@@ -46,16 +46,125 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="frmAbout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmAbout.Designer.cs">
+      <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAssignments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAssignments.Designer.cs">
+      <DependentUpon>frmAssignments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAttendance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAttendance.Designer.cs">
+      <DependentUpon>frmAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCourses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCourses.Designer.cs">
+      <DependentUpon>frmCourses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEnterNewPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEnterNewPassword.Designer.cs">
+      <DependentUpon>frmEnterNewPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmGradebook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGradebook.Designer.cs">
+      <DependentUpon>frmGradebook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHome.Designer.cs">
+      <DependentUpon>frmHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmResetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmResetPassword.Designer.cs">
+      <DependentUpon>frmResetPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSeatingChart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSeatingChart.Designer.cs">
+      <DependentUpon>frmSeatingChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmStudents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStudents.Designer.cs">
+      <DependentUpon>frmStudents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTeachers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTeachers.Designer.cs">
+      <DependentUpon>frmTeachers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUsers.Designer.cs">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProgOps.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="frmAbout.resx">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAssignments.resx">
+      <DependentUpon>frmAssignments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAttendance.resx">
+      <DependentUpon>frmAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCourses.resx">
+      <DependentUpon>frmCourses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEnterNewPassword.resx">
+      <DependentUpon>frmEnterNewPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGradebook.resx">
+      <DependentUpon>frmGradebook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHome.resx">
+      <DependentUpon>frmHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmResetPassword.resx">
+      <DependentUpon>frmResetPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSeatingChart.resx">
+      <DependentUpon>frmSeatingChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStudents.resx">
+      <DependentUpon>frmStudents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTeachers.resx">
+      <DependentUpon>frmTeachers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUsers.resx">
+      <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -78,6 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons\Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
