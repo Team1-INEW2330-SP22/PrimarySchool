@@ -12,9 +12,26 @@ namespace PrimarySchool
 {
     public partial class frmStudents : Form
     {
-        public frmStudents()
+        // Creates 'home' attribute so we can show Home again. Doesn't initialize.
+        private frmHome home;
+
+        // Initializes 'home' attribute to parameter.
+        public frmStudents(frmHome home)
         {
+            this.home = home;
             InitializeComponent();
+        }
+
+        // Shows Home.
+        private void frmStudents_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FormOps.ShowModeless(home);
+        }
+
+        // Closes Students.
+        private void mnuFileClose_Click(object sender, EventArgs e)
+        {
+            FormOps.CloseForm(this);
         }
     }
 }

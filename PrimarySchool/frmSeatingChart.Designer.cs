@@ -102,6 +102,7 @@ namespace PrimarySchool
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
             this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
             this.mnuFileClose.Text = "&Close";
+            this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
             // mnuEdit
             // 
@@ -130,7 +131,7 @@ namespace PrimarySchool
             // mnuEditRandomize
             // 
             this.mnuEditRandomize.Name = "mnuEditRandomize";
-            this.mnuEditRandomize.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.mnuEditRandomize.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
             this.mnuEditRandomize.Size = new System.Drawing.Size(206, 22);
             this.mnuEditRandomize.Text = "R&andomize";
@@ -147,7 +148,7 @@ namespace PrimarySchool
             // 
             this.mnuHelpInstructions.Name = "mnuHelpInstructions";
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
             // 
             // lblInstructions
@@ -171,6 +172,7 @@ namespace PrimarySchool
             this.dgvSeatingChart.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(197)))), ((int)(((byte)(190)))));
             this.dgvSeatingChart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSeatingChart.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.dgvSeatingChart.Enabled = false;
             this.dgvSeatingChart.Location = new System.Drawing.Point(14, 145);
             this.dgvSeatingChart.Name = "dgvSeatingChart";
             this.dgvSeatingChart.Size = new System.Drawing.Size(409, 389);
@@ -237,12 +239,9 @@ namespace PrimarySchool
             // 
             this.cbxCourses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
             this.cbxCourses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxCourses.Enabled = false;
             this.cbxCourses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
             this.cbxCourses.FormattingEnabled = true;
-            this.cbxCourses.Items.AddRange(new object[] {
-            "Math",
-            "Language Arts",
-            "Social Studies"});
             this.cbxCourses.Location = new System.Drawing.Point(15, 49);
             this.cbxCourses.Name = "cbxCourses";
             this.cbxCourses.Size = new System.Drawing.Size(196, 29);
@@ -285,6 +284,7 @@ namespace PrimarySchool
             // lbxUnavailableSeats
             // 
             this.lbxUnavailableSeats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
+            this.lbxUnavailableSeats.Enabled = false;
             this.lbxUnavailableSeats.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.lbxUnavailableSeats.FormattingEnabled = true;
             this.lbxUnavailableSeats.ItemHeight = 21;
@@ -296,6 +296,7 @@ namespace PrimarySchool
             // lbxAvailableSeats
             // 
             this.lbxAvailableSeats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
+            this.lbxAvailableSeats.Enabled = false;
             this.lbxAvailableSeats.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.lbxAvailableSeats.FormattingEnabled = true;
             this.lbxAvailableSeats.ItemHeight = 21;
@@ -336,6 +337,7 @@ namespace PrimarySchool
             this.Name = "frmSeatingChart";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Seating Chart";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSeatingChart_FormClosing);
             this.mnuMenu.ResumeLayout(false);
             this.mnuMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeatingChart)).EndInit();

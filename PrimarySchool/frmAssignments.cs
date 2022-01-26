@@ -12,9 +12,21 @@ namespace PrimarySchool
 {
     public partial class frmAssignments : Form
     {
-        public frmAssignments()
+        // Creates 'gradebook' attribute so we can perform certain operations on Gradebook from Assignments.
+        // Doesn't initialize.
+        private frmGradebook gradebook;
+
+        // Initializes 'gradebook' attribute to parameter.
+        public frmAssignments(frmGradebook gradebook)
         {
+            this.gradebook = gradebook;
             InitializeComponent();
+        }
+
+        // Closes Assignments.
+        private void mnuFileClose_Click(object sender, EventArgs e)
+        {
+            FormOps.CloseForm(this);
         }
     }
 }

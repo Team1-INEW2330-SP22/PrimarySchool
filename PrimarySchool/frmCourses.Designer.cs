@@ -78,11 +78,11 @@ namespace PrimarySchool
             this.mnuEditOperationsCancel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEditOperationsAddNew = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEditOperationsDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHelpInstructions = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEditOperationsStudents = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEditOperationsStudentsAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEditOperationsStudentsRemove = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHelpInstructions = new System.Windows.Forms.ToolStripMenuItem();
             this.gbxSearch.SuspendLayout();
             this.gbxStudents.SuspendLayout();
             this.mnuMenu.SuspendLayout();
@@ -258,6 +258,7 @@ namespace PrimarySchool
             // 
             this.tbxTotalStudents.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(197)))), ((int)(((byte)(190)))));
             this.tbxTotalStudents.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxTotalStudents.Enabled = false;
             this.tbxTotalStudents.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxTotalStudents.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.tbxTotalStudents.Location = new System.Drawing.Point(482, 99);
@@ -280,6 +281,7 @@ namespace PrimarySchool
             // 
             this.tbxTeacher.BackColor = System.Drawing.Color.White;
             this.tbxTeacher.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxTeacher.Enabled = false;
             this.tbxTeacher.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxTeacher.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.tbxTeacher.Location = new System.Drawing.Point(83, 133);
@@ -302,6 +304,7 @@ namespace PrimarySchool
             // 
             this.tbxCapacity.BackColor = System.Drawing.Color.White;
             this.tbxCapacity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxCapacity.Enabled = false;
             this.tbxCapacity.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxCapacity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.tbxCapacity.Location = new System.Drawing.Point(482, 65);
@@ -324,6 +327,7 @@ namespace PrimarySchool
             // 
             this.tbxCourseID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(197)))), ((int)(((byte)(190)))));
             this.tbxCourseID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxCourseID.Enabled = false;
             this.tbxCourseID.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxCourseID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.tbxCourseID.Location = new System.Drawing.Point(83, 31);
@@ -346,6 +350,7 @@ namespace PrimarySchool
             // 
             this.tbxRoom.BackColor = System.Drawing.Color.White;
             this.tbxRoom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxRoom.Enabled = false;
             this.tbxRoom.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxRoom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.tbxRoom.Location = new System.Drawing.Point(482, 32);
@@ -368,6 +373,7 @@ namespace PrimarySchool
             // 
             this.tbxSubject.BackColor = System.Drawing.Color.White;
             this.tbxSubject.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxSubject.Enabled = false;
             this.tbxSubject.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxSubject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.tbxSubject.Location = new System.Drawing.Point(83, 99);
@@ -390,6 +396,7 @@ namespace PrimarySchool
             // 
             this.tbxCourseName.BackColor = System.Drawing.Color.White;
             this.tbxCourseName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxCourseName.Enabled = false;
             this.tbxCourseName.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxCourseName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.tbxCourseName.Location = new System.Drawing.Point(83, 65);
@@ -447,6 +454,7 @@ namespace PrimarySchool
             // 
             // lbxCourseStudents
             // 
+            this.lbxCourseStudents.Enabled = false;
             this.lbxCourseStudents.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxCourseStudents.FormattingEnabled = true;
             this.lbxCourseStudents.ItemHeight = 17;
@@ -457,6 +465,7 @@ namespace PrimarySchool
             // 
             // lbxAvailableStudents
             // 
+            this.lbxAvailableStudents.Enabled = false;
             this.lbxAvailableStudents.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxAvailableStudents.FormattingEnabled = true;
             this.lbxAvailableStudents.ItemHeight = 17;
@@ -517,6 +526,7 @@ namespace PrimarySchool
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
             this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
             this.mnuFileClose.Text = "&Close";
+            this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
             // mnuEdit
             // 
@@ -535,7 +545,7 @@ namespace PrimarySchool
             this.mnuEditNavigationPrevious,
             this.mnuEditNavigationNext});
             this.mnuEditNavigation.Name = "mnuEditNavigation";
-            this.mnuEditNavigation.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.mnuEditNavigation.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.N)));
             this.mnuEditNavigation.Size = new System.Drawing.Size(207, 22);
             this.mnuEditNavigation.Text = "Nagivation";
@@ -544,28 +554,28 @@ namespace PrimarySchool
             // 
             this.mnuEditNavigationFirst.Name = "mnuEditNavigationFirst";
             this.mnuEditNavigationFirst.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.mnuEditNavigationFirst.Size = new System.Drawing.Size(180, 22);
+            this.mnuEditNavigationFirst.Size = new System.Drawing.Size(160, 22);
             this.mnuEditNavigationFirst.Text = "&First";
             // 
             // mnuEditNavigationLast
             // 
             this.mnuEditNavigationLast.Name = "mnuEditNavigationLast";
             this.mnuEditNavigationLast.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.mnuEditNavigationLast.Size = new System.Drawing.Size(180, 22);
+            this.mnuEditNavigationLast.Size = new System.Drawing.Size(160, 22);
             this.mnuEditNavigationLast.Text = "&Last";
             // 
             // mnuEditNavigationPrevious
             // 
             this.mnuEditNavigationPrevious.Name = "mnuEditNavigationPrevious";
             this.mnuEditNavigationPrevious.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.mnuEditNavigationPrevious.Size = new System.Drawing.Size(180, 22);
+            this.mnuEditNavigationPrevious.Size = new System.Drawing.Size(160, 22);
             this.mnuEditNavigationPrevious.Text = "&Previous";
             // 
             // mnuEditNavigationNext
             // 
             this.mnuEditNavigationNext.Name = "mnuEditNavigationNext";
             this.mnuEditNavigationNext.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.mnuEditNavigationNext.Size = new System.Drawing.Size(180, 22);
+            this.mnuEditNavigationNext.Size = new System.Drawing.Size(160, 22);
             this.mnuEditNavigationNext.Text = "&Next";
             // 
             // mnuEditOperations
@@ -578,7 +588,7 @@ namespace PrimarySchool
             this.mnuEditOperationsDelete,
             this.mnuEditOperationsStudents});
             this.mnuEditOperations.Name = "mnuEditOperations";
-            this.mnuEditOperations.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.mnuEditOperations.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.O)));
             this.mnuEditOperations.Size = new System.Drawing.Size(207, 22);
             this.mnuEditOperations.Text = "Operations";
@@ -618,28 +628,13 @@ namespace PrimarySchool
             this.mnuEditOperationsDelete.Size = new System.Drawing.Size(192, 22);
             this.mnuEditOperationsDelete.Text = "&Delete";
             // 
-            // mnuHelp
-            // 
-            this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuHelpInstructions});
-            this.mnuHelp.Name = "mnuHelp";
-            this.mnuHelp.Size = new System.Drawing.Size(44, 20);
-            this.mnuHelp.Text = "&Help";
-            // 
-            // mnuHelpInstructions
-            // 
-            this.mnuHelpInstructions.Name = "mnuHelpInstructions";
-            this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
-            this.mnuHelpInstructions.Text = "&Instructions";
-            // 
             // mnuEditOperationsStudents
             // 
             this.mnuEditOperationsStudents.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuEditOperationsStudentsAdd,
             this.mnuEditOperationsStudentsRemove});
             this.mnuEditOperationsStudents.Name = "mnuEditOperationsStudents";
-            this.mnuEditOperationsStudents.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.mnuEditOperationsStudents.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.T)));
             this.mnuEditOperationsStudents.Size = new System.Drawing.Size(192, 22);
             this.mnuEditOperationsStudents.Text = "S&tudents";
@@ -657,6 +652,21 @@ namespace PrimarySchool
             this.mnuEditOperationsStudentsRemove.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
             this.mnuEditOperationsStudentsRemove.Size = new System.Drawing.Size(180, 22);
             this.mnuEditOperationsStudentsRemove.Text = "&Remove";
+            // 
+            // mnuHelp
+            // 
+            this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuHelpInstructions});
+            this.mnuHelp.Name = "mnuHelp";
+            this.mnuHelp.Size = new System.Drawing.Size(44, 20);
+            this.mnuHelp.Text = "&Help";
+            // 
+            // mnuHelpInstructions
+            // 
+            this.mnuHelpInstructions.Name = "mnuHelpInstructions";
+            this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
+            this.mnuHelpInstructions.Text = "&Instructions";
             // 
             // frmCourses
             // 
@@ -698,6 +708,7 @@ namespace PrimarySchool
             this.Name = "frmCourses";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Courses";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCourses_FormClosing);
             this.gbxSearch.ResumeLayout(false);
             this.gbxSearch.PerformLayout();
             this.gbxStudents.ResumeLayout(false);

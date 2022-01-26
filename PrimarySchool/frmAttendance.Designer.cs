@@ -95,8 +95,9 @@ namespace PrimarySchool
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
             this.mnuFileClose.Text = "&Close";
+            this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
             // mnuEdit
             // 
@@ -157,6 +158,7 @@ namespace PrimarySchool
             this.dgvAttendance.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(197)))), ((int)(((byte)(190)))));
             this.dgvAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAttendance.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.dgvAttendance.Enabled = false;
             this.dgvAttendance.Location = new System.Drawing.Point(18, 148);
             this.dgvAttendance.Name = "dgvAttendance";
             this.dgvAttendance.Size = new System.Drawing.Size(949, 412);
@@ -195,6 +197,7 @@ namespace PrimarySchool
             // 
             this.cbxDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
             this.cbxDate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxDate.Enabled = false;
             this.cbxDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
             this.cbxDate.FormattingEnabled = true;
             this.cbxDate.Location = new System.Drawing.Point(217, 49);
@@ -246,12 +249,9 @@ namespace PrimarySchool
             // 
             this.cbxCourses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
             this.cbxCourses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxCourses.Enabled = false;
             this.cbxCourses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
             this.cbxCourses.FormattingEnabled = true;
-            this.cbxCourses.Items.AddRange(new object[] {
-            "Math",
-            "Language Arts",
-            "Social Studies"});
             this.cbxCourses.Location = new System.Drawing.Point(15, 49);
             this.cbxCourses.Name = "cbxCourses";
             this.cbxCourses.Size = new System.Drawing.Size(196, 29);
@@ -285,6 +285,7 @@ namespace PrimarySchool
             this.Name = "frmAttendance";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Attendance";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAttendance_FormClosing);
             this.mnuMenu.ResumeLayout(false);
             this.mnuMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAttendance)).EndInit();

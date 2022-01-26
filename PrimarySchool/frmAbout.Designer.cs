@@ -76,8 +76,9 @@ namespace PrimarySchool
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
             this.mnuFileClose.Text = "&Close";
+            this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
             // mnuHelp
             // 
@@ -216,6 +217,7 @@ namespace PrimarySchool
             this.btnReturnToHome.TabIndex = 121;
             this.btnReturnToHome.Text = "&Return to Home";
             this.btnReturnToHome.UseVisualStyleBackColor = false;
+            this.btnReturnToHome.Click += new System.EventHandler(this.btnReturnToHome_Click);
             // 
             // frmAbout
             // 

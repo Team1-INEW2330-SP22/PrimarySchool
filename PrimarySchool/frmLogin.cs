@@ -20,7 +20,7 @@ namespace PrimarySchool
             InitializeComponent();
         }
 
-        // Proceeds to Home form if LogIn method returns true.
+        // Proceeds to Home if LogIn method returns true.
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             try
@@ -28,22 +28,17 @@ namespace PrimarySchool
                 if (LogIn())
                 {
                     frmHome home = new frmHome(this);
-                    home.Show();
-                    this.Hide();
+                    FormOps.ShowModelessAndHide(home, this);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                FormOps.ErrorBox(ex.Message);
             }
         }
 
         // Checks user credentials.
         // Displays MessageBox if user credentials aren't correct.
-
         private bool LogIn()
         {
             try
@@ -55,25 +50,18 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    MessageBox.Show("Check username and password",
-                        "Incorrect Credentials",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                    FormOps.ErrorBox("Check username and password");
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                FormOps.ErrorBox(ex.Message);
                 return false;
             }
         }
 
-        // Replaces tbxUsername Text value with default ' Type your username' prompt
-        // if user leaves field empty.
+        // Replaces tbxUsername Text value with default prompt if user leaves field empty.
         private void tbxUsername_Leave(object sender, EventArgs e)
         {
             try
@@ -86,10 +74,7 @@ namespace PrimarySchool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                FormOps.ErrorBox(ex.Message);
             }
         }
 
@@ -102,14 +87,11 @@ namespace PrimarySchool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                FormOps.ErrorBox(ex.Message);
             }
         }
 
-        // Closes DB connection (do later).
+        // Closes DB connection.
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -118,14 +100,11 @@ namespace PrimarySchool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                FormOps.ErrorBox(ex.Message);
             }
         }
 
-        // Opens DB connection (do later).
+        // Opens DB connection.
         // Clears tbxUsername.
         private void frmLogin_Load(object sender, EventArgs e)
         {
@@ -137,10 +116,7 @@ namespace PrimarySchool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                FormOps.ErrorBox(ex.Message);
             }
         }
 
@@ -158,10 +134,7 @@ namespace PrimarySchool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                FormOps.ErrorBox(ex.Message);
             }
         }
 
@@ -178,15 +151,11 @@ namespace PrimarySchool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                FormOps.ErrorBox(ex.Message);
             }
         }
 
-        // Clears username field and makes text color black if user selects tbxUsername
-        // when default ' Type your username' prompt is visible.
+        // Clears tbxUsername and makes text color black if user selects tbxUsername while default prompt is visible.
         private void tbxUsername_Enter(object sender, EventArgs e)
         {
             try
@@ -199,15 +168,19 @@ namespace PrimarySchool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                FormOps.ErrorBox(ex.Message);
             }
         }
 
-        // Clears tbxPassword when user selects it while the default prompt is visible,
-        // sets the text color to black, and sets the password character.
+        // Opens Reset Password as modal.
+        private void lblForgot_Click(object sender, EventArgs e)
+        {
+            frmResetPassword resetPassword = new frmResetPassword();
+            FormOps.ShowModal(resetPassword);
+        }
+
+        // Clears tbxPassword if user selects it while the default prompt is visible, sets the text color to black,
+        // and sets the password character.
         private void tbxPassword_Enter(object sender, EventArgs e)
         {
             try
@@ -221,10 +194,7 @@ namespace PrimarySchool
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                FormOps.ErrorBox(ex.Message);
             }
         }
     }

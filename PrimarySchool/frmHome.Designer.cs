@@ -41,7 +41,7 @@ namespace PrimarySchool
             this.mnuOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOfficerTeachers = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOfficerStudents = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAcademicOfficerCourses = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOfficerCourses = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAdminUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,6 +109,7 @@ namespace PrimarySchool
             this.mnuTeacherGradebook.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
             this.mnuTeacherGradebook.Size = new System.Drawing.Size(185, 22);
             this.mnuTeacherGradebook.Text = "&Gradebook";
+            this.mnuTeacherGradebook.Click += new System.EventHandler(this.mnuTeacherGradebook_Click);
             // 
             // mnuTeacherAttendance
             // 
@@ -116,6 +117,7 @@ namespace PrimarySchool
             this.mnuTeacherAttendance.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
             this.mnuTeacherAttendance.Size = new System.Drawing.Size(185, 22);
             this.mnuTeacherAttendance.Text = "&Attendance";
+            this.mnuTeacherAttendance.Click += new System.EventHandler(this.mnuTeacherAttendance_Click);
             // 
             // mnuTeacherSeatingChart
             // 
@@ -123,13 +125,14 @@ namespace PrimarySchool
             this.mnuTeacherSeatingChart.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.mnuTeacherSeatingChart.Size = new System.Drawing.Size(185, 22);
             this.mnuTeacherSeatingChart.Text = "&Seating Chart";
+            this.mnuTeacherSeatingChart.Click += new System.EventHandler(this.mnuTeacherSeatingChart_Click);
             // 
             // mnuOfficer
             // 
             this.mnuOfficer.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuOfficerTeachers,
             this.mnuOfficerStudents,
-            this.mnuAcademicOfficerCourses});
+            this.mnuOfficerCourses});
             this.mnuOfficer.Name = "mnuOfficer";
             this.mnuOfficer.Size = new System.Drawing.Size(111, 20);
             this.mnuOfficer.Text = "&Academic Officer";
@@ -140,21 +143,24 @@ namespace PrimarySchool
             this.mnuOfficerTeachers.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
             this.mnuOfficerTeachers.Size = new System.Drawing.Size(192, 22);
             this.mnuOfficerTeachers.Text = "&Teachers";
+            this.mnuOfficerTeachers.Click += new System.EventHandler(this.mnuOfficerTeachers_Click);
             // 
             // mnuOfficerStudents
             // 
             this.mnuOfficerStudents.Name = "mnuOfficerStudents";
-            this.mnuOfficerStudents.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.mnuOfficerStudents.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
             this.mnuOfficerStudents.Size = new System.Drawing.Size(192, 22);
             this.mnuOfficerStudents.Text = "&Students";
+            this.mnuOfficerStudents.Click += new System.EventHandler(this.mnuOfficerStudents_Click);
             // 
-            // mnuAcademicOfficerCourses
+            // mnuOfficerCourses
             // 
-            this.mnuAcademicOfficerCourses.Name = "mnuAcademicOfficerCourses";
-            this.mnuAcademicOfficerCourses.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.mnuAcademicOfficerCourses.Size = new System.Drawing.Size(192, 22);
-            this.mnuAcademicOfficerCourses.Text = "&Courses";
+            this.mnuOfficerCourses.Name = "mnuOfficerCourses";
+            this.mnuOfficerCourses.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.mnuOfficerCourses.Size = new System.Drawing.Size(192, 22);
+            this.mnuOfficerCourses.Text = "&Courses";
+            this.mnuOfficerCourses.Click += new System.EventHandler(this.mnuOfficerCourses_Click);
             // 
             // mnuAdmin
             // 
@@ -162,7 +168,7 @@ namespace PrimarySchool
             this.mnuAdminUsers});
             this.mnuAdmin.Name = "mnuAdmin";
             this.mnuAdmin.Size = new System.Drawing.Size(92, 20);
-            this.mnuAdmin.Text = "&Administrator";
+            this.mnuAdmin.Text = "A&dministrator";
             // 
             // mnuAdminUsers
             // 
@@ -170,6 +176,7 @@ namespace PrimarySchool
             this.mnuAdminUsers.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
             this.mnuAdminUsers.Size = new System.Drawing.Size(144, 22);
             this.mnuAdminUsers.Text = "&Users";
+            this.mnuAdminUsers.Click += new System.EventHandler(this.mnuAdminUsers_Click);
             // 
             // mnuHelp
             // 
@@ -190,10 +197,11 @@ namespace PrimarySchool
             // mnuHelpAbout
             // 
             this.mnuHelpAbout.Name = "mnuHelpAbout";
-            this.mnuHelpAbout.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.mnuHelpAbout.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.A)));
             this.mnuHelpAbout.Size = new System.Drawing.Size(181, 22);
             this.mnuHelpAbout.Text = "&About";
+            this.mnuHelpAbout.Click += new System.EventHandler(this.mnuHelpAbout_Click);
             // 
             // lblMenu
             // 
@@ -276,6 +284,6 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.PictureBox pbxSchool;
-        private System.Windows.Forms.ToolStripMenuItem mnuAcademicOfficerCourses;
+        private System.Windows.Forms.ToolStripMenuItem mnuOfficerCourses;
     }
 }

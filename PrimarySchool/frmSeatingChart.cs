@@ -12,9 +12,25 @@ namespace PrimarySchool
 {
     public partial class frmSeatingChart : Form
     {
-        public frmSeatingChart()
+        // Creates 'home' attribute so we can show Home again. Doesn't initialize.
+        private frmHome home;
+
+        // Initializes 'home' attribute to parameter.
+        public frmSeatingChart(frmHome home)
         {
+            this.home = home;
             InitializeComponent();
+        }
+
+        // Closes Seating Chart.
+        private void mnuFileClose_Click(object sender, EventArgs e)
+        {
+            FormOps.CloseForm(this);
+        }
+
+        private void frmSeatingChart_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FormOps.ShowModeless(home);
         }
     }
 }

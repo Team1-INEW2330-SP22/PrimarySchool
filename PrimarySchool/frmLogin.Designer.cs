@@ -112,6 +112,7 @@ namespace PrimarySchool
             this.lblForgot.Size = new System.Drawing.Size(144, 17);
             this.lblForgot.TabIndex = 5;
             this.lblForgot.Text = "Forgot your password?";
+            this.lblForgot.Click += new System.EventHandler(this.lblForgot_Click);
             // 
             // pbxEyeball
             // 

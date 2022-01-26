@@ -79,22 +79,23 @@ namespace PrimarySchool
             // 
             this.mnuFileSave.Name = "mnuFileSave";
             this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuFileSave.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileSave.Size = new System.Drawing.Size(180, 22);
             this.mnuFileSave.Text = "&Save";
             // 
             // mnuFilePrint
             // 
             this.mnuFilePrint.Name = "mnuFilePrint";
             this.mnuFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.mnuFilePrint.Size = new System.Drawing.Size(144, 22);
+            this.mnuFilePrint.Size = new System.Drawing.Size(180, 22);
             this.mnuFilePrint.Text = "&Print";
             // 
             // mnuFileClose
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
             this.mnuFileClose.Text = "&Close";
+            this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
             // mnuEdit
             // 
@@ -126,6 +127,7 @@ namespace PrimarySchool
             this.mnuEditAssignments.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
             this.mnuEditAssignments.Size = new System.Drawing.Size(184, 22);
             this.mnuEditAssignments.Text = "&Assignments";
+            this.mnuEditAssignments.Click += new System.EventHandler(this.mnuEditAssignments_Click);
             // 
             // mnuHelp
             // 
@@ -191,12 +193,9 @@ namespace PrimarySchool
             // 
             this.cbxCourses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
             this.cbxCourses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxCourses.Enabled = false;
             this.cbxCourses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
             this.cbxCourses.FormattingEnabled = true;
-            this.cbxCourses.Items.AddRange(new object[] {
-            "Math",
-            "Language Arts",
-            "Social Studies"});
             this.cbxCourses.Location = new System.Drawing.Point(15, 42);
             this.cbxCourses.Name = "cbxCourses";
             this.cbxCourses.Size = new System.Drawing.Size(196, 29);
@@ -222,6 +221,7 @@ namespace PrimarySchool
             this.dgvGradebook.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(197)))), ((int)(((byte)(190)))));
             this.dgvGradebook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGradebook.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.dgvGradebook.Enabled = false;
             this.dgvGradebook.Location = new System.Drawing.Point(12, 137);
             this.dgvGradebook.Name = "dgvGradebook";
             this.dgvGradebook.Size = new System.Drawing.Size(1060, 412);
@@ -259,6 +259,7 @@ namespace PrimarySchool
             this.Name = "frmGradebook";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Gradebook";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmGradebook_FormClosing);
             this.mnuMenu.ResumeLayout(false);
             this.mnuMenu.PerformLayout();
             this.gbxGradebook.ResumeLayout(false);

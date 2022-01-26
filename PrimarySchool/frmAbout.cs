@@ -16,5 +16,17 @@ namespace PrimarySchool
         {
             InitializeComponent();
         }
+
+        // Closes About.
+        private void mnuFileClose_Click(object sender, EventArgs e)
+        {
+            FormOps.CloseForm(this);
+        }
+
+        // Closes About.
+        private void btnReturnToHome_Click(object sender, EventArgs e)
+        {
+            FormOps.CloseForm(this);
+        }
     }
 }
