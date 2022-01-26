@@ -105,9 +105,6 @@ namespace PrimarySchool
                 switch (role)
                 {
                     case "Teacher":
-                        mnuFile.Enabled = true;
-                        mnuFileLogOut.Enabled = true;
-                        mnuFileExit.Enabled = true;
                         mnuTeacher.Enabled = true;
                         mnuTeacherGradebook.Enabled = true;
                         mnuTeacherAttendance.Enabled = true;
@@ -118,14 +115,8 @@ namespace PrimarySchool
                         mnuOfficerCourses.Enabled = false;
                         mnuAdmin.Enabled = false;
                         mnuAdminUsers.Enabled = false;
-                        mnuHelp.Enabled = true;
-                        mnuHelpInstructions.Enabled = true;
-                        mnuHelpAbout.Enabled = true;
                         break;
                     case "Academic Officer":
-                        mnuFile.Enabled = true;
-                        mnuFileLogOut.Enabled = true;
-                        mnuFileExit.Enabled = true;
                         mnuTeacher.Enabled = false;
                         mnuTeacherGradebook.Enabled = false;
                         mnuTeacherAttendance.Enabled = false;
@@ -136,14 +127,8 @@ namespace PrimarySchool
                         mnuOfficerCourses.Enabled = true;
                         mnuAdmin.Enabled = false;
                         mnuAdminUsers.Enabled = false;
-                        mnuHelp.Enabled = true;
-                        mnuHelpInstructions.Enabled = true;
-                        mnuHelpAbout.Enabled = true;
                         break;
                     case "Administrator":
-                        mnuFile.Enabled = true;
-                        mnuFileLogOut.Enabled = true;
-                        mnuFileExit.Enabled = true;
                         mnuTeacher.Enabled = true;
                         mnuTeacherGradebook.Enabled = true;
                         mnuTeacherAttendance.Enabled = true;
@@ -154,14 +139,8 @@ namespace PrimarySchool
                         mnuOfficerCourses.Enabled = true;
                         mnuAdmin.Enabled = true;
                         mnuAdminUsers.Enabled = true;
-                        mnuHelp.Enabled = true;
-                        mnuHelpInstructions.Enabled = true;
-                        mnuHelpAbout.Enabled = true;
                         break;
                     default:
-                        mnuFile.Enabled = true;
-                        mnuFileLogOut.Enabled = true;
-                        mnuFileExit.Enabled = true;
                         mnuTeacher.Enabled = false;
                         mnuTeacherGradebook.Enabled = false;
                         mnuTeacherAttendance.Enabled = false;
@@ -172,9 +151,6 @@ namespace PrimarySchool
                         mnuOfficerCourses.Enabled = false;
                         mnuAdmin.Enabled = false;
                         mnuAdminUsers.Enabled = false;
-                        mnuHelp.Enabled = true;
-                        mnuHelpInstructions.Enabled = true;
-                        mnuHelpAbout.Enabled = true;
                         break;
                 }
             }
