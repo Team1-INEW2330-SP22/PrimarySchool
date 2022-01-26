@@ -96,5 +96,105 @@ namespace PrimarySchool
             frmUsers users = new frmUsers(this);
             FormOps.ShowModelessAndHide(users, this);
         }
+
+        // Sets program state based on user role.
+        private void SetState(string role)
+        {
+            try
+            {
+                switch (role)
+                {
+                    case "Teacher":
+                        mnuFile.Enabled = true;
+                        mnuFileLogOut.Enabled = true;
+                        mnuFileExit.Enabled = true;
+                        mnuTeacher.Enabled = true;
+                        mnuTeacherGradebook.Enabled = true;
+                        mnuTeacherAttendance.Enabled = true;
+                        mnuTeacherSeatingChart.Enabled = true;
+                        mnuOfficer.Enabled = false;
+                        mnuOfficerTeachers.Enabled = false;
+                        mnuOfficerStudents.Enabled = false;
+                        mnuOfficerCourses.Enabled = false;
+                        mnuAdmin.Enabled = false;
+                        mnuAdminUsers.Enabled = false;
+                        mnuHelp.Enabled = true;
+                        mnuHelpInstructions.Enabled = true;
+                        mnuHelpAbout.Enabled = true;
+                        break;
+                    case "Academic Officer":
+                        mnuFile.Enabled = true;
+                        mnuFileLogOut.Enabled = true;
+                        mnuFileExit.Enabled = true;
+                        mnuTeacher.Enabled = false;
+                        mnuTeacherGradebook.Enabled = false;
+                        mnuTeacherAttendance.Enabled = false;
+                        mnuTeacherSeatingChart.Enabled = false;
+                        mnuOfficer.Enabled = true;
+                        mnuOfficerTeachers.Enabled = true;
+                        mnuOfficerStudents.Enabled = true;
+                        mnuOfficerCourses.Enabled = true;
+                        mnuAdmin.Enabled = false;
+                        mnuAdminUsers.Enabled = false;
+                        mnuHelp.Enabled = true;
+                        mnuHelpInstructions.Enabled = true;
+                        mnuHelpAbout.Enabled = true;
+                        break;
+                    case "Administrator":
+                        mnuFile.Enabled = true;
+                        mnuFileLogOut.Enabled = true;
+                        mnuFileExit.Enabled = true;
+                        mnuTeacher.Enabled = true;
+                        mnuTeacherGradebook.Enabled = true;
+                        mnuTeacherAttendance.Enabled = true;
+                        mnuTeacherSeatingChart.Enabled = true;
+                        mnuOfficer.Enabled = true;
+                        mnuOfficerTeachers.Enabled = true;
+                        mnuOfficerStudents.Enabled = true;
+                        mnuOfficerCourses.Enabled = true;
+                        mnuAdmin.Enabled = true;
+                        mnuAdminUsers.Enabled = true;
+                        mnuHelp.Enabled = true;
+                        mnuHelpInstructions.Enabled = true;
+                        mnuHelpAbout.Enabled = true;
+                        break;
+                    default:
+                        mnuFile.Enabled = true;
+                        mnuFileLogOut.Enabled = true;
+                        mnuFileExit.Enabled = true;
+                        mnuTeacher.Enabled = false;
+                        mnuTeacherGradebook.Enabled = false;
+                        mnuTeacherAttendance.Enabled = false;
+                        mnuTeacherSeatingChart.Enabled = false;
+                        mnuOfficer.Enabled = false;
+                        mnuOfficerTeachers.Enabled = false;
+                        mnuOfficerStudents.Enabled = false;
+                        mnuOfficerCourses.Enabled = false;
+                        mnuAdmin.Enabled = false;
+                        mnuAdminUsers.Enabled = false;
+                        mnuHelp.Enabled = true;
+                        mnuHelpInstructions.Enabled = true;
+                        mnuHelpAbout.Enabled = true;
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        // Sets state.
+        private void frmHome_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                SetState("Administrator");
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
     }
 }

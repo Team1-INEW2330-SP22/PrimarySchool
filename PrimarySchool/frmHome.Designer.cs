@@ -255,6 +255,7 @@ namespace PrimarySchool
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Home";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmHome_FormClosing);
+            this.Load += new System.EventHandler(this.frmHome_Load);
             this.mnuMenu.ResumeLayout(false);
             this.mnuMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxSchool)).EndInit();
