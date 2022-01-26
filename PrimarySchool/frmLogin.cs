@@ -114,7 +114,7 @@ namespace PrimarySchool
         {
             try
             {
-                
+                ProgOps.CloseDisposeDatabase();
             }
             catch (Exception ex)
             {
@@ -131,6 +131,7 @@ namespace PrimarySchool
         {
             try
             {
+                ProgOps.OpenDatabase();
                 tbxUsername.Text = string.Empty;
                 tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml("#0B090B");
             }
