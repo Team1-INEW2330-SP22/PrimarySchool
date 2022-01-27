@@ -25,20 +25,20 @@ namespace PrimarySchool
         // Closes Home.
         private void mnuFileExit_Click(object sender, EventArgs e)
         {
-            FormOps.CloseForm(this);
+            Application.Exit();
         }
 
         // Resets Login and shows Login.
         private void mnuFileLogOut_Click(object sender, EventArgs e)
         {
-            login.Reset();
-            FormOps.ShowModelessAndHide(login, this);
+            FormOps.CloseForm(this);
         }
 
         // Closes Login when the Home screen is closed.
         private void frmHome_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FormOps.CloseForm(login);
+            login.Reset();
+            FormOps.ShowModeless(login);
         }
 
         // Hides Home and opens Gradebook.

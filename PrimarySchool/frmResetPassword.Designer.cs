@@ -29,6 +29,7 @@ namespace PrimarySchool
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmResetPassword));
             this.lblEmail = new System.Windows.Forms.Label();
             this.tbxEmail = new System.Windows.Forms.TextBox();
             this.btnSend = new System.Windows.Forms.Button();
@@ -57,6 +58,8 @@ namespace PrimarySchool
             this.tbxEmail.Size = new System.Drawing.Size(323, 29);
             this.tbxEmail.TabIndex = 4;
             this.tbxEmail.Text = " Type your email";
+            this.tbxEmail.Enter += new System.EventHandler(this.tbxEmail_Enter);
+            this.tbxEmail.Leave += new System.EventHandler(this.tbxEmail_Leave);
             // 
             // btnSend
             // 
@@ -91,6 +94,8 @@ namespace PrimarySchool
             this.tbxCode.Size = new System.Drawing.Size(323, 29);
             this.tbxCode.TabIndex = 7;
             this.tbxCode.Text = " Type the code sent to your email";
+            this.tbxCode.Enter += new System.EventHandler(this.tbxCode_Enter);
+            this.tbxCode.Leave += new System.EventHandler(this.tbxCode_Leave);
             // 
             // btnSubmit
             // 
@@ -120,6 +125,7 @@ namespace PrimarySchool
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmResetPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

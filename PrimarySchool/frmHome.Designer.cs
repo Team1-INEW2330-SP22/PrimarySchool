@@ -286,5 +286,6 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.PictureBox pbxSchool;
         private System.Windows.Forms.ToolStripMenuItem mnuOfficerCourses;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }

@@ -89,5 +89,27 @@ namespace PrimarySchool
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
+
+        // Returns a hex code from our color palette.
+        public static string GetColorHex(string color)
+        {
+            switch (color)
+            {
+                case "dark blue":
+                    return "#3B77A5";
+                case "mid blue":
+                    return "#89B4D2";
+                case "light blue":
+                    return "#E2EBF3";
+                case "gray":
+                    return "#C3C5BE";
+                case "black":
+                    return "#0B090B";
+                default:
+                    // Returns hex code for red if something goes wrong.
+                    // Search for red on our forms to find errors with this method.
+                    return "#FF0000";
+            }
+        }
     }
 }

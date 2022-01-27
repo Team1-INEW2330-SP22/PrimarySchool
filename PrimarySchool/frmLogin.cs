@@ -68,7 +68,7 @@ namespace PrimarySchool
             {
                 if (tbxUsername.Text.Trim().Equals(string.Empty))
                 {
-                    tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml("#89B4D2");
+                    tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("mid blue"));
                     tbxUsername.Text = strTypeUser;
                 }
             }
@@ -112,7 +112,7 @@ namespace PrimarySchool
             {
                 ProgOps.OpenDatabase();
                 tbxUsername.Text = string.Empty;
-                tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml("#0B090B");
+                tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("black"));
             }
             catch (Exception ex)
             {
@@ -127,7 +127,7 @@ namespace PrimarySchool
             {
                 if (tbxPassword.Text.Trim().Equals(string.Empty))
                 {
-                    tbxPassword.ForeColor = System.Drawing.ColorTranslator.FromHtml("#89B4D2");
+                    tbxPassword.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("mid blue"));
                     tbxPassword.Text = strTypePassword;
                     tbxPassword.PasswordChar = '\0';
                 }
@@ -143,9 +143,9 @@ namespace PrimarySchool
         {
             try
             {
-                tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml("#89B4D2");
+                tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("mid blue"));
                 tbxUsername.Text = strTypeUser;
-                tbxPassword.ForeColor = System.Drawing.ColorTranslator.FromHtml("#89B4D2");
+                tbxPassword.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("mid blue"));
                 tbxPassword.Text = strTypePassword;
                 tbxPassword.PasswordChar = '\0';
             }
@@ -163,7 +163,7 @@ namespace PrimarySchool
                 if (tbxUsername.Text.Equals(strTypeUser))
                 {
                     tbxUsername.Text = string.Empty;
-                    tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml("#0B090B");
+                    tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("black"));
                 }
             }
             catch (Exception ex)
@@ -188,7 +188,7 @@ namespace PrimarySchool
                 if (tbxPassword.Text.Equals(strTypePassword))
                 {
                     tbxPassword.Text = string.Empty;
-                    tbxPassword.ForeColor = System.Drawing.ColorTranslator.FromHtml("#0B090B");
+                    tbxPassword.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("black"));
                     tbxPassword.PasswordChar = '*';
                 }
             }

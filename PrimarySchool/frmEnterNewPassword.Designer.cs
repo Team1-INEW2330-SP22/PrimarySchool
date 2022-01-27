@@ -29,6 +29,7 @@ namespace PrimarySchool
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEnterNewPassword));
             this.btnSubmit = new System.Windows.Forms.Button();
             this.lblConfirm = new System.Windows.Forms.Label();
             this.tbxConfirm = new System.Windows.Forms.TextBox();
@@ -104,6 +105,7 @@ namespace PrimarySchool
             this.Controls.Add(this.tbxNewPass);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmEnterNewPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
