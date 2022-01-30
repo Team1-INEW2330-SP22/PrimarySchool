@@ -68,7 +68,7 @@ namespace PrimarySchool
             {
                 if (tbxUsername.Text.Trim().Equals(string.Empty))
                 {
-                    tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("mid blue"));
+                    tbxUsername.ForeColor = FormOps.GetColorFromPalette("dark blue");
                     tbxUsername.Text = strTypeUser;
                 }
             }
@@ -112,7 +112,7 @@ namespace PrimarySchool
             {
                 ProgOps.OpenDatabase();
                 tbxUsername.Text = string.Empty;
-                tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("black"));
+                tbxUsername.ForeColor = FormOps.GetColorFromPalette("black");
             }
             catch (Exception ex)
             {
@@ -127,7 +127,7 @@ namespace PrimarySchool
             {
                 if (tbxPassword.Text.Trim().Equals(string.Empty))
                 {
-                    tbxPassword.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("mid blue"));
+                    tbxPassword.ForeColor = FormOps.GetColorFromPalette("mid blue");
                     tbxPassword.Text = strTypePassword;
                     tbxPassword.PasswordChar = '\0';
                 }
@@ -143,9 +143,9 @@ namespace PrimarySchool
         {
             try
             {
-                tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("mid blue"));
+                tbxUsername.ForeColor = FormOps.GetColorFromPalette("mid blue");
                 tbxUsername.Text = strTypeUser;
-                tbxPassword.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("mid blue"));
+                tbxPassword.ForeColor = FormOps.GetColorFromPalette("mid blue");
                 tbxPassword.Text = strTypePassword;
                 tbxPassword.PasswordChar = '\0';
             }
@@ -163,7 +163,7 @@ namespace PrimarySchool
                 if (tbxUsername.Text.Equals(strTypeUser))
                 {
                     tbxUsername.Text = string.Empty;
-                    tbxUsername.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("black"));
+                    tbxUsername.ForeColor = FormOps.GetColorFromPalette("black");
                 }
             }
             catch (Exception ex)
@@ -179,6 +179,26 @@ namespace PrimarySchool
             FormOps.ShowModal(resetPassword);
         }
 
+        // Reveals password.
+        private void pbxEyeball_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbxPassword.PasswordChar.Equals('*'))
+                {
+                    tbxPassword.PasswordChar = '\0';
+                }
+                else
+                {
+                    tbxPassword.PasswordChar = '*';
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
         // Clears tbxPassword if user selects it while the default prompt is visible, sets the text color to black,
         // and sets the password character.
         private void tbxPassword_Enter(object sender, EventArgs e)
@@ -188,7 +208,7 @@ namespace PrimarySchool
                 if (tbxPassword.Text.Equals(strTypePassword))
                 {
                     tbxPassword.Text = string.Empty;
-                    tbxPassword.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("black"));
+                    tbxPassword.ForeColor = FormOps.GetColorFromPalette("black");
                     tbxPassword.PasswordChar = '*';
                 }
             }

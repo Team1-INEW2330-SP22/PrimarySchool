@@ -125,6 +125,7 @@ namespace PrimarySchool
             this.pbxEyeball.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxEyeball.TabIndex = 6;
             this.pbxEyeball.TabStop = false;
+            this.pbxEyeball.Click += new System.EventHandler(this.pbxEyeball_Click);
             // 
             // btnClose
             // 

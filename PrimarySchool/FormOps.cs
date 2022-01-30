@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 // Enables easy repitition for basic form-related operations.
 
@@ -90,25 +91,52 @@ namespace PrimarySchool
                     MessageBoxIcon.Error);
         }
 
-        // Returns a hex code from our color palette.
-        public static string GetColorHex(string color)
+        // Returns a color from our color palette.
+        public static Color GetColorFromPalette(string color)
         {
             switch (color)
             {
                 case "dark blue":
-                    return "#3B77A5";
+                    return System.Drawing.ColorTranslator.FromHtml("#3B77A5");
                 case "mid blue":
-                    return "#89B4D2";
+                    return System.Drawing.ColorTranslator.FromHtml("#89B4D2");
                 case "light blue":
-                    return "#E2EBF3";
+                    return System.Drawing.ColorTranslator.FromHtml("#E2EBF3");
                 case "gray":
-                    return "#C3C5BE";
+                    return System.Drawing.ColorTranslator.FromHtml("#C3C5BE");
                 case "black":
-                    return "#0B090B";
+                    return System.Drawing.ColorTranslator.FromHtml("#0B090B");
                 default:
-                    // Returns hex code for red if something goes wrong.
-                    // Search for red on our forms to find errors with this method.
-                    return "#FF0000";
+                    // Returns red if the string isn't correct.
+                    return System.Drawing.ColorTranslator.FromHtml("#FF0000");
+            }
+        }
+
+        // Asks a question and returns a boolean value depending on the answer.
+        public static Boolean QuestionBox(string question)
+        {
+            try
+            {
+                SystemSounds.Beep.Play();
+                DialogResult response;
+                response = MessageBox.Show(question,
+                    "Question", 
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+                if (response == DialogResult.No)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorBox(ex.Message);
+                return false;
             }
         }
     }

@@ -28,7 +28,7 @@ namespace PrimarySchool
                 if (tbxEmail.Text.Equals(strTypeEmail))
                 {
                     tbxEmail.Text = string.Empty;
-                    tbxEmail.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("black"));
+                    tbxEmail.ForeColor = FormOps.GetColorFromPalette("black");
                 }
             }
             catch (Exception ex)
@@ -44,7 +44,7 @@ namespace PrimarySchool
             {
                 if (tbxEmail.Text.Trim().Equals(string.Empty))
                 {
-                    tbxEmail.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("mid blue"));
+                    tbxEmail.ForeColor = FormOps.GetColorFromPalette("mid blue");
                     tbxEmail.Text = strTypeEmail;
                 }
             }
@@ -62,7 +62,7 @@ namespace PrimarySchool
                 if (tbxCode.Text.Equals(strTypeCode))
                 {
                     tbxCode.Text = string.Empty;
-                    tbxCode.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("black"));
+                    tbxCode.ForeColor = FormOps.GetColorFromPalette("black");
                 }
             }
             catch (Exception ex)
@@ -78,7 +78,7 @@ namespace PrimarySchool
             {
                 if (tbxCode.Text.Trim().Equals(string.Empty))
                 {
-                    tbxCode.ForeColor = System.Drawing.ColorTranslator.FromHtml(FormOps.GetColorHex("mid blue"));
+                    tbxCode.ForeColor = FormOps.GetColorFromPalette("mid blue");
                     tbxCode.Text = strTypeCode;
                 }
             }

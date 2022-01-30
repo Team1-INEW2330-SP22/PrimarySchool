@@ -88,27 +88,27 @@ namespace PrimarySchool
             this.lblAvailableCourses = new System.Windows.Forms.Label();
             this.lbxStudentCourses = new System.Windows.Forms.ListBox();
             this.lbxAvailableCourses = new System.Windows.Forms.ListBox();
-            this.btnStudentsRemove = new System.Windows.Forms.Button();
-            this.btnStudentsAdd = new System.Windows.Forms.Button();
+            this.btnRemoveCourse = new System.Windows.Forms.Button();
+            this.btnAddCourse = new System.Windows.Forms.Button();
             this.mnuMenu = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileClose = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditNavigation = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditNavigationFirst = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditNavigationLast = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditNavigationPrevious = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditNavigationNext = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditOperations = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditOperationsEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditOperationsSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditOperationsCancel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditOperationsAddNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditOperationsDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditOperationsSearch = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditOperationsCourses = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditOperationsCoursesAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditOperationsCoursesRemove = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEditTab = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNavigation = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFirst = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLast = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPrevious = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNext = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOperations = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEditRecord = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCancel = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAddNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCourses = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAddCourse = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRemoveCourse = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpInstructions = new System.Windows.Forms.ToolStripMenuItem();
             this.tbxECCellPhone = new System.Windows.Forms.TextBox();
@@ -641,6 +641,7 @@ namespace PrimarySchool
             this.btnDelete.TabIndex = 104;
             this.btnDelete.Text = "&Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAddNew
             // 
@@ -654,6 +655,7 @@ namespace PrimarySchool
             this.btnAddNew.TabIndex = 103;
             this.btnAddNew.Text = "&Add New";
             this.btnAddNew.UseVisualStyleBackColor = false;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // btnCancel
             // 
@@ -667,6 +669,7 @@ namespace PrimarySchool
             this.btnCancel.TabIndex = 102;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -680,6 +683,7 @@ namespace PrimarySchool
             this.btnSave.TabIndex = 101;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnEdit
             // 
@@ -693,6 +697,7 @@ namespace PrimarySchool
             this.btnEdit.TabIndex = 100;
             this.btnEdit.Text = "&Edit";
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnLast
             // 
@@ -706,6 +711,7 @@ namespace PrimarySchool
             this.btnLast.TabIndex = 99;
             this.btnLast.Text = "&Last >|";
             this.btnLast.UseVisualStyleBackColor = false;
+            this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
             // 
             // btnFirst
             // 
@@ -719,6 +725,7 @@ namespace PrimarySchool
             this.btnFirst.TabIndex = 98;
             this.btnFirst.Text = "|< &First";
             this.btnFirst.UseVisualStyleBackColor = false;
+            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // btnNext
             // 
@@ -732,6 +739,7 @@ namespace PrimarySchool
             this.btnNext.TabIndex = 97;
             this.btnNext.Text = "&Next >";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrevious
             // 
@@ -745,6 +753,7 @@ namespace PrimarySchool
             this.btnPrevious.TabIndex = 96;
             this.btnPrevious.Text = "< &Previous";
             this.btnPrevious.UseVisualStyleBackColor = false;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // gbxCourses
             // 
@@ -753,8 +762,8 @@ namespace PrimarySchool
             this.gbxCourses.Controls.Add(this.lblAvailableCourses);
             this.gbxCourses.Controls.Add(this.lbxStudentCourses);
             this.gbxCourses.Controls.Add(this.lbxAvailableCourses);
-            this.gbxCourses.Controls.Add(this.btnStudentsRemove);
-            this.gbxCourses.Controls.Add(this.btnStudentsAdd);
+            this.gbxCourses.Controls.Add(this.btnRemoveCourse);
+            this.gbxCourses.Controls.Add(this.btnAddCourse);
             this.gbxCourses.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxCourses.Location = new System.Drawing.Point(431, 409);
             this.gbxCourses.Name = "gbxCourses";
@@ -805,37 +814,37 @@ namespace PrimarySchool
             this.lbxAvailableCourses.Size = new System.Drawing.Size(193, 140);
             this.lbxAvailableCourses.TabIndex = 91;
             // 
-            // btnStudentsRemove
+            // btnRemoveCourse
             // 
-            this.btnStudentsRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.btnStudentsRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStudentsRemove.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStudentsRemove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.btnStudentsRemove.Location = new System.Drawing.Point(269, 189);
-            this.btnStudentsRemove.Name = "btnStudentsRemove";
-            this.btnStudentsRemove.Size = new System.Drawing.Size(83, 26);
-            this.btnStudentsRemove.TabIndex = 90;
-            this.btnStudentsRemove.Text = "&Remove";
-            this.btnStudentsRemove.UseVisualStyleBackColor = false;
+            this.btnRemoveCourse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
+            this.btnRemoveCourse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemoveCourse.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveCourse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
+            this.btnRemoveCourse.Location = new System.Drawing.Point(269, 189);
+            this.btnRemoveCourse.Name = "btnRemoveCourse";
+            this.btnRemoveCourse.Size = new System.Drawing.Size(83, 26);
+            this.btnRemoveCourse.TabIndex = 90;
+            this.btnRemoveCourse.Text = "&Remove";
+            this.btnRemoveCourse.UseVisualStyleBackColor = false;
             // 
-            // btnStudentsAdd
+            // btnAddCourse
             // 
-            this.btnStudentsAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.btnStudentsAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStudentsAdd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStudentsAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.btnStudentsAdd.Location = new System.Drawing.Point(64, 189);
-            this.btnStudentsAdd.Name = "btnStudentsAdd";
-            this.btnStudentsAdd.Size = new System.Drawing.Size(95, 26);
-            this.btnStudentsAdd.TabIndex = 89;
-            this.btnStudentsAdd.Text = "Add C&ourse";
-            this.btnStudentsAdd.UseVisualStyleBackColor = false;
+            this.btnAddCourse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
+            this.btnAddCourse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddCourse.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddCourse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
+            this.btnAddCourse.Location = new System.Drawing.Point(64, 189);
+            this.btnAddCourse.Name = "btnAddCourse";
+            this.btnAddCourse.Size = new System.Drawing.Size(95, 26);
+            this.btnAddCourse.TabIndex = 89;
+            this.btnAddCourse.Text = "Add C&ourse";
+            this.btnAddCourse.UseVisualStyleBackColor = false;
             // 
             // mnuMenu
             // 
             this.mnuMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFile,
-            this.mnuEdit,
+            this.mnuEditTab,
             this.mnuHelp});
             this.mnuMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMenu.Name = "mnuMenu";
@@ -849,150 +858,158 @@ namespace PrimarySchool
             this.mnuFileClose});
             this.mnuFile.Name = "mnuFile";
             this.mnuFile.Size = new System.Drawing.Size(37, 20);
-            this.mnuFile.Text = "&File";
+            this.mnuFile.Text = "F&ile";
             // 
             // mnuFileClose
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
             this.mnuFileClose.Text = "&Close";
             this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
-            // mnuEdit
+            // mnuEditTab
             // 
-            this.mnuEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuEditNavigation,
-            this.mnuEditOperations});
-            this.mnuEdit.Name = "mnuEdit";
-            this.mnuEdit.Size = new System.Drawing.Size(39, 20);
-            this.mnuEdit.Text = "&Edit";
+            this.mnuEditTab.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuNavigation,
+            this.mnuOperations});
+            this.mnuEditTab.Name = "mnuEditTab";
+            this.mnuEditTab.Size = new System.Drawing.Size(39, 20);
+            this.mnuEditTab.Text = "Edi&t";
             // 
-            // mnuEditNavigation
+            // mnuNavigation
             // 
-            this.mnuEditNavigation.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuEditNavigationFirst,
-            this.mnuEditNavigationLast,
-            this.mnuEditNavigationPrevious,
-            this.mnuEditNavigationNext});
-            this.mnuEditNavigation.Name = "mnuEditNavigation";
-            this.mnuEditNavigation.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.mnuNavigation.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuFirst,
+            this.mnuLast,
+            this.mnuPrevious,
+            this.mnuNext});
+            this.mnuNavigation.Name = "mnuNavigation";
+            this.mnuNavigation.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.N)));
-            this.mnuEditNavigation.Size = new System.Drawing.Size(207, 22);
-            this.mnuEditNavigation.Text = "Nagivation";
+            this.mnuNavigation.Size = new System.Drawing.Size(207, 22);
+            this.mnuNavigation.Text = "Nagivation";
             // 
-            // mnuEditNavigationFirst
+            // mnuFirst
             // 
-            this.mnuEditNavigationFirst.Name = "mnuEditNavigationFirst";
-            this.mnuEditNavigationFirst.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.mnuEditNavigationFirst.Size = new System.Drawing.Size(160, 22);
-            this.mnuEditNavigationFirst.Text = "&First";
+            this.mnuFirst.Name = "mnuFirst";
+            this.mnuFirst.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.mnuFirst.Size = new System.Drawing.Size(160, 22);
+            this.mnuFirst.Text = "&First";
+            this.mnuFirst.Click += new System.EventHandler(this.mnuFirst_Click);
             // 
-            // mnuEditNavigationLast
+            // mnuLast
             // 
-            this.mnuEditNavigationLast.Name = "mnuEditNavigationLast";
-            this.mnuEditNavigationLast.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.mnuEditNavigationLast.Size = new System.Drawing.Size(160, 22);
-            this.mnuEditNavigationLast.Text = "&Last";
+            this.mnuLast.Name = "mnuLast";
+            this.mnuLast.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.mnuLast.Size = new System.Drawing.Size(160, 22);
+            this.mnuLast.Text = "&Last";
+            this.mnuLast.Click += new System.EventHandler(this.mnuLast_Click);
             // 
-            // mnuEditNavigationPrevious
+            // mnuPrevious
             // 
-            this.mnuEditNavigationPrevious.Name = "mnuEditNavigationPrevious";
-            this.mnuEditNavigationPrevious.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.mnuEditNavigationPrevious.Size = new System.Drawing.Size(160, 22);
-            this.mnuEditNavigationPrevious.Text = "&Previous";
+            this.mnuPrevious.Name = "mnuPrevious";
+            this.mnuPrevious.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.mnuPrevious.Size = new System.Drawing.Size(160, 22);
+            this.mnuPrevious.Text = "&Previous";
+            this.mnuPrevious.Click += new System.EventHandler(this.mnuPrevious_Click);
             // 
-            // mnuEditNavigationNext
+            // mnuNext
             // 
-            this.mnuEditNavigationNext.Name = "mnuEditNavigationNext";
-            this.mnuEditNavigationNext.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.mnuEditNavigationNext.Size = new System.Drawing.Size(160, 22);
-            this.mnuEditNavigationNext.Text = "&Next";
+            this.mnuNext.Name = "mnuNext";
+            this.mnuNext.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.mnuNext.Size = new System.Drawing.Size(160, 22);
+            this.mnuNext.Text = "&Next";
+            this.mnuNext.Click += new System.EventHandler(this.mnuNext_Click);
             // 
-            // mnuEditOperations
+            // mnuOperations
             // 
-            this.mnuEditOperations.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuEditOperationsEdit,
-            this.mnuEditOperationsSave,
-            this.mnuEditOperationsCancel,
-            this.mnuEditOperationsAddNew,
-            this.mnuEditOperationsDelete,
-            this.mnuEditOperationsSearch,
-            this.mnuEditOperationsCourses});
-            this.mnuEditOperations.Name = "mnuEditOperations";
-            this.mnuEditOperations.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.mnuOperations.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuEditRecord,
+            this.mnuSave,
+            this.mnuCancel,
+            this.mnuAddNew,
+            this.mnuDelete,
+            this.mnuSearch,
+            this.mnuCourses});
+            this.mnuOperations.Name = "mnuOperations";
+            this.mnuOperations.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.O)));
-            this.mnuEditOperations.Size = new System.Drawing.Size(207, 22);
-            this.mnuEditOperations.Text = "Operations";
+            this.mnuOperations.Size = new System.Drawing.Size(207, 22);
+            this.mnuOperations.Text = "Operations";
             // 
-            // mnuEditOperationsEdit
+            // mnuEditRecord
             // 
-            this.mnuEditOperationsEdit.Name = "mnuEditOperationsEdit";
-            this.mnuEditOperationsEdit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.mnuEditOperationsEdit.Size = new System.Drawing.Size(190, 22);
-            this.mnuEditOperationsEdit.Text = "&Edit";
+            this.mnuEditRecord.Name = "mnuEditRecord";
+            this.mnuEditRecord.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.mnuEditRecord.Size = new System.Drawing.Size(190, 22);
+            this.mnuEditRecord.Text = "&Edit";
+            this.mnuEditRecord.Click += new System.EventHandler(this.mnuEditRecord_Click);
             // 
-            // mnuEditOperationsSave
+            // mnuSave
             // 
-            this.mnuEditOperationsSave.Name = "mnuEditOperationsSave";
-            this.mnuEditOperationsSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuEditOperationsSave.Size = new System.Drawing.Size(190, 22);
-            this.mnuEditOperationsSave.Text = "&Save";
+            this.mnuSave.Name = "mnuSave";
+            this.mnuSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.mnuSave.Size = new System.Drawing.Size(190, 22);
+            this.mnuSave.Text = "&Save";
             // 
-            // mnuEditOperationsCancel
+            // mnuCancel
             // 
-            this.mnuEditOperationsCancel.Name = "mnuEditOperationsCancel";
-            this.mnuEditOperationsCancel.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.mnuEditOperationsCancel.Size = new System.Drawing.Size(190, 22);
-            this.mnuEditOperationsCancel.Text = "&Cancel";
+            this.mnuCancel.Name = "mnuCancel";
+            this.mnuCancel.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.mnuCancel.Size = new System.Drawing.Size(190, 22);
+            this.mnuCancel.Text = "&Cancel";
+            this.mnuCancel.Click += new System.EventHandler(this.mnuCancel_Click);
             // 
-            // mnuEditOperationsAddNew
+            // mnuAddNew
             // 
-            this.mnuEditOperationsAddNew.Name = "mnuEditOperationsAddNew";
-            this.mnuEditOperationsAddNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.mnuEditOperationsAddNew.Size = new System.Drawing.Size(190, 22);
-            this.mnuEditOperationsAddNew.Text = "&Add New";
+            this.mnuAddNew.Name = "mnuAddNew";
+            this.mnuAddNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.mnuAddNew.Size = new System.Drawing.Size(190, 22);
+            this.mnuAddNew.Text = "&Add New";
+            this.mnuAddNew.Click += new System.EventHandler(this.mnuAddNew_Click);
             // 
-            // mnuEditOperationsDelete
+            // mnuDelete
             // 
-            this.mnuEditOperationsDelete.Name = "mnuEditOperationsDelete";
-            this.mnuEditOperationsDelete.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.mnuEditOperationsDelete.Size = new System.Drawing.Size(190, 22);
-            this.mnuEditOperationsDelete.Text = "&Delete";
+            this.mnuDelete.Name = "mnuDelete";
+            this.mnuDelete.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.mnuDelete.Size = new System.Drawing.Size(190, 22);
+            this.mnuDelete.Text = "&Delete";
+            this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click);
             // 
-            // mnuEditOperationsSearch
+            // mnuSearch
             // 
-            this.mnuEditOperationsSearch.Name = "mnuEditOperationsSearch";
-            this.mnuEditOperationsSearch.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.mnuSearch.Name = "mnuSearch";
+            this.mnuSearch.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
-            this.mnuEditOperationsSearch.Size = new System.Drawing.Size(190, 22);
-            this.mnuEditOperationsSearch.Text = "Sea&rch";
+            this.mnuSearch.Size = new System.Drawing.Size(190, 22);
+            this.mnuSearch.Text = "Sea&rch";
             // 
-            // mnuEditOperationsCourses
+            // mnuCourses
             // 
-            this.mnuEditOperationsCourses.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuEditOperationsCoursesAdd,
-            this.mnuEditOperationsCoursesRemove});
-            this.mnuEditOperationsCourses.Name = "mnuEditOperationsCourses";
-            this.mnuEditOperationsCourses.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.mnuCourses.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuAddCourse,
+            this.mnuRemoveCourse});
+            this.mnuCourses.Name = "mnuCourses";
+            this.mnuCourses.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.C)));
-            this.mnuEditOperationsCourses.Size = new System.Drawing.Size(190, 22);
-            this.mnuEditOperationsCourses.Text = "C&ourses";
+            this.mnuCourses.Size = new System.Drawing.Size(190, 22);
+            this.mnuCourses.Text = "C&ourses";
             // 
-            // mnuEditOperationsCoursesAdd
+            // mnuAddCourse
             // 
-            this.mnuEditOperationsCoursesAdd.Name = "mnuEditOperationsCoursesAdd";
-            this.mnuEditOperationsCoursesAdd.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.mnuAddCourse.Name = "mnuAddCourse";
+            this.mnuAddCourse.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.O)));
-            this.mnuEditOperationsCoursesAdd.Size = new System.Drawing.Size(211, 22);
-            this.mnuEditOperationsCoursesAdd.Text = "Add C&ourse";
+            this.mnuAddCourse.Size = new System.Drawing.Size(211, 22);
+            this.mnuAddCourse.Text = "Add C&ourse";
             // 
-            // mnuEditOperationsCoursesRemove
+            // mnuRemoveCourse
             // 
-            this.mnuEditOperationsCoursesRemove.Name = "mnuEditOperationsCoursesRemove";
-            this.mnuEditOperationsCoursesRemove.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.mnuEditOperationsCoursesRemove.Size = new System.Drawing.Size(211, 22);
-            this.mnuEditOperationsCoursesRemove.Text = "&Remove";
+            this.mnuRemoveCourse.Name = "mnuRemoveCourse";
+            this.mnuRemoveCourse.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.mnuRemoveCourse.Size = new System.Drawing.Size(211, 22);
+            this.mnuRemoveCourse.Text = "&Remove";
             // 
             // mnuHelp
             // 
@@ -1102,6 +1119,7 @@ namespace PrimarySchool
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Students";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmStudents_FormClosing);
+            this.Load += new System.EventHandler(this.frmStudents_Load);
             this.gbxSearch.ResumeLayout(false);
             this.gbxSearch.PerformLayout();
             this.gbxCourses.ResumeLayout(false);
@@ -1172,27 +1190,27 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblAvailableCourses;
         private System.Windows.Forms.ListBox lbxStudentCourses;
         private System.Windows.Forms.ListBox lbxAvailableCourses;
-        private System.Windows.Forms.Button btnStudentsRemove;
-        private System.Windows.Forms.Button btnStudentsAdd;
+        private System.Windows.Forms.Button btnRemoveCourse;
+        private System.Windows.Forms.Button btnAddCourse;
         private System.Windows.Forms.MenuStrip mnuMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuFile;
         private System.Windows.Forms.ToolStripMenuItem mnuFileClose;
-        private System.Windows.Forms.ToolStripMenuItem mnuEdit;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditNavigation;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditNavigationFirst;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditNavigationLast;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditNavigationPrevious;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditNavigationNext;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditOperations;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditOperationsEdit;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditOperationsSave;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditOperationsCancel;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditOperationsAddNew;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditOperationsDelete;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditOperationsSearch;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditOperationsCourses;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditOperationsCoursesAdd;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditOperationsCoursesRemove;
+        private System.Windows.Forms.ToolStripMenuItem mnuEditTab;
+        private System.Windows.Forms.ToolStripMenuItem mnuNavigation;
+        private System.Windows.Forms.ToolStripMenuItem mnuFirst;
+        private System.Windows.Forms.ToolStripMenuItem mnuLast;
+        private System.Windows.Forms.ToolStripMenuItem mnuPrevious;
+        private System.Windows.Forms.ToolStripMenuItem mnuNext;
+        private System.Windows.Forms.ToolStripMenuItem mnuOperations;
+        private System.Windows.Forms.ToolStripMenuItem mnuEditRecord;
+        private System.Windows.Forms.ToolStripMenuItem mnuSave;
+        private System.Windows.Forms.ToolStripMenuItem mnuCancel;
+        private System.Windows.Forms.ToolStripMenuItem mnuAddNew;
+        private System.Windows.Forms.ToolStripMenuItem mnuDelete;
+        private System.Windows.Forms.ToolStripMenuItem mnuSearch;
+        private System.Windows.Forms.ToolStripMenuItem mnuCourses;
+        private System.Windows.Forms.ToolStripMenuItem mnuAddCourse;
+        private System.Windows.Forms.ToolStripMenuItem mnuRemoveCourse;
         private System.Windows.Forms.ToolStripMenuItem mnuHelp;
         private System.Windows.Forms.ToolStripMenuItem mnuHelpInstructions;
         private System.Windows.Forms.TextBox tbxECCellPhone;
