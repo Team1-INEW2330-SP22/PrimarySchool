@@ -56,6 +56,7 @@ namespace PrimarySchool
             // 
             // mnuMenu
             // 
+            this.mnuMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.mnuMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFile,
             this.mnuEdit,
@@ -194,13 +195,13 @@ namespace PrimarySchool
             // 
             this.cbxCourses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
             this.cbxCourses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxCourses.Enabled = false;
             this.cbxCourses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
             this.cbxCourses.FormattingEnabled = true;
             this.cbxCourses.Location = new System.Drawing.Point(15, 42);
             this.cbxCourses.Name = "cbxCourses";
             this.cbxCourses.Size = new System.Drawing.Size(196, 29);
             this.cbxCourses.TabIndex = 1;
+            this.cbxCourses.SelectedIndexChanged += new System.EventHandler(this.cbxCourses_SelectedIndexChanged);
             // 
             // lblSelectCourse
             // 
@@ -223,8 +224,10 @@ namespace PrimarySchool
             this.dgvGradebook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGradebook.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.dgvGradebook.Enabled = false;
+            this.dgvGradebook.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(197)))), ((int)(((byte)(190)))));
             this.dgvGradebook.Location = new System.Drawing.Point(12, 137);
             this.dgvGradebook.Name = "dgvGradebook";
+            this.dgvGradebook.RowHeadersWidth = 62;
             this.dgvGradebook.Size = new System.Drawing.Size(1060, 412);
             this.dgvGradebook.TabIndex = 2;
             this.dgvGradebook.TabStop = false;
@@ -262,6 +265,7 @@ namespace PrimarySchool
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Gradebook";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmGradebook_FormClosing);
+            this.Load += new System.EventHandler(this.frmGradebook_Load);
             this.mnuMenu.ResumeLayout(false);
             this.mnuMenu.PerformLayout();
             this.gbxGradebook.ResumeLayout(false);

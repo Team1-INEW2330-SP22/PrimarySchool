@@ -174,6 +174,7 @@ namespace PrimarySchool
             this.dgvSeatingChart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSeatingChart.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.dgvSeatingChart.Enabled = false;
+            this.dgvSeatingChart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(197)))), ((int)(((byte)(190)))));
             this.dgvSeatingChart.Location = new System.Drawing.Point(14, 145);
             this.dgvSeatingChart.Name = "dgvSeatingChart";
             this.dgvSeatingChart.Size = new System.Drawing.Size(409, 389);
@@ -240,13 +241,13 @@ namespace PrimarySchool
             // 
             this.cbxCourses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
             this.cbxCourses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxCourses.Enabled = false;
             this.cbxCourses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
             this.cbxCourses.FormattingEnabled = true;
             this.cbxCourses.Location = new System.Drawing.Point(15, 49);
             this.cbxCourses.Name = "cbxCourses";
             this.cbxCourses.Size = new System.Drawing.Size(196, 29);
             this.cbxCourses.TabIndex = 1;
+            this.cbxCourses.SelectedIndexChanged += new System.EventHandler(this.cbxCourses_SelectedIndexChanged);
             // 
             // lblSelectCourse
             // 
@@ -340,6 +341,7 @@ namespace PrimarySchool
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Seating Chart";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSeatingChart_FormClosing);
+            this.Load += new System.EventHandler(this.frmSeatingChart_Load);
             this.mnuMenu.ResumeLayout(false);
             this.mnuMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeatingChart)).EndInit();

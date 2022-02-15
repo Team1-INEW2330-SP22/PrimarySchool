@@ -25,7 +25,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (LogIn())
+                if (ProgOps.LogIn(tbxUsername, tbxPassword))
                 {
                     frmHome home = new frmHome(this);
                     FormOps.ShowModelessAndHide(home, this);
@@ -37,6 +37,7 @@ namespace PrimarySchool
             }
         }
 
+        // NOT CURRENTLY BEING USED ******************************
         // Checks user credentials.
         // Displays MessageBox if user credentials aren't correct.
         private bool LogIn()
@@ -68,7 +69,7 @@ namespace PrimarySchool
             {
                 if (tbxUsername.Text.Trim().Equals(string.Empty))
                 {
-                    tbxUsername.ForeColor = FormOps.GetColorFromPalette("dark blue");
+                    tbxUsername.ForeColor = FormOps.GetColorFromPalette("mid blue");
                     tbxUsername.Text = strTypeUser;
                 }
             }

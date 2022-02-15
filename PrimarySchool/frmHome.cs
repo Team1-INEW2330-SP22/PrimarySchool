@@ -37,6 +37,7 @@ namespace PrimarySchool
         // Closes Login when the Home screen is closed.
         private void frmHome_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ProgOps.LogOut();
             login.Reset();
             FormOps.ShowModeless(login);
         }
@@ -165,7 +166,7 @@ namespace PrimarySchool
         {
             try
             {
-                SetState("Administrator");
+                SetState(ProgOps.UserRole);
             }
             catch (Exception ex)
             {
