@@ -188,7 +188,7 @@ namespace PrimarySchool
                 }
             }
 
-            ((DataGridViewTextBoxColumn)dgvGradebook.Columns["Grade"]).MaxInputLength = 3;
+            ((DataGridViewTextBoxColumn)dgvGradebook.Columns["Grade"]).MaxInputLength = 6;
             ((DataGridViewTextBoxColumn)dgvGradebook.Columns["Comments"]).MaxInputLength = 255;
 
             dgvGradebook.Enabled = true;

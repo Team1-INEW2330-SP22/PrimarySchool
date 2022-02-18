@@ -50,10 +50,8 @@ namespace PrimarySchool
             this.lblCourseName = new System.Windows.Forms.Label();
             this.cbxCourses = new System.Windows.Forms.ComboBox();
             this.lblSelectCourse = new System.Windows.Forms.Label();
-            this.lblUnavailableSeats = new System.Windows.Forms.Label();
-            this.lblAvailableSeats = new System.Windows.Forms.Label();
-            this.lbxUnavailableSeats = new System.Windows.Forms.ListBox();
-            this.lbxAvailableSeats = new System.Windows.Forms.ListBox();
+            this.lblSeatList = new System.Windows.Forms.Label();
+            this.lbxSeatList = new System.Windows.Forms.ListBox();
             this.pbxListBoxBackground = new System.Windows.Forms.PictureBox();
             this.mnuMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeatingChart)).BeginInit();
@@ -177,7 +175,7 @@ namespace PrimarySchool
             this.dgvSeatingChart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(197)))), ((int)(((byte)(190)))));
             this.dgvSeatingChart.Location = new System.Drawing.Point(14, 145);
             this.dgvSeatingChart.Name = "dgvSeatingChart";
-            this.dgvSeatingChart.Size = new System.Drawing.Size(409, 389);
+            this.dgvSeatingChart.Size = new System.Drawing.Size(519, 389);
             this.dgvSeatingChart.TabIndex = 5;
             this.dgvSeatingChart.TabStop = false;
             // 
@@ -259,60 +257,37 @@ namespace PrimarySchool
             this.lblSelectCourse.TabIndex = 0;
             this.lblSelectCourse.Text = "Select Course";
             // 
-            // lblUnavailableSeats
+            // lblSeatList
             // 
-            this.lblUnavailableSeats.AutoSize = true;
-            this.lblUnavailableSeats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.lblUnavailableSeats.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnavailableSeats.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.lblUnavailableSeats.Location = new System.Drawing.Point(595, 149);
-            this.lblUnavailableSeats.Name = "lblUnavailableSeats";
-            this.lblUnavailableSeats.Size = new System.Drawing.Size(126, 20);
-            this.lblUnavailableSeats.TabIndex = 17;
-            this.lblUnavailableSeats.Text = "Unavailable Seats";
+            this.lblSeatList.AutoSize = true;
+            this.lblSeatList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
+            this.lblSeatList.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSeatList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
+            this.lblSeatList.Location = new System.Drawing.Point(614, 149);
+            this.lblSeatList.Name = "lblSeatList";
+            this.lblSeatList.Size = new System.Drawing.Size(64, 20);
+            this.lblSeatList.TabIndex = 16;
+            this.lblSeatList.Text = "Seat List";
             // 
-            // lblAvailableSeats
+            // lbxSeatList
             // 
-            this.lblAvailableSeats.AutoSize = true;
-            this.lblAvailableSeats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.lblAvailableSeats.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvailableSeats.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.lblAvailableSeats.Location = new System.Drawing.Point(431, 149);
-            this.lblAvailableSeats.Name = "lblAvailableSeats";
-            this.lblAvailableSeats.Size = new System.Drawing.Size(110, 20);
-            this.lblAvailableSeats.TabIndex = 16;
-            this.lblAvailableSeats.Text = "Available Seats";
-            // 
-            // lbxUnavailableSeats
-            // 
-            this.lbxUnavailableSeats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.lbxUnavailableSeats.Enabled = false;
-            this.lbxUnavailableSeats.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.lbxUnavailableSeats.FormattingEnabled = true;
-            this.lbxUnavailableSeats.ItemHeight = 21;
-            this.lbxUnavailableSeats.Location = new System.Drawing.Point(595, 173);
-            this.lbxUnavailableSeats.Name = "lbxUnavailableSeats";
-            this.lbxUnavailableSeats.Size = new System.Drawing.Size(160, 361);
-            this.lbxUnavailableSeats.TabIndex = 15;
-            // 
-            // lbxAvailableSeats
-            // 
-            this.lbxAvailableSeats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.lbxAvailableSeats.Enabled = false;
-            this.lbxAvailableSeats.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.lbxAvailableSeats.FormattingEnabled = true;
-            this.lbxAvailableSeats.ItemHeight = 21;
-            this.lbxAvailableSeats.Location = new System.Drawing.Point(431, 173);
-            this.lbxAvailableSeats.Name = "lbxAvailableSeats";
-            this.lbxAvailableSeats.Size = new System.Drawing.Size(160, 361);
-            this.lbxAvailableSeats.TabIndex = 14;
+            this.lbxSeatList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
+            this.lbxSeatList.Enabled = false;
+            this.lbxSeatList.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbxSeatList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
+            this.lbxSeatList.FormattingEnabled = true;
+            this.lbxSeatList.ItemHeight = 17;
+            this.lbxSeatList.Location = new System.Drawing.Point(539, 173);
+            this.lbxSeatList.Name = "lbxSeatList";
+            this.lbxSeatList.Size = new System.Drawing.Size(215, 361);
+            this.lbxSeatList.TabIndex = 14;
             // 
             // pbxListBoxBackground
             // 
             this.pbxListBoxBackground.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.pbxListBoxBackground.Location = new System.Drawing.Point(431, 145);
+            this.pbxListBoxBackground.Location = new System.Drawing.Point(539, 145);
             this.pbxListBoxBackground.Name = "pbxListBoxBackground";
-            this.pbxListBoxBackground.Size = new System.Drawing.Size(324, 389);
+            this.pbxListBoxBackground.Size = new System.Drawing.Size(215, 389);
             this.pbxListBoxBackground.TabIndex = 8;
             this.pbxListBoxBackground.TabStop = false;
             // 
@@ -322,10 +297,8 @@ namespace PrimarySchool
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(180)))), ((int)(((byte)(210)))));
             this.ClientSize = new System.Drawing.Size(769, 541);
-            this.Controls.Add(this.lblUnavailableSeats);
-            this.Controls.Add(this.lblAvailableSeats);
-            this.Controls.Add(this.lbxUnavailableSeats);
-            this.Controls.Add(this.lbxAvailableSeats);
+            this.Controls.Add(this.lblSeatList);
+            this.Controls.Add(this.lbxSeatList);
             this.Controls.Add(this.pbxListBoxBackground);
             this.Controls.Add(this.gbxSeatingChart);
             this.Controls.Add(this.lblInstructions);
@@ -374,10 +347,8 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblCourseName;
         private System.Windows.Forms.ComboBox cbxCourses;
         private System.Windows.Forms.Label lblSelectCourse;
-        private System.Windows.Forms.Label lblUnavailableSeats;
-        private System.Windows.Forms.Label lblAvailableSeats;
-        private System.Windows.Forms.ListBox lbxUnavailableSeats;
-        private System.Windows.Forms.ListBox lbxAvailableSeats;
+        private System.Windows.Forms.Label lblSeatList;
+        private System.Windows.Forms.ListBox lbxSeatList;
         private System.Windows.Forms.PictureBox pbxListBoxBackground;
         private System.Windows.Forms.ToolStripMenuItem mnuEditRandomize;
     }

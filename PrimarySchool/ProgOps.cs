@@ -14,7 +14,8 @@ namespace PrimarySchool
     class ProgOps
     {
         // Connection string to database
-        private const string CONNECT_STRING = @"Server=cstnt.tstc.edu;Database=inew2330sp22;User Id=group1fa212330;password=1645456";
+        private const string CONNECT_STRING = 
+            @"Server=cstnt.tstc.edu;Database=inew2330sp22;User Id=group1fa212330;password=1645456";
 
         // Build connection to database
         private static SqlConnection _cntPrimarySchoolDatabase = new SqlConnection(CONNECT_STRING);
@@ -79,7 +80,8 @@ namespace PrimarySchool
                     "WHERE User_LoginName = '" + tbxUsername.Text.Trim() + 
                     "' AND User_LoginPwd = '" + tbxPassword.Text + "';";
 
-                SqlDataAdapter logInAdapter = new SqlDataAdapter(logInQuery, _cntPrimarySchoolDatabase);
+                SqlDataAdapter logInAdapter = 
+                    new SqlDataAdapter(logInQuery, _cntPrimarySchoolDatabase);
 
                 DataTable logInTable = new DataTable();
 
@@ -90,12 +92,15 @@ namespace PrimarySchool
                     logInAdapter.Dispose();
                     logInTable.Dispose();
 
-                    string getInfoQuery = "SELECT User_ID, User_FName + ' ' + User_LName AS 'Name', Role_Title " +
+                    string getInfoQuery = "SELECT User_ID, " +
+                        "User_FName + ' ' + User_LName AS 'Name', " +
+                        "Role_Title " +
                         "FROM group1fa212330.Users AS U " +
                         "JOIN group1fa212330.User_Roles AS UR ON U.Role_ID = UR.Role_ID " +
                         "WHERE User_LoginName = '" + tbxUsername.Text.Trim() + "';";
 
-                    SqlDataAdapter getInfoAdapter = new SqlDataAdapter(getInfoQuery, _cntPrimarySchoolDatabase);
+                    SqlDataAdapter getInfoAdapter = 
+                        new SqlDataAdapter(getInfoQuery, _cntPrimarySchoolDatabase);
                     DataTable getInfoTable = new DataTable();
 
                     getInfoAdapter.Fill(getInfoTable);
@@ -226,7 +231,8 @@ namespace PrimarySchool
                     "WHERE User_ID = " + userID +
                     " ORDER BY Course_Name;";
 
-                SqlDataAdapter courseNamesAdapter = new SqlDataAdapter(courseNamesQuery, _cntPrimarySchoolDatabase);
+                SqlDataAdapter courseNamesAdapter = 
+                    new SqlDataAdapter(courseNamesQuery, _cntPrimarySchoolDatabase);
 
                 courseNamesAdapter.Fill(courseNamesTable);
 
@@ -249,8 +255,10 @@ namespace PrimarySchool
             {
                 string courseIDQuery = "SELECT Course_ID " +
                        "FROM group1fa212330.Courses " +
-                       "WHERE User_ID = " + userID + " AND Course_Name = '" + courseName + "';";
-                SqlDataAdapter courseIDAdapter = new SqlDataAdapter(courseIDQuery, _cntPrimarySchoolDatabase);
+                       "WHERE User_ID = " + userID + 
+                       " AND Course_Name = '" + courseName + "';";
+                SqlDataAdapter courseIDAdapter = 
+                    new SqlDataAdapter(courseIDQuery, _cntPrimarySchoolDatabase);
                 DataTable courseIDTable = new DataTable();
                 courseIDAdapter.Fill(courseIDTable);
 
@@ -273,7 +281,7 @@ namespace PrimarySchool
         {
             try
             {
-                string roomQuery = "SELECT R.Room_ID " +
+                string roomQuery = "SELECT DISTINCT R.Room_ID " +
                         "FROM group1fa212330.Rooms AS R " +
                         "JOIN group1fa212330.Seats AS S " +
                         "ON R.Room_ID = S.Room_ID " +
@@ -284,7 +292,8 @@ namespace PrimarySchool
                         "JOIN group1fa212330.Users AS U " +
                         "ON C.User_ID = U.User_ID " +
                         "WHERE C.Course_ID = " + courseID + ";";
-                SqlDataAdapter roomAdapter = new SqlDataAdapter(roomQuery, _cntPrimarySchoolDatabase);
+                SqlDataAdapter roomAdapter = 
+                    new SqlDataAdapter(roomQuery, _cntPrimarySchoolDatabase);
                 DataTable roomTable = new DataTable();
                 roomAdapter.Fill(roomTable);
 
@@ -312,7 +321,7 @@ namespace PrimarySchool
         {
             try
             {
-                string totalSeatsQuery = "SELECT Number_Of_Seats " +
+                string totalSeatsQuery = "SELECT DISTINCT Number_Of_Seats " +
                     "FROM group1fa212330.Room_Sizes AS RS " +
                     "JOIN group1fa212330.Rooms AS R " +
                     "ON RS.Room_Size_ID = R.Room_Size_ID " +
@@ -323,7 +332,8 @@ namespace PrimarySchool
                     "JOIN group1fa212330.Courses AS C " +
                     "ON SC.Course_ID = C.Course_ID " +
                     "WHERE C.Course_ID = " + courseID + ";";
-                SqlDataAdapter totalSeatsAdapter = new SqlDataAdapter(totalSeatsQuery, _cntPrimarySchoolDatabase);
+                SqlDataAdapter totalSeatsAdapter = 
+                    new SqlDataAdapter(totalSeatsQuery, _cntPrimarySchoolDatabase);
                 DataTable totalSeatsTable = new DataTable();
                 totalSeatsAdapter.Fill(totalSeatsTable);
 
@@ -369,7 +379,8 @@ namespace PrimarySchool
                     "ON GB.Assignment_ID = GA.Assignment_ID " +
                     "WHERE SR.Course_ID = " + courseID + " " +
                     "ORDER BY Last_Name;";
-                SqlDataAdapter gbAdapter = new SqlDataAdapter(gbQuery, _cntPrimarySchoolDatabase);
+                SqlDataAdapter gbAdapter = 
+                    new SqlDataAdapter(gbQuery, _cntPrimarySchoolDatabase);
                 gbAdapter.Fill(gbTable);
 
                 gbAdapter.Dispose();
@@ -390,22 +401,23 @@ namespace PrimarySchool
             try
             {
                 string attendQuery = "SELECT S.Student_ID AS 'Student ID', " +
-                "First_Name AS 'First Name', " +
-                "Last_Name AS 'Last Name', " +
-                "isPresent AS 'Present', " +
-                "isExcused as 'Excused',  " +
-                "absenceReason AS 'Absence Reason', " +
-                "Date " +
-                "FROM group1fa212330.Attendance AS A " +
-                "JOIN group1fa212330.Courses AS C " +
-                "ON A.Course_ID = C.Course_ID " +
-                "JOIN group1fa212330.Student_Registration AS SR " +
-                "ON C.Course_ID = SR.Course_ID " +
-                "JOIN group1fa212330.Students AS S " +
-                "ON SR.Student_ID = S.Student_ID " +
-                "WHERE SR.Course_ID = " + courseID + " " +
-                "AND Date = '" + date + "';";
-                SqlDataAdapter attendAdapter = new SqlDataAdapter(attendQuery, _cntPrimarySchoolDatabase);
+                    "First_Name AS 'First Name', " +
+                    "Last_Name AS 'Last Name', " +
+                    "isPresent AS 'Present', " +
+                    "isExcused as 'Excused', " +
+                    "absenceReason AS 'Absence Reason', " +
+                    "Date " +
+                    "FROM group1fa212330.Attendance AS A " +
+                    "JOIN group1fa212330.Courses AS C " +
+                    "ON A.Course_ID = C.Course_ID " +
+                    "JOIN group1fa212330.Student_Registration AS SR " +
+                    "ON C.Course_ID = SR.Course_ID " +
+                    "JOIN group1fa212330.Students AS S " +
+                    "ON SR.Student_ID = S.Student_ID " +
+                    "WHERE SR.Course_ID = " + courseID + " " +
+                    "AND Date = '" + date + "';";
+                SqlDataAdapter attendAdapter = 
+                    new SqlDataAdapter(attendQuery, _cntPrimarySchoolDatabase);
                 attendAdapter.Fill(attendTable);
 
                 attendAdapter.Dispose();
@@ -436,8 +448,10 @@ namespace PrimarySchool
                     "ON S.Student_ID = SC.Student_ID " +
                     "JOIN group1fa212330.Seats AS S1 " +
                     "ON SC.Seat_ID = S1.Seat_ID " +
-                    "WHERE Course_ID = " + courseID + ";";
-                SqlDataAdapter seatsAdapter = new SqlDataAdapter(seatsQuery, _cntPrimarySchoolDatabase);
+                    "WHERE Course_ID = " + courseID + " " +
+                    "ORDER BY SC.Seat_ID;";
+                SqlDataAdapter seatsAdapter = 
+                    new SqlDataAdapter(seatsQuery, _cntPrimarySchoolDatabase);
                 seatsAdapter.Fill(seatsTable);
 
                 seatsAdapter.Dispose();
@@ -458,16 +472,17 @@ namespace PrimarySchool
             try
             {
                 string studentsQuery = "SELECT S.Student_ID AS 'Student ID', " +
-                "First_Name AS 'First Name', " +
-                "Last_Name AS 'Last Name' " +
-                "FROM group1fa212330.Students AS S " +
-                "JOIN group1fa212330.Student_Registration AS SR " +
-                "ON S.Student_ID = SR.Student_ID " +
-                "JOIN group1fa212330.Courses AS C " +
-                "ON SR.Course_ID = C.Course_ID " +
-                "WHERE SR.Course_ID = " + courseID + " " +
-                "ORDER BY Last_Name;";
-                SqlDataAdapter studentsAdapter = new SqlDataAdapter(studentsQuery, _cntPrimarySchoolDatabase);
+                    "First_Name AS 'First Name', " +
+                    "Last_Name AS 'Last Name' " +
+                    "FROM group1fa212330.Students AS S " +
+                    "JOIN group1fa212330.Student_Registration AS SR " +
+                    "ON S.Student_ID = SR.Student_ID " +
+                    "JOIN group1fa212330.Courses AS C " +
+                    "ON SR.Course_ID = C.Course_ID " +
+                    "WHERE SR.Course_ID = " + courseID + " " +
+                    "ORDER BY Last_Name;";
+                SqlDataAdapter studentsAdapter = 
+                    new SqlDataAdapter(studentsQuery, _cntPrimarySchoolDatabase);
                 studentsAdapter.Fill(studentsTable);
 
                 studentsAdapter.Dispose();

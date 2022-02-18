@@ -103,7 +103,7 @@ namespace PrimarySchool
                     }
                     else
                     {
-                        lblTotalSeats.Text = roomID.ToString() + " Total Seats";
+                        lblTotalSeats.Text = totalSeats.ToString() + " Total Seats";
                     }
 
                     FillDataGridView();
