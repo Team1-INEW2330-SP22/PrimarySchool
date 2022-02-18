@@ -28,17 +28,22 @@ namespace PrimarySchool
             }
         }
 
-        // Command objects
+        // Command objects - MMC
+        private static SqlCommand _sqlTeachersCommand;
 
+        // Data adapters - MMC
+        private static SqlDataAdapter _daTeachers = new SqlDataAdapter();
 
-        // Data adapters
+        // Data tables - MMC
+        private static DataTable _dtTeachersTable = new DataTable();
 
-
-        // Data tables
-
-
-        // String builders
+        // String builders - MMC
         private static StringBuilder _errorMessages = new StringBuilder();
+
+        public static DataTable DTTeachersTable
+        {
+            get { return _dtTeachersTable; }
+        }
 
         // Hold current user information
         private static int userID = 0;
@@ -147,7 +152,7 @@ namespace PrimarySchool
             try
             {
                 // Opens the connection
-                _cntPrimarySchoolDatabase.Open();
+                //_cntPrimarySchoolDatabase.Open();
 
                 // Show message stating that connection to database was succesful
                 MessageBox.Show("Connection to database successfully opened", "Database Connection",
@@ -343,6 +348,60 @@ namespace PrimarySchool
             {
                 FormOps.ErrorBox(ex.Message);
                 return 0;
+            }
+        }
+
+        //Get Teacher information for Academic Officers - Teacher Tab
+        public static void TeachersCommand(TextBox txUserID, TextBox txLName, TextBox txFname,
+            TextBox txMName, TextBox txDOB, TextBox txMailingAddress, TextBox txStreet, TextBox txCity,
+            TextBox txState, TextBox txZip, TextBox txPhone, TextBox txTotalCourses)
+        {
+            try
+            {
+                //statement for the command string
+                string sqlStatement = "SELECT Users.User_ID, User_LName, User_FName, User_MName, User_DOB, User_MailingAddress, User_MailingAddress AS User_StreetAddress, " +
+                    "User_City, User_State, User_Zip, User_Phone_Number, Count(Courses.Course_ID) AS NumOfCourses " +
+                    "FROM group1fa212330.Users " +
+                    "JOIN group1fa212330.Courses ON Users.User_ID = Courses.User_ID " +
+                    "GROUP BY Users.User_ID, User_LName, User_FName, User_MName, User_DOB, User_MailingAddress, User_City, User_State, User_Zip, User_Phone_Number;";
+                //establish command object
+                _sqlTeachersCommand = new SqlCommand(sqlStatement, _cntPrimarySchoolDatabase);
+                //establish data adapter
+                _daTeachers.SelectCommand = _sqlTeachersCommand;
+                //fill data table
+                _daTeachers.Fill(_dtTeachersTable);
+                //bind controls to data table
+                txUserID.DataBindings.Add("Text", _dtTeachersTable, "User_ID");
+                txLName.DataBindings.Add("Text", _dtTeachersTable, "User_LName");
+                txFname.DataBindings.Add("Text", _dtTeachersTable, "User_FName");
+                txMName.DataBindings.Add("Text", _dtTeachersTable, "User_MName");
+                txDOB.DataBindings.Add("Text", _dtTeachersTable, "User_DOB");
+                txMailingAddress.DataBindings.Add("Text", _dtTeachersTable, "User_MailingAddress");
+                txStreet.DataBindings.Add("Text", _dtTeachersTable, "User_StreetAddress");
+                txCity.DataBindings.Add("Text", _dtTeachersTable, "User_City");
+                txState.DataBindings.Add("Text", _dtTeachersTable, "User_State");
+                txZip.DataBindings.Add("Text", _dtTeachersTable, "User_Zip");
+                txPhone.DataBindings.Add("Text", _dtTeachersTable, "User_Phone_Number");
+                txTotalCourses.DataBindings.Add("Text", _dtTeachersTable, "NumOfCourses");
+            }
+            catch (SqlException ex)
+            {
+                if (ex is SqlException)
+                {//handles more specific SqlException here.
+                    for (int i = 0; i < ex.Errors.Count; i++)
+                    {
+                        _errorMessages.Append("Index #" + i + "\n" +
+                            "Message: " + ex.Errors[i].Message + "\n" +
+                            "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                            "Source: " + ex.Errors[i].Source + "\n" +
+                            "Procedure: " + ex.Errors[i].Procedure + "\n");
+                    }
+                    MessageBox.Show(_errorMessages.ToString(), "Error on DatabaseCommand", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {//handles generic ones here
+                    MessageBox.Show(ex.Message, "Error on DatabaseCommand", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
