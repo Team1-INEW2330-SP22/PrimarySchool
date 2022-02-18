@@ -157,7 +157,7 @@ namespace PrimarySchool
             try
             {
                 // Opens the connection
-                //_cntPrimarySchoolDatabase.Open();
+                _cntPrimarySchoolDatabase.Open();
 
                 // Show message stating that connection to database was succesful
                 MessageBox.Show("Connection to database successfully opened", "Database Connection",
