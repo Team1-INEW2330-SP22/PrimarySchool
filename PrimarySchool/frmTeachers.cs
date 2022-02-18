@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace PrimarySchool
 {
@@ -32,7 +33,7 @@ namespace PrimarySchool
         }
 
         // Prevents closing of form during edits.
-        // Closes and disposes of DB things (do later).
+        // Closes and disposes of DB things.
         // Shows Home.
         private void frmTeachers_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -45,7 +46,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-
+                    //ProgOps.CloseDisposeDatabase();
                     FormOps.ShowModeless(home);
                 }
             }
@@ -167,8 +168,12 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void frmTeachers_Load(object sender, EventArgs e)
         {
-
-
+            //ProgOps.OpenDatabase();
+            ProgOps.TeachersCommand(tbxUserID, tbxLastName, tbxFirstName, tbxMiddleName, tbxDateOfBirth, tbxMailAddress,
+                tbxStreetAddress, tbxCity, tbxState, tbxZip, tbxPhone, tbxTotalCourses);
+            //establish currency manager to control buttons previous and next
+            manager = (CurrencyManager)this.BindingContext[ProgOps.DTTeachersTable];
+            //set state
             SetState("View");
         }
 
@@ -305,8 +310,8 @@ namespace PrimarySchool
         {
             try
             {
-                //manager.Position = 0;
-                //SystemSounds.Beep.Play();
+                manager.Position = 0;
+                SystemSounds.Beep.Play();
             }
             catch (Exception ex)
             {
@@ -319,8 +324,8 @@ namespace PrimarySchool
         {
             try
             {
-                //manager.Position = manager.Count - 1;
-                //SystemSounds.Beep.Play();
+                manager.Position = manager.Count - 1;
+                SystemSounds.Beep.Play();
             }
             catch (Exception ex)
             {
@@ -334,11 +339,11 @@ namespace PrimarySchool
         {
             try
             {
-                //if (manager.Position == 0)
-                //{
-                //    SystemSounds.Beep.Play();
-                //}
-                //manager.Position--;
+                if (manager.Position == 0)
+                {
+                    SystemSounds.Beep.Play();
+                }
+                manager.Position--;
             }
             catch (Exception ex)
             {
@@ -352,11 +357,11 @@ namespace PrimarySchool
         {
             try
             {
-                //if (manager.Position == manager.Count - 1)
-                //{
-                //    SystemSounds.Beep.Play();
-                //}
-                //manager.Position++;
+                if (manager.Position == manager.Count - 1)
+                {
+                    SystemSounds.Beep.Play();
+                }
+                manager.Position++;
             }
             catch (Exception ex)
             {
@@ -380,8 +385,8 @@ namespace PrimarySchool
             {
                 //manager.EndCurrentEdit();
 
-                //MessageBox.Show("Record saved.", "Save",
-                //    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Record saved.", "Save",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
                 SetState("View");
             }
             catch (Exception ex)
@@ -419,18 +424,18 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void Cancel()
         {
-            //try
-            //{
-            //    manager.CancelCurrentEdit();
-            //    if (state.Equals("Add New"))
-            //    {
-            //        manager.Position = bookmark;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    FormOps.ErrorBox(ex.Message);
-            //}
+            try
+            {
+                manager.CancelCurrentEdit();
+                if (state.Equals("Add New"))
+                {
+                    manager.Position = bookmark;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
             SetState("View");
         }
 
@@ -442,7 +447,7 @@ namespace PrimarySchool
         {
             try
             {
-                //bookmark = manager.Position;
+                bookmark = manager.Position;
                 SetState("Add New");
                 //manager.AddNew();
 
