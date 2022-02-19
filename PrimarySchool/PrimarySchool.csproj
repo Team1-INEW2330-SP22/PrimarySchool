@@ -190,6 +190,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="help\aaLoginForm.htm" />
+    <Content Include="help\aaPasswordReset.htm" />
+    <Content Include="help\aaSystemAccess.htm" />
+    <Content Include="help\applicationAccess.htm" />
+    <Content Include="help\css\style.css" />
+    <Content Include="help\gettingStarted.htm" />
+    <Content Include="help\gsAppAccess.htm" />
+    <Content Include="help\gsInstallation.htm" />
+    <Content Include="help\gsLicense.htm" />
+    <Content Include="help\gsOverview.htm" />
+    <Content Include="help\gsSysReq.htm" />
+    <Content Include="help\includes\toggle.css" />
+    <Content Include="help\schoolhouseLogo.png" />
+    <Content Include="help\template.htm" />
+    <Content Include="help\welcome.htm" />
     <Content Include="Icons\Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
