@@ -95,7 +95,10 @@ namespace PrimarySchool
                 if (logInTable.Rows.Count == 1)
                 {
                     logInAdapter.Dispose();
+                    logInAdapter = null;
+
                     logInTable.Dispose();
+                    logInTable = null;
 
                     string getInfoQuery = "SELECT User_ID, " +
                         "User_FName + ' ' + User_LName AS 'Name', " +
@@ -115,14 +118,20 @@ namespace PrimarySchool
                     userRole = Convert.ToString(getInfoTable.Rows[0][2]);
 
                     getInfoAdapter.Dispose();
+                    getInfoAdapter = null;
+
                     getInfoTable.Dispose();
+                    getInfoTable = null;
 
                     return true;
                 }
                 else
                 {
                     logInAdapter.Dispose();
+                    logInAdapter = null;
+
                     logInTable.Dispose();
+                    logInTable = null;
 
                     FormOps.ErrorBox("Check username and password");
 
@@ -224,17 +233,30 @@ namespace PrimarySchool
             }
         }
 
-        // Returns data for Course Name ComboBox as a Data Table using current User ID.
-        // **** USE ONLY WITH TEACHER USERS. ****
-        public static DataTable GetCourseNamesForTeacher()
+        // Returns data for Course Name ComboBox as a Data Table.
+        // Runs different queries based on User Role.
+        public static DataTable GetCourseNames()
         {
+
             DataTable courseNamesTable = new DataTable();
+
             try
             {
-                string courseNamesQuery = "SELECT Course_Name " +
-                    "FROM group1fa212330.Courses " +
-                    "WHERE User_ID = " + userID +
-                    " ORDER BY Course_Name;";
+                string courseNamesQuery;
+
+                if (userRole.Equals("Teacher"))
+                {
+                    courseNamesQuery = "SELECT Course_Name " +
+                        "FROM group1fa212330.Courses " +
+                        "WHERE User_ID = " + userID +
+                        " ORDER BY Course_Name;";
+                }
+                else
+                {
+                    courseNamesQuery = "SELECT Course_Name " +
+                        "FROM group1fa212330.Courses " +
+                        "ORDER BY Course_Name";
+                }
 
                 SqlDataAdapter courseNamesAdapter = 
                     new SqlDataAdapter(courseNamesQuery, _cntPrimarySchoolDatabase);
@@ -242,6 +264,7 @@ namespace PrimarySchool
                 courseNamesAdapter.Fill(courseNamesTable);
 
                 courseNamesAdapter.Dispose();
+                courseNamesAdapter = null;
 
                 return courseNamesTable;
             }
@@ -252,25 +275,31 @@ namespace PrimarySchool
             }
         }
 
-        // Get Course ID using Course Name and current User ID.
-        // **** USE ONLY WITH TEACHER USERS. ****
-        public static int GetCourseIDForTeacher(string courseName)
+        // Get Course ID using Course Name.
+        // Works for both Teacher and non-Teachers because
+        // Course_Name now has a Unique constraint.
+        public static int GetCourseID(string courseName)
         {
             try
             {
                 string courseIDQuery = "SELECT Course_ID " +
                        "FROM group1fa212330.Courses " +
-                       "WHERE User_ID = " + userID + 
-                       " AND Course_Name = '" + courseName + "';";
-                SqlDataAdapter courseIDAdapter = 
+                       "WHERE Course_Name = '" + courseName + "';";
+
+                SqlDataAdapter courseIDAdapter =
                     new SqlDataAdapter(courseIDQuery, _cntPrimarySchoolDatabase);
+
                 DataTable courseIDTable = new DataTable();
+
                 courseIDAdapter.Fill(courseIDTable);
 
                 int courseID = Convert.ToInt32(courseIDTable.Rows[0][0]);
 
                 courseIDAdapter.Dispose();
+                courseIDAdapter = null;
+
                 courseIDTable.Dispose();
+                courseIDTable = null;
 
                 return courseID;
             }
@@ -281,25 +310,55 @@ namespace PrimarySchool
             }
         }
 
+        // Get Instructor Name as string using Course ID.
+        public static string GetInstructorName(int courseID)
+        {
+            try
+            {
+                string instructorNameQuery = "SELECT User_FName + ' ' + User_LName AS 'Instructor Name' " +
+                    "FROM group1fa212330.Users AS U " +
+                    "JOIN group1fa212330.Courses AS C " +
+                    "ON U.User_ID = C.User_ID " +
+                    "WHERE Course_ID = " + courseID + ";";
+
+                SqlDataAdapter instructorNameAdapter =
+                    new SqlDataAdapter(instructorNameQuery, _cntPrimarySchoolDatabase);
+
+                DataTable instructorNameTable = new DataTable();
+
+                instructorNameAdapter.Fill(instructorNameTable);
+
+                string instructorName = Convert.ToString(instructorNameTable.Rows[0][0]);
+
+                instructorNameAdapter.Dispose();
+                instructorNameAdapter = null;
+
+                instructorNameTable.Dispose();
+                instructorNameTable = null;
+
+                return instructorName;
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+                return "[Instructor Name]";
+            }
+        }
+
         // Get Room ID using Course ID.
         public static int GetRoomID(int courseID)
         {
             try
             {
-                string roomQuery = "SELECT DISTINCT R.Room_ID " +
-                        "FROM group1fa212330.Rooms AS R " +
-                        "JOIN group1fa212330.Seats AS S " +
-                        "ON R.Room_ID = S.Room_ID " +
-                        "JOIN group1fa212330.Seating_Chart AS SC " +
-                        "ON S.Seat_ID = SC.Seat_ID " +
-                        "JOIN group1fa212330.Courses AS C " +
-                        "ON SC.Course_ID = C.Course_ID " +
-                        "JOIN group1fa212330.Users AS U " +
-                        "ON C.User_ID = U.User_ID " +
-                        "WHERE C.Course_ID = " + courseID + ";";
+                string roomQuery = "SELECT DISTINCT Room_ID " +
+                    "FROM group1fa212330.Seating_Chart " +
+                    "WHERE Course_ID = " + courseID + ";";
+
                 SqlDataAdapter roomAdapter = 
                     new SqlDataAdapter(roomQuery, _cntPrimarySchoolDatabase);
+
                 DataTable roomTable = new DataTable();
+
                 roomAdapter.Fill(roomTable);
 
                 int roomID = 0;
@@ -310,7 +369,10 @@ namespace PrimarySchool
                 }
 
                 roomAdapter.Dispose();
+                roomAdapter = null;
+
                 roomTable.Dispose();
+                roomTable = null;
 
                 return roomID;
             }
@@ -337,9 +399,12 @@ namespace PrimarySchool
                     "JOIN group1fa212330.Courses AS C " +
                     "ON SC.Course_ID = C.Course_ID " +
                     "WHERE C.Course_ID = " + courseID + ";";
+
                 SqlDataAdapter totalSeatsAdapter = 
                     new SqlDataAdapter(totalSeatsQuery, _cntPrimarySchoolDatabase);
+
                 DataTable totalSeatsTable = new DataTable();
+
                 totalSeatsAdapter.Fill(totalSeatsTable);
 
                 int totalSeatsID = 0;
@@ -350,7 +415,10 @@ namespace PrimarySchool
                 }
 
                 totalSeatsAdapter.Dispose();
+                totalSeatsAdapter = null;
+
                 totalSeatsTable.Dispose();
+                totalSeatsTable = null;
 
                 return totalSeatsID;
             }
@@ -418,10 +486,12 @@ namespace PrimarySchool
         // Returns data for Gradebook DataGridView as a Data Table using Course ID.
         public static DataTable GetGradebookTable(int courseID)
         {
-            DataTable gbTable = new DataTable();
+
+            DataTable gradebookTable = new DataTable();
+
             try
             {
-                string gbQuery = "SELECT DISTINCT S.Student_ID AS 'Student ID', " +
+                string gradebookQuery = "SELECT DISTINCT S.Student_ID AS 'Student ID', " +
                     "First_Name AS 'First Name', " +
                     "Last_Name AS 'Last Name', " +
                     "Assignment_Name AS Assignment, " +
@@ -438,25 +508,30 @@ namespace PrimarySchool
                     "ON GB.Assignment_ID = GA.Assignment_ID " +
                     "WHERE SR.Course_ID = " + courseID + " " +
                     "ORDER BY Last_Name;";
-                SqlDataAdapter gbAdapter = 
-                    new SqlDataAdapter(gbQuery, _cntPrimarySchoolDatabase);
-                gbAdapter.Fill(gbTable);
 
-                gbAdapter.Dispose();
+                SqlDataAdapter gradebookAdapter = 
+                    new SqlDataAdapter(gradebookQuery, _cntPrimarySchoolDatabase);
 
-                return gbTable;
+                gradebookAdapter.Fill(gradebookTable);
+
+                gradebookAdapter.Dispose();
+                gradebookAdapter = null;
+
+                return gradebookTable;
             }
             catch (Exception ex)
             {
                 FormOps.ErrorBox(ex.Message);
-                return gbTable;
+                return gradebookTable;
             }
         }
 
         // Returns data for Attendance DataGridView as a Data Table using Course ID and Date in string format.
         public static DataTable GetAttendanceTable(int courseID, string date)
         {
+
             DataTable attendTable = new DataTable();
+
             try
             {
                 string attendQuery = "SELECT S.Student_ID AS 'Student ID', " +
@@ -475,11 +550,14 @@ namespace PrimarySchool
                     "ON SR.Student_ID = S.Student_ID " +
                     "WHERE SR.Course_ID = " + courseID + " " +
                     "AND Date = '" + date + "';";
+
                 SqlDataAdapter attendAdapter = 
                     new SqlDataAdapter(attendQuery, _cntPrimarySchoolDatabase);
+
                 attendAdapter.Fill(attendTable);
 
                 attendAdapter.Dispose();
+                attendAdapter = null;
                 
                 return attendTable;
             }
@@ -493,27 +571,28 @@ namespace PrimarySchool
         // Returns data for Seats DataGridView as a Data Table using Course ID.
         public static DataTable GetSeatingChartTable(int courseID)
         {
+
             DataTable seatsTable = new DataTable();
+
             try
             {
                 string seatsQuery = "SELECT S.Student_ID AS 'Student ID', " +
                     "First_Name AS 'First Name', " +
                     "Last_Name AS 'Last Name', " +
-                    "SC.Seat_ID AS 'Seat ID', " +
-                    "Row, " +
-                    "Number " +
+                    "SC.Seat_ID AS 'Seat ID' " +
                     "FROM group1fa212330.Students AS S " +
                     "JOIN group1fa212330.Seating_Chart AS SC " +
                     "ON S.Student_ID = SC.Student_ID " +
-                    "JOIN group1fa212330.Seats AS S1 " +
-                    "ON SC.Seat_ID = S1.Seat_ID " +
                     "WHERE Course_ID = " + courseID + " " +
                     "ORDER BY SC.Seat_ID;";
+
                 SqlDataAdapter seatsAdapter = 
                     new SqlDataAdapter(seatsQuery, _cntPrimarySchoolDatabase);
+
                 seatsAdapter.Fill(seatsTable);
 
                 seatsAdapter.Dispose();
+                seatsAdapter = null;
 
                 return seatsTable;
             }
@@ -524,10 +603,44 @@ namespace PrimarySchool
             }
         }
 
+        // Returns data for Seats ListBox as a Data Table using Course ID.
+        public static DataTable GetSeatsList(int courseID)
+        {
+
+            DataTable seatsListTable = new DataTable();
+
+            try
+            {
+                string seatsListQuery = "SELECT SC.Seat_ID AS 'Seat ID', Row, Number " +
+                    "FROM group1fa212330.Seating_Chart AS SC " +
+                    "JOIN group1fa212330.Seats AS S " +
+                    "ON SC.Seat_ID = S.Seat_ID " +
+                    "WHERE Course_ID = " + courseID + " " +
+                    "ORDER BY SC.Seat_ID;";
+
+                SqlDataAdapter seatsListAdapter =
+                    new SqlDataAdapter(seatsListQuery, _cntPrimarySchoolDatabase);
+
+                seatsListAdapter.Fill(seatsListTable);
+
+                seatsListAdapter.Dispose();
+                seatsListAdapter = null;
+
+                return seatsListTable;
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+                return seatsListTable;
+            }
+        }
+
         // Returns full names of students in a course as a Data Table using Course ID.
         public static DataTable GetStudentsInCourse(int courseID)
         {
+
             DataTable studentsTable = new DataTable();
+
             try
             {
                 string studentsQuery = "SELECT S.Student_ID AS 'Student ID', " +
@@ -540,11 +653,14 @@ namespace PrimarySchool
                     "ON SR.Course_ID = C.Course_ID " +
                     "WHERE SR.Course_ID = " + courseID + " " +
                     "ORDER BY Last_Name;";
+
                 SqlDataAdapter studentsAdapter = 
                     new SqlDataAdapter(studentsQuery, _cntPrimarySchoolDatabase);
+
                 studentsAdapter.Fill(studentsTable);
 
                 studentsAdapter.Dispose();
+                studentsAdapter = null;
 
                 return studentsTable;
             }

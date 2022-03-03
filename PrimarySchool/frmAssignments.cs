@@ -56,9 +56,9 @@ namespace PrimarySchool
                         btnNext.Enabled = true;
                         btnPrevious.Enabled = true;
                         btnEdit.Enabled = true;
-                        btnAddNew.Enabled = true;
+                        btnAdd.Enabled = true;
                         btnSave.Enabled = false;
-                        btnDelete.Enabled = true;
+                        btnRemove.Enabled = true;
                         btnCancel.Enabled = false;
                         gbxSearch.Enabled = true;
                         tbxSearch.ReadOnly = true;
@@ -86,9 +86,9 @@ namespace PrimarySchool
                         btnNext.Enabled = false;
                         btnPrevious.Enabled = false;
                         btnEdit.Enabled = false;
-                        btnAddNew.Enabled = false;
+                        btnAdd.Enabled = false;
                         btnSave.Enabled = true;
-                        btnDelete.Enabled = false;
+                        btnRemove.Enabled = false;
                         btnCancel.Enabled = true;
                         gbxSearch.Enabled = false;
                         tbxSearch.ReadOnly = false;
