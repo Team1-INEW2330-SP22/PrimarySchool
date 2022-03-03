@@ -56,47 +56,45 @@ namespace PrimarySchool
         {
             try
             {
-                if (ProgOps.UserRole.Equals("Teacher"))
-                {
-                    DataTable courseNamesTable = ProgOps.GetCourseNamesForTeacher();
+                DataTable courseNamesTable = ProgOps.GetCourseNames();
 
-                    for (int x = 0; x < courseNamesTable.Rows.Count; x++)
+                for (int x = 0; x < courseNamesTable.Rows.Count; x++)
+                {
+                    cbxCourses.Items.Add(courseNamesTable.Rows[x][0]);
+                }
+
+                courseNamesTable.Dispose();
+                courseNamesTable = null;
+
+                DateTime date = new DateTime(2021, 9, 1);
+                DateTime endDate = new DateTime(2022, 6, 17);
+
+                DayOfWeek saturday = DayOfWeek.Saturday;
+                DayOfWeek sunday = DayOfWeek.Sunday;
+
+                do
+                {
+                    if (date.DayOfWeek != saturday && date.DayOfWeek != sunday)
                     {
-                        cbxCourses.Items.Add(courseNamesTable.Rows[x][0]);
+                        cbxDate.Items.Add(date.ToString("yyyy-MM-dd"));
                     }
 
-                    courseNamesTable.Dispose();
+                    date = date.AddDays(1);
 
-                    DateTime date = new DateTime(2021, 9, 1);
-                    DateTime endDate = new DateTime(2022, 6, 17);
+                } while (date <= endDate);
 
-                    DayOfWeek saturday = DayOfWeek.Saturday;
-                    DayOfWeek sunday = DayOfWeek.Sunday;
+                DayOfWeek weekday = DateTime.Now.DayOfWeek;
+                DateTime today = DateTime.Now;
 
-                    do
+                if (weekday != saturday && weekday != sunday)
+                {
+                    for (int x = 0; x < cbxDate.Items.Count; x++)
                     {
-                        if (date.DayOfWeek != saturday &&
-                            date.DayOfWeek != sunday)
+                        if (cbxDate.Items[x].Equals(today.ToString("yyyy-MM-dd")))
                         {
-                            cbxDate.Items.Add(date.ToString("yyyy-MM-dd"));
-                        }
-                        date = date.AddDays(1);
-                    } while (date <= endDate);
-
-                    DayOfWeek weekday = DateTime.Now.DayOfWeek;
-                    DateTime today = DateTime.Now;
-
-                    if (weekday != saturday &&
-                        weekday != sunday)
-                    {
-                        for (int x = 0; x < cbxDate.Items.Count; x++)
-                        {
-                            if (cbxDate.Items[x].Equals(today.ToString("yyyy-MM-dd")))
-                            {
-                                cbxDate.SelectedIndex = x;
-                                lblDate.Text = cbxDate.Text;
-                                break;
-                            }
+                            cbxDate.SelectedIndex = x;
+                            lblDate.Text = cbxDate.Text;
+                            break;
                         }
                     }
                 }
@@ -114,25 +112,27 @@ namespace PrimarySchool
         {
             try
             {
-                if (ProgOps.UserRole.Equals("Teacher"))
+                lblCourseName.Text = cbxCourses.SelectedItem.ToString();
+
+                selectedCourseID = ProgOps.GetCourseID(lblCourseName.Text);
+
+                if (!ProgOps.UserRole.Equals("Teacher"))
                 {
-                    lblCourseName.Text = cbxCourses.SelectedItem.ToString();
-
-                    selectedCourseID = ProgOps.GetCourseIDForTeacher(lblCourseName.Text);
-
-                    int roomID = ProgOps.GetRoomID(selectedCourseID);
-
-                    if (roomID == 0)
-                    {
-                        lblRoom.Text = "Room Not Set";
-                    }
-                    else
-                    {
-                        lblRoom.Text = "Room " + roomID.ToString();
-                    }
-
-                    FillDataGridView();
+                    lblInstructor.Text = ProgOps.GetInstructorName(selectedCourseID);
                 }
+
+                int roomID = ProgOps.GetRoomID(selectedCourseID);
+
+                if (roomID == 0)
+                {
+                    lblRoom.Text = "Room Not Set";
+                }
+                else
+                {
+                    lblRoom.Text = "Room " + roomID.ToString();
+                }
+
+                FillDataGridView();
             }
             catch (Exception ex)
             {
@@ -206,16 +206,20 @@ namespace PrimarySchool
                         dgvAttendance.Rows.Clear();
                     }
 
-                    for (int x = 0; x < studentsTable.Rows.Count; x++)
+                    if (dgvAttendance.Columns.Count > 0)
                     {
-                        dgvAttendance.Rows.Add(new DataGridViewRow());
-                        dgvAttendance.Rows[x].Cells[0].Value = studentsTable.Rows[x][0].ToString();
-                        dgvAttendance.Rows[x].Cells[1].Value = studentsTable.Rows[x][1].ToString();
-                        dgvAttendance.Rows[x].Cells[2].Value = studentsTable.Rows[x][2].ToString();
-                        dgvAttendance.Rows[x].Cells[6].Value = cbxDate.Text;
+                        for (int x = 0; x < studentsTable.Rows.Count; x++)
+                        {
+                            dgvAttendance.Rows.Add(new DataGridViewRow());
+                            dgvAttendance.Rows[x].Cells[0].Value = studentsTable.Rows[x][0].ToString();
+                            dgvAttendance.Rows[x].Cells[1].Value = studentsTable.Rows[x][1].ToString();
+                            dgvAttendance.Rows[x].Cells[2].Value = studentsTable.Rows[x][2].ToString();
+                            dgvAttendance.Rows[x].Cells[6].Value = cbxDate.Text;
+                        }
                     }
 
                     studentsTable.Dispose();
+                    studentsTable = null;
                 }
                 else
                 {
@@ -228,13 +232,14 @@ namespace PrimarySchool
                 }
 
                 attendTable.Dispose();
+                attendTable = null;
             }
         }
 
         // Configures and enables the DataGridView.
         private void ConfigureDataGridView(bool firstTime)
         {
-            if (firstTime)
+            if (ProgOps.UserRole.Equals("Teacher") && firstTime)
             {
                 DataGridViewTextBoxColumn colStudentID = new DataGridViewTextBoxColumn();
                 DataGridViewTextBoxColumn colFirstName = new DataGridViewTextBoxColumn();
@@ -266,25 +271,40 @@ namespace PrimarySchool
                 dgvAttendance.Columns.Add(colAbsenceReason);
                 dgvAttendance.Columns.Add(colDate);
             }
-
-            foreach (DataGridViewColumn column in dgvAttendance.Columns)
+            else if (!ProgOps.UserRole.Equals("Teacher") && firstTime)
             {
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
-
-                if (column.HeaderText.Equals("Student ID") || column.HeaderText.Equals("First Name") ||
-                    column.HeaderText.Equals("Last Name") || column.HeaderText.Equals("Date"))
-                {
-                    column.ReadOnly = true;
-                    column.Resizable = DataGridViewTriState.False;
-                }
-
-                if (column.HeaderText.Equals("Student ID"))
-                {
-                    column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                }
+                FormOps.ErrorBox("Attendance for this date has not been taken");
             }
 
-            dgvAttendance.Enabled = true;
+            if (dgvAttendance.Columns.Count > 0)
+            {
+                foreach (DataGridViewColumn column in dgvAttendance.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                    if (ProgOps.UserRole.Equals("Teacher"))
+                    {
+                        if (column.HeaderText.Equals("Student ID") || column.HeaderText.Equals("First Name") ||
+                            column.HeaderText.Equals("Last Name") || column.HeaderText.Equals("Date"))
+                        {
+                            column.ReadOnly = true;
+                            column.Resizable = DataGridViewTriState.False;
+                        }
+                    }
+                    else
+                    {
+                        column.ReadOnly = true;
+                        column.Resizable = DataGridViewTriState.False;
+                    }
+
+                    if (column.HeaderText.Equals("Student ID"))
+                    {
+                        column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    }
+                }
+
+                dgvAttendance.Enabled = true;
+            }
         }
     }
 }

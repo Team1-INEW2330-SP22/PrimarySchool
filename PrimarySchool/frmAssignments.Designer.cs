@@ -38,8 +38,8 @@ namespace PrimarySchool
             this.tbxAssignmentName = new System.Windows.Forms.TextBox();
             this.lblAssignmentName = new System.Windows.Forms.Label();
             this.cbxCategory = new System.Windows.Forms.ComboBox();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnAddNew = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -72,6 +72,7 @@ namespace PrimarySchool
             this.lblCourseName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tbxWeight = new System.Windows.Forms.TextBox();
+            this.btnCreate = new System.Windows.Forms.Button();
             this.gbxSearch.SuspendLayout();
             this.mnuMenu.SuspendLayout();
             this.SuspendLayout();
@@ -167,33 +168,33 @@ namespace PrimarySchool
             this.cbxCategory.Size = new System.Drawing.Size(283, 28);
             this.cbxCategory.TabIndex = 79;
             // 
-            // btnDelete
+            // btnRemove
             // 
-            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.btnDelete.Location = new System.Drawing.Point(215, 386);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(93, 30);
-            this.btnDelete.TabIndex = 88;
-            this.btnDelete.Text = "&Delete";
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
+            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemove.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
+            this.btnRemove.Location = new System.Drawing.Point(188, 419);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(147, 30);
+            this.btnRemove.TabIndex = 88;
+            this.btnRemove.Text = "&Remove from Course";
+            this.btnRemove.UseVisualStyleBackColor = false;
+            this.btnRemove.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // btnAddNew
+            // btnAdd
             // 
-            this.btnAddNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddNew.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddNew.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.btnAddNew.Location = new System.Drawing.Point(120, 386);
-            this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(93, 30);
-            this.btnAddNew.TabIndex = 87;
-            this.btnAddNew.Text = "&Add New";
-            this.btnAddNew.UseVisualStyleBackColor = false;
-            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
+            this.btnAdd.Location = new System.Drawing.Point(188, 386);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(147, 30);
+            this.btnAdd.TabIndex = 87;
+            this.btnAdd.Text = "&Add to Course";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // btnCancel
             // 
@@ -300,7 +301,7 @@ namespace PrimarySchool
             this.gbxSearch.Controls.Add(this.tbxSearch);
             this.gbxSearch.Controls.Add(this.lblSearch);
             this.gbxSearch.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbxSearch.Location = new System.Drawing.Point(120, 433);
+            this.gbxSearch.Location = new System.Drawing.Point(120, 499);
             this.gbxSearch.Name = "gbxSearch";
             this.gbxSearch.Size = new System.Drawing.Size(283, 88);
             this.gbxSearch.TabIndex = 89;
@@ -366,7 +367,7 @@ namespace PrimarySchool
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
             this.mnuFileClose.Text = "&Close";
             this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
@@ -535,19 +536,33 @@ namespace PrimarySchool
             this.tbxWeight.TabIndex = 122;
             this.tbxWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // btnCreate
+            // 
+            this.btnCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
+            this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
+            this.btnCreate.Location = new System.Drawing.Point(188, 452);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(147, 30);
+            this.btnCreate.TabIndex = 123;
+            this.btnCreate.Text = "Crea&te New";
+            this.btnCreate.UseVisualStyleBackColor = false;
+            // 
             // frmAssignments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(180)))), ((int)(((byte)(210)))));
-            this.ClientSize = new System.Drawing.Size(484, 531);
+            this.ClientSize = new System.Drawing.Size(484, 601);
+            this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.tbxWeight);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblCourseName);
             this.Controls.Add(this.mnuMenu);
             this.Controls.Add(this.gbxSearch);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnAddNew);
+            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnEdit);
@@ -592,8 +607,8 @@ namespace PrimarySchool
         private System.Windows.Forms.TextBox tbxAssignmentName;
         private System.Windows.Forms.Label lblAssignmentName;
         private System.Windows.Forms.ComboBox cbxCategory;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnAddNew;
+        private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnEdit;
@@ -626,5 +641,6 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblCourseName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbxWeight;
+        private System.Windows.Forms.Button btnCreate;
     }
 }

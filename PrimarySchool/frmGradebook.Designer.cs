@@ -63,7 +63,7 @@ namespace PrimarySchool
             this.mnuHelp});
             this.mnuMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMenu.Name = "mnuMenu";
-            this.mnuMenu.Size = new System.Drawing.Size(1084, 24);
+            this.mnuMenu.Size = new System.Drawing.Size(923, 24);
             this.mnuMenu.TabIndex = 0;
             this.mnuMenu.Text = "menuStrip1";
             // 
@@ -81,21 +81,22 @@ namespace PrimarySchool
             // 
             this.mnuFileSave.Name = "mnuFileSave";
             this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuFileSave.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileSave.Size = new System.Drawing.Size(180, 22);
             this.mnuFileSave.Text = "&Save";
+            this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
             // 
             // mnuFilePrint
             // 
             this.mnuFilePrint.Name = "mnuFilePrint";
             this.mnuFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.mnuFilePrint.Size = new System.Drawing.Size(144, 22);
+            this.mnuFilePrint.Size = new System.Drawing.Size(180, 22);
             this.mnuFilePrint.Text = "&Print";
             // 
             // mnuFileClose
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
             this.mnuFileClose.Text = "&Close";
             this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
@@ -115,6 +116,7 @@ namespace PrimarySchool
             this.mnuEditClear.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
             this.mnuEditClear.Size = new System.Drawing.Size(184, 22);
             this.mnuEditClear.Text = "&Clear";
+            this.mnuEditClear.Click += new System.EventHandler(this.mnuEditClear_Click);
             // 
             // mnuEditReset
             // 
@@ -122,6 +124,7 @@ namespace PrimarySchool
             this.mnuEditReset.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
             this.mnuEditReset.Size = new System.Drawing.Size(184, 22);
             this.mnuEditReset.Text = "&Reset";
+            this.mnuEditReset.Click += new System.EventHandler(this.mnuEditReset_Click);
             // 
             // mnuEditAssignments
             // 
@@ -154,9 +157,9 @@ namespace PrimarySchool
             this.gbxGradebook.Controls.Add(this.lblCourseName);
             this.gbxGradebook.Controls.Add(this.cbxCourses);
             this.gbxGradebook.Controls.Add(this.lblSelectCourse);
-            this.gbxGradebook.Location = new System.Drawing.Point(12, 36);
+            this.gbxGradebook.Location = new System.Drawing.Point(14, 36);
             this.gbxGradebook.Name = "gbxGradebook";
-            this.gbxGradebook.Size = new System.Drawing.Size(439, 95);
+            this.gbxGradebook.Size = new System.Drawing.Size(544, 95);
             this.gbxGradebook.TabIndex = 1;
             this.gbxGradebook.TabStop = false;
             this.gbxGradebook.Text = "Gradebook";
@@ -165,7 +168,7 @@ namespace PrimarySchool
             // 
             this.lblRoom.AutoSize = true;
             this.lblRoom.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRoom.Location = new System.Drawing.Point(231, 67);
+            this.lblRoom.Location = new System.Drawing.Point(282, 65);
             this.lblRoom.Name = "lblRoom";
             this.lblRoom.Size = new System.Drawing.Size(51, 17);
             this.lblRoom.TabIndex = 4;
@@ -175,7 +178,7 @@ namespace PrimarySchool
             // 
             this.lblInstructor.AutoSize = true;
             this.lblInstructor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInstructor.Location = new System.Drawing.Point(231, 46);
+            this.lblInstructor.Location = new System.Drawing.Point(282, 44);
             this.lblInstructor.Name = "lblInstructor";
             this.lblInstructor.Size = new System.Drawing.Size(71, 17);
             this.lblInstructor.TabIndex = 3;
@@ -185,7 +188,7 @@ namespace PrimarySchool
             // 
             this.lblCourseName.AutoSize = true;
             this.lblCourseName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCourseName.Location = new System.Drawing.Point(231, 25);
+            this.lblCourseName.Location = new System.Drawing.Point(282, 23);
             this.lblCourseName.Name = "lblCourseName";
             this.lblCourseName.Size = new System.Drawing.Size(96, 17);
             this.lblCourseName.TabIndex = 2;
@@ -197,9 +200,9 @@ namespace PrimarySchool
             this.cbxCourses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCourses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
             this.cbxCourses.FormattingEnabled = true;
-            this.cbxCourses.Location = new System.Drawing.Point(15, 42);
+            this.cbxCourses.Location = new System.Drawing.Point(18, 46);
             this.cbxCourses.Name = "cbxCourses";
-            this.cbxCourses.Size = new System.Drawing.Size(196, 29);
+            this.cbxCourses.Size = new System.Drawing.Size(249, 29);
             this.cbxCourses.TabIndex = 1;
             this.cbxCourses.SelectedIndexChanged += new System.EventHandler(this.cbxCourses_SelectedIndexChanged);
             // 
@@ -207,7 +210,7 @@ namespace PrimarySchool
             // 
             this.lblSelectCourse.AutoSize = true;
             this.lblSelectCourse.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectCourse.Location = new System.Drawing.Point(16, 25);
+            this.lblSelectCourse.Location = new System.Drawing.Point(18, 29);
             this.lblSelectCourse.Name = "lblSelectCourse";
             this.lblSelectCourse.Size = new System.Drawing.Size(87, 17);
             this.lblSelectCourse.TabIndex = 0;
@@ -225,31 +228,32 @@ namespace PrimarySchool
             this.dgvGradebook.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.dgvGradebook.Enabled = false;
             this.dgvGradebook.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(197)))), ((int)(((byte)(190)))));
-            this.dgvGradebook.Location = new System.Drawing.Point(12, 137);
+            this.dgvGradebook.Location = new System.Drawing.Point(14, 137);
             this.dgvGradebook.Name = "dgvGradebook";
             this.dgvGradebook.RowHeadersWidth = 62;
-            this.dgvGradebook.Size = new System.Drawing.Size(1060, 412);
+            this.dgvGradebook.Size = new System.Drawing.Size(894, 412);
             this.dgvGradebook.TabIndex = 2;
             this.dgvGradebook.TabStop = false;
+            this.dgvGradebook.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGradebook_CellValueChanged);
             // 
             // lblInstructions
             // 
             this.lblInstructions.AutoSize = true;
             this.lblInstructions.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInstructions.Location = new System.Drawing.Point(457, 97);
+            this.lblInstructions.Location = new System.Drawing.Point(564, 63);
             this.lblInstructions.Name = "lblInstructions";
-            this.lblInstructions.Size = new System.Drawing.Size(586, 34);
+            this.lblInstructions.Size = new System.Drawing.Size(344, 68);
             this.lblInstructions.TabIndex = 3;
-            this.lblInstructions.Text = "Use the table below to edit assignment grades. The final grade is calculated auto" +
-    "matically.\r\nThe menu up top contains more operations. For detailed help, click I" +
-    "nstructions under the Help tab.";
+            this.lblInstructions.Text = "Use the table below to edit assignment grades. The final \r\ngrade is calculated au" +
+    "tomatically. The menu up top cont-\r\nains more operations. For detailed help, cli" +
+    "ck Instructions \r\nunder the Help tab.";
             // 
             // frmGradebook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(180)))), ((int)(((byte)(210)))));
-            this.ClientSize = new System.Drawing.Size(1084, 561);
+            this.ClientSize = new System.Drawing.Size(923, 561);
             this.Controls.Add(this.lblInstructions);
             this.Controls.Add(this.dgvGradebook);
             this.Controls.Add(this.gbxGradebook);
