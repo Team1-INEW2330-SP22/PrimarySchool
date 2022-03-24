@@ -200,6 +200,43 @@ namespace PrimarySchool
             }
         }
 
+        // If user press Enter key inside tbxUsername, tbxPassword gets focus.
+        private void tbxUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    tbxPassword.Focus();
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        // If user press Enter key inside tbxPassword, btnLogin performs click.
+        private void tbxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    btnLogIn.Focus();
+                    btnLogIn.PerformClick();
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
         // Clears tbxPassword if user selects it while the default prompt is visible, sets the text color to black,
         // and sets the password character.
         private void tbxPassword_Enter(object sender, EventArgs e)

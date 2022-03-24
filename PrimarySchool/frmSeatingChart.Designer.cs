@@ -87,6 +87,7 @@ namespace PrimarySchool
             this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.mnuFileSave.Size = new System.Drawing.Size(144, 22);
             this.mnuFileSave.Text = "&Save";
+            this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
             // 
             // mnuFilePrint
             // 
@@ -181,6 +182,8 @@ namespace PrimarySchool
             this.dgvSeatingChart.Size = new System.Drawing.Size(582, 389);
             this.dgvSeatingChart.TabIndex = 5;
             this.dgvSeatingChart.TabStop = false;
+            this.dgvSeatingChart.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeatingChart_CellValueChanged);
+            this.dgvSeatingChart.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvSeatingChart_DataError);
             // 
             // gbxSeatingChart
             // 
