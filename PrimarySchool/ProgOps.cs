@@ -28,19 +28,26 @@ namespace PrimarySchool
                 return _cntPrimarySchoolDatabase;
             }
         }
-
-        // Command objects
-        private static SqlCommand assignmentsCommand;
+        
         // Command objects - MMC
         private static SqlCommand _sqlTeachersCommand;
 
-        // Data adapters
-        private static SqlDataAdapter assignmentsAdapter;
         // Data adapters - MMC
         private static SqlDataAdapter _daTeachers = new SqlDataAdapter();
 
         // Data tables - MMC
         private static DataTable _dtTeachersTable = new DataTable();
+
+        public static DataTable DTTeachersTable
+        {
+            get { return _dtTeachersTable; }
+        }
+
+        // Command objects
+        private static SqlCommand assignmentsCommand;
+
+        // Data adapters
+        private static SqlDataAdapter assignmentsAdapter;
 
         // Data tables
         private static DataTable assignmentsTable;
@@ -55,13 +62,7 @@ namespace PrimarySchool
         }
 
         // String builders
-        // String builders - MMC
         private static StringBuilder _errorMessages = new StringBuilder();
-
-        public static DataTable DTTeachersTable
-        {
-            get { return _dtTeachersTable; }
-        }
 
         // Hold current user information
         private static int userID = 0;
