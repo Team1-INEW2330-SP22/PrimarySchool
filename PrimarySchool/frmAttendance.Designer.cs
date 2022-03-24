@@ -82,21 +82,22 @@ namespace PrimarySchool
             // 
             this.mnuFileSave.Name = "mnuFileSave";
             this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuFileSave.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileSave.Size = new System.Drawing.Size(180, 22);
             this.mnuFileSave.Text = "&Save";
+            this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
             // 
             // mnuFilePrint
             // 
             this.mnuFilePrint.Name = "mnuFilePrint";
             this.mnuFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.mnuFilePrint.Size = new System.Drawing.Size(144, 22);
+            this.mnuFilePrint.Size = new System.Drawing.Size(180, 22);
             this.mnuFilePrint.Text = "&Print";
             // 
             // mnuFileClose
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
             this.mnuFileClose.Text = "&Close";
             this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
@@ -115,6 +116,7 @@ namespace PrimarySchool
             this.mnuEditClear.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
             this.mnuEditClear.Size = new System.Drawing.Size(143, 22);
             this.mnuEditClear.Text = "&Clear";
+            this.mnuEditClear.Click += new System.EventHandler(this.mnuEditClear_Click);
             // 
             // mnuEditReset
             // 
@@ -122,6 +124,7 @@ namespace PrimarySchool
             this.mnuEditReset.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
             this.mnuEditReset.Size = new System.Drawing.Size(143, 22);
             this.mnuEditReset.Text = "&Reset";
+            this.mnuEditReset.Click += new System.EventHandler(this.mnuEditReset_Click);
             // 
             // mnuHelp
             // 
@@ -165,6 +168,8 @@ namespace PrimarySchool
             this.dgvAttendance.Size = new System.Drawing.Size(986, 412);
             this.dgvAttendance.TabIndex = 5;
             this.dgvAttendance.TabStop = false;
+            this.dgvAttendance.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAttendance_CellValueChanged);
+            this.dgvAttendance.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvAttendance_DataError);
             // 
             // gbxAttendance
             // 

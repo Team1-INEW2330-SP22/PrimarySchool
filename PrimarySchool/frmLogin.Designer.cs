@@ -51,6 +51,7 @@ namespace PrimarySchool
             this.tbxUsername.TabIndex = 0;
             this.tbxUsername.Text = " Type your username";
             this.tbxUsername.Enter += new System.EventHandler(this.tbxUsername_Enter);
+            this.tbxUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxUsername_KeyDown);
             this.tbxUsername.Leave += new System.EventHandler(this.tbxUsername_Leave);
             // 
             // tbxPassword
@@ -63,6 +64,7 @@ namespace PrimarySchool
             this.tbxPassword.TabIndex = 1;
             this.tbxPassword.Text = " Type your password";
             this.tbxPassword.Enter += new System.EventHandler(this.tbxPassword_Enter);
+            this.tbxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxPassword_KeyDown);
             this.tbxPassword.Leave += new System.EventHandler(this.tbxPassword_Leave);
             // 
             // btnLogIn

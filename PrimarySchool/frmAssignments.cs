@@ -17,6 +17,12 @@ namespace PrimarySchool
         // Doesn't initialize.
         private frmGradebook gradebook;
 
+        // Creates form level variable to hold selected course name.
+        private string courseName;
+
+        // Creates form level variable to hold selected course ID.
+        private int selectedCourseID;
+
         // Creates 'state' attribute to hold current state.
         private string state;
 
@@ -26,10 +32,21 @@ namespace PrimarySchool
         // Holds currency manager position.
         private int bookmark;
 
+        // Holds default value for tbxSearch.
+        private string strSearch = "Name";
+
+        // Creates form level data table for categories.
+        //      Column [0]: Category_ID
+        //      Column [1]: Category_Name
+        //      Column [2]: Category_Weight
+        private DataTable categoriesTable;
+
         // Initializes 'gradebook' attribute to parameter.
-        public frmAssignments(frmGradebook gradebook)
+        public frmAssignments(frmGradebook gradebook, string courseName, int selectedCourseID)
         {
             this.gradebook = gradebook;
+            this.courseName = courseName;
+            this.selectedCourseID = selectedCourseID;
             InitializeComponent();
         }
 
@@ -45,11 +62,12 @@ namespace PrimarySchool
             try
             {
                 this.state = state;
+
                 switch (state)
                 {
                     case "View":
                         tbxAssignmentName.ReadOnly = true;
-                        cbxCategory.Enabled = false;
+                        tbxCategory.ReadOnly = true;
                         tbxDescription.ReadOnly = true;
                         btnFirst.Enabled = true;
                         btnLast.Enabled = true;
@@ -57,11 +75,12 @@ namespace PrimarySchool
                         btnPrevious.Enabled = true;
                         btnEdit.Enabled = true;
                         btnAdd.Enabled = true;
-                        btnSave.Enabled = false;
                         btnRemove.Enabled = true;
+                        btnCreate.Enabled = true;
+                        btnSave.Enabled = false;
                         btnCancel.Enabled = false;
                         gbxSearch.Enabled = true;
-                        tbxSearch.ReadOnly = true;
+                        tbxSearch.ReadOnly = false;
                         btnSearch.Enabled = true;
                         mnuNavigation.Enabled = true;
                         mnuFirst.Enabled = true;
@@ -69,17 +88,17 @@ namespace PrimarySchool
                         mnuNext.Enabled = true;
                         mnuPrevious.Enabled = true;
                         mnuEditRecord.Enabled = true;
-                        mnuAddNew.Enabled = true;
+                        mnuAdd.Enabled = true;
                         mnuSave.Enabled = false;
-                        mnuDelete.Enabled = true;
+                        mnuRemove.Enabled = true;
                         mnuCancel.Enabled = false;
                         mnuSearch.Enabled = true;
                         tbxAssignmentName.Focus();
                         break;
-                    // Acts as both 'Add New' and 'Edit' state.
+                    // Acts as both 'Create New' and 'Edit' state.
                     default:
                         tbxAssignmentName.ReadOnly = false;
-                        cbxCategory.Enabled = true;
+                        tbxCategory.ReadOnly = false;
                         tbxDescription.ReadOnly = false;
                         btnFirst.Enabled = false;
                         btnLast.Enabled = false;
@@ -87,11 +106,12 @@ namespace PrimarySchool
                         btnPrevious.Enabled = false;
                         btnEdit.Enabled = false;
                         btnAdd.Enabled = false;
-                        btnSave.Enabled = true;
                         btnRemove.Enabled = false;
+                        btnCreate.Enabled = false;
+                        btnSave.Enabled = true;
                         btnCancel.Enabled = true;
                         gbxSearch.Enabled = false;
-                        tbxSearch.ReadOnly = false;
+                        tbxSearch.ReadOnly = true;
                         btnSearch.Enabled = false;
                         mnuNavigation.Enabled = false;
                         mnuFirst.Enabled = false;
@@ -99,9 +119,9 @@ namespace PrimarySchool
                         mnuNext.Enabled = false;
                         mnuPrevious.Enabled = false;
                         mnuEditRecord.Enabled = false;
-                        mnuAddNew.Enabled = false;
+                        mnuAdd.Enabled = false;
                         mnuSave.Enabled = true;
-                        mnuDelete.Enabled = false;
+                        mnuRemove.Enabled = false;
                         mnuCancel.Enabled = true;
                         mnuSearch.Enabled = false;
                         tbxAssignmentName.Focus();
@@ -120,43 +140,31 @@ namespace PrimarySchool
             Edit();
         }
 
-        // Calls AddNew().
-        private void btnAddNew_Click(object sender, EventArgs e)
-        {
-            AddNew();
-        }
-
         // Calls Cancel().
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Cancel();
         }
 
-        // Calls DB commmand (do later).
-        // Fills currency manager (do later).
+        // Calls DB commmand.
+        // Fills currency manager.
         // Sets state to 'View'.
         private void frmAssignments_Load(object sender, EventArgs e)
         {
-
-
-            SetState("View");
-        }
-
-        // Prevents closing of form during edits.
-        // Closes and disposes of DB things (do later).
-        private void frmAssignments_FormClosing(object sender, FormClosingEventArgs e)
-        {
             try
             {
-                if (state.Equals("Edit") || state.Equals("Add New"))
-                {
-                    FormOps.ErrorBox("You must finish the current edit before closing Assignments.");
-                    e.Cancel = true;
-                }
-                else
-                {
+                tbxCourseName.Text = courseName;
 
-                }
+                ProgOps.DatabaseCommandAssignments(tbxAssignmentID, tbxCategory, 
+                    tbxAssignmentName, tbxDescription);
+
+                manager = (CurrencyManager)this.BindingContext[ProgOps.AssignmentsTable];
+
+                FillCategoriesDataTable();
+
+                FillListBox();
+
+                SetState("View");
             }
             catch (Exception ex)
             {
@@ -164,10 +172,29 @@ namespace PrimarySchool
             }
         }
 
-        // Calls Delete().
-        private void btnDelete_Click(object sender, EventArgs e)
+        // Prevents closing of form during edits.
+        // Closes and disposes of DB things.
+        private void frmAssignments_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Delete();
+            try
+            {
+                if (state.Equals("Edit") || state.Equals("Create New"))
+                {
+                    FormOps.ErrorBox("You must finish the current edit before closing Assignments");
+
+                    e.Cancel = true;
+                }
+                else
+                {
+                    ClearCategoriesDataTable();
+
+                    ProgOps.DisposeAssignments();
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
         }
 
         // Calls GoToFirst().
@@ -230,22 +257,16 @@ namespace PrimarySchool
             Save();
         }
 
-        // Calls Delete().
-        private void mnuDelete_Click(object sender, EventArgs e)
-        {
-            Delete();
-        }
-
         // Calls Cancel().
         private void mnuCancel_Click(object sender, EventArgs e)
         {
             Cancel();
         }
 
-        // Calls AddNew().
+        // Calls CreateNew().
         private void mnuAddNew_Click(object sender, EventArgs e)
         {
-            AddNew();
+            CreateNew();
         }
 
         // Calls Edit().
@@ -257,17 +278,69 @@ namespace PrimarySchool
         // Checks validity of edited/new data (do later).
         private bool ValidateData()
         {
+            try
+            {
+                if (tbxAssignmentName.Text.Trim().Equals(string.Empty))
+                {
+                    FormOps.ErrorBox("You must enter an Assignment Name");
+                    tbxAssignmentName.Focus();
+                    return false;
+                }
 
-            return false;
+                if (tbxCategory.Text.Trim().Equals(string.Empty))
+                {
+                    FormOps.ErrorBox("You must enter a Category ID");
+                    tbxCategory.Focus();
+                    return false;
+                }
+
+                List<int> categoryIDList = new List<int>();
+
+                for (int x = 0; x < categoriesTable.Rows.Count; x++)
+                {
+                    categoryIDList.Add(Convert.ToInt32(categoriesTable.Rows[x][0]));
+                }
+
+                if (!categoryIDList.Contains(Convert.ToInt32(tbxCategory.Text.Trim())))
+                {
+                    FormOps.ErrorBox("You must enter a valid Category ID...\n" +
+                        "review the list box on the right side of the form");
+
+                    tbxCategory.Focus();
+
+                    categoryIDList.Clear();
+                    categoryIDList = null;
+
+                    return false;
+                }
+
+                categoryIDList.Clear();
+                categoryIDList = null;
+
+                if (tbxDescription.Text.Trim().Equals(string.Empty))
+                {
+                    FormOps.ErrorBox("You must enter an Assignment Description");
+                    tbxDescription.Focus();
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+                return false;
+            }
         }
 
-        // Goes to first record and beeps (commented).
+        // Goes to first record and beeps.
         private void GoToFirst()
         {
             try
             {
-                //manager.Position = 0;
-                //SystemSounds.Beep.Play();
+                manager.Position = 0;
+
+                SystemSounds.Beep.Play();
             }
             catch (Exception ex)
             {
@@ -275,13 +348,14 @@ namespace PrimarySchool
             }
         }
 
-        // Goes to last record and beeps (commented).
+        // Goes to last record and beeps.
         private void GoToLast()
         {
             try
             {
-                //manager.Position = manager.Count - 1;
-                //SystemSounds.Beep.Play();
+                manager.Position = manager.Count - 1;
+
+                SystemSounds.Beep.Play();
             }
             catch (Exception ex)
             {
@@ -289,17 +363,18 @@ namespace PrimarySchool
             }
         }
 
-        // Goes to previous record (commented).
-        // Beeps when first record is reached (commented).
+        // Goes to previous record.
+        // Beeps when first record is reached.
         private void GoToPrevious()
         {
             try
             {
-                //if (manager.Position == 0)
-                //{
-                //    SystemSounds.Beep.Play();
-                //}
-                //manager.Position--;
+                if (manager.Position == 0)
+                {
+                    SystemSounds.Beep.Play();
+                }
+
+                manager.Position--;
             }
             catch (Exception ex)
             {
@@ -307,17 +382,18 @@ namespace PrimarySchool
             }
         }
 
-        // Goes to next record (commented).
-        // Beeps when last record is reached (commented).
+        // Goes to next record.
+        // Beeps when last record is reached.
         private void GoToNext()
         {
             try
             {
-                //if (manager.Position == manager.Count - 1)
-                //{
-                //    SystemSounds.Beep.Play();
-                //}
-                //manager.Position++;
+                if (manager.Position == manager.Count - 1)
+                {
+                    SystemSounds.Beep.Play();
+                }
+
+                manager.Position++;
             }
             catch (Exception ex)
             {
@@ -326,9 +402,10 @@ namespace PrimarySchool
         }
 
         // Calls ValidateData before saving.
-        // Ends current edit (commented).
-        // Sorts by ID (do later).
-        // Informs user of successful save (commented).
+        // Ends current edit.
+        // Updates database.
+        // Sorts by ID.
+        // Informs user of successful save.
         // Sets state to 'View'.
         private void Save()
         {
@@ -339,10 +416,15 @@ namespace PrimarySchool
 
             try
             {
-                //manager.EndCurrentEdit();
+                manager.EndCurrentEdit();
 
-                //MessageBox.Show("Record saved.", "Save",
-                //    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ProgOps.UpdateAssignments();
+
+                ProgOps.AssignmentsTable.DefaultView.Sort = "Assignment_ID";
+
+                MessageBox.Show("Record saved", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 SetState("View");
             }
             catch (Exception ex)
@@ -351,61 +433,42 @@ namespace PrimarySchool
             }
         }
 
-        // Asks user if they are sure about deleting the chosen record.
-        // Returns to form if 'no' selected.
-        // Deletes record if 'yes' selected (commented).
-        // Sets state to View.
-        private void Delete()
-        {
-            if (!FormOps.QuestionBox("Are you sure you want to delete this assignment?"))
-            {
-                return;
-            }
-            else
-            {
-                try
-                {
-                    //manager.RemoveAt(manager.Position);
-                }
-                catch (Exception ex)
-                {
-                    FormOps.ErrorBox(ex.Message);
-                }
-            }
-            SetState("View");
-        }
-
-        // Cancels current edit (commented).
-        // Prevents error if user cancels before saving new record (commented).
+        // Cancels current edit.
+        // Prevents error if user cancels before saving new record.
         // Sets state to 'View'.
         private void Cancel()
         {
-            //try
-            //{
-            //    manager.CancelCurrentEdit();
-            //    if (state.Equals("Add New"))
-            //    {
-            //        manager.Position = bookmark;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    FormOps.ErrorBox(ex.Message);
-            //}
+            try
+            {
+                manager.CancelCurrentEdit();
+
+                if (state.Equals("Create New"))
+                {
+                    manager.Position = bookmark;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+
             SetState("View");
         }
 
-        // Saves curreny manager position into bookmark variable (commented).
-        // Set state to 'Add'.
-        // Adds new record to data table (commented).
+        // Saves curreny manager position into bookmark variable.
+        // Set state to 'Create New'.
+        // Adds new record to data table.
         // Sets correct ID (do later).
-        private void AddNew()
+        private void CreateNew()
         {
             try
             {
-                //bookmark = manager.Position;
-                SetState("Add New");
-                //manager.AddNew();
+                bookmark = manager.Position;
+
+                SetState("Create New");
+
+                manager.AddNew();
+
 
             }
             catch (Exception ex)
@@ -420,6 +483,200 @@ namespace PrimarySchool
         {
             SetState("Edit");
 
+
+        }
+
+        private void tbxSearch_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbxSearch.Text.Trim().Equals(string.Empty))
+                {
+                    tbxSearch.ForeColor = FormOps.GetColorFromPalette("mid blue");
+                    tbxSearch.Text = strSearch;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void tbxSearch_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbxSearch.Text.Equals(strSearch))
+                {
+                    tbxSearch.Text = string.Empty;
+                    tbxSearch.ForeColor = FormOps.GetColorFromPalette("black");
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void FillCategoriesDataTable()
+        {
+            try
+            {
+                categoriesTable = ProgOps.GetCategoriesTable();
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void ClearCategoriesDataTable()
+        {
+            try
+            {
+                if (categoriesTable != null)
+                {
+                    categoriesTable.Clear();
+                    categoriesTable.Dispose();
+                    categoriesTable = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        // Calls CreateNew().
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            CreateNew();
+        }
+
+        private void FillListBox()
+        {
+            try
+            {
+                if (categoriesTable != null)
+                {
+                    lbxCategories.Items.Add("Category ID - Category Name - Weight");
+                    lbxCategories.Items.Add("");
+
+                    for (int x = 0; x < categoriesTable.Rows.Count; x++)
+                    {
+                        lbxCategories.Items.Add(categoriesTable.Rows[x][0].ToString() + 
+                            " - " + categoriesTable.Rows[x][1].ToString() + 
+                            " - " + categoriesTable.Rows[x][2].ToString() + "%");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        // Calls AddToCourse().
+        private void mnuAdd_Click(object sender, EventArgs e)
+        {
+            AddToCourse();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            AddToCourse();
+        }
+
+        private void AddToCourse()
+        {
+            try
+            {
+                if (!tbxAssignmentID.Text.Trim().Equals(string.Empty))
+                {
+                    ProgOps.AddAssignmentToCourse(selectedCourseID, Convert.ToInt32(tbxAssignmentID.Text));
+                }
+                else
+                {
+                    FormOps.ErrorBox("Unable to add because the Assignment ID is not listed...\n" +
+                        "to fix this, try again after closing and reopening Assignments");
+                } 
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void RemoveFromCourse()
+        {
+            try
+            {
+                if (!tbxAssignmentID.Text.Trim().Equals(string.Empty))
+                {
+                    ProgOps.RemoveAssignmentFromCourse(selectedCourseID, Convert.ToInt32(tbxAssignmentID.Text));
+                }
+                else
+                {
+                    FormOps.ErrorBox("Unable to remove because the Assignment ID is not listed...\n" +
+                        "to fix this, try again after closing and reopening Assignments");
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            RemoveFromCourse();
+        }
+
+        private void mnuRemove_Click(object sender, EventArgs e)
+        {
+            RemoveFromCourse();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            PerformSearch();
+        }
+
+        private void PerformSearch()
+        {
+            try
+            {
+                if (tbxSearch.Text.Equals(""))
+                {
+                    return;
+                }
+
+                int savedRow = manager.Position;
+
+                DataRow[] foundRows;
+
+                ProgOps.AssignmentsTable.DefaultView.Sort = "Assignment_Name";
+
+                foundRows = ProgOps.AssignmentsTable.Select("Assignment_Name LIKE '" + tbxSearch.Text + "*'");
+
+                if (foundRows.Length == 0)
+                {
+                    manager.Position = savedRow;
+                }
+                else
+                {
+                    manager.Position = ProgOps.AssignmentsTable.DefaultView.Find(foundRows[0]["Assignment_Name"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void mnuSearch_Click(object sender, EventArgs e)
+        {
+            PerformSearch();
         }
     }
 }
