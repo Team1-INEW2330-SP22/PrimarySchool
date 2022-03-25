@@ -296,6 +296,7 @@ namespace PrimarySchool
             this.btnRandom.TabIndex = 20;
             this.btnRandom.Text = "Random Grades";
             this.btnRandom.UseVisualStyleBackColor = true;
+            this.btnRandom.Click += new System.EventHandler(this.btnRandom_Click);
             // 
             // frmGradebook
             // 

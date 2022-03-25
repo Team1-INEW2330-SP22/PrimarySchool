@@ -57,7 +57,7 @@ namespace PrimarySchool
                     if (FormOps.QuestionBox("Save changes before closing?" +
                         "\nIf not, the data will be reset."))
                     {
-                        if (CheckUserInput())
+                        if (ValidateData())
                         {
                             // Update database.
                             ProgOps.UpdateSeatingChartTable(seatChartTable, changedRowsList,
@@ -136,7 +136,7 @@ namespace PrimarySchool
                     if (FormOps.QuestionBox("Save changes before switching courses?" +
                         "\nIf not, the data will be reset."))
                     {
-                        if (CheckUserInput())
+                        if (ValidateData())
                         {
                             // Update database.
                             ProgOps.UpdateSeatingChartTable(seatChartTable, changedRowsList,
@@ -339,6 +339,7 @@ namespace PrimarySchool
                             seatsListTable.Rows[x][1] + "\t" + seatsListTable.Rows[x][2]);
                     }
 
+                    seatsListTable.Clear();
                     seatsListTable.Dispose();
                     seatsListTable = null;
                 }
@@ -353,13 +354,13 @@ namespace PrimarySchool
         {
             try
             {
-                if (dgvSeatingChart.Rows.Count > 0)
+                if ( seatChartTable != null && seatChartTable.Rows.Count > 0)
                 {
                     seatList = new List<int>();
 
-                    for (int x = 0; x < dgvSeatingChart.Rows.Count; x++)
+                    for (int x = 0; x < seatChartTable.Rows.Count; x++)
                     {
-                        seatList.Add(Convert.ToInt32(dgvSeatingChart.Rows[x].Cells[3].Value));
+                        seatList.Add(Convert.ToInt32(seatChartTable.Rows[x][3]));
                     }
                 }
             }
@@ -390,7 +391,8 @@ namespace PrimarySchool
         {
             try
             {
-                if (seatList != null && dgvSeatingChart.Rows.Count > 0)
+                if (seatList != null && seatChartTable != null && 
+                    seatChartTable.Rows.Count > 0)
                 {
                     List<int> tempList = new List<int>();
 
@@ -420,13 +422,15 @@ namespace PrimarySchool
 
                     // ****************************************
 
-                    for (int x = 0; x < dgvSeatingChart.Rows.Count; x++)
+                    for (int x = 0; x < seatChartTable.Rows.Count; x++)
                     {
-                        dgvSeatingChart.Rows[x].Cells[3].Value = tempList[x];
+                        seatChartTable.Rows[x][3] = tempList[x];
                     }
 
                     tempList.Clear();
                     tempList = null;
+
+                    SetSavedStatus(false);
                 }
                 else
                 {
@@ -446,12 +450,13 @@ namespace PrimarySchool
             {
                 RandomizeChart();
 
-                SetSavedStatus(false);
-
-                for (int x = 0; x < dgvSeatingChart.Rows.Count; x++)
+                if (seatChartTable != null)
                 {
-                    AddRowToChangedRowsList(x);
-                }
+                    for (int x = 0; x < seatChartTable.Rows.Count; x++)
+                    {
+                        AddRowToChangedRowsList(x);
+                    }
+                } 
             }
             catch (Exception ex)
             {
@@ -463,12 +468,14 @@ namespace PrimarySchool
         {
             try
             {
-                if (dgvSeatingChart.Rows.Count > 0)
+                if (seatChartTable != null && seatChartTable.Rows.Count > 0)
                 {
-                    for (int x = 0; x < dgvSeatingChart.Rows.Count; x++)
+                    for (int x = 0; x < seatChartTable.Rows.Count; x++)
                     {
-                        dgvSeatingChart.Rows[x].Cells[3].Value = DBNull.Value;
+                        seatChartTable.Rows[x][3] = DBNull.Value;
                     }
+
+                    SetSavedStatus(false);
                 }
                 else
                 {
@@ -487,11 +494,12 @@ namespace PrimarySchool
             {
                 ClearModifiableData();
 
-                SetSavedStatus(false);
-
-                for (int x = 0; x < dgvSeatingChart.Rows.Count; x++)
+                if (seatChartTable != null)
                 {
-                    AddRowToChangedRowsList(x);
+                    for (int x = 0; x < seatChartTable.Rows.Count; x++)
+                    {
+                        AddRowToChangedRowsList(x);
+                    }
                 }
             }
             catch (Exception ex)
@@ -504,11 +512,24 @@ namespace PrimarySchool
         {
             try
             {
-                if (seatList != null && dgvSeatingChart.Rows.Count > 0)
+                if (seatList != null && seatChartTable != null && 
+                    seatChartTable.Rows.Count > 0)
                 {
-                    for (int x = 0; x < dgvSeatingChart.Rows.Count; x++)
+                    for (int x = 0; x < seatChartTable.Rows.Count; x++)
                     {
-                        dgvSeatingChart.Rows[x].Cells[3].Value = seatList[x];
+                        seatChartTable.Rows[x][3] = seatList[x];
+                    }
+
+                    ClearChangedRowsList();
+                    InitializeChangedRowsList();
+
+                    if (saved)
+                    {
+                        SetSavedStatus(false);
+                    }
+                    else
+                    {
+                        SetSavedStatus(true);
                     }
                 }
                 else
@@ -527,18 +548,6 @@ namespace PrimarySchool
             try
             {
                 ResetModifiableData();
-
-                ClearChangedRowsList();
-                InitializeChangedRowsList();
-
-                if (saved)
-                {
-                    SetSavedStatus(false);
-                }
-                else
-                {
-                    SetSavedStatus(true);
-                }
             }
             catch (Exception ex)
             {
@@ -550,18 +559,21 @@ namespace PrimarySchool
         {
             try
             {
-                string columnName = dgvSeatingChart.CurrentCell.OwningColumn.Name;
+                if (seatChartTable != null)
+                {
+                    string columnName = dgvSeatingChart.CurrentCell.OwningColumn.Name;
 
-                int row = dgvSeatingChart.CurrentCell.RowIndex, column = dgvSeatingChart.CurrentCell.ColumnIndex;
+                    int row = dgvSeatingChart.CurrentCell.RowIndex, column = dgvSeatingChart.CurrentCell.ColumnIndex;
 
-                FormOps.ErrorBox("Invalid data detected on row " + (row + 1).ToString() + " of the " +
-                    columnName + " column...\nPlease try again");
+                    FormOps.ErrorBox("Invalid data detected on row " + (row + 1).ToString() + " of the " +
+                        columnName + " column...\nPlease try again");
 
-                seatChartTable.Rows[row][column] = DBNull.Value;
+                    seatChartTable.Rows[row][column] = DBNull.Value;
 
-                SetSavedStatus(false);
+                    SetSavedStatus(false);
 
-                e.Cancel = true;
+                    e.Cancel = true;
+                }
             }
             catch (Exception ex)
             {
@@ -594,11 +606,14 @@ namespace PrimarySchool
         {
             try
             {
-                int row = e.RowIndex;
+                if (seatChartTable != null)
+                {
+                    int row = e.RowIndex;
 
-                AddRowToChangedRowsList(row);
+                    AddRowToChangedRowsList(row);
 
-                SetSavedStatus(false);
+                    SetSavedStatus(false);
+                }
             }
             catch (Exception ex)
             {
@@ -610,13 +625,20 @@ namespace PrimarySchool
         {
             try
             {
-                if (CheckUserInput())
+                if (seatChartTable != null && seatChartTable.Rows.Count > 0)
                 {
-                    // Update database.
-                    ProgOps.UpdateSeatingChartTable(seatChartTable, changedRowsList,
-                        selectedCourseID);
+                    if (ValidateData())
+                    {
+                        // Update database.
+                        ProgOps.UpdateSeatingChartTable(seatChartTable, changedRowsList,
+                            selectedCourseID);
 
-                    SetSavedStatus(true);
+                        SetSavedStatus(true);
+                    }
+                }
+                else
+                {
+                    FormOps.ErrorBox("Nothing to save");
                 }
             }
             catch (Exception ex)
@@ -625,72 +647,80 @@ namespace PrimarySchool
             }
         }
 
-        private bool CheckUserInput()
+        private bool ValidateData()
         {
             try
             {
-                bool noNulls = true, correctRange = true, allUnique = true;
-
-                string errorMessage = "Invalid input detected";
-
-                for (int x = 0; x < dgvSeatingChart.Rows.Count; x++)
+                if (seatChartTable != null)
                 {
-                    if (dgvSeatingChart.Rows[x].Cells[3].Value == DBNull.Value)
+                    bool noNulls = true, correctRange = true, allUnique = true;
+
+                    string errorMessage = "Invalid input detected";
+
+                    for (int x = 0; x < seatChartTable.Rows.Count; x++)
                     {
-                        errorMessage = "Every student must be assigned a Seat ID";
-                        noNulls = false;
-                    }
-                }
-
-                if (noNulls)
-                {
-                    int lowest = seatList.Min();
-
-                    int highest = seatList.Max();
-
-                    for (int x = 0; x < dgvSeatingChart.Rows.Count; x++)
-                    {
-                        int value = Convert.ToInt32(dgvSeatingChart.Rows[x].Cells[3].Value);
-
-                        if (value < lowest || value > highest)
+                        if (seatChartTable.Rows[x][3] == DBNull.Value)
                         {
-                            errorMessage = "Check that all Seat IDs are in the Seat List";
-                            correctRange = false;
-                            break;
+                            errorMessage = "Every student must be assigned a Seat ID";
+                            noNulls = false;
                         }
                     }
-                }
 
-                if (noNulls && correctRange)
-                {
-                    for (int x = 0; x < dgvSeatingChart.Rows.Count; x++)
+                    if (noNulls)
                     {
-                        int value = Convert.ToInt32(dgvSeatingChart.Rows[x].Cells[3].Value);
+                        int lowest = seatList.Min();
 
-                        for (int y = 0; y < dgvSeatingChart.Rows.Count; y++)
+                        int highest = seatList.Max();
+
+                        for (int x = 0; x < seatChartTable.Rows.Count; x++)
                         {
-                            if (value == Convert.ToInt32(dgvSeatingChart.Rows[y].Cells[3].Value) && y != x)
+                            int value = Convert.ToInt32(seatChartTable.Rows[x][3]);
+
+                            if (value < lowest || value > highest)
                             {
-                                errorMessage = "Check that no Seat IDs are repeated";
-                                allUnique = false;
+                                errorMessage = "Check that all Seat IDs are in the Seat List";
+                                correctRange = false;
                                 break;
                             }
                         }
+                    }
 
-                        if (!allUnique)
+                    if (noNulls && correctRange)
+                    {
+                        for (int x = 0; x < seatChartTable.Rows.Count; x++)
                         {
-                            break;
+                            int value = Convert.ToInt32(seatChartTable.Rows[x][3]);
+
+                            for (int y = 0; y < seatChartTable.Rows.Count; y++)
+                            {
+                                if (value == Convert.ToInt32(seatChartTable.Rows[y][3]) && y != x)
+                                {
+                                    errorMessage = "Check that no Seat IDs are repeated";
+                                    allUnique = false;
+                                    break;
+                                }
+                            }
+
+                            if (!allUnique)
+                            {
+                                break;
+                            }
                         }
                     }
-                }
 
-                if (noNulls && correctRange && allUnique)
-                {
-                    return true;
+                    if (noNulls && correctRange && allUnique)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        FormOps.ErrorBox(errorMessage);
+                        return false;
+                    }
                 }
                 else
                 {
-                    FormOps.ErrorBox(errorMessage);
+                    FormOps.ErrorBox("Data table is null");
                     return false;
                 }
             }
@@ -705,7 +735,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (dgvSeatingChart.Rows.Count > 0)
+                if (seatChartTable != null && seatChartTable.Rows.Count > 0)
                 {
                     changedRowsList = new List<int>();
                 }
@@ -720,7 +750,8 @@ namespace PrimarySchool
         {
             try
             {
-                if (!changedRowsList.Contains(row))
+                if (seatChartTable != null && changedRowsList != null 
+                    && !changedRowsList.Contains(row))
                 {
                     changedRowsList.Add(row);
                 }

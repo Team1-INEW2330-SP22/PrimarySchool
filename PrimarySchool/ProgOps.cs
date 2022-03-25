@@ -52,7 +52,7 @@ namespace PrimarySchool
         // Data tables
         private static DataTable assignmentsTable;
 
-        // Public getter for assignmentsTable.
+        // Public getter for assignmentsTable
         public static DataTable AssignmentsTable
         {
             get
@@ -699,8 +699,6 @@ namespace PrimarySchool
 
                 for (int x = 0; x < changedRowsList.Count; x++)
                 {
-                    int row = changedRowsList[x];
-
                     insert.Parameters.AddWithValue("@CourseID", courseID);
 
                     insert.Parameters.AddWithValue("@StudentID", attendanceTable.Rows[x][0]);
@@ -744,8 +742,6 @@ namespace PrimarySchool
 
                 for (int x = 0; x < changedRowsList.Count; x++)
                 {
-                    int row = changedRowsList[x];
-
                     update.Parameters.AddWithValue("@isPresent", attendanceTable.Rows[x][3]);
 
                     update.Parameters.AddWithValue("@absenceReason", attendanceTable.Rows[x][5]);
@@ -1179,39 +1175,5 @@ namespace PrimarySchool
                 FormOps.ErrorBox(ex.Message);
             }
         }
-
-        //public static int GetCategoryIDForAssignment(int assignmentID)
-        //{
-        //    try
-        //    {
-        //        string categoryIDQuery =
-        //            "SELECT Category_ID " +
-        //            "FROM group1fa212330.Grade_Assignments " +
-        //            "WHERE Assignment_ID = " + assignmentID + ";";
-
-        //        SqlDataAdapter categoryIDAdapter =
-        //            new SqlDataAdapter(categoryIDQuery, _cntPrimarySchoolDatabase);
-
-        //        DataTable categoryIDTable = new DataTable();
-
-        //        categoryIDAdapter.Fill(categoryIDTable);
-
-        //        int categoryID = Convert.ToInt32(categoryIDTable.Rows[0][0]);
-
-        //        categoryIDAdapter.Dispose();
-        //        categoryIDAdapter = null;
-
-        //        categoryIDTable.Clear();
-        //        categoryIDTable.Dispose();
-        //        categoryIDTable = null;
-
-        //        return categoryID;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        FormOps.ErrorBox(ex.Message);
-        //        return 0;
-        //    }
-        //}
     }
 }
