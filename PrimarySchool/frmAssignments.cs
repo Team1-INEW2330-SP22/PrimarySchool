@@ -598,7 +598,7 @@ namespace PrimarySchool
                 else
                 {
                     FormOps.ErrorBox("Unable to add because the Assignment ID is not listed...\n" +
-                        "to fix this, try again after closing and reopening Assignments");
+                        "To fix this, try again after closing and reopening Assignments");
                 } 
             }
             catch (Exception ex)
@@ -618,7 +618,7 @@ namespace PrimarySchool
                 else
                 {
                     FormOps.ErrorBox("Unable to remove because the Assignment ID is not listed...\n" +
-                        "to fix this, try again after closing and reopening Assignments");
+                        "To fix this, try again after closing and reopening Assignments");
                 }
             }
             catch (Exception ex)

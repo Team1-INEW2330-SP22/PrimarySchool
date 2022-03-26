@@ -38,6 +38,9 @@ namespace PrimarySchool
         // Data tables - MMC
         private static DataTable _dtTeachersTable = new DataTable();
 
+        // String builders - MMC
+        private static StringBuilder _errorMessages = new StringBuilder();
+
         public static DataTable DTTeachersTable
         {
             get { return _dtTeachersTable; }
@@ -60,9 +63,6 @@ namespace PrimarySchool
                 return assignmentsTable;
             }
         }
-
-        // String builders
-        private static StringBuilder _errorMessages = new StringBuilder();
 
         // Hold current user information
         private static int userID = 0;
@@ -115,6 +115,7 @@ namespace PrimarySchool
                     logInAdapter.Dispose();
                     logInAdapter = null;
 
+                    logInTable.Clear();
                     logInTable.Dispose();
                     logInTable = null;
 
@@ -138,6 +139,7 @@ namespace PrimarySchool
                     getInfoAdapter.Dispose();
                     getInfoAdapter = null;
 
+                    getInfoTable.Clear();
                     getInfoTable.Dispose();
                     getInfoTable = null;
 
@@ -148,6 +150,7 @@ namespace PrimarySchool
                     logInAdapter.Dispose();
                     logInAdapter = null;
 
+                    logInTable.Clear();
                     logInTable.Dispose();
                     logInTable = null;
 
@@ -699,17 +702,19 @@ namespace PrimarySchool
 
                 for (int x = 0; x < changedRowsList.Count; x++)
                 {
+                    int row = changedRowsList[x];
+
                     insert.Parameters.AddWithValue("@CourseID", courseID);
 
-                    insert.Parameters.AddWithValue("@StudentID", attendanceTable.Rows[x][0]);
+                    insert.Parameters.AddWithValue("@StudentID", attendanceTable.Rows[row][0]);
 
-                    insert.Parameters.AddWithValue("@isPresent", attendanceTable.Rows[x][3]);
+                    insert.Parameters.AddWithValue("@isPresent", attendanceTable.Rows[row][3]);
 
-                    insert.Parameters.AddWithValue("@absenceReason", attendanceTable.Rows[x][5]);
+                    insert.Parameters.AddWithValue("@absenceReason", attendanceTable.Rows[row][5]);
 
-                    insert.Parameters.AddWithValue("@isExcused", attendanceTable.Rows[x][4]);
+                    insert.Parameters.AddWithValue("@isExcused", attendanceTable.Rows[row][4]);
 
-                    DateTime date = Convert.ToDateTime(attendanceTable.Rows[x][6].ToString());
+                    DateTime date = Convert.ToDateTime(attendanceTable.Rows[row][6].ToString());
 
                     insert.Parameters.AddWithValue("@Date", date.ToString("yyyy-MM-dd"));
 
@@ -742,17 +747,19 @@ namespace PrimarySchool
 
                 for (int x = 0; x < changedRowsList.Count; x++)
                 {
-                    update.Parameters.AddWithValue("@isPresent", attendanceTable.Rows[x][3]);
+                    int row = changedRowsList[x];
 
-                    update.Parameters.AddWithValue("@absenceReason", attendanceTable.Rows[x][5]);
+                    update.Parameters.AddWithValue("@isPresent", attendanceTable.Rows[row][3]);
 
-                    update.Parameters.AddWithValue("@isExcused", attendanceTable.Rows[x][4]);
+                    update.Parameters.AddWithValue("@absenceReason", attendanceTable.Rows[row][5]);
+
+                    update.Parameters.AddWithValue("@isExcused", attendanceTable.Rows[row][4]);
 
                     update.Parameters.AddWithValue("@CourseID", courseID);
 
-                    update.Parameters.AddWithValue("@StudentID", attendanceTable.Rows[x][0]);
+                    update.Parameters.AddWithValue("@StudentID", attendanceTable.Rows[row][0]);
 
-                    DateTime date = Convert.ToDateTime(attendanceTable.Rows[x][6].ToString());
+                    DateTime date = Convert.ToDateTime(attendanceTable.Rows[row][6].ToString());
 
                     update.Parameters.AddWithValue("@Date", date.ToString("yyyy-MM-dd"));
 
@@ -1095,7 +1102,6 @@ namespace PrimarySchool
 
                     for (int x = 0; x < studentIDsTable.Rows.Count; x++)
                     {
-
                         insert.Parameters.AddWithValue("@CourseID", courseID);
 
                         insert.Parameters.AddWithValue("@StudentID", studentIDsTable.Rows[x][0]);
@@ -1113,6 +1119,9 @@ namespace PrimarySchool
                     studentIDsTable.Clear();
                     studentIDsTable.Dispose();
                     studentIDsTable = null;
+
+                    MessageBox.Show("Assignment successfully added to course", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -1159,11 +1168,14 @@ namespace PrimarySchool
                     delete.Parameters.AddWithValue("@AssignmentID", assignmentID);
 
                     delete.ExecuteNonQuery();
+
+                    MessageBox.Show("Assignment successfully removed from course", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     FormOps.ErrorBox("This assignment is not part of the current course " +
-                        "and therefore cannot be deleted");
+                        "and therefore cannot be removed");
                 }
 
                 dataCheckTable.Clear();

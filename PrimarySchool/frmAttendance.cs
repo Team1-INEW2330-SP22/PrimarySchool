@@ -708,6 +708,9 @@ namespace PrimarySchool
                     }
 
                     SetSavedStatus(true);
+
+                    ClearChangedRowsList();
+                    InitializeChangedRowsList();
                 }
             }
             catch (Exception ex)
