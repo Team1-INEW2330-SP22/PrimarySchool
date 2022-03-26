@@ -14,7 +14,7 @@ namespace PrimarySchool
     class ProgOps
     {
         // Connection string to database
-        private const string CONNECT_STRING = 
+        private const string CONNECT_STRING =
             @"Server=cstnt.tstc.edu;Database=inew2330sp22;User Id=group1fa212330;password=1645456";
 
         // Build connection to database
@@ -29,6 +29,23 @@ namespace PrimarySchool
             }
         }
 
+        // Command objects - MMC
+        private static SqlCommand _sqlTeachersCommand;
+
+        // Data adapters - MMC
+        private static SqlDataAdapter _daTeachers = new SqlDataAdapter();
+
+        // Data tables - MMC
+        private static DataTable _dtTeachersTable = new DataTable();
+
+        // String builders - MMC
+        private static StringBuilder _errorMessages = new StringBuilder();
+
+        public static DataTable DTTeachersTable
+        {
+            get { return _dtTeachersTable; }
+        }
+
         // Command objects
         private static SqlCommand assignmentsCommand;
 
@@ -38,7 +55,7 @@ namespace PrimarySchool
         // Data tables
         private static DataTable assignmentsTable;
 
-        // Public getter for assignmentsTable.
+        // Public getter for assignmentsTable
         public static DataTable AssignmentsTable
         {
             get
@@ -46,9 +63,6 @@ namespace PrimarySchool
                 return assignmentsTable;
             }
         }
-
-        // String builders
-        private static StringBuilder _errorMessages = new StringBuilder();
 
         // Hold current user information
         private static int userID = 0;
@@ -59,15 +73,15 @@ namespace PrimarySchool
         static public int UserID
         {
             get
-            { 
+            {
                 return userID;
             }
         }
         static public string UserFullName
         {
             get
-            { 
-                return userFullName; 
+            {
+                return userFullName;
             }
         }
         static public string UserRole
@@ -86,10 +100,10 @@ namespace PrimarySchool
             {
                 string logInQuery = "SELECT User_LoginName, User_LoginPwd " +
                     "FROM group1fa212330.Users " +
-                    "WHERE User_LoginName = '" + tbxUsername.Text.Trim() + 
+                    "WHERE User_LoginName = '" + tbxUsername.Text.Trim() +
                     "' AND User_LoginPwd = '" + tbxPassword.Text + "';";
 
-                SqlDataAdapter logInAdapter = 
+                SqlDataAdapter logInAdapter =
                     new SqlDataAdapter(logInQuery, _cntPrimarySchoolDatabase);
 
                 DataTable logInTable = new DataTable();
@@ -101,6 +115,7 @@ namespace PrimarySchool
                     logInAdapter.Dispose();
                     logInAdapter = null;
 
+                    logInTable.Clear();
                     logInTable.Dispose();
                     logInTable = null;
 
@@ -111,7 +126,7 @@ namespace PrimarySchool
                         "JOIN group1fa212330.User_Roles AS UR ON U.Role_ID = UR.Role_ID " +
                         "WHERE User_LoginName = '" + tbxUsername.Text.Trim() + "';";
 
-                    SqlDataAdapter getInfoAdapter = 
+                    SqlDataAdapter getInfoAdapter =
                         new SqlDataAdapter(getInfoQuery, _cntPrimarySchoolDatabase);
                     DataTable getInfoTable = new DataTable();
 
@@ -124,6 +139,7 @@ namespace PrimarySchool
                     getInfoAdapter.Dispose();
                     getInfoAdapter = null;
 
+                    getInfoTable.Clear();
                     getInfoTable.Dispose();
                     getInfoTable = null;
 
@@ -134,6 +150,7 @@ namespace PrimarySchool
                     logInAdapter.Dispose();
                     logInAdapter = null;
 
+                    logInTable.Clear();
                     logInTable.Dispose();
                     logInTable = null;
 
@@ -188,12 +205,12 @@ namespace PrimarySchool
                             "Source: " + ex.Errors[i].Source + "\n" +
                             "Procedure: " + ex.Errors[i].Procedure + "\n");
                     }
-                    MessageBox.Show(_errorMessages.ToString(), "Error on Open", 
+                    MessageBox.Show(_errorMessages.ToString(), "Error on Open",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 { // Handles generic error messages
-                    MessageBox.Show(ex.Message, "Error on Open", 
+                    MessageBox.Show(ex.Message, "Error on Open",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -226,12 +243,12 @@ namespace PrimarySchool
                             "Source: " + ex.Errors[i].Source + "\n" +
                             "Procedure: " + ex.Errors[i].Procedure + "\n");
                     }
-                    MessageBox.Show(_errorMessages.ToString(), "Error on Close", 
+                    MessageBox.Show(_errorMessages.ToString(), "Error on Close",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 { // Handles generic error messages
-                    MessageBox.Show(ex.Message, "Error on Close", 
+                    MessageBox.Show(ex.Message, "Error on Close",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -250,7 +267,7 @@ namespace PrimarySchool
 
                 if (userRole.Equals("Teacher"))
                 {
-                    courseNamesQuery = 
+                    courseNamesQuery =
                         "SELECT Course_Name " +
                         "FROM group1fa212330.Courses " +
                         "WHERE User_ID = " + userID +
@@ -258,13 +275,13 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    courseNamesQuery = 
+                    courseNamesQuery =
                         "SELECT Course_Name " +
                         "FROM group1fa212330.Courses " +
                         "ORDER BY Course_Name";
                 }
 
-                SqlDataAdapter courseNamesAdapter = 
+                SqlDataAdapter courseNamesAdapter =
                     new SqlDataAdapter(courseNamesQuery, _cntPrimarySchoolDatabase);
 
                 courseNamesAdapter.Fill(courseNamesTable);
@@ -288,7 +305,7 @@ namespace PrimarySchool
         {
             try
             {
-                string courseIDQuery = 
+                string courseIDQuery =
                     "SELECT Course_ID " +
                     "FROM group1fa212330.Courses " +
                     "WHERE Course_Name = '" + courseName + "';";
@@ -323,7 +340,7 @@ namespace PrimarySchool
         {
             try
             {
-                string instructorNameQuery = 
+                string instructorNameQuery =
                     "SELECT User_FName + ' ' + User_LName AS 'Instructor Name' " +
                     "FROM group1fa212330.Users AS U " +
                     "JOIN group1fa212330.Courses AS C " +
@@ -360,12 +377,12 @@ namespace PrimarySchool
         {
             try
             {
-                string roomQuery = 
+                string roomQuery =
                     "SELECT DISTINCT Room_ID " +
                     "FROM group1fa212330.Seating_Chart " +
                     "WHERE Course_ID = " + courseID + ";";
 
-                SqlDataAdapter roomAdapter = 
+                SqlDataAdapter roomAdapter =
                     new SqlDataAdapter(roomQuery, _cntPrimarySchoolDatabase);
 
                 DataTable roomTable = new DataTable();
@@ -400,7 +417,7 @@ namespace PrimarySchool
         {
             try
             {
-                string totalSeatsQuery = 
+                string totalSeatsQuery =
                     "SELECT DISTINCT Number_Of_Seats " +
                     "FROM group1fa212330.Room_Sizes AS RS " +
                     "JOIN group1fa212330.Rooms AS R " +
@@ -413,7 +430,7 @@ namespace PrimarySchool
                     "ON SC.Course_ID = C.Course_ID " +
                     "WHERE C.Course_ID = " + courseID + ";";
 
-                SqlDataAdapter totalSeatsAdapter = 
+                SqlDataAdapter totalSeatsAdapter =
                     new SqlDataAdapter(totalSeatsQuery, _cntPrimarySchoolDatabase);
 
                 DataTable totalSeatsTable = new DataTable();
@@ -443,6 +460,60 @@ namespace PrimarySchool
             }
         }
 
+        //Get Teacher information for Academic Officers - Teacher Tab
+        public static void TeachersCommand(TextBox txUserID, TextBox txLName, TextBox txFname,
+            TextBox txMName, TextBox txDOB, TextBox txMailingAddress, TextBox txStreet, TextBox txCity,
+            TextBox txState, TextBox txZip, TextBox txPhone, TextBox txTotalCourses)
+        {
+            try
+            {
+                //statement for the command string
+                string sqlStatement = "SELECT Users.User_ID, User_LName, User_FName, User_MName, User_DOB, User_MailingAddress, User_MailingAddress AS User_StreetAddress, " +
+                    "User_City, User_State, User_Zip, User_Phone_Number, Count(Courses.Course_ID) AS NumOfCourses " +
+                    "FROM group1fa212330.Users " +
+                    "JOIN group1fa212330.Courses ON Users.User_ID = Courses.User_ID " +
+                    "GROUP BY Users.User_ID, User_LName, User_FName, User_MName, User_DOB, User_MailingAddress, User_City, User_State, User_Zip, User_Phone_Number;";
+                //establish command object
+                _sqlTeachersCommand = new SqlCommand(sqlStatement, _cntPrimarySchoolDatabase);
+                //establish data adapter
+                _daTeachers.SelectCommand = _sqlTeachersCommand;
+                //fill data table
+                _daTeachers.Fill(_dtTeachersTable);
+                //bind controls to data table
+                txUserID.DataBindings.Add("Text", _dtTeachersTable, "User_ID");
+                txLName.DataBindings.Add("Text", _dtTeachersTable, "User_LName");
+                txFname.DataBindings.Add("Text", _dtTeachersTable, "User_FName");
+                txMName.DataBindings.Add("Text", _dtTeachersTable, "User_MName");
+                txDOB.DataBindings.Add("Text", _dtTeachersTable, "User_DOB");
+                txMailingAddress.DataBindings.Add("Text", _dtTeachersTable, "User_MailingAddress");
+                txStreet.DataBindings.Add("Text", _dtTeachersTable, "User_StreetAddress");
+                txCity.DataBindings.Add("Text", _dtTeachersTable, "User_City");
+                txState.DataBindings.Add("Text", _dtTeachersTable, "User_State");
+                txZip.DataBindings.Add("Text", _dtTeachersTable, "User_Zip");
+                txPhone.DataBindings.Add("Text", _dtTeachersTable, "User_Phone_Number");
+                txTotalCourses.DataBindings.Add("Text", _dtTeachersTable, "NumOfCourses");
+            }
+            catch (SqlException ex)
+            {
+                if (ex is SqlException)
+                {//handles more specific SqlException here.
+                    for (int i = 0; i < ex.Errors.Count; i++)
+                    {
+                        _errorMessages.Append("Index #" + i + "\n" +
+                            "Message: " + ex.Errors[i].Message + "\n" +
+                            "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                            "Source: " + ex.Errors[i].Source + "\n" +
+                            "Procedure: " + ex.Errors[i].Procedure + "\n");
+                    }
+                    MessageBox.Show(_errorMessages.ToString(), "Error on DatabaseCommand", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {//handles generic ones here
+                    MessageBox.Show(ex.Message, "Error on DatabaseCommand", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         // Returns data for Gradebook DataGridView as a Data Table using Course ID.
         public static DataTable GetGradebookTable(int courseID)
         {
@@ -465,7 +536,7 @@ namespace PrimarySchool
                     "WHERE Course_ID = " + courseID + " " +
                     "ORDER BY Last_Name, GB.Assignment_ID;";
 
-                SqlDataAdapter gradebookAdapter = 
+                SqlDataAdapter gradebookAdapter =
                     new SqlDataAdapter(gradebookQuery, _cntPrimarySchoolDatabase);
 
                 gradebookAdapter.Fill(gradebookTable);
@@ -523,8 +594,8 @@ namespace PrimarySchool
             }
         }
 
-        public static void UpdateGradebookTable(DataTable gradebookTable, 
-            DataTable hiddenGradebookTable, List<int> changedRowsList, 
+        public static void UpdateGradebookTable(DataTable gradebookTable,
+            DataTable hiddenGradebookTable, List<int> changedRowsList,
             int courseID)
         {
             try
@@ -548,7 +619,7 @@ namespace PrimarySchool
                         update.Parameters.AddWithValue("@Grade", gradebookTable.Rows[row][3]);
                     }
 
-                    if (gradebookTable.Rows[row][4] == DBNull.Value || 
+                    if (gradebookTable.Rows[row][4] == DBNull.Value ||
                         gradebookTable.Rows[row][4].ToString().Trim().Equals(string.Empty))
                     {
                         update.Parameters.AddWithValue("@Comments", DBNull.Value);
@@ -601,14 +672,14 @@ namespace PrimarySchool
                     "AND Date = '" + date + "' " +
                     "ORDER BY Last_Name;";
 
-                SqlDataAdapter attendAdapter = 
+                SqlDataAdapter attendAdapter =
                     new SqlDataAdapter(attendQuery, _cntPrimarySchoolDatabase);
 
                 attendAdapter.Fill(attendTable);
 
                 attendAdapter.Dispose();
                 attendAdapter = null;
-                
+
                 return attendTable;
             }
             catch (Exception ex)
@@ -618,7 +689,7 @@ namespace PrimarySchool
             }
         }
 
-        public static void InsertIntoAttendanceTable(DataTable attendanceTable, 
+        public static void InsertIntoAttendanceTable(DataTable attendanceTable,
             List<int> changedRowsList, int courseID)
         {
             try
@@ -635,15 +706,15 @@ namespace PrimarySchool
 
                     insert.Parameters.AddWithValue("@CourseID", courseID);
 
-                    insert.Parameters.AddWithValue("@StudentID", attendanceTable.Rows[x][0]);
+                    insert.Parameters.AddWithValue("@StudentID", attendanceTable.Rows[row][0]);
 
-                    insert.Parameters.AddWithValue("@isPresent", attendanceTable.Rows[x][3]);
+                    insert.Parameters.AddWithValue("@isPresent", attendanceTable.Rows[row][3]);
 
-                    insert.Parameters.AddWithValue("@absenceReason", attendanceTable.Rows[x][5]);
+                    insert.Parameters.AddWithValue("@absenceReason", attendanceTable.Rows[row][5]);
 
-                    insert.Parameters.AddWithValue("@isExcused", attendanceTable.Rows[x][4]);
+                    insert.Parameters.AddWithValue("@isExcused", attendanceTable.Rows[row][4]);
 
-                    DateTime date = Convert.ToDateTime(attendanceTable.Rows[x][6].ToString());
+                    DateTime date = Convert.ToDateTime(attendanceTable.Rows[row][6].ToString());
 
                     insert.Parameters.AddWithValue("@Date", date.ToString("yyyy-MM-dd"));
 
@@ -678,17 +749,17 @@ namespace PrimarySchool
                 {
                     int row = changedRowsList[x];
 
-                    update.Parameters.AddWithValue("@isPresent", attendanceTable.Rows[x][3]);
+                    update.Parameters.AddWithValue("@isPresent", attendanceTable.Rows[row][3]);
 
-                    update.Parameters.AddWithValue("@absenceReason", attendanceTable.Rows[x][5]);
+                    update.Parameters.AddWithValue("@absenceReason", attendanceTable.Rows[row][5]);
 
-                    update.Parameters.AddWithValue("@isExcused", attendanceTable.Rows[x][4]);
+                    update.Parameters.AddWithValue("@isExcused", attendanceTable.Rows[row][4]);
 
                     update.Parameters.AddWithValue("@CourseID", courseID);
 
-                    update.Parameters.AddWithValue("@StudentID", attendanceTable.Rows[x][0]);
+                    update.Parameters.AddWithValue("@StudentID", attendanceTable.Rows[row][0]);
 
-                    DateTime date = Convert.ToDateTime(attendanceTable.Rows[x][6].ToString());
+                    DateTime date = Convert.ToDateTime(attendanceTable.Rows[row][6].ToString());
 
                     update.Parameters.AddWithValue("@Date", date.ToString("yyyy-MM-dd"));
 
@@ -714,7 +785,7 @@ namespace PrimarySchool
 
             try
             {
-                string seatsQuery = 
+                string seatsQuery =
                     "SELECT S.Student_ID AS 'Student ID', " +
                     "First_Name AS 'First Name', " +
                     "Last_Name AS 'Last Name', " +
@@ -725,7 +796,7 @@ namespace PrimarySchool
                     "WHERE Course_ID = " + courseID + " " +
                     "ORDER BY SC.Seat_ID;";
 
-                SqlDataAdapter seatsAdapter = 
+                SqlDataAdapter seatsAdapter =
                     new SqlDataAdapter(seatsQuery, _cntPrimarySchoolDatabase);
 
                 seatsAdapter.Fill(seatsTable);
@@ -750,7 +821,7 @@ namespace PrimarySchool
 
             try
             {
-                string seatsListQuery = 
+                string seatsListQuery =
                     "SELECT SC.Seat_ID AS 'Seat ID', Row, Number " +
                     "FROM group1fa212330.Seating_Chart AS SC " +
                     "JOIN group1fa212330.Seats AS S " +
@@ -775,7 +846,7 @@ namespace PrimarySchool
             }
         }
 
-        public static void UpdateSeatingChartTable(DataTable seatingChartTable, 
+        public static void UpdateSeatingChartTable(DataTable seatingChartTable,
             List<int> changedRowsList, int courseID)
         {
             try
@@ -817,7 +888,7 @@ namespace PrimarySchool
 
             try
             {
-                string studentsQuery = 
+                string studentsQuery =
                     "SELECT S.Student_ID AS 'Student ID', " +
                     "First_Name AS 'First Name', " +
                     "Last_Name AS 'Last Name' " +
@@ -829,7 +900,7 @@ namespace PrimarySchool
                     "WHERE SR.Course_ID = " + courseID + " " +
                     "ORDER BY Last_Name;";
 
-                SqlDataAdapter studentsAdapter = 
+                SqlDataAdapter studentsAdapter =
                     new SqlDataAdapter(studentsQuery, _cntPrimarySchoolDatabase);
 
                 studentsAdapter.Fill(studentsTable);
@@ -883,7 +954,7 @@ namespace PrimarySchool
             }
         }
 
-        public static void DatabaseCommandAssignments(TextBox tbxAssignmentID, 
+        public static void DatabaseCommandAssignments(TextBox tbxAssignmentID,
             TextBox tbxCategory, TextBox tbxAssignmentName, TextBox tbxDescription)
         {
             try
@@ -920,7 +991,7 @@ namespace PrimarySchool
 
             try
             {
-                SqlCommandBuilder assignmentAdapterCommands = 
+                SqlCommandBuilder assignmentAdapterCommands =
                     new SqlCommandBuilder(assignmentsAdapter);
 
                 assignmentsAdapter.Update(assignmentsTable);
@@ -1031,7 +1102,6 @@ namespace PrimarySchool
 
                     for (int x = 0; x < studentIDsTable.Rows.Count; x++)
                     {
-
                         insert.Parameters.AddWithValue("@CourseID", courseID);
 
                         insert.Parameters.AddWithValue("@StudentID", studentIDsTable.Rows[x][0]);
@@ -1049,6 +1119,9 @@ namespace PrimarySchool
                     studentIDsTable.Clear();
                     studentIDsTable.Dispose();
                     studentIDsTable = null;
+
+                    MessageBox.Show("Assignment successfully added to course", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -1095,11 +1168,14 @@ namespace PrimarySchool
                     delete.Parameters.AddWithValue("@AssignmentID", assignmentID);
 
                     delete.ExecuteNonQuery();
+
+                    MessageBox.Show("Assignment successfully removed from course", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     FormOps.ErrorBox("This assignment is not part of the current course " +
-                        "and therefore cannot be deleted");
+                        "and therefore cannot be removed");
                 }
 
                 dataCheckTable.Clear();
@@ -1111,39 +1187,5 @@ namespace PrimarySchool
                 FormOps.ErrorBox(ex.Message);
             }
         }
-
-        //public static int GetCategoryIDForAssignment(int assignmentID)
-        //{
-        //    try
-        //    {
-        //        string categoryIDQuery =
-        //            "SELECT Category_ID " +
-        //            "FROM group1fa212330.Grade_Assignments " +
-        //            "WHERE Assignment_ID = " + assignmentID + ";";
-
-        //        SqlDataAdapter categoryIDAdapter =
-        //            new SqlDataAdapter(categoryIDQuery, _cntPrimarySchoolDatabase);
-
-        //        DataTable categoryIDTable = new DataTable();
-
-        //        categoryIDAdapter.Fill(categoryIDTable);
-
-        //        int categoryID = Convert.ToInt32(categoryIDTable.Rows[0][0]);
-
-        //        categoryIDAdapter.Dispose();
-        //        categoryIDAdapter = null;
-
-        //        categoryIDTable.Clear();
-        //        categoryIDTable.Dispose();
-        //        categoryIDTable = null;
-
-        //        return categoryID;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        FormOps.ErrorBox(ex.Message);
-        //        return 0;
-        //    }
-        //}
     }
 }

@@ -155,7 +155,7 @@ namespace PrimarySchool
             {
                 tbxCourseName.Text = courseName;
 
-                ProgOps.DatabaseCommandAssignments(tbxAssignmentID, tbxCategory, 
+                ProgOps.DatabaseCommandAssignments(tbxAssignmentID, tbxCategory,
                     tbxAssignmentName, tbxDescription);
 
                 manager = (CurrencyManager)this.BindingContext[ProgOps.AssignmentsTable];
@@ -564,8 +564,8 @@ namespace PrimarySchool
 
                     for (int x = 0; x < categoriesTable.Rows.Count; x++)
                     {
-                        lbxCategories.Items.Add(categoriesTable.Rows[x][0].ToString() + 
-                            " - " + categoriesTable.Rows[x][1].ToString() + 
+                        lbxCategories.Items.Add(categoriesTable.Rows[x][0].ToString() +
+                            " - " + categoriesTable.Rows[x][1].ToString() +
                             " - " + categoriesTable.Rows[x][2].ToString() + "%");
                     }
                 }
@@ -598,8 +598,8 @@ namespace PrimarySchool
                 else
                 {
                     FormOps.ErrorBox("Unable to add because the Assignment ID is not listed...\n" +
-                        "to fix this, try again after closing and reopening Assignments");
-                } 
+                        "To fix this, try again after closing and reopening Assignments");
+                }
             }
             catch (Exception ex)
             {
@@ -618,7 +618,7 @@ namespace PrimarySchool
                 else
                 {
                     FormOps.ErrorBox("Unable to remove because the Assignment ID is not listed...\n" +
-                        "to fix this, try again after closing and reopening Assignments");
+                        "To fix this, try again after closing and reopening Assignments");
                 }
             }
             catch (Exception ex)

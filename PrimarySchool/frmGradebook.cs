@@ -62,13 +62,13 @@ namespace PrimarySchool
         {
             try
             {
-                if (!saved)
+                if (!saved && CheckTables() && changedRowsList != null)
                 {
                     if (FormOps.QuestionBox("Save changes before closing?" +
                         "\nIf not, the data will be reset."))
                     {
                         // Update database.
-                        ProgOps.UpdateGradebookTable(gradebookTable, hiddenGradebookTable, 
+                        ProgOps.UpdateGradebookTable(gradebookTable, hiddenGradebookTable,
                             changedRowsList, selectedCourseID);
                     }
                 }
@@ -96,7 +96,7 @@ namespace PrimarySchool
             {
                 if (cbxCourses.SelectedIndex >= 0)
                 {
-                    if (!saved)
+                    if (!saved && CheckTables() && changedRowsList != null)
                     {
                         if (FormOps.QuestionBox("Save changes before going to Assignments?" +
                             "\nIf not, the data will be reset."))
@@ -174,13 +174,13 @@ namespace PrimarySchool
         {
             try
             {
-                if (!saved)
+                if (!saved && CheckTables() && changedRowsList != null)
                 {
                     if (FormOps.QuestionBox("Save changes before switching courses?" +
                         "\nIf not, the data will be reset."))
                     {
                         // Update database.
-                        ProgOps.UpdateGradebookTable(gradebookTable, hiddenGradebookTable, 
+                        ProgOps.UpdateGradebookTable(gradebookTable, hiddenGradebookTable,
                             changedRowsList, selectedCourseID);
                     }
 
@@ -298,7 +298,7 @@ namespace PrimarySchool
 
                     if (ProgOps.UserRole.Equals("Teacher"))
                     {
-                        if (column.HeaderText.Equals("First Name") || column.HeaderText.Equals("Last Name") || 
+                        if (column.HeaderText.Equals("First Name") || column.HeaderText.Equals("Last Name") ||
                             column.HeaderText.Equals("Assignment"))
                         {
                             column.ReadOnly = true;
@@ -332,13 +332,15 @@ namespace PrimarySchool
         {
             try
             {
-                if (dgvGradebook.Rows.Count > 0)
+                if (CheckTables())
                 {
-                    for (int x = 0; x < dgvGradebook.Rows.Count; x++)
+                    for (int x = 0; x < gradebookTable.Rows.Count; x++)
                     {
                         gradebookTable.Rows[x][3] = DBNull.Value;
                         gradebookTable.Rows[x][4] = DBNull.Value;
                     }
+
+                    SetSavedStatus(false);
                 }
                 else
                 {
@@ -355,7 +357,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (dgvGradebook.Rows.Count > 0)
+                if (CheckTables())
                 {
                     changedRowsList = new List<int>();
                 }
@@ -370,7 +372,8 @@ namespace PrimarySchool
         {
             try
             {
-                if (!changedRowsList.Contains(row))
+                if (CheckTables() && changedRowsList != null
+                    && !changedRowsList.Contains(row))
                 {
                     changedRowsList.Add(row);
                 }
@@ -401,29 +404,29 @@ namespace PrimarySchool
         {
             try
             {
-                if (dgvGradebook.Rows.Count > 0)
+                if (CheckTables())
                 {
                     gradeList = new List<double>();
                     commentsList = new List<string>();
 
-                    for (int x = 0; x < dgvGradebook.Rows.Count; x++)
+                    for (int x = 0; x < gradebookTable.Rows.Count; x++)
                     {
-                        if (dgvGradebook.Rows[x].Cells[3].Value == DBNull.Value)
+                        if (gradebookTable.Rows[x][3] == DBNull.Value)
                         {
                             gradeList.Add(-1);
                         }
                         else
                         {
-                            gradeList.Add(Convert.ToDouble(dgvGradebook.Rows[x].Cells[3].Value));
+                            gradeList.Add(Convert.ToDouble(gradebookTable.Rows[x][3]));
                         }
 
-                        if (dgvGradebook.Rows[x].Cells[4].Value == DBNull.Value)
+                        if (gradebookTable.Rows[x][4] == DBNull.Value)
                         {
                             commentsList.Add(string.Empty);
                         }
                         else
                         {
-                            commentsList.Add(dgvGradebook.Rows[x].Cells[4].Value.ToString());
+                            commentsList.Add(gradebookTable.Rows[x][4].ToString());
                         }
                     }
                 }
@@ -460,9 +463,10 @@ namespace PrimarySchool
         {
             try
             {
-                if (gradeList != null && commentsList != null && dgvGradebook.Rows.Count > 0)
+                if (CheckTables() && gradeList != null &&
+                    commentsList != null)
                 {
-                    for (int x = 0; x < dgvGradebook.Rows.Count; x++)
+                    for (int x = 0; x < gradebookTable.Rows.Count; x++)
                     {
                         if (gradeList[x] < 0)
                         {
@@ -473,8 +477,8 @@ namespace PrimarySchool
                             gradebookTable.Rows[x][3] = gradeList[x].ToString();
                         }
 
-                        dgvGradebook.Rows[x].Cells[3].Value = 
-                            Convert.ToDouble(dgvGradebook.Rows[x].Cells[3].Value).ToString("F");
+                        gradebookTable.Rows[x][3] =
+                            Convert.ToDouble(gradebookTable.Rows[x][3]).ToString("F");
 
                         if (commentsList[x].Equals(string.Empty))
                         {
@@ -484,6 +488,18 @@ namespace PrimarySchool
                         {
                             gradebookTable.Rows[x][4] = commentsList[x];
                         }
+                    }
+
+                    ClearChangedRowsList();
+                    InitializeChangedRowsList();
+
+                    if (saved)
+                    {
+                        SetSavedStatus(false);
+                    }
+                    else
+                    {
+                        SetSavedStatus(true);
                     }
                 }
                 else
@@ -503,11 +519,12 @@ namespace PrimarySchool
             {
                 ClearModifiableData();
 
-                SetSavedStatus(false);
-
-                for (int x = 0; x < dgvGradebook.Rows.Count; x++)
+                if (CheckTables())
                 {
-                    AddRowToChangedRowsList(x);
+                    for (int x = 0; x < gradebookTable.Rows.Count; x++)
+                    {
+                        AddRowToChangedRowsList(x);
+                    }
                 }
             }
             catch (Exception ex)
@@ -521,18 +538,6 @@ namespace PrimarySchool
             try
             {
                 ResetModifiableData();
-
-                ClearChangedRowsList();
-                InitializeChangedRowsList();
-
-                if (saved)
-                {
-                    SetSavedStatus(false);
-                }
-                else
-                {
-                    SetSavedStatus(true);
-                }
             }
             catch (Exception ex)
             {
@@ -544,35 +549,38 @@ namespace PrimarySchool
         {
             try
             {
-                int row = e.RowIndex, column = e.ColumnIndex;
-
-                if (column == 3)
+                if (CheckTables())
                 {
-                    if (dgvGradebook.Rows[row].Cells[column].Value != DBNull.Value)
+                    int row = e.RowIndex, column = e.ColumnIndex;
+
+                    if (column == 3)
                     {
-                        if (Convert.ToInt32(dgvGradebook.Rows[row].Cells[column].Value) < 0)
+                        if (dgvGradebook.Rows[row].Cells[column].Value != DBNull.Value)
                         {
-                            gradebookTable.Rows[row][column] = 0;
+                            if (Convert.ToInt32(dgvGradebook.Rows[row].Cells[column].Value) < 0)
+                            {
+                                gradebookTable.Rows[row][column] = 0;
+                            }
                         }
                     }
-                }
 
-                if (column == 4)
-                {
-                    if (dgvGradebook.Rows[row].Cells[column].Value.ToString().Trim().Equals(string.Empty))
+                    if (column == 4)
                     {
-                        gradebookTable.Rows[row][column] = DBNull.Value;
+                        if (dgvGradebook.Rows[row].Cells[column].Value.ToString().Trim().Equals(string.Empty))
+                        {
+                            gradebookTable.Rows[row][column] = DBNull.Value;
+                        }
+                        else
+                        {
+                            gradebookTable.Rows[row][column] =
+                                dgvGradebook.Rows[row].Cells[column].Value.ToString().Trim();
+                        }
                     }
-                    else
-                    {
-                        gradebookTable.Rows[row][column] = 
-                            dgvGradebook.Rows[row].Cells[column].Value.ToString().Trim();
-                    }
+
+                    AddRowToChangedRowsList(row);
+
+                    SetSavedStatus(false);
                 }
-
-                AddRowToChangedRowsList(row);
-
-                SetSavedStatus(false);
             }
             catch (Exception ex)
             {
@@ -584,17 +592,24 @@ namespace PrimarySchool
         {
             try
             {
-                // Update database
-                ProgOps.UpdateGradebookTable(gradebookTable, hiddenGradebookTable, 
-                    changedRowsList, selectedCourseID);
+                if (CheckTables() && changedRowsList != null)
+                {
+                    // Update database
+                    ProgOps.UpdateGradebookTable(gradebookTable, hiddenGradebookTable,
+                        changedRowsList, selectedCourseID);
 
-                SetSavedStatus(true);
+                    SetSavedStatus(true);
+                }
+                else
+                {
+                    FormOps.ErrorBox("Nothing to save");
+                }
             }
             catch (Exception ex)
             {
                 FormOps.ErrorBox(ex.Message);
             }
-            
+
         }
 
         private void SetSavedStatus(bool status)
@@ -619,21 +634,24 @@ namespace PrimarySchool
         }
 
         private void dgvGradebook_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        { 
+        {
             try
             {
-                string columnName = dgvGradebook.CurrentCell.OwningColumn.Name;
+                if (CheckTables())
+                {
+                    string columnName = dgvGradebook.CurrentCell.OwningColumn.Name;
 
-                int row = dgvGradebook.CurrentCell.RowIndex, column = dgvGradebook.CurrentCell.ColumnIndex;
+                    int row = dgvGradebook.CurrentCell.RowIndex, column = dgvGradebook.CurrentCell.ColumnIndex;
 
-                FormOps.ErrorBox("Invalid data detected on row " + (row + 1).ToString() + " of the " + 
-                    columnName + " column...\nPlease try again");
+                    FormOps.ErrorBox("Invalid data detected on row " + (row + 1).ToString() + " of the " +
+                        columnName + " column...\nPlease try again");
 
-                gradebookTable.Rows[row][column] = DBNull.Value;
+                    gradebookTable.Rows[row][column] = DBNull.Value;
 
-                SetSavedStatus(false);
+                    SetSavedStatus(false);
 
-                e.Cancel = true;
+                    e.Cancel = true;
+                }
             }
             catch (Exception ex)
             {
@@ -645,46 +663,46 @@ namespace PrimarySchool
         {
             try
             {
-                if (dgvGradebook.Rows.Count > 0)
+                if (CheckTables())
                 {
                     lbxFinalGrades.Items.Clear();
 
                     int studentID = Convert.ToInt32(hiddenGradebookTable.Rows[0][0]);
 
-                    string studentName = dgvGradebook.Rows[0].Cells[0].Value.ToString() + 
-                        " " + dgvGradebook.Rows[0].Cells[1].Value.ToString();
+                    string studentName = gradebookTable.Rows[0][0].ToString() +
+                        " " + gradebookTable.Rows[0][1].ToString();
 
                     double final = 0;
 
-                    for (int x = 0; x < dgvGradebook.Rows.Count; x++)
+                    for (int x = 0; x < gradebookTable.Rows.Count; x++)
                     {
                         if (studentID == Convert.ToInt32(hiddenGradebookTable.Rows[x][0]))
                         {
-                            if (dgvGradebook.Rows[x].Cells[3].Value != DBNull.Value)
+                            if (gradebookTable.Rows[x][3] != DBNull.Value)
                             {
                                 // Perform calculation
-                                //final++;
+
                             }
                         }
 
-                        if (studentID != Convert.ToInt32(hiddenGradebookTable.Rows[x][0]) || 
-                            (x + 1) == dgvGradebook.Rows.Count)
+                        if (studentID != Convert.ToInt32(hiddenGradebookTable.Rows[x][0]) ||
+                            (x + 1) == gradebookTable.Rows.Count)
                         {
                             lbxFinalGrades.Items.Add(studentName + ": " + final.ToString("F") + "%");
 
-                            if ((x + 1) != dgvGradebook.Rows.Count)
+                            if ((x + 1) != gradebookTable.Rows.Count)
                             {
                                 studentID = Convert.ToInt32(hiddenGradebookTable.Rows[x][0]);
 
-                                studentName = dgvGradebook.Rows[x].Cells[0].Value.ToString() + 
-                                    " " + dgvGradebook.Rows[x].Cells[1].Value.ToString();
+                                studentName = gradebookTable.Rows[x][0].ToString() +
+                                    " " + gradebookTable.Rows[x][1].ToString();
 
                                 final = 0;
 
-                                if (dgvGradebook.Rows[x].Cells[3].Value != DBNull.Value)
+                                if (gradebookTable.Rows[x][3] != DBNull.Value)
                                 {
                                     // Perform calculation
-                                    //final++;
+
                                 }
                             }
                         }
@@ -706,8 +724,11 @@ namespace PrimarySchool
                 for (int x = 0; x < dgvGradebook.Rows.Count; x++)
                 {
                     gradebookTable.Rows[x][3] = Convert.ToDecimal(rand.Next(65, 100));
+
                     AddRowToChangedRowsList(x);
                 }
+
+                SetSavedStatus(false);
             }
             catch (Exception ex)
             {
@@ -758,6 +779,32 @@ namespace PrimarySchool
             {
                 FormOps.ErrorBox(ex.Message);
             }
+        }
+
+        private bool CheckTables()
+        {
+            try
+            {
+                if (gradebookTable != null && gradebookTable.Rows.Count > 0
+                    && hiddenGradebookTable != null && hiddenGradebookTable.Rows.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+                return false;
+            }
+        }
+
+        private void btnRandom_Click(object sender, EventArgs e)
+        {
+            GenerateRandomGrades();
         }
     }
 }

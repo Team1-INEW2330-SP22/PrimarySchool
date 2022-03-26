@@ -37,10 +37,6 @@ namespace PrimarySchool
         // List to hold changed rows.
         private List<int> changedRowsList;
 
-        // Creates form level bool to indicate if application should add row
-        // to changedRowsList.
-        private bool regardChanges;
-
         // Creates form level bool to indicate if current edits are saved.
         private bool saved;
 
@@ -110,10 +106,6 @@ namespace PrimarySchool
         {
             try
             {
-                newData = false;
-
-                regardChanges = false;
-
                 SetState(ProgOps.UserRole);
 
                 FillComboBox();
@@ -208,10 +200,6 @@ namespace PrimarySchool
                     SetSavedStatus(true);
                 }
 
-                newData = false;
-
-                regardChanges = false;
-
                 lblCourseName.Text = cbxCourses.SelectedItem.ToString();
 
                 selectedCourseID = ProgOps.GetCourseID(lblCourseName.Text);
@@ -234,8 +222,7 @@ namespace PrimarySchool
 
                 FillDataGridView();
 
-                if (ProgOps.UserRole.Equals("Teacher") && 
-                    cbxDate.SelectedIndex >= 0)
+                if (ProgOps.UserRole.Equals("Teacher"))
                 {
                     ClearPresentExcusedAndReasonLists();
                     FillPresentExcusedAndReasonLists();
@@ -275,16 +262,11 @@ namespace PrimarySchool
                     SetSavedStatus(true);
                 }
 
-                newData = false;
-
-                regardChanges = false;
-
                 lblDate.Text = cbxDate.Text;
 
                 FillDataGridView();
 
-                if (ProgOps.UserRole.Equals("Teacher") && 
-                    cbxCourses.SelectedIndex >= 0)
+                if (ProgOps.UserRole.Equals("Teacher"))
                 {
                     ClearPresentExcusedAndReasonLists();
                     FillPresentExcusedAndReasonLists();
@@ -370,9 +352,8 @@ namespace PrimarySchool
 
                         studentsTable.Clear();
                         studentsTable.Dispose();
+                        studentsTable.Dispose();
                         studentsTable = null;
-
-                        regardChanges = true;
                     }
                     else
                     {
@@ -383,8 +364,6 @@ namespace PrimarySchool
                         dgvAttendance.DataSource = attendanceTable;
 
                         ConfigureDataGridView();
-
-                        regardChanges = true;
                     }
                 }
             }
@@ -491,7 +470,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (attendanceTable.Rows.Count > 0)
+                if (attendanceTable != null && attendanceTable.Rows.Count > 0)
                 {
                     presentList = new List<bool>();
                     excusedList = new List<bool>();
@@ -566,7 +545,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (attendanceTable.Rows.Count > 0)
+                if (attendanceTable != null && attendanceTable.Rows.Count > 0)
                 {
                     for (int x = 0; x < attendanceTable.Rows.Count; x++)
                     {
@@ -609,9 +588,8 @@ namespace PrimarySchool
         {
             try
             {
-                if (presentList != null && 
-                    excusedList != null && 
-                    reasonList != null && 
+                if (presentList != null && excusedList != null &&
+                    reasonList != null && attendanceTable != null &&
                     attendanceTable.Rows.Count > 0)
                 {
                     for (int x = 0; x < attendanceTable.Rows.Count; x++)
@@ -660,18 +638,28 @@ namespace PrimarySchool
         {
             try
             {
-                string columnName = dgvAttendance.CurrentCell.OwningColumn.Name;
+                if (attendanceTable != null)
+                {
+                    string columnName = dgvAttendance.CurrentCell.OwningColumn.Name;
 
-                int row = dgvAttendance.CurrentCell.RowIndex, column = dgvAttendance.CurrentCell.ColumnIndex;
+                    int row = dgvAttendance.CurrentCell.RowIndex, column = dgvAttendance.CurrentCell.ColumnIndex;
 
-                FormOps.ErrorBox("Invalid data detected on row " + (row + 1).ToString() + " of the " +
-                    columnName + " column...\nPlease try again");
+                    FormOps.ErrorBox("Invalid data detected on row " + (row + 1).ToString() + " of the " +
+                        columnName + " column...\nPlease try again");
 
-                attendanceTable.Rows[row][column] = DBNull.Value;
+                    if (column == 3 || column == 4)
+                    {
+                        attendanceTable.Rows[row][column] = false;
+                    }
+                    else
+                    {
+                        attendanceTable.Rows[row][column] = DBNull.Value;
+                    }
 
-                SetSavedStatus(false);
+                    SetSavedStatus(false);
 
-                e.Cancel = true;
+                    e.Cancel = true;
+                }
             }
             catch (Exception ex)
             {
@@ -720,6 +708,9 @@ namespace PrimarySchool
                     }
 
                     SetSavedStatus(true);
+
+                    ClearChangedRowsList();
+                    InitializeChangedRowsList();
                 }
             }
             catch (Exception ex)
@@ -734,10 +725,7 @@ namespace PrimarySchool
             {
                 int row = e.RowIndex;
 
-                if (regardChanges)
-                {
-                    AddRowToChangedRowsList(row);
-                }
+                AddRowToChangedRowsList(row);
 
                 SetSavedStatus(false);
             }
@@ -765,9 +753,17 @@ namespace PrimarySchool
         {
             try
             {
-                if (attendanceTable.Rows.Count > 0)
+                if (attendanceTable != null && attendanceTable.Rows.Count > 0)
                 {
                     changedRowsList = new List<int>();
+
+                    if (newData)
+                    {
+                        for (int x = 0; x < attendanceTable.Rows.Count; x++)
+                        {
+                            AddRowToChangedRowsList(x);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -780,7 +776,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (!changedRowsList.Contains(row))
+                if (changedRowsList != null && !changedRowsList.Contains(row))
                 {
                     changedRowsList.Add(row);
                 }
