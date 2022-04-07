@@ -26,6 +26,7 @@ namespace PrimarySchool
         private DataTable seatChartTable;
 
         // List to hold initial Seat IDs in chart.
+        // Sometimes short-handed as "Data List".
         private List<int> seatList;
 
         // List to hold changed rows.
@@ -52,30 +53,14 @@ namespace PrimarySchool
         {
             try
             {
-                if (!saved)
-                {
-                    if (FormOps.QuestionBox("Save changes before closing?" +
-                        "\nIf not, the data will be reset."))
-                    {
-                        if (ValidateData())
-                        {
-                            // Update database.
-                            ProgOps.UpdateSeatingChartTable(seatChartTable, changedRowsList,
-                                selectedCourseID);
-                        }
-                        else
-                        {
-                            FormOps.ErrorBox("Failed to save changes");
-                        }
-                    }
-                }
+                SaveYesOrNo("Save changes before closing?");
 
-                ClearSeatChartDataTable();
+                ClearDataTable();
 
                 if (ProgOps.UserRole.Equals("Teacher"))
                 {
-                    ClearSeatList();
-                    ClearChangedRowsList();
+                    ClearDataList();
+                    ClearChangedRows();
                 }
 
                 FormOps.ShowModeless(home);
@@ -131,71 +116,9 @@ namespace PrimarySchool
         {
             try
             {
-                if (!saved)
-                {
-                    if (FormOps.QuestionBox("Save changes before switching courses?" +
-                        "\nIf not, the data will be reset."))
-                    {
-                        if (ValidateData())
-                        {
-                            // Update database.
-                            ProgOps.UpdateSeatingChartTable(seatChartTable, changedRowsList,
-                                selectedCourseID);
-                        }
-                        else
-                        {
-                            FormOps.ErrorBox("Failed to save changes");
-                        }
-                    }
+                SaveYesOrNo("Save changes before switching courses?");
 
-                    SetSavedStatus(true);
-                }
-
-                if (cbxCourses.SelectedIndex >= 0)
-                {
-                    lblCourseName.Text = cbxCourses.SelectedItem.ToString();
-
-                    selectedCourseID = ProgOps.GetCourseID(lblCourseName.Text);
-
-                    if (!ProgOps.UserRole.Equals("Teacher"))
-                    {
-                        lblInstructor.Text = ProgOps.GetInstructorName(selectedCourseID);
-                    }
-
-                    int roomID = ProgOps.GetRoomID(selectedCourseID);
-
-                    if (roomID == 0)
-                    {
-                        lblRoom.Text = "Room Not Set";
-                    }
-                    else
-                    {
-                        lblRoom.Text = "Room " + roomID.ToString();
-                    }
-
-                    int totalSeats = ProgOps.GetTotalSeats(selectedCourseID);
-
-                    if (totalSeats == 0)
-                    {
-                        lblTotalSeats.Text = "Room Not Set";
-                    }
-                    else
-                    {
-                        lblTotalSeats.Text = totalSeats.ToString() + " Total Seats";
-                    }
-
-                    FillDataGridView();
-
-                    FillListBox();
-
-                    if (ProgOps.UserRole.Equals("Teacher"))
-                    {
-                        ClearSeatList();
-                        FillSeatList();
-                        ClearChangedRowsList();
-                        InitializeChangedRowsList();
-                    }
-                }
+                LoadCourse();
             }
             catch (Exception ex)
             {
@@ -239,17 +162,22 @@ namespace PrimarySchool
         {
             try
             {
-                ClearSeatChartDataTable();
+                FillDataTable();
 
-                seatChartTable = ProgOps.GetSeatingChartTable(selectedCourseID);
+                SetSavedStatus(true);
 
-                dgvSeatingChart.DataSource = null;
-                dgvSeatingChart.Rows.Clear();
-                dgvSeatingChart.Columns.Clear();
+                ClearDataGridView();
 
-                dgvSeatingChart.DataSource = seatChartTable;
+                if (CheckDataTable())
+                {
+                    dgvSeatingChart.DataSource = seatChartTable;
 
-                ConfigureDataGridView();
+                    ConfigDataGridView();
+                }
+                else
+                {
+                    FormOps.ErrorBox("Data could not be found");
+                }
             }
             catch (Exception ex)
             {
@@ -257,7 +185,21 @@ namespace PrimarySchool
             }
         }
 
-        private void ClearSeatChartDataTable()
+        private void FillDataTable()
+        {
+            try
+            {
+                ClearDataTable();
+
+                seatChartTable = ProgOps.GetSeatingChartTable(selectedCourseID);
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void ClearDataTable()
         {
             try
             {
@@ -274,8 +216,22 @@ namespace PrimarySchool
             }
         }
 
+        private void ClearDataGridView()
+        {
+            try
+            {
+                dgvSeatingChart.DataSource = null;
+                dgvSeatingChart.Rows.Clear();
+                dgvSeatingChart.Columns.Clear();
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
         // Configures and enables the DataGridView.
-        private void ConfigureDataGridView()
+        private void ConfigDataGridView()
         {
             try
             {
@@ -350,12 +306,14 @@ namespace PrimarySchool
             }
         }
 
-        private void FillSeatList()
+        private void FillDataList()
         {
             try
             {
-                if (seatChartTable != null && seatChartTable.Rows.Count > 0)
+                if (CheckDataTable())
                 {
+                    ClearDataList();
+
                     seatList = new List<int>();
 
                     for (int x = 0; x < seatChartTable.Rows.Count; x++)
@@ -370,7 +328,7 @@ namespace PrimarySchool
             }
         }
 
-        private void ClearSeatList()
+        private void ClearDataList()
         {
             try
             {
@@ -387,12 +345,12 @@ namespace PrimarySchool
         }
 
         // Randomizes the Seating Chart.
+        // Based on Fisher-Yates shuffle.
         private void RandomizeChart()
         {
             try
             {
-                if (seatList != null && seatChartTable != null &&
-                    seatChartTable.Rows.Count > 0)
+                if (seatList != null && CheckDataTable())
                 {
                     List<int> tempList = new List<int>();
 
@@ -402,8 +360,6 @@ namespace PrimarySchool
                     }
 
                     Random rand = new Random();
-
-                    // Based on Fisher-Yates shuffle **********
 
                     int seatCount = tempList.Count;
 
@@ -420,8 +376,6 @@ namespace PrimarySchool
                         tempList[seatCount] = value;
                     }
 
-                    // ****************************************
-
                     for (int x = 0; x < seatChartTable.Rows.Count; x++)
                     {
                         seatChartTable.Rows[x][3] = tempList[x];
@@ -429,6 +383,8 @@ namespace PrimarySchool
 
                     tempList.Clear();
                     tempList = null;
+
+                    AddAllToChangedRows();
 
                     SetSavedStatus(false);
                 }
@@ -449,14 +405,6 @@ namespace PrimarySchool
             try
             {
                 RandomizeChart();
-
-                if (seatChartTable != null)
-                {
-                    for (int x = 0; x < seatChartTable.Rows.Count; x++)
-                    {
-                        AddRowToChangedRowsList(x);
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -464,16 +412,18 @@ namespace PrimarySchool
             }
         }
 
-        private void ClearModifiableData()
+        private void ClearTableData()
         {
             try
             {
-                if (seatChartTable != null && seatChartTable.Rows.Count > 0)
+                if (CheckDataTable())
                 {
                     for (int x = 0; x < seatChartTable.Rows.Count; x++)
                     {
                         seatChartTable.Rows[x][3] = DBNull.Value;
                     }
+
+                    AddAllToChangedRows();
 
                     SetSavedStatus(false);
                 }
@@ -492,15 +442,7 @@ namespace PrimarySchool
         {
             try
             {
-                ClearModifiableData();
-
-                if (seatChartTable != null)
-                {
-                    for (int x = 0; x < seatChartTable.Rows.Count; x++)
-                    {
-                        AddRowToChangedRowsList(x);
-                    }
-                }
+                ClearTableData();
             }
             catch (Exception ex)
             {
@@ -508,29 +450,22 @@ namespace PrimarySchool
             }
         }
 
-        private void ResetModifiableData()
+        private void ResetTableData()
         {
             try
             {
-                if (seatList != null && seatChartTable != null &&
-                    seatChartTable.Rows.Count > 0)
+                if (seatList != null && CheckDataTable())
                 {
                     for (int x = 0; x < seatChartTable.Rows.Count; x++)
                     {
                         seatChartTable.Rows[x][3] = seatList[x];
                     }
 
-                    ClearChangedRowsList();
-                    InitializeChangedRowsList();
+                    //InitChangedRows();
 
-                    if (saved)
-                    {
-                        SetSavedStatus(false);
-                    }
-                    else
-                    {
-                        SetSavedStatus(true);
-                    }
+                    AddAllToChangedRows();
+
+                    SetSavedStatus(false);
                 }
                 else
                 {
@@ -547,7 +482,7 @@ namespace PrimarySchool
         {
             try
             {
-                ResetModifiableData();
+                ResetTableData();
             }
             catch (Exception ex)
             {
@@ -559,7 +494,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (seatChartTable != null)
+                if (CheckDataTable())
                 {
                     string columnName = dgvSeatingChart.CurrentCell.OwningColumn.Name;
 
@@ -606,11 +541,11 @@ namespace PrimarySchool
         {
             try
             {
-                if (seatChartTable != null)
+                if (CheckDataTable())
                 {
                     int row = e.RowIndex;
 
-                    AddRowToChangedRowsList(row);
+                    AddToChangedRows(row);
 
                     SetSavedStatus(false);
                 }
@@ -625,21 +560,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (seatChartTable != null && seatChartTable.Rows.Count > 0)
-                {
-                    if (ValidateData())
-                    {
-                        // Update database.
-                        ProgOps.UpdateSeatingChartTable(seatChartTable, changedRowsList,
-                            selectedCourseID);
-
-                        SetSavedStatus(true);
-                    }
-                }
-                else
-                {
-                    FormOps.ErrorBox("Nothing to save");
-                }
+                Save();
             }
             catch (Exception ex)
             {
@@ -651,7 +572,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (seatChartTable != null)
+                if (CheckDataTable())
                 {
                     bool noNulls = true, correctRange = true, allUnique = true;
 
@@ -726,17 +647,19 @@ namespace PrimarySchool
             }
             catch (Exception ex)
             {
-                FormOps.ErrorBox("CheckUserInput: " + ex.Message);
+                FormOps.ErrorBox("ValidateData: " + ex.Message);
                 return false;
             }
         }
 
-        private void InitializeChangedRowsList()
+        private void InitChangedRows()
         {
             try
             {
-                if (seatChartTable != null && seatChartTable.Rows.Count > 0)
+                if (CheckDataTable())
                 {
+                    ClearChangedRows();
+
                     changedRowsList = new List<int>();
                 }
             }
@@ -746,11 +669,12 @@ namespace PrimarySchool
             }
         }
 
-        private void AddRowToChangedRowsList(int row)
+        private void AddToChangedRows(int row)
         {
             try
             {
-                if (seatChartTable != null && changedRowsList != null
+                if (CheckDataTable()
+                    && changedRowsList != null
                     && !changedRowsList.Contains(row))
                 {
                     changedRowsList.Add(row);
@@ -762,7 +686,7 @@ namespace PrimarySchool
             }
         }
 
-        private void ClearChangedRowsList()
+        private void ClearChangedRows()
         {
             try
             {
@@ -770,6 +694,229 @@ namespace PrimarySchool
                 {
                     changedRowsList.Clear();
                     changedRowsList = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void LoadCourse()
+        {
+            try
+            {
+                if (cbxCourses.SelectedIndex >= 0)
+                {
+                    lblCourseName.Text = cbxCourses.SelectedItem.ToString();
+
+                    selectedCourseID = ProgOps.GetCourseID(lblCourseName.Text);
+
+                    if (!ProgOps.UserRole.Equals("Teacher"))
+                    {
+                        lblInstructor.Text = ProgOps.GetInstructorName(selectedCourseID);
+                    }
+
+                    int roomID = ProgOps.GetRoomID(selectedCourseID);
+
+                    if (roomID == 0)
+                    {
+                        lblRoom.Text = "Room Not Set";
+                    }
+                    else
+                    {
+                        lblRoom.Text = "Room " + roomID.ToString();
+                    }
+
+                    int totalSeats = ProgOps.GetTotalSeats(selectedCourseID);
+
+                    if (totalSeats == 0)
+                    {
+                        lblTotalSeats.Text = "Room Not Set";
+                    }
+                    else
+                    {
+                        lblTotalSeats.Text = totalSeats.ToString() + " Total Seats";
+                    }
+
+                    FillDataGridView();
+
+                    FillListBox();
+
+                    if (ProgOps.UserRole.Equals("Teacher"))
+                    {
+                        FillDataList();
+                        InitChangedRows();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void Save()
+        {
+            try
+            {
+                if (CheckDataTable() && changedRowsList != null)
+                {
+                    if (ValidateData())
+                    {
+                        ProgOps.UpdateSeatingChartTable(seatChartTable, changedRowsList, selectedCourseID);
+
+                        InitChangedRows();
+
+                        SetSavedStatus(true);
+                    }
+                }
+                else
+                {
+                    FormOps.ErrorBox("Nothing to save");
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void SaveYesOrNo(string question)
+        {
+            try
+            {
+                if (!saved 
+                    && CheckDataTable() 
+                    && changedRowsList != null)
+                {
+                    if (FormOps.QuestionBox(question + "\nIf not, the data may be reset."))
+                    {
+                        if (ValidateData())
+                        {
+                            ProgOps.UpdateSeatingChartTable(seatChartTable, changedRowsList, selectedCourseID);
+
+                            InitChangedRows();
+
+                            SetSavedStatus(true);
+                        }
+                        else
+                        {
+                            FormOps.ErrorBox("Failed to save changes");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private bool CheckDataTable()
+        {
+            try
+            {
+                if (seatChartTable != null 
+                    && seatChartTable.Rows.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+                return false;
+            }
+        }
+
+        private void AddAllToChangedRows()
+        {
+            try
+            {
+                if (CheckDataTable())
+                {
+                    for (int x = 0; x < seatChartTable.Rows.Count; x++)
+                    {
+                        AddToChangedRows(x);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void mnuFilePrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CheckDataTable())
+                {
+                    if (!saved)
+                    {
+                        FormOps.ErrorBox("Cannot print data that has not been saved");
+
+                        SaveYesOrNo("Save then print?");
+
+                        if (saved)
+                        {
+                            CrystalReports.crptSeatingChart report = new CrystalReports.crptSeatingChart();
+
+                            report.SetDatabaseLogon("group1fa212330", "1645456");
+
+                            report.SetParameterValue("selectedCourseID", selectedCourseID);
+
+                            frmViewer viewer = new frmViewer();
+
+                            viewer.crvViewer.ReportSource = null;
+
+                            viewer.crvViewer.ReportSource = report;
+
+                            viewer.ShowDialog();
+
+                            viewer.crvViewer.ReportSource = null;
+
+                            report.Dispose();
+                            report = null;
+
+                            viewer.Dispose();
+                            viewer = null;
+                        }
+                    }
+                    else
+                    {
+                        CrystalReports.crptSeatingChart report = new CrystalReports.crptSeatingChart();
+
+                        report.SetDatabaseLogon("group1fa212330", "1645456");
+
+                        report.SetParameterValue("selectedCourseID", selectedCourseID);
+
+                        frmViewer viewer = new frmViewer();
+
+                        viewer.crvViewer.ReportSource = null;
+
+                        viewer.crvViewer.ReportSource = report;
+
+                        viewer.ShowDialog();
+
+                        viewer.crvViewer.ReportSource = null;
+
+                        report.Dispose();
+                        report = null;
+
+                        viewer.Dispose();
+                        viewer = null;
+                    }
+                }
+                else
+                {
+                    FormOps.ErrorBox("Select a course before printing");
                 }
             }
             catch (Exception ex)

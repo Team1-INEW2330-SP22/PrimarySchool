@@ -1084,8 +1084,8 @@ namespace PrimarySchool
                 if (dataCheckTable.Rows.Count == 0)
                 {
                     string studentIDsQuery
-                    = "SELECT DISTINCT Student_ID " +
-                    "FROM group1fa212330.Gradebook " +
+                    = "SELECT Student_ID " +
+                    "FROM group1fa212330.Student_Registration " +
                     "WHERE Course_ID = " + courseID + ";";
 
                     SqlDataAdapter studentIDsAdapter =
