@@ -786,8 +786,8 @@ namespace PrimarySchool
         {
             try
             {
-                if (!saved 
-                    && CheckDataTable() 
+                if (!saved
+                    && CheckDataTable()
                     && changedRowsList != null)
                 {
                     if (FormOps.QuestionBox(question + "\nIf not, the data may be reset."))
@@ -817,7 +817,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (seatChartTable != null 
+                if (seatChartTable != null
                     && seatChartTable.Rows.Count > 0)
                 {
                     return true;

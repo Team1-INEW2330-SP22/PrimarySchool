@@ -362,8 +362,8 @@ namespace PrimarySchool
         {
             try
             {
-                if (CheckDataTables() 
-                    && changedRowsList != null 
+                if (CheckDataTables()
+                    && changedRowsList != null
                     && !changedRowsList.Contains(row))
                 {
                     changedRowsList.Add(row);
@@ -481,18 +481,6 @@ namespace PrimarySchool
                         }
                     }
 
-                    ClearChangedRowsList();
-                    InitializeChangedRowsList();
-
-                    if (saved)
-                    {
-                        SetSavedStatus(false);
-                    }
-                    else
-                    {
-                        SetSavedStatus(true);
-                    }
-
                     //InitChangedRows();
 
                     AddAllToChangedRows();
@@ -528,20 +516,6 @@ namespace PrimarySchool
             {
                 ResetTableData();
             }
-                ClearChangedRowsList();
-                InitializeChangedRowsList();
-
-                if (saved)
-                {
-                    SetSavedStatus(false);
-                }
-                else
-                {
-                    SetSavedStatus(true);
-                if (CheckDataTables())
-                {
-                    int row = e.RowIndex, column = e.ColumnIndex;
-            }
             catch (Exception ex)
             {
                 FormOps.ErrorBox(ex.Message);
@@ -552,7 +526,21 @@ namespace PrimarySchool
         {
             try
             {
-                int row = e.RowIndex, column = e.ColumnIndex;
+                if (CheckDataTables())
+                {
+                    int row = e.RowIndex, column = e.ColumnIndex;
+
+                    if (column == 3)
+                    {
+                        if (dgvGradebook.Rows[row].Cells[column].Value != DBNull.Value)
+                        {
+                            if (Convert.ToInt32(dgvGradebook.Rows[row].Cells[column].Value) < 0)
+                            {
+                                gradebookTable.Rows[row][column] = 0;
+                            }
+                        }
+                    }
+
                     if (column == 4)
                     {
                         if (dgvGradebook.Rows[row].Cells[column].Value.ToString().Trim().Equals(string.Empty))
@@ -564,25 +552,17 @@ namespace PrimarySchool
                             gradebookTable.Rows[row][column] = dgvGradebook.Rows[row].Cells[column].Value.ToString().Trim();
                         }
                     }
-                if (column == 4)
+
                     CalculateFinalGrades();
 
                     AddToChangedRows(row);
-                    if (dgvGradebook.Rows[row].Cells[column].Value.ToString().Trim().Equals(string.Empty))
-                    {
-                        gradebookTable.Rows[row][column] = DBNull.Value;
-                    }
-                    else
-                    {
-                        gradebookTable.Rows[row][column] = 
-                            dgvGradebook.Rows[row].Cells[column].Value.ToString().Trim();
-                    }
-                }
-
-                AddRowToChangedRowsList(row);
 
                     SetSavedStatus(false);
-                Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
             }
         }
 
@@ -590,11 +570,7 @@ namespace PrimarySchool
         {
             try
             {
-                // Update database
-                ProgOps.UpdateGradebookTable(gradebookTable, hiddenGradebookTable, 
-                    changedRowsList, selectedCourseID);
-
-                SetSavedStatus(true);
+                Save();
             }
             catch (Exception ex)
             {
@@ -616,9 +592,7 @@ namespace PrimarySchool
                 else
                 {
                     this.Text = "Primary School - Gradebook";
-                if (CheckDataTables())
-                {
-                    string columnName = dgvGradebook.CurrentCell.OwningColumn.Name;
+                }
             }
             catch (Exception ex)
             {
@@ -630,7 +604,9 @@ namespace PrimarySchool
         {
             try
             {
-                string columnName = dgvGradebook.CurrentCell.OwningColumn.Name;
+                if (CheckDataTables())
+                {
+                    string columnName = dgvGradebook.CurrentCell.OwningColumn.Name;
 
                     int row = dgvGradebook.CurrentCell.RowIndex, column = dgvGradebook.CurrentCell.ColumnIndex;
 
@@ -642,11 +618,23 @@ namespace PrimarySchool
                     SetSavedStatus(false);
 
                     e.Cancel = true;
-                lbxFinalGrades.Items.Clear();
+                }
+            }
+            catch (Exception ex)
             {
                 FormOps.ErrorBox(ex.Message);
             }
         }
+
+        private void CalculateFinalGrades()
+        {
+            try
+            {
+                lbxFinalGrades.Items.Clear();
+
+                if (CheckDataTables())
+                {
+                    int studentID = Convert.ToInt32(hiddenGradebookTable.Rows[0][0]);
 
                     List<int> tempStudentIdList = new List<int>();
                     List<int> tempCategoryIdList = new List<int>();
@@ -659,13 +647,13 @@ namespace PrimarySchool
                     List<double> weightList = new List<double>();
                     List<int> countList = new List<int>();
                     List<double> pointsList = new List<double>();
-            try
-            {
-                if (dgvGradebook.Rows.Count > 0)
-                    for (int x = 0; x < hiddenGradebookTable.Rows.Count; x++)
-                    lbxFinalGrades.Items.Clear();
 
-                if (CheckDataTables())
+                    List<double> dividedWeightList = new List<double>();
+
+                    for (int x = 0; x < hiddenGradebookTable.Rows.Count; x++)
+                    {
+                        if (studentID == Convert.ToInt32(hiddenGradebookTable.Rows[x][0]))
+                        {
                             if (!tempCategoryIdList.Contains(Convert.ToInt32(hiddenGradebookTable.Rows[x][2])))
                             {
                                 tempStudentIdList.Add(Convert.ToInt32(hiddenGradebookTable.Rows[x][0]));
@@ -687,17 +675,17 @@ namespace PrimarySchool
                             {
                                 for (int y = 0; y < tempCategoryIdList.Count; y++)
                                 {
-                                    if (tempCategoryIdList[y] == Convert.ToInt32(hiddenGradebookTable.Rows[x][2]) 
+                                    if (tempCategoryIdList[y] == Convert.ToInt32(hiddenGradebookTable.Rows[x][2])
                                         && gradebookTable.Rows[x][3] != DBNull.Value)
                                     {
                                         tempCountList[y]++;
                                         tempPointsList[y] += Convert.ToDouble(gradebookTable.Rows[x][3]);
                                     }
                                 }
-                        " " + dgvGradebook.Rows[0].Cells[1].Value.ToString();
+                            }
+                        }
 
-                    List<double> dividedWeightList = new List<double>();
-                        if (studentID != Convert.ToInt32(hiddenGradebookTable.Rows[x][0]) 
+                        if (studentID != Convert.ToInt32(hiddenGradebookTable.Rows[x][0])
                             || (x + 1) == hiddenGradebookTable.Rows.Count)
                         {
                             for (int y = 0; y < tempCategoryIdList.Count; y++)
@@ -714,11 +702,11 @@ namespace PrimarySchool
                             tempWeightList.Clear();
                             tempCountList.Clear();
                             tempPointsList.Clear();
-                        {
+
                             if ((x + 1) != hiddenGradebookTable.Rows.Count)
                             {
-                                // Perform calculation
-                                //final++;
+                                studentID = Convert.ToInt32(hiddenGradebookTable.Rows[x][0]);
+
                                 if (!tempCategoryIdList.Contains(Convert.ToInt32(hiddenGradebookTable.Rows[x][2])))
                                 {
                                     tempStudentIdList.Add(Convert.ToInt32(hiddenGradebookTable.Rows[x][0]));
@@ -740,7 +728,7 @@ namespace PrimarySchool
                                 {
                                     for (int y = 0; y < tempCategoryIdList.Count; y++)
                                     {
-                                        if (tempCategoryIdList[y] == Convert.ToInt32(hiddenGradebookTable.Rows[x][2]) 
+                                        if (tempCategoryIdList[y] == Convert.ToInt32(hiddenGradebookTable.Rows[x][2])
                                             && gradebookTable.Rows[x][3] != DBNull.Value)
                                         {
                                             tempCountList[y]++;
@@ -748,7 +736,7 @@ namespace PrimarySchool
                                         }
                                     }
                                 }
-                            } 
+                            }
                         }
                     }
 
@@ -778,10 +766,10 @@ namespace PrimarySchool
                             {
                                 studentID = studentIdList[x];
 
-                        if (studentID != Convert.ToInt32(hiddenGradebookTable.Rows[x][0]) || 
-                            (x + 1) == dgvGradebook.Rows.Count)
+                                final = 0;
+
                                 if (studentID == studentIdList[x])
-                            lbxFinalGrades.Items.Add(studentName + ": " + final.ToString("F") + "%");
+                                {
                                     final += pointsList[x] * (dividedWeightList[x] * .01);
                                 }
                             }
@@ -790,7 +778,7 @@ namespace PrimarySchool
 
                     studentID = Convert.ToInt32(hiddenGradebookTable.Rows[0][0]);
 
-                    string studentName = gradebookTable.Rows[0][0].ToString().Substring(0, 1) 
+                    string studentName = gradebookTable.Rows[0][0].ToString().Substring(0, 1)
                         + ". " + gradebookTable.Rows[0][1].ToString();
 
                     List<string> studentNameList = new List<string>();
@@ -803,7 +791,7 @@ namespace PrimarySchool
                         {
                             studentID = Convert.ToInt32(hiddenGradebookTable.Rows[x][0]);
 
-                            studentName = gradebookTable.Rows[x][0].ToString().Substring(0, 1) 
+                            studentName = gradebookTable.Rows[x][0].ToString().Substring(0, 1)
                                 + ". " + gradebookTable.Rows[x][1].ToString();
 
                             studentNameList.Add(studentName);
@@ -812,20 +800,8 @@ namespace PrimarySchool
 
                     for (int x = 0; x < finalGradeList.Count; x++)
                     {
-                        lbxFinalGrades.Items.Add(studentNameList[x] 
+                        lbxFinalGrades.Items.Add(studentNameList[x]
                             + ": " + finalGradeList[x].ToString("F"));
-                                studentName = dgvGradebook.Rows[x].Cells[0].Value.ToString() + 
-                                    " " + dgvGradebook.Rows[x].Cells[1].Value.ToString();
-
-                                final = 0;
-
-                                if (dgvGradebook.Rows[x].Cells[3].Value != DBNull.Value)
-                                {
-                                    // Perform calculation
-                                    //final++;
-                                }
-                            }
-                        }
                     }
 
                     tempStudentIdList.Clear();
@@ -863,8 +839,7 @@ namespace PrimarySchool
             catch (Exception ex)
             {
                 FormOps.ErrorBox(ex.Message);
-
-                    AddToChangedRows(x);
+            }
         }
 
         private void GenerateRandomGrades()
@@ -876,7 +851,8 @@ namespace PrimarySchool
                 for (int x = 0; x < gradebookTable.Rows.Count; x++)
                 {
                     gradebookTable.Rows[x][3] = Convert.ToDecimal(rand.Next(65, 100));
-                    AddRowToChangedRowsList(x);
+
+                    AddToChangedRows(x);
                 }
 
                 SetSavedStatus(false);
@@ -934,9 +910,9 @@ namespace PrimarySchool
         {
             try
             {
-                if (gradebookTable != null 
-                    && gradebookTable.Rows.Count > 0 
-                    && hiddenGradebookTable != null 
+                if (gradebookTable != null
+                    && gradebookTable.Rows.Count > 0
+                    && hiddenGradebookTable != null
                     && hiddenGradebookTable.Rows.Count > 0)
                 {
                     return true;
@@ -985,7 +961,7 @@ namespace PrimarySchool
                 {
                     if (FormOps.QuestionBox(question + "\nIf not, the data may be reset."))
                     {
-                        ProgOps.UpdateGradebookTable(gradebookTable, hiddenGradebookTable, 
+                        ProgOps.UpdateGradebookTable(gradebookTable, hiddenGradebookTable,
                             changedRowsList, selectedCourseID);
 
                         InitChangedRows();
@@ -1094,32 +1070,6 @@ namespace PrimarySchool
             {
                 FormOps.ErrorBox(ex.Message);
             }
-        }
-
-        private bool CheckTables()
-        {
-            try
-            {
-                if (gradebookTable != null && gradebookTable.Rows.Count > 0 
-                    && hiddenGradebookTable != null && hiddenGradebookTable.Rows.Count > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                FormOps.ErrorBox(ex.Message);
-                return false;
-            }
-        }
-
-        private void btnRandom_Click(object sender, EventArgs e)
-        {
-            GenerateRandomGrades();
         }
     }
 }
