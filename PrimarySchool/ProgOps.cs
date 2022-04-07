@@ -14,7 +14,7 @@ namespace PrimarySchool
     class ProgOps
     {
         // Connection string to database
-        private const string CONNECT_STRING = 
+        private const string CONNECT_STRING =
             @"Server=cstnt.tstc.edu;Database=inew2330sp22;User Id=group1fa212330;password=1645456";
 
         // Build connection to database
@@ -29,6 +29,23 @@ namespace PrimarySchool
             }
         }
         
+        // Command objects - MMC
+        private static SqlCommand _sqlTeachersCommand;
+
+        // Data adapters - MMC
+        private static SqlDataAdapter _daTeachers = new SqlDataAdapter();
+
+        // Data tables - MMC
+        private static DataTable _dtTeachersTable = new DataTable();
+
+        // String builders - MMC
+        private static StringBuilder _errorMessages = new StringBuilder();
+
+        public static DataTable DTTeachersTable
+        {
+            get { return _dtTeachersTable; }
+        }
+
         // Command objects - MMC
         private static SqlCommand _sqlTeachersCommand;
 
@@ -73,15 +90,15 @@ namespace PrimarySchool
         static public int UserID
         {
             get
-            { 
+            {
                 return userID;
             }
         }
         static public string UserFullName
         {
             get
-            { 
-                return userFullName; 
+            {
+                return userFullName;
             }
         }
         static public string UserRole
@@ -100,10 +117,10 @@ namespace PrimarySchool
             {
                 string logInQuery = "SELECT User_LoginName, User_LoginPwd " +
                     "FROM group1fa212330.Users " +
-                    "WHERE User_LoginName = '" + tbxUsername.Text.Trim() + 
+                    "WHERE User_LoginName = '" + tbxUsername.Text.Trim() +
                     "' AND User_LoginPwd = '" + tbxPassword.Text + "';";
 
-                SqlDataAdapter logInAdapter = 
+                SqlDataAdapter logInAdapter =
                     new SqlDataAdapter(logInQuery, _cntPrimarySchoolDatabase);
 
                 DataTable logInTable = new DataTable();
@@ -126,7 +143,7 @@ namespace PrimarySchool
                         "JOIN group1fa212330.User_Roles AS UR ON U.Role_ID = UR.Role_ID " +
                         "WHERE User_LoginName = '" + tbxUsername.Text.Trim() + "';";
 
-                    SqlDataAdapter getInfoAdapter = 
+                    SqlDataAdapter getInfoAdapter =
                         new SqlDataAdapter(getInfoQuery, _cntPrimarySchoolDatabase);
                     DataTable getInfoTable = new DataTable();
 
@@ -205,12 +222,12 @@ namespace PrimarySchool
                             "Source: " + ex.Errors[i].Source + "\n" +
                             "Procedure: " + ex.Errors[i].Procedure + "\n");
                     }
-                    MessageBox.Show(_errorMessages.ToString(), "Error on Open", 
+                    MessageBox.Show(_errorMessages.ToString(), "Error on Open",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 { // Handles generic error messages
-                    MessageBox.Show(ex.Message, "Error on Open", 
+                    MessageBox.Show(ex.Message, "Error on Open",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -243,12 +260,12 @@ namespace PrimarySchool
                             "Source: " + ex.Errors[i].Source + "\n" +
                             "Procedure: " + ex.Errors[i].Procedure + "\n");
                     }
-                    MessageBox.Show(_errorMessages.ToString(), "Error on Close", 
+                    MessageBox.Show(_errorMessages.ToString(), "Error on Close",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 { // Handles generic error messages
-                    MessageBox.Show(ex.Message, "Error on Close", 
+                    MessageBox.Show(ex.Message, "Error on Close",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -267,7 +284,7 @@ namespace PrimarySchool
 
                 if (userRole.Equals("Teacher"))
                 {
-                    courseNamesQuery = 
+                    courseNamesQuery =
                         "SELECT Course_Name " +
                         "FROM group1fa212330.Courses " +
                         "WHERE User_ID = " + userID +
@@ -275,13 +292,13 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    courseNamesQuery = 
+                    courseNamesQuery =
                         "SELECT Course_Name " +
                         "FROM group1fa212330.Courses " +
                         "ORDER BY Course_Name";
                 }
 
-                SqlDataAdapter courseNamesAdapter = 
+                SqlDataAdapter courseNamesAdapter =
                     new SqlDataAdapter(courseNamesQuery, _cntPrimarySchoolDatabase);
 
                 courseNamesAdapter.Fill(courseNamesTable);
@@ -305,7 +322,7 @@ namespace PrimarySchool
         {
             try
             {
-                string courseIDQuery = 
+                string courseIDQuery =
                     "SELECT Course_ID " +
                     "FROM group1fa212330.Courses " +
                     "WHERE Course_Name = '" + courseName + "';";
@@ -340,7 +357,7 @@ namespace PrimarySchool
         {
             try
             {
-                string instructorNameQuery = 
+                string instructorNameQuery =
                     "SELECT User_FName + ' ' + User_LName AS 'Instructor Name' " +
                     "FROM group1fa212330.Users AS U " +
                     "JOIN group1fa212330.Courses AS C " +
@@ -377,12 +394,12 @@ namespace PrimarySchool
         {
             try
             {
-                string roomQuery = 
+                string roomQuery =
                     "SELECT DISTINCT Room_ID " +
                     "FROM group1fa212330.Seating_Chart " +
                     "WHERE Course_ID = " + courseID + ";";
 
-                SqlDataAdapter roomAdapter = 
+                SqlDataAdapter roomAdapter =
                     new SqlDataAdapter(roomQuery, _cntPrimarySchoolDatabase);
 
                 DataTable roomTable = new DataTable();
@@ -417,7 +434,7 @@ namespace PrimarySchool
         {
             try
             {
-                string totalSeatsQuery = 
+                string totalSeatsQuery =
                     "SELECT DISTINCT Number_Of_Seats " +
                     "FROM group1fa212330.Room_Sizes AS RS " +
                     "JOIN group1fa212330.Rooms AS R " +
@@ -430,7 +447,7 @@ namespace PrimarySchool
                     "ON SC.Course_ID = C.Course_ID " +
                     "WHERE C.Course_ID = " + courseID + ";";
 
-                SqlDataAdapter totalSeatsAdapter = 
+                SqlDataAdapter totalSeatsAdapter =
                     new SqlDataAdapter(totalSeatsQuery, _cntPrimarySchoolDatabase);
 
                 DataTable totalSeatsTable = new DataTable();
@@ -536,7 +553,7 @@ namespace PrimarySchool
                     "WHERE Course_ID = " + courseID + " " +
                     "ORDER BY Last_Name, GB.Assignment_ID;";
 
-                SqlDataAdapter gradebookAdapter = 
+                SqlDataAdapter gradebookAdapter =
                     new SqlDataAdapter(gradebookQuery, _cntPrimarySchoolDatabase);
 
                 gradebookAdapter.Fill(gradebookTable);
@@ -594,8 +611,8 @@ namespace PrimarySchool
             }
         }
 
-        public static void UpdateGradebookTable(DataTable gradebookTable, 
-            DataTable hiddenGradebookTable, List<int> changedRowsList, 
+        public static void UpdateGradebookTable(DataTable gradebookTable,
+            DataTable hiddenGradebookTable, List<int> changedRowsList,
             int courseID)
         {
             try
@@ -619,7 +636,7 @@ namespace PrimarySchool
                         update.Parameters.AddWithValue("@Grade", gradebookTable.Rows[row][3]);
                     }
 
-                    if (gradebookTable.Rows[row][4] == DBNull.Value || 
+                    if (gradebookTable.Rows[row][4] == DBNull.Value ||
                         gradebookTable.Rows[row][4].ToString().Trim().Equals(string.Empty))
                     {
                         update.Parameters.AddWithValue("@Comments", DBNull.Value);
@@ -672,14 +689,14 @@ namespace PrimarySchool
                     "AND Date = '" + date + "' " +
                     "ORDER BY Last_Name;";
 
-                SqlDataAdapter attendAdapter = 
+                SqlDataAdapter attendAdapter =
                     new SqlDataAdapter(attendQuery, _cntPrimarySchoolDatabase);
 
                 attendAdapter.Fill(attendTable);
 
                 attendAdapter.Dispose();
                 attendAdapter = null;
-                
+
                 return attendTable;
             }
             catch (Exception ex)
@@ -689,7 +706,7 @@ namespace PrimarySchool
             }
         }
 
-        public static void InsertIntoAttendanceTable(DataTable attendanceTable, 
+        public static void InsertIntoAttendanceTable(DataTable attendanceTable,
             List<int> changedRowsList, int courseID)
         {
             try
@@ -785,7 +802,7 @@ namespace PrimarySchool
 
             try
             {
-                string seatsQuery = 
+                string seatsQuery =
                     "SELECT S.Student_ID AS 'Student ID', " +
                     "First_Name AS 'First Name', " +
                     "Last_Name AS 'Last Name', " +
@@ -796,7 +813,7 @@ namespace PrimarySchool
                     "WHERE Course_ID = " + courseID + " " +
                     "ORDER BY SC.Seat_ID;";
 
-                SqlDataAdapter seatsAdapter = 
+                SqlDataAdapter seatsAdapter =
                     new SqlDataAdapter(seatsQuery, _cntPrimarySchoolDatabase);
 
                 seatsAdapter.Fill(seatsTable);
@@ -821,7 +838,7 @@ namespace PrimarySchool
 
             try
             {
-                string seatsListQuery = 
+                string seatsListQuery =
                     "SELECT SC.Seat_ID AS 'Seat ID', Row, Number " +
                     "FROM group1fa212330.Seating_Chart AS SC " +
                     "JOIN group1fa212330.Seats AS S " +
@@ -846,7 +863,7 @@ namespace PrimarySchool
             }
         }
 
-        public static void UpdateSeatingChartTable(DataTable seatingChartTable, 
+        public static void UpdateSeatingChartTable(DataTable seatingChartTable,
             List<int> changedRowsList, int courseID)
         {
             try
@@ -888,7 +905,7 @@ namespace PrimarySchool
 
             try
             {
-                string studentsQuery = 
+                string studentsQuery =
                     "SELECT S.Student_ID AS 'Student ID', " +
                     "First_Name AS 'First Name', " +
                     "Last_Name AS 'Last Name' " +
@@ -900,7 +917,7 @@ namespace PrimarySchool
                     "WHERE SR.Course_ID = " + courseID + " " +
                     "ORDER BY Last_Name;";
 
-                SqlDataAdapter studentsAdapter = 
+                SqlDataAdapter studentsAdapter =
                     new SqlDataAdapter(studentsQuery, _cntPrimarySchoolDatabase);
 
                 studentsAdapter.Fill(studentsTable);
@@ -954,7 +971,7 @@ namespace PrimarySchool
             }
         }
 
-        public static void DatabaseCommandAssignments(TextBox tbxAssignmentID, 
+        public static void DatabaseCommandAssignments(TextBox tbxAssignmentID,
             TextBox tbxCategory, TextBox tbxAssignmentName, TextBox tbxDescription)
         {
             try
@@ -991,7 +1008,7 @@ namespace PrimarySchool
 
             try
             {
-                SqlCommandBuilder assignmentAdapterCommands = 
+                SqlCommandBuilder assignmentAdapterCommands =
                     new SqlCommandBuilder(assignmentsAdapter);
 
                 assignmentsAdapter.Update(assignmentsTable);
@@ -1084,8 +1101,8 @@ namespace PrimarySchool
                 if (dataCheckTable.Rows.Count == 0)
                 {
                     string studentIDsQuery
-                    = "SELECT DISTINCT Student_ID " +
-                    "FROM group1fa212330.Gradebook " +
+                    = "SELECT Student_ID " +
+                    "FROM group1fa212330.Student_Registration " +
                     "WHERE Course_ID = " + courseID + ";";
 
                     SqlDataAdapter studentIDsAdapter =

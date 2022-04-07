@@ -55,30 +55,14 @@ namespace PrimarySchool
         {
             try
             {
-                if (!saved)
-                {
-                    if (FormOps.QuestionBox("Save changes before closing?" +
-                        "\nIf not, the data will be reset."))
-                    {
-                        if (newData)
-                        {
-                            // Insert new data into database.
-                            ProgOps.InsertIntoAttendanceTable(attendanceTable, changedRowsList, selectedCourseID);
-                        }
-                        else
-                        {
-                            // Update database.
-                            ProgOps.UpdateAttendanceTable(attendanceTable, changedRowsList, selectedCourseID);
-                        }
-                    }
-                }
+                SaveYesOrNo("Save changes before closing?");
 
-                ClearAttendanceDataTable();
+                ClearDataTable();
 
                 if (ProgOps.UserRole.Equals("Teacher"))
                 {
-                    ClearPresentExcusedAndReasonLists();
-                    ClearChangedRowsList();
+                    ClearDataLists();
+                    ClearChangedRows();
                 }
 
                 FormOps.ShowModeless(home);
@@ -180,55 +164,9 @@ namespace PrimarySchool
         {
             try
             {
-                if (!saved && cbxCourses.SelectedIndex >= 0)
-                {
-                    if (FormOps.QuestionBox("Save changes before closing?" +
-                        "\nIf not, the data will be reset."))
-                    {
-                        if (newData)
-                        {
-                            // Insert new data into database.
-                            ProgOps.InsertIntoAttendanceTable(attendanceTable, changedRowsList, selectedCourseID);
-                        }
-                        else
-                        {
-                            // Update database.
-                            ProgOps.UpdateAttendanceTable(attendanceTable, changedRowsList, selectedCourseID);
-                        }
-                    }
+                SaveYesOrNo("Save changes before switching courses?");
 
-                    SetSavedStatus(true);
-                }
-
-                lblCourseName.Text = cbxCourses.SelectedItem.ToString();
-
-                selectedCourseID = ProgOps.GetCourseID(lblCourseName.Text);
-
-                if (!ProgOps.UserRole.Equals("Teacher"))
-                {
-                    lblInstructor.Text = ProgOps.GetInstructorName(selectedCourseID);
-                }
-
-                int roomID = ProgOps.GetRoomID(selectedCourseID);
-
-                if (roomID == 0)
-                {
-                    lblRoom.Text = "Room Not Set";
-                }
-                else
-                {
-                    lblRoom.Text = "Room " + roomID.ToString();
-                }
-
-                FillDataGridView();
-
-                if (ProgOps.UserRole.Equals("Teacher"))
-                {
-                    ClearPresentExcusedAndReasonLists();
-                    FillPresentExcusedAndReasonLists();
-                    ClearChangedRowsList();
-                    InitializeChangedRowsList();
-                }
+                LoadCourse();
             }
             catch (Exception ex)
             {
@@ -242,37 +180,9 @@ namespace PrimarySchool
         {
             try
             {
-                if (!saved && cbxCourses.SelectedIndex >= 0)
-                {
-                    if (FormOps.QuestionBox("Save changes before closing?" +
-                        "\nIf not, the data will be reset."))
-                    {
-                        if (newData)
-                        {
-                            // Insert new data into database.
-                            ProgOps.InsertIntoAttendanceTable(attendanceTable, changedRowsList, selectedCourseID);
-                        }
-                        else
-                        {
-                            // Update database.
-                            ProgOps.UpdateAttendanceTable(attendanceTable, changedRowsList, selectedCourseID);
-                        }
-                    }
+                SaveYesOrNo("Save changes before switching dates?");
 
-                    SetSavedStatus(true);
-                }
-
-                lblDate.Text = cbxDate.Text;
-
-                FillDataGridView();
-
-                if (ProgOps.UserRole.Equals("Teacher"))
-                {
-                    ClearPresentExcusedAndReasonLists();
-                    FillPresentExcusedAndReasonLists();
-                    ClearChangedRowsList();
-                    InitializeChangedRowsList();
-                }
+                LoadDate();
             }
             catch (Exception ex)
             {
@@ -309,6 +219,47 @@ namespace PrimarySchool
             }
         }
 
+        private void LoadCourse()
+        {
+            try
+            {
+                if (cbxCourses.SelectedIndex >= 0)
+                {
+                    lblCourseName.Text = cbxCourses.SelectedItem.ToString();
+
+                    selectedCourseID = ProgOps.GetCourseID(lblCourseName.Text);
+
+                    if (!ProgOps.UserRole.Equals("Teacher"))
+                    {
+                        lblInstructor.Text = ProgOps.GetInstructorName(selectedCourseID);
+                    }
+
+                    int roomID = ProgOps.GetRoomID(selectedCourseID);
+
+                    if (roomID == 0)
+                    {
+                        lblRoom.Text = "Room Not Set";
+                    }
+                    else
+                    {
+                        lblRoom.Text = "Room " + roomID.ToString();
+                    }
+
+                    FillDataGridView();
+
+                    if (ProgOps.UserRole.Equals("Teacher"))
+                    {
+                        FillDataLists();
+                        InitChangedRows();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
         // Fills dgvAttendance when both a course and a date have been selected.
         private void FillDataGridView()
         {
@@ -316,7 +267,7 @@ namespace PrimarySchool
             {
                 if (!cbxCourses.Text.Equals(string.Empty) && !cbxDate.Text.Equals(string.Empty))
                 {
-                    ClearAttendanceDataTable();
+                    ClearDataTable();
 
                     attendanceTable = ProgOps.GetAttendanceTable(selectedCourseID, cbxDate.Text);
 
@@ -324,46 +275,45 @@ namespace PrimarySchool
                     {
                         newData = true;
 
-                        ClearDataGridView();
+                        ConfigDataGridView();
 
-                        ConfigureDataGridView();
-
-                        DataTable studentsTable = ProgOps.GetStudentsInCourse(selectedCourseID);
-
-                        if (attendanceTable.Rows.Count > 0)
+                        if (ProgOps.UserRole.Equals("Teacher"))
                         {
-                            attendanceTable.Rows.Clear();
-                        }
+                            DataTable studentsTable = ProgOps.GetStudentsInCourse(selectedCourseID);
 
-                        if (attendanceTable.Columns.Count > 0)
-                        {
-                            for (int x = 0; x < studentsTable.Rows.Count; x++)
+                            if (attendanceTable.Columns.Count > 0)
                             {
-                                attendanceTable.Rows.Add(attendanceTable.NewRow());
-                                attendanceTable.Rows[x][0] = studentsTable.Rows[x][0];
-                                attendanceTable.Rows[x][1] = studentsTable.Rows[x][1].ToString();
-                                attendanceTable.Rows[x][2] = studentsTable.Rows[x][2].ToString();
-                                attendanceTable.Rows[x][3] = false;
-                                attendanceTable.Rows[x][4] = false;
-                                attendanceTable.Rows[x][5] = DBNull.Value;
-                                attendanceTable.Rows[x][6] = cbxDate.Text;
+                                for (int x = 0; x < studentsTable.Rows.Count; x++)
+                                {
+                                    attendanceTable.Rows.Add(attendanceTable.NewRow());
+                                    attendanceTable.Rows[x][0] = studentsTable.Rows[x][0];
+                                    attendanceTable.Rows[x][1] = studentsTable.Rows[x][1].ToString();
+                                    attendanceTable.Rows[x][2] = studentsTable.Rows[x][2].ToString();
+                                    attendanceTable.Rows[x][3] = false;
+                                    attendanceTable.Rows[x][4] = false;
+                                    attendanceTable.Rows[x][5] = DBNull.Value;
+                                    attendanceTable.Rows[x][6] = cbxDate.Text;
+                                }
                             }
-                        }
 
-                        studentsTable.Clear();
-                        studentsTable.Dispose();
-                        studentsTable.Dispose();
-                        studentsTable = null;
+                            SetSavedStatus(false);
+
+                            studentsTable.Clear();
+                            studentsTable.Dispose();
+                            studentsTable = null;
+                        }
                     }
                     else
                     {
                         newData = false;
 
+                        SetSavedStatus(true);
+
                         ClearDataGridView();
 
                         dgvAttendance.DataSource = attendanceTable;
 
-                        ConfigureDataGridView();
+                        ConfigDataGridView();
                     }
                 }
             }
@@ -374,7 +324,7 @@ namespace PrimarySchool
         }
 
         // Configures and enables the DataGridView.
-        private void ConfigureDataGridView()
+        private void ConfigDataGridView()
         {
             try
             {
@@ -386,7 +336,7 @@ namespace PrimarySchool
                     }
                     else
                     {
-                        ClearAttendanceDataTable();
+                        ClearDataTable();
                         attendanceTable = new DataTable();
                     }
 
@@ -408,8 +358,11 @@ namespace PrimarySchool
                     dgvAttendance.Columns[5].HeaderText = "Absence Reason";
                     dgvAttendance.Columns[6].HeaderText = "Date";
                 }
-                else if (!ProgOps.UserRole.Equals("Teacher") && newData)
+                
+                if (!ProgOps.UserRole.Equals("Teacher") && newData)
                 {
+                    ClearDataTable();
+
                     FormOps.ErrorBox("Attendance for this date has not been taken");
                 }
 
@@ -449,11 +402,11 @@ namespace PrimarySchool
             }
         }
 
-        private void ClearAttendanceDataTable()
+        private void ClearDataTable()
         {
             try
             {
-                if (attendanceTable != null)
+                if (CheckDataTable())
                 {
                     attendanceTable.Clear();
                     attendanceTable.Dispose();
@@ -466,12 +419,14 @@ namespace PrimarySchool
             }
         }
 
-        private void FillPresentExcusedAndReasonLists()
+        private void FillDataLists()
         {
             try
             {
-                if (attendanceTable != null && attendanceTable.Rows.Count > 0)
+                if (CheckDataTable())
                 {
+                    ClearDataLists();
+
                     presentList = new List<bool>();
                     excusedList = new List<bool>();
                     reasonList = new List<string>();
@@ -513,7 +468,7 @@ namespace PrimarySchool
             }
         }
 
-        private void ClearPresentExcusedAndReasonLists()
+        private void ClearDataLists()
         {
             try
             {
@@ -541,11 +496,11 @@ namespace PrimarySchool
             }
         }
 
-        private void ClearModifiableData()
+        private void ClearTableData()
         {
             try
             {
-                if (attendanceTable != null && attendanceTable.Rows.Count > 0)
+                if (CheckDataTable())
                 {
                     for (int x = 0; x < attendanceTable.Rows.Count; x++)
                     {
@@ -553,6 +508,10 @@ namespace PrimarySchool
                         attendanceTable.Rows[x][4] = false;
                         attendanceTable.Rows[x][5] = DBNull.Value;
                     }
+
+                    AddAllToChangedRows();
+
+                    SetSavedStatus(false);
                 }
                 else
                 {
@@ -569,14 +528,7 @@ namespace PrimarySchool
         {
             try
             {
-                ClearModifiableData();
-
-                SetSavedStatus(false);
-
-                for (int x = 0; x < attendanceTable.Rows.Count; x++)
-                {
-                    AddRowToChangedRowsList(x);
-                }
+                ClearTableData();
             }
             catch (Exception ex)
             {
@@ -584,13 +536,14 @@ namespace PrimarySchool
             }
         }
 
-        private void ResetModifiableData()
+        private void ResetTableData()
         {
             try
             {
-                if (presentList != null && excusedList != null && 
-                    reasonList != null && attendanceTable != null && 
-                    attendanceTable.Rows.Count > 0)
+                if (presentList != null 
+                    && excusedList != null 
+                    && reasonList != null 
+                    && CheckDataTable())
                 {
                     for (int x = 0; x < attendanceTable.Rows.Count; x++)
                     {
@@ -614,19 +567,11 @@ namespace PrimarySchool
         {
             try
             {
-                ResetModifiableData();
+                ResetTableData();
 
-                ClearChangedRowsList();
-                InitializeChangedRowsList();
+                InitChangedRows();
 
-                if (saved)
-                {
-                    SetSavedStatus(false);
-                }
-                else
-                {
-                    SetSavedStatus(true);
-                }
+                SetSavedStatus(false);
             }
             catch (Exception ex)
             {
@@ -638,7 +583,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (attendanceTable != null)
+                if (CheckDataTable())
                 {
                     string columnName = dgvAttendance.CurrentCell.OwningColumn.Name;
 
@@ -692,26 +637,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (!saved)
-                {
-                    if (newData)
-                    {
-                        // Insert new data into database.
-                        ProgOps.InsertIntoAttendanceTable(attendanceTable, changedRowsList, selectedCourseID);
-
-                        newData = false;
-                    }
-                    else
-                    {
-                        // Update database.
-                        ProgOps.UpdateAttendanceTable(attendanceTable, changedRowsList, selectedCourseID);
-                    }
-
-                    SetSavedStatus(true);
-
-                    ClearChangedRowsList();
-                    InitializeChangedRowsList();
-                }
+                Save();
             }
             catch (Exception ex)
             {
@@ -723,11 +649,14 @@ namespace PrimarySchool
         {
             try
             {
-                int row = e.RowIndex;
+                if (CheckDataTable())
+                {
+                    int row = e.RowIndex;
 
-                AddRowToChangedRowsList(row);
+                    AddToChangedRows(row);
 
-                SetSavedStatus(false);
+                    SetSavedStatus(false);
+                }
             }
             catch (Exception ex)
             {
@@ -749,20 +678,19 @@ namespace PrimarySchool
             }
         }
 
-        private void InitializeChangedRowsList()
+        private void InitChangedRows()
         {
             try
             {
-                if (attendanceTable != null && attendanceTable.Rows.Count > 0)
+                if (CheckDataTable())
                 {
+                    ClearChangedRows();
+
                     changedRowsList = new List<int>();
 
                     if (newData)
                     {
-                        for (int x = 0; x < attendanceTable.Rows.Count; x++)
-                        {
-                            AddRowToChangedRowsList(x);
-                        }
+                        AddAllToChangedRows();
                     }
                 }
             }
@@ -772,11 +700,13 @@ namespace PrimarySchool
             }
         }
 
-        private void AddRowToChangedRowsList(int row)
+        private void AddToChangedRows(int row)
         {
             try
             {
-                if (changedRowsList != null && !changedRowsList.Contains(row))
+                if (CheckDataTable() 
+                    && changedRowsList != null 
+                    && !changedRowsList.Contains(row))
                 {
                     changedRowsList.Add(row);
                 }
@@ -787,7 +717,7 @@ namespace PrimarySchool
             }
         }
 
-        private void ClearChangedRowsList()
+        private void ClearChangedRows()
         {
             try
             {
@@ -795,6 +725,219 @@ namespace PrimarySchool
                 {
                     changedRowsList.Clear();
                     changedRowsList = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private bool CheckDataTable()
+        {
+            try
+            {
+                if (attendanceTable != null
+                    && attendanceTable.Rows.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+                return false;
+            }
+        }
+
+        private void AddAllToChangedRows()
+        {
+            try
+            {
+                if (CheckDataTable())
+                {
+                    for (int x = 0; x < attendanceTable.Rows.Count; x++)
+                    {
+                        AddToChangedRows(x);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void Save()
+        {
+            try
+            {
+                if (CheckDataTable() && changedRowsList != null)
+                {
+                    if (newData)
+                    {
+                        ProgOps.InsertIntoAttendanceTable(attendanceTable, changedRowsList, selectedCourseID);
+
+                        newData = false;
+                    }
+                    else
+                    {
+                        ProgOps.UpdateAttendanceTable(attendanceTable, changedRowsList, selectedCourseID);
+                    }
+
+                    SetSavedStatus(true);
+
+                    InitChangedRows();
+                }
+                else
+                {
+                    FormOps.ErrorBox("Nothing to save");
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void SaveYesOrNo(string question)
+        {
+            try
+            {
+                if (!saved
+                    && cbxCourses.SelectedIndex >= 0
+                    && CheckDataTable()
+                    && changedRowsList != null)
+                {
+                    if (FormOps.QuestionBox(question + "\nIf not, the data may be reset."))
+                    {
+                        if (newData)
+                        {
+                            ProgOps.InsertIntoAttendanceTable(attendanceTable, changedRowsList, selectedCourseID);
+
+                            newData = false;
+
+                            SetSavedStatus(true);
+
+                            InitChangedRows();
+                        }
+                        else
+                        {
+                            ProgOps.UpdateAttendanceTable(attendanceTable, changedRowsList, selectedCourseID);
+
+                            SetSavedStatus(true);
+
+                            InitChangedRows();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void LoadDate()
+        {
+            try
+            {
+                if (cbxDate.SelectedIndex >= 0)
+                {
+                    lblDate.Text = cbxDate.Text;
+
+                    FillDataGridView();
+
+                    if (ProgOps.UserRole.Equals("Teacher"))
+                    {
+                        FillDataLists();
+                        InitChangedRows();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void mnuFilePrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CheckDataTable())
+                {
+                    if (!saved)
+                    {
+                        FormOps.ErrorBox("Cannot print data that has not been saved");
+
+                        SaveYesOrNo("Save then print?");
+
+                        if (saved)
+                        {
+                            CrystalReports.crptAttendance report = new CrystalReports.crptAttendance();
+
+                            report.SetDatabaseLogon("group1fa212330", "1645456");
+
+                            report.SetParameterValue("selectedCourseID", selectedCourseID);
+
+                            DateTime date = Convert.ToDateTime(attendanceTable.Rows[0][6]);
+
+                            report.SetParameterValue("date", date.ToString("yyyy-MM-dd"));
+
+                            frmViewer viewer = new frmViewer();
+
+                            viewer.crvViewer.ReportSource = null;
+
+                            viewer.crvViewer.ReportSource = report;
+
+                            viewer.ShowDialog();
+
+                            viewer.crvViewer.ReportSource = null;
+
+                            report.Dispose();
+                            report = null;
+
+                            viewer.Dispose();
+                            viewer = null;
+                        }
+                    }
+                    else
+                    {
+                        CrystalReports.crptAttendance report = new CrystalReports.crptAttendance();
+
+                        report.SetDatabaseLogon("group1fa212330", "1645456");
+
+                        report.SetParameterValue("selectedCourseID", selectedCourseID);
+
+                        DateTime date = Convert.ToDateTime(attendanceTable.Rows[0][6]);
+
+                        report.SetParameterValue("date", date.ToString("yyyy-MM-dd"));
+
+                        frmViewer viewer = new frmViewer();
+
+                        viewer.crvViewer.ReportSource = null;
+
+                        viewer.crvViewer.ReportSource = report;
+
+                        viewer.ShowDialog();
+
+                        viewer.crvViewer.ReportSource = null;
+
+                        report.Dispose();
+                        report = null;
+
+                        viewer.Dispose();
+                        viewer = null;
+                    }
+                }
+                else
+                {
+                    FormOps.ErrorBox("Select a valid course/date combination before printing");
                 }
             }
             catch (Exception ex)
