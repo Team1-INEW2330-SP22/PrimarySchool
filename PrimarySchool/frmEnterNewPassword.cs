@@ -12,9 +12,29 @@ namespace PrimarySchool
 {
     public partial class frmEnterNewPassword : Form
     {
-        public frmEnterNewPassword()
+        string emailAddress, tokenCode;
+        public frmEnterNewPassword(TextBox email, TextBox token)
         {
+            this.emailAddress = email.Text;
+            this.tokenCode = token.Text;
             InitializeComponent();
         }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            if (tbxNewPass.Text == tbxConfirm.Text)
+            {
+                ProgOps.UpdateNewPass(emailAddress, tokenCode, tbxNewPass);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Passwords do not match");
+                tbxNewPass.Clear();
+                tbxConfirm.Clear();
+            }
+        }
+
+        
     }
 }

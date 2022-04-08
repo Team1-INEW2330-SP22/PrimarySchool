@@ -36,6 +36,7 @@ namespace PrimarySchool
             this.lblCode = new System.Windows.Forms.Label();
             this.tbxCode = new System.Windows.Forms.TextBox();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.lblMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblEmail
@@ -43,7 +44,7 @@ namespace PrimarySchool
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.lblEmail.Location = new System.Drawing.Point(38, 24);
+            this.lblEmail.Location = new System.Drawing.Point(38, 14);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(39, 17);
             this.lblEmail.TabIndex = 5;
@@ -53,7 +54,7 @@ namespace PrimarySchool
             // 
             this.tbxEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
             this.tbxEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(180)))), ((int)(((byte)(210)))));
-            this.tbxEmail.Location = new System.Drawing.Point(38, 46);
+            this.tbxEmail.Location = new System.Drawing.Point(38, 36);
             this.tbxEmail.Name = "tbxEmail";
             this.tbxEmail.Size = new System.Drawing.Size(323, 29);
             this.tbxEmail.TabIndex = 4;
@@ -67,19 +68,20 @@ namespace PrimarySchool
             this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSend.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSend.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.btnSend.Location = new System.Drawing.Point(38, 90);
+            this.btnSend.Location = new System.Drawing.Point(38, 80);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(323, 33);
             this.btnSend.TabIndex = 6;
             this.btnSend.Text = "&Send Code";
             this.btnSend.UseVisualStyleBackColor = false;
+            this.btnSend.Click += new System.EventHandler(this.SendEmail);
             // 
             // lblCode
             // 
             this.lblCode.AutoSize = true;
             this.lblCode.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.lblCode.Location = new System.Drawing.Point(38, 137);
+            this.lblCode.Location = new System.Drawing.Point(38, 141);
             this.lblCode.Name = "lblCode";
             this.lblCode.Size = new System.Drawing.Size(39, 17);
             this.lblCode.TabIndex = 8;
@@ -89,7 +91,7 @@ namespace PrimarySchool
             // 
             this.tbxCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
             this.tbxCode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(180)))), ((int)(((byte)(210)))));
-            this.tbxCode.Location = new System.Drawing.Point(38, 159);
+            this.tbxCode.Location = new System.Drawing.Point(38, 163);
             this.tbxCode.Name = "tbxCode";
             this.tbxCode.Size = new System.Drawing.Size(323, 29);
             this.tbxCode.TabIndex = 7;
@@ -103,12 +105,22 @@ namespace PrimarySchool
             this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubmit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.btnSubmit.Location = new System.Drawing.Point(38, 203);
+            this.btnSubmit.Location = new System.Drawing.Point(38, 207);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(323, 33);
             this.btnSubmit.TabIndex = 9;
             this.btnSubmit.Text = "S&ubmit";
             this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
+            // lblMessage
+            // 
+            this.lblMessage.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessage.Location = new System.Drawing.Point(38, 116);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(323, 20);
+            this.lblMessage.TabIndex = 10;
+            this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmResetPassword
             // 
@@ -116,6 +128,7 @@ namespace PrimarySchool
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(180)))), ((int)(((byte)(210)))));
             this.ClientSize = new System.Drawing.Size(399, 261);
+            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.lblCode);
             this.Controls.Add(this.tbxCode);
@@ -143,5 +156,6 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblCode;
         private System.Windows.Forms.TextBox tbxCode;
         private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.Label lblMessage;
     }
 }

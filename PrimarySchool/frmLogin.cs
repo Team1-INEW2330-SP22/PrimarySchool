@@ -23,17 +23,13 @@ namespace PrimarySchool
         // Proceeds to Home if LogIn method returns true.
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            try
+
+            if (ProgOps.UserLogin_DBCmd(tbxUsername, tbxPassword) == 1)
             {
-                if (LogIn())
-                {
-                    frmHome home = new frmHome(this);
-                    FormOps.ShowModelessAndHide(home, this);
-                }
-            }
-            catch (Exception ex)
-            {
-                FormOps.ErrorBox(ex.Message);
+                ProgOps.UserLoginObjectDisposal();
+                frmHome home = new frmHome(this);
+                FormOps.ShowModelessAndHide(home, this);
+
             }
         }
 
