@@ -109,11 +109,11 @@ namespace PrimarySchool
             // 
             this.lblVersionNumber.AutoSize = true;
             this.lblVersionNumber.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersionNumber.Location = new System.Drawing.Point(195, 77);
+            this.lblVersionNumber.Location = new System.Drawing.Point(214, 77);
             this.lblVersionNumber.Name = "lblVersionNumber";
-            this.lblVersionNumber.Size = new System.Drawing.Size(125, 20);
+            this.lblVersionNumber.Size = new System.Drawing.Size(86, 20);
             this.lblVersionNumber.TabIndex = 118;
-            this.lblVersionNumber.Text = "[Version Number]";
+            this.lblVersionNumber.Text = "Alpha Build";
             // 
             // lblProgramInfo
             // 
@@ -124,7 +124,8 @@ namespace PrimarySchool
             this.lblProgramInfo.Name = "lblProgramInfo";
             this.lblProgramInfo.Size = new System.Drawing.Size(237, 266);
             this.lblProgramInfo.TabIndex = 119;
-            this.lblProgramInfo.Text = "[Program Information]";
+            this.lblProgramInfo.Text = "This is the Alpha Build of the Primary School application by Group One of INEW-23" +
+    "30-7Z1 (04/08/2022).";
             // 
             // gbxDevelopers
             // 
