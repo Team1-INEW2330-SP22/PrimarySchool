@@ -109,11 +109,11 @@ namespace PrimarySchool
             // 
             this.lblVersionNumber.AutoSize = true;
             this.lblVersionNumber.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersionNumber.Location = new System.Drawing.Point(195, 77);
+            this.lblVersionNumber.Location = new System.Drawing.Point(214, 77);
             this.lblVersionNumber.Name = "lblVersionNumber";
-            this.lblVersionNumber.Size = new System.Drawing.Size(125, 20);
+            this.lblVersionNumber.Size = new System.Drawing.Size(86, 20);
             this.lblVersionNumber.TabIndex = 118;
-            this.lblVersionNumber.Text = "[Version Number]";
+            this.lblVersionNumber.Text = "Alpha Build";
             // 
             // lblProgramInfo
             // 
@@ -124,7 +124,7 @@ namespace PrimarySchool
             this.lblProgramInfo.Name = "lblProgramInfo";
             this.lblProgramInfo.Size = new System.Drawing.Size(237, 266);
             this.lblProgramInfo.TabIndex = 119;
-            this.lblProgramInfo.Text = "[Program Information]";
+            this.lblProgramInfo.Text = "This is the Alpha Build for the Primary School application (04/08/2022).";
             // 
             // gbxDevelopers
             // 
@@ -190,7 +190,7 @@ namespace PrimarySchool
             this.pbxAnderson.Location = new System.Drawing.Point(6, 28);
             this.pbxAnderson.Name = "pbxAnderson";
             this.pbxAnderson.Size = new System.Drawing.Size(70, 70);
-            this.pbxAnderson.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxAnderson.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbxAnderson.TabIndex = 128;
             this.pbxAnderson.TabStop = false;
             // 
