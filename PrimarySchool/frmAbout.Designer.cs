@@ -186,7 +186,6 @@ namespace PrimarySchool
             // pbxAnderson
             // 
             this.pbxAnderson.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.pbxAnderson.Image = ((System.Drawing.Image)(resources.GetObject("pbxAnderson.Image")));
             this.pbxAnderson.Location = new System.Drawing.Point(6, 28);
             this.pbxAnderson.Name = "pbxAnderson";
             this.pbxAnderson.Size = new System.Drawing.Size(70, 70);
