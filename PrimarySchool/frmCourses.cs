@@ -68,7 +68,7 @@ namespace PrimarySchool
         // Closes Courses.
         private void mnuFileClose_Click(object sender, EventArgs e)
         {
-            FormOps.CloseForm(this);
+            FormOps.CloseModeless(this);
         }
 
         // Sets program state based on parameter/argument.

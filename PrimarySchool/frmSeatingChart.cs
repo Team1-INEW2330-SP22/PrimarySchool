@@ -45,22 +45,38 @@ namespace PrimarySchool
         // Closes Seating Chart.
         private void mnuFileClose_Click(object sender, EventArgs e)
         {
-            FormOps.CloseForm(this);
+            FormOps.CloseModeless(this);
         }
 
-        // Brings back Home.
+        // Calls SaveYesOrNo method
+        // Clears and disposes DataTable(s)
+        // Checks if User Role is Teacher for if statement
+        // --Clears data list(s)
+        // --Clears list of changed rows
+        // Brings back Home form
         private void frmSeatingChart_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
                 SaveYesOrNo("Save changes before closing?");
 
-                ClearDataTable();
+                if (seatChartTable != null)
+                {
+                    seatChartTable.Clear();
+                    seatChartTable.Dispose();
+                }
 
                 if (ProgOps.UserRole.Equals("Teacher"))
                 {
-                    ClearDataList();
-                    ClearChangedRows();
+                    if (seatList != null)
+                    {
+                        seatList.Clear();
+                    }
+
+                    if (changedRowsList != null)
+                    {
+                        changedRowsList.Clear();
+                    }
                 }
 
                 FormOps.ShowModeless(home);
@@ -71,6 +87,10 @@ namespace PrimarySchool
             }
         }
 
+        // Calls SetState method with User Role as argument
+        // Calls FillComboBox method
+        // Calls FillListBox method
+        // Calls SetSavedStatus method with true argument
         private void frmSeatingChart_Load(object sender, EventArgs e)
         {
             try
@@ -89,7 +109,9 @@ namespace PrimarySchool
             }
         }
 
-        // Populates cbxCourses with course names.
+        // Calls ProgOps method GetCourseNames
+        // Fills ComboBox with course names via for loop
+        // Clears and disposes DataTable of course names
         private void FillComboBox()
         {
             try
@@ -103,7 +125,6 @@ namespace PrimarySchool
 
                 courseNamesTable.Clear();
                 courseNamesTable.Dispose();
-                courseNamesTable = null;
             }
             catch (Exception ex)
             {
@@ -111,7 +132,8 @@ namespace PrimarySchool
             }
         }
 
-        // Fills labels and calls FillDataGridView method.
+        // Calls SaveYesOrNo method
+        // Calls LoadCourse method
         private void cbxCourses_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -157,7 +179,13 @@ namespace PrimarySchool
             }
         }
 
-        // Fills DataGridView.
+        // Calls FillDataTable(s) method
+        // Calls SetSavedStatus method with true argument
+        // Calls ClearDataGridView method
+        // Calls CheckDataTables for if statement
+        // --Sets DataGridView DataSource to seatChartTable if above true
+        // --Calls ConfigDataGridView method
+        // Displays error message if above false
         private void FillDataGridView()
         {
             try
@@ -185,11 +213,13 @@ namespace PrimarySchool
             }
         }
 
+        // Calls NullifyDataTable(s) method
+        // Calls ProgOps GetSeatingChartTable method to fill seatChartTable
         private void FillDataTable()
         {
             try
             {
-                ClearDataTable();
+                NullifyDataTable();
 
                 seatChartTable = ProgOps.GetSeatingChartTable(selectedCourseID);
             }
@@ -199,7 +229,9 @@ namespace PrimarySchool
             }
         }
 
-        private void ClearDataTable()
+        // Checks that DataTable(s) is(are) not null in if statement(s)
+        // --Clears, disposes, and makes DataTable(s) null if above true
+        private void NullifyDataTable()
         {
             try
             {
@@ -216,6 +248,9 @@ namespace PrimarySchool
             }
         }
 
+        // Sets DataGridView data source to null
+        // Clears DataGridView rows
+        // Clears DataGridView columns
         private void ClearDataGridView()
         {
             try
@@ -230,7 +265,8 @@ namespace PrimarySchool
             }
         }
 
-        // Configures and enables the DataGridView.
+        // Configures DataGridView based on column information
+        // Enables DataGridView
         private void ConfigDataGridView()
         {
             try
@@ -271,8 +307,8 @@ namespace PrimarySchool
             }
         }
 
-        // Adds column headers to ListBox if ListBox is empty.
-        // Clears ListBox, adds column headers, and rows if ListBox is not empty.
+        // Adds column headers to ListBox if ListBox is empty
+        // Clears ListBox, adds column headers, and rows if ListBox is not empty
         private void FillListBox()
         {
             try
@@ -297,7 +333,6 @@ namespace PrimarySchool
 
                     seatsListTable.Clear();
                     seatsListTable.Dispose();
-                    seatsListTable = null;
                 }
             }
             catch (Exception ex)
@@ -306,6 +341,10 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // --Calls ClearDataList(s) if above true
+        // --Initializes new data list(s)
+        // --Uses for loop to fill data list(s) with data from DataTable
         private void FillDataList()
         {
             try
@@ -328,6 +367,8 @@ namespace PrimarySchool
             }
         }
 
+        // Checks if data list(s) are not null
+        // --Clears and nulls data list(s) if above true
         private void ClearDataList()
         {
             try
@@ -344,8 +385,8 @@ namespace PrimarySchool
             }
         }
 
-        // Randomizes the Seating Chart.
-        // Based on Fisher-Yates shuffle.
+        // Randomizes the Seating Chart
+        // (Based on Fisher-Yates shuffle)
         private void RandomizeChart()
         {
             try
@@ -382,7 +423,6 @@ namespace PrimarySchool
                     }
 
                     tempList.Clear();
-                    tempList = null;
 
                     AddAllToChangedRows();
 
@@ -399,7 +439,7 @@ namespace PrimarySchool
             }
         }
 
-        // Calls RandomizeChart method.
+        // Calls RandomizeChart method
         private void mnuEditRandomize_Click(object sender, EventArgs e)
         {
             try
@@ -412,6 +452,11 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // --Clears modifiable data in table, using for loop, if above true
+        // --Calls AddAllToChangedRows method if above true
+        // --Calls SetSavedStatus with false argument if above true
+        // Displays error message if above false
         private void ClearTableData()
         {
             try
@@ -438,6 +483,7 @@ namespace PrimarySchool
             }
         }
 
+        // Calls ClearTableData method
         private void mnuEditClear_Click(object sender, EventArgs e)
         {
             try
@@ -450,6 +496,12 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // Checks if data list(s) is(are) not null for if statement
+        // --Uses for loop to fill DataTable with data from data list(s) if above true
+        // --Calls AddAllToChangedRows method
+        // --Calls SetSavedStatus with false argument
+        // Displays error message if above false
         private void ResetTableData()
         {
             try
@@ -460,8 +512,6 @@ namespace PrimarySchool
                     {
                         seatChartTable.Rows[x][3] = seatList[x];
                     }
-
-                    //InitChangedRows();
 
                     AddAllToChangedRows();
 
@@ -478,6 +528,7 @@ namespace PrimarySchool
             }
         }
 
+        // Calls ResetTableData method
         private void mnuEditReset_Click(object sender, EventArgs e)
         {
             try
@@ -516,6 +567,9 @@ namespace PrimarySchool
             }
         }
 
+        // Sets saved status based on boolean parameter
+        // If not saved, adds asterisk (*) to form text
+        // If saved, sets form text to default value
         private void SetSavedStatus(bool status)
         {
             try
@@ -556,6 +610,7 @@ namespace PrimarySchool
             }
         }
 
+        // Calls Save method
         private void mnuFileSave_Click(object sender, EventArgs e)
         {
             try
@@ -652,6 +707,9 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // --Calls ClearChangedRows if CheckDataTable(s) true
+        // --Initializes new list of changes rows if CheckDataTable(s) true
         private void InitChangedRows()
         {
             try
@@ -669,6 +727,10 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // Checks if list of changed rows is not null for if statement
+        // Checks if specified row is not contained in list of changed rows for if statement
+        // --Adds specified row to list of changed rows if above true
         private void AddToChangedRows(int row)
         {
             try
@@ -686,6 +748,7 @@ namespace PrimarySchool
             }
         }
 
+        // If list of changed rows is not null, clear the list and make it null
         private void ClearChangedRows()
         {
             try
@@ -702,6 +765,20 @@ namespace PrimarySchool
             }
         }
 
+        // Checks cbxCourses selected index greater than or equal to 0
+        // --Sets course name label to selected course
+        // --Calls ProgOps method GetCourseID to fill selectedCourseID
+        // --If User Role is not Teacher
+        // ----Calls ProgOps method GetInstructorName for instructor name label
+        // --Calls ProgOps method GetRoomID
+        // --If Room ID equals 0
+        // ----Set room label to Room Not Set
+        // --Else
+        // ----Set room label to Room ID
+        // --Calls FillDataGridView method
+        // --If User Role is Teacher
+        // ----Calls FillDataList(s) method
+        // ----Calls InitChangedRows method
         private void LoadCourse()
         {
             try
@@ -756,6 +833,11 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // Checks if list of changed rows is not null for if statement
+        // --Call ProgOps UpdateGradebookTable method if above true
+        // --Call SetSavedStatus method with true argument if above true
+        // Display error message if above false
         private void Save()
         {
             try
@@ -782,13 +864,18 @@ namespace PrimarySchool
             }
         }
 
+        // Checks saved, CheckDataTable(s), and changedRowsList for if statement
+        // --Prompts to save with yes or no question if above true (question is parameter)
+        // ----Calls ValidateData method for if statement
+        // ------Calls ProgOps UpdateGradebookTable method if above if users chooses yes
+        // ------Calls InitChangedRows method if users chooses yes
+        // ------Calls SetSavedStatus with true argument if users chooses yes
+        // ----Displays error if above false
         private void SaveYesOrNo(string question)
         {
             try
             {
-                if (!saved
-                    && CheckDataTable()
-                    && changedRowsList != null)
+                if (!saved && CheckDataTable() && changedRowsList != null)
                 {
                     if (FormOps.QuestionBox(question + "\nIf not, the data may be reset."))
                     {
@@ -813,6 +900,8 @@ namespace PrimarySchool
             }
         }
 
+        // Returns true if DataTable(s) is(are) null and contain(s) more than 0 rows
+        // Returns false if DataTable(s) is(are) not null or contain(s) 0 rows
         private bool CheckDataTable()
         {
             try
@@ -834,6 +923,8 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // --Calls AddToChangedRows with each row as argument in for loop
         private void AddAllToChangedRows()
         {
             try
@@ -852,6 +943,7 @@ namespace PrimarySchool
             }
         }
 
+        
         private void mnuFilePrint_Click(object sender, EventArgs e)
         {
             try
@@ -878,15 +970,11 @@ namespace PrimarySchool
 
                             viewer.crvViewer.ReportSource = report;
 
-                            viewer.ShowDialog();
-
-                            viewer.crvViewer.ReportSource = null;
+                            FormOps.ShowModal(viewer);
 
                             report.Dispose();
-                            report = null;
 
                             viewer.Dispose();
-                            viewer = null;
                         }
                     }
                     else
@@ -903,15 +991,11 @@ namespace PrimarySchool
 
                         viewer.crvViewer.ReportSource = report;
 
-                        viewer.ShowDialog();
-
-                        viewer.crvViewer.ReportSource = null;
+                        FormOps.ShowModal(viewer);
 
                         report.Dispose();
-                        report = null;
 
                         viewer.Dispose();
-                        viewer = null;
                     }
                 }
                 else

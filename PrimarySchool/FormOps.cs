@@ -15,12 +15,26 @@ namespace PrimarySchool
 {
     class FormOps
     {
-        // Closes form.
-        public static void CloseForm(Form form)
+        // Closes modeless form.
+        public static void CloseModeless(Form form)
         {
             try
             {
                 form.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorBox(ex.Message);
+            }
+        }
+
+        // Closes modal form.
+        public static void CloseModal(Form form)
+        {
+            try
+            {
+                form.Close();
+                form.Dispose();
             }
             catch (Exception ex)
             {

@@ -52,7 +52,6 @@ namespace PrimarySchool
             this.lblFinalGrades = new System.Windows.Forms.Label();
             this.lbxFinalGrades = new System.Windows.Forms.ListBox();
             this.pbxListBoxBackground = new System.Windows.Forms.PictureBox();
-            this.btnRandom = new System.Windows.Forms.Button();
             this.mnuMenu.SuspendLayout();
             this.gbxGradebook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGradebook)).BeginInit();
@@ -86,7 +85,7 @@ namespace PrimarySchool
             // 
             this.mnuFileSave.Name = "mnuFileSave";
             this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuFileSave.Size = new System.Drawing.Size(180, 22);
+            this.mnuFileSave.Size = new System.Drawing.Size(144, 22);
             this.mnuFileSave.Text = "&Save";
             this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
             // 
@@ -94,7 +93,7 @@ namespace PrimarySchool
             // 
             this.mnuFilePrint.Name = "mnuFilePrint";
             this.mnuFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.mnuFilePrint.Size = new System.Drawing.Size(180, 22);
+            this.mnuFilePrint.Size = new System.Drawing.Size(144, 22);
             this.mnuFilePrint.Text = "&Print";
             this.mnuFilePrint.Click += new System.EventHandler(this.mnuFilePrint_Click);
             // 
@@ -102,7 +101,7 @@ namespace PrimarySchool
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
             this.mnuFileClose.Text = "&Close";
             this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
@@ -289,23 +288,12 @@ namespace PrimarySchool
             this.pbxListBoxBackground.TabIndex = 17;
             this.pbxListBoxBackground.TabStop = false;
             // 
-            // btnRandom
-            // 
-            this.btnRandom.Location = new System.Drawing.Point(633, 28);
-            this.btnRandom.Name = "btnRandom";
-            this.btnRandom.Size = new System.Drawing.Size(144, 32);
-            this.btnRandom.TabIndex = 20;
-            this.btnRandom.Text = "Random Grades";
-            this.btnRandom.UseVisualStyleBackColor = true;
-            this.btnRandom.Click += new System.EventHandler(this.btnRandom_Click);
-            // 
             // frmGradebook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(180)))), ((int)(((byte)(210)))));
             this.ClientSize = new System.Drawing.Size(923, 577);
-            this.Controls.Add(this.btnRandom);
             this.Controls.Add(this.lblFinalGrades);
             this.Controls.Add(this.lbxFinalGrades);
             this.Controls.Add(this.pbxListBoxBackground);
@@ -360,6 +348,5 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblFinalGrades;
         private System.Windows.Forms.ListBox lbxFinalGrades;
         private System.Windows.Forms.PictureBox pbxListBoxBackground;
-        private System.Windows.Forms.Button btnRandom;
     }
 }

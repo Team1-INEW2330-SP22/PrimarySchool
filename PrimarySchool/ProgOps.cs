@@ -23,7 +23,7 @@ namespace PrimarySchool
         // Build connection to database
         private static SqlConnection _cntPrimarySchoolDatabase = new SqlConnection(CONNECT_STRING);
 
-        // Get SqlConnection from outside ProgOps
+        // Get database connection from outside ProgOps
         static public SqlConnection dbConnection
         {
             get
@@ -58,7 +58,7 @@ namespace PrimarySchool
         // Data tables
         private static DataTable assignmentsTable;
 
-        // Public getter for assignmentsTable
+        // Public getter for assignments DataTable
         public static DataTable AssignmentsTable
         {
             get
@@ -116,11 +116,9 @@ namespace PrimarySchool
                 if (logInTable.Rows.Count == 1)
                 {
                     logInAdapter.Dispose();
-                    logInAdapter = null;
 
                     logInTable.Clear();
                     logInTable.Dispose();
-                    logInTable = null;
 
                     string getInfoQuery = "SELECT User_ID, " +
                         "User_FName + ' ' + User_LName AS 'Name', " +
@@ -140,22 +138,18 @@ namespace PrimarySchool
                     userRole = Convert.ToString(getInfoTable.Rows[0][2]);
 
                     getInfoAdapter.Dispose();
-                    getInfoAdapter = null;
 
                     getInfoTable.Clear();
                     getInfoTable.Dispose();
-                    getInfoTable = null;
 
                     return true;
                 }
                 else
                 {
                     logInAdapter.Dispose();
-                    logInAdapter = null;
 
                     logInTable.Clear();
                     logInTable.Dispose();
-                    logInTable = null;
 
                     FormOps.ErrorBox("Check username and password");
 
@@ -257,8 +251,8 @@ namespace PrimarySchool
             }
         }
 
-        // Returns data for Course Name ComboBox as a Data Table.
-        // Runs different queries based on User Role.
+        // Returns DataTable for course name ComboBox
+        // Runs different queries based on User Role
         public static DataTable GetCourseNames()
         {
 
@@ -290,7 +284,6 @@ namespace PrimarySchool
                 courseNamesAdapter.Fill(courseNamesTable);
 
                 courseNamesAdapter.Dispose();
-                courseNamesAdapter = null;
 
                 return courseNamesTable;
             }
@@ -301,9 +294,9 @@ namespace PrimarySchool
             }
         }
 
-        // Get Course ID using Course Name.
-        // Works for both Teacher and non-Teachers because
-        // Course_Name now has a Unique constraint.
+        // Get Course ID using Course Name
+        // Works for both Teachers and non-Teachers because--
+        // Course Name field now has a Unique constraint
         public static int GetCourseID(string courseName)
         {
             try
@@ -323,11 +316,9 @@ namespace PrimarySchool
                 int courseID = Convert.ToInt32(courseIDTable.Rows[0][0]);
 
                 courseIDAdapter.Dispose();
-                courseIDAdapter = null;
 
                 courseIDTable.Clear();
                 courseIDTable.Dispose();
-                courseIDTable = null;
 
                 return courseID;
             }
@@ -338,7 +329,7 @@ namespace PrimarySchool
             }
         }
 
-        // Get Instructor Name as string using Course ID.
+        // Get instructor name as string using Course ID
         public static string GetInstructorName(int courseID)
         {
             try
@@ -360,11 +351,9 @@ namespace PrimarySchool
                 string instructorName = Convert.ToString(instructorNameTable.Rows[0][0]);
 
                 instructorNameAdapter.Dispose();
-                instructorNameAdapter = null;
 
                 instructorNameTable.Clear();
                 instructorNameTable.Dispose();
-                instructorNameTable = null;
 
                 return instructorName;
             }
@@ -375,7 +364,7 @@ namespace PrimarySchool
             }
         }
 
-        // Get Room ID using Course ID.
+        // Get Room ID as integer using Course ID
         public static int GetRoomID(int courseID)
         {
             try
@@ -400,11 +389,9 @@ namespace PrimarySchool
                 }
 
                 roomAdapter.Dispose();
-                roomAdapter = null;
 
                 roomTable.Clear();
                 roomTable.Dispose();
-                roomTable = null;
 
                 return roomID;
             }
@@ -415,7 +402,7 @@ namespace PrimarySchool
             }
         }
 
-        // Get Total Seats using Course ID.
+        // Gets total seats as integer using Course ID
         public static int GetTotalSeats(int courseID)
         {
             try
@@ -448,11 +435,9 @@ namespace PrimarySchool
                 }
 
                 totalSeatsAdapter.Dispose();
-                totalSeatsAdapter = null;
 
                 totalSeatsTable.Clear();
                 totalSeatsTable.Dispose();
-                totalSeatsTable = null;
 
                 return totalSeatsID;
             }
@@ -480,9 +465,9 @@ namespace PrimarySchool
                 _sqlTeachersCommand = new SqlCommand(sqlStatement, _cntPrimarySchoolDatabase);
                 //establish data adapter
                 _daTeachers.SelectCommand = _sqlTeachersCommand;
-                //fill data table
+                //fill DataTable
                 _daTeachers.Fill(_dtTeachersTable);
-                //bind controls to data table
+                //bind controls to DataTable
                 txUserID.DataBindings.Add("Text", _dtTeachersTable, "User_ID");
                 txLName.DataBindings.Add("Text", _dtTeachersTable, "User_LName");
                 txFname.DataBindings.Add("Text", _dtTeachersTable, "User_FName");
@@ -517,7 +502,7 @@ namespace PrimarySchool
             }
         }
 
-        // Returns data for Gradebook DataGridView as a Data Table using Course ID.
+        // Returns DataTable for Gradebook using Course ID
         public static DataTable GetGradebookTable(int courseID)
         {
 
@@ -545,7 +530,6 @@ namespace PrimarySchool
                 gradebookAdapter.Fill(gradebookTable);
 
                 gradebookAdapter.Dispose();
-                gradebookAdapter = null;
 
                 return gradebookTable;
             }
@@ -556,8 +540,8 @@ namespace PrimarySchool
             }
         }
 
-        // Returns a table parallel to the Gradebook table that contains Assignment ID,
-        // Category ID, and Category Weight to be used in code.
+        // Returns a DataTable parallel to the Gradebook table that contains
+        // Assignment ID, Category ID, and Category Weight to be used in code
         public static DataTable GetHiddenGradebookTable(int courseID)
         {
 
@@ -586,7 +570,6 @@ namespace PrimarySchool
                 hiddenGradebookAdapter.Fill(hiddenGradebookTable);
 
                 hiddenGradebookAdapter.Dispose();
-                hiddenGradebookAdapter = null;
 
                 return hiddenGradebookTable;
             }
@@ -597,6 +580,10 @@ namespace PrimarySchool
             }
         }
 
+        // Updates the Gradebook table in a for loop
+        // Uses the list of changed rows to be conditional
+        // In other words, only updates rows that contain unsaved changes
+        // Some cases, this will mean every row-- but not every case
         public static void UpdateGradebookTable(DataTable gradebookTable,
             DataTable hiddenGradebookTable, List<int> changedRowsList,
             int courseID)
@@ -643,6 +630,8 @@ namespace PrimarySchool
                     update.Parameters.Clear();
                 }
 
+                update.Dispose();
+
                 MessageBox.Show("Database successfully updated", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -652,7 +641,7 @@ namespace PrimarySchool
             }
         }
 
-        // Returns data for Attendance DataGridView as a Data Table using Course ID and Date in string format.
+        // Returns DataTable for Attendance using Course ID and Date (in string format)
         public static DataTable GetAttendanceTable(int courseID, string date)
         {
 
@@ -681,7 +670,6 @@ namespace PrimarySchool
                 attendAdapter.Fill(attendTable);
 
                 attendAdapter.Dispose();
-                attendAdapter = null;
 
                 return attendTable;
             }
@@ -692,6 +680,10 @@ namespace PrimarySchool
             }
         }
 
+        // Inserts into the Attendance table in a for loop
+        // Uses the list of changed rows to be conditional
+        // In other words, only inserts rows that contain unsaved changes
+        // Some cases, this will mean every row-- but not every case
         public static void InsertIntoAttendanceTable(DataTable attendanceTable,
             List<int> changedRowsList, int courseID)
         {
@@ -726,6 +718,8 @@ namespace PrimarySchool
                     insert.Parameters.Clear();
                 }
 
+                insert.Dispose();
+
                 MessageBox.Show("Database successfully updated", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -735,6 +729,10 @@ namespace PrimarySchool
             }
         }
 
+        // Updates the Attendance table in a for loop
+        // Uses the list of changed rows to be conditional
+        // In other words, only updates rows that contain unsaved changes
+        // Some cases, this will mean every row-- but not every case
         public static void UpdateAttendanceTable(DataTable attendanceTable,
             List<int> changedRowsList, int courseID)
         {
@@ -771,6 +769,8 @@ namespace PrimarySchool
                     update.Parameters.Clear();
                 }
 
+                update.Dispose();
+
                 MessageBox.Show("Database successfully updated", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -780,7 +780,7 @@ namespace PrimarySchool
             }
         }
 
-        // Returns data for Seats DataGridView as a Data Table using Course ID.
+        // Returns DataTable for Seating Chart using Course ID
         public static DataTable GetSeatingChartTable(int courseID)
         {
 
@@ -805,7 +805,6 @@ namespace PrimarySchool
                 seatsAdapter.Fill(seatsTable);
 
                 seatsAdapter.Dispose();
-                seatsAdapter = null;
 
                 return seatsTable;
             }
@@ -816,7 +815,7 @@ namespace PrimarySchool
             }
         }
 
-        // Returns data for Seats ListBox as a Data Table using Course ID.
+        // Returns DataTable for Seats using Course ID
         public static DataTable GetSeatsList(int courseID)
         {
 
@@ -838,7 +837,6 @@ namespace PrimarySchool
                 seatsListAdapter.Fill(seatsListTable);
 
                 seatsListAdapter.Dispose();
-                seatsListAdapter = null;
 
                 return seatsListTable;
             }
@@ -849,6 +847,10 @@ namespace PrimarySchool
             }
         }
 
+        // Updates the Seating Chart table in a for loop
+        // Uses the list of changed rows to be conditional
+        // In other words, only updates rows that contain unsaved changes
+        // Some cases, this will mean every row-- but not every case
         public static void UpdateSeatingChartTable(DataTable seatingChartTable,
             List<int> changedRowsList, int courseID)
         {
@@ -874,6 +876,8 @@ namespace PrimarySchool
                     update.Parameters.Clear();
                 }
 
+                update.Dispose();
+
                 MessageBox.Show("Database successfully updated", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -883,7 +887,7 @@ namespace PrimarySchool
             }
         }
 
-        // Returns full names of students in a course as a Data Table using Course ID.
+        // Returns DataTable for full names of students in the specified course using Course ID
         public static DataTable GetStudentsInCourse(int courseID)
         {
 
@@ -909,7 +913,6 @@ namespace PrimarySchool
                 studentsAdapter.Fill(studentsTable);
 
                 studentsAdapter.Dispose();
-                studentsAdapter = null;
 
                 return studentsTable;
             }
@@ -920,7 +923,7 @@ namespace PrimarySchool
             }
         }
 
-        // Returns assignment Weight as a double using Assignment Name.
+        // Returns assignment Weight as a double using Assignment Name
         public static double GetAssignmentWeight(string assignmentName)
         {
             try
@@ -942,11 +945,9 @@ namespace PrimarySchool
                 double weight = Convert.ToDouble(weightTable.Rows[0][0]);
 
                 weightAdapter.Dispose();
-                weightAdapter = null;
 
                 weightTable.Clear();
                 weightTable.Dispose();
-                weightTable = null;
 
                 return weight;
             }
@@ -957,6 +958,9 @@ namespace PrimarySchool
             }
         }
 
+        // Establishes objects for Assignments form
+        // Fills DataTable
+        // Binds TextBoxes to DataTable
         public static void DatabaseCommandAssignments(TextBox tbxAssignmentID,
             TextBox tbxCategory, TextBox tbxAssignmentName, TextBox tbxDescription)
         {
@@ -986,7 +990,7 @@ namespace PrimarySchool
             }
         }
 
-        // Update database for Assignments form.
+        // Updates database for Assignments form
         public static void UpdateAssignments()
         {
 
@@ -1021,6 +1025,7 @@ namespace PrimarySchool
             }
         }
 
+        // Clears and disposes objects used for Assignments forms
         public static void DisposeAssignments()
         {
             try
@@ -1029,7 +1034,16 @@ namespace PrimarySchool
                 {
                     assignmentsTable.Clear();
                     assignmentsTable.Dispose();
-                    assignmentsTable = null;
+                }
+
+                if (assignmentsCommand != null)
+                {
+                    assignmentsCommand.Dispose();
+                }
+
+                if (assignmentsAdapter != null)
+                {
+                    assignmentsAdapter.Dispose();
                 }
             }
             catch (Exception ex)
@@ -1038,6 +1052,7 @@ namespace PrimarySchool
             }
         }
 
+        // Returns DataTable for Categories
         public static DataTable GetCategoriesTable()
         {
 
@@ -1056,7 +1071,6 @@ namespace PrimarySchool
                 categoriesAdapter.Fill(categoriesTable);
 
                 categoriesAdapter.Dispose();
-                categoriesAdapter = null;
 
                 return categoriesTable;
             }
@@ -1067,6 +1081,10 @@ namespace PrimarySchool
             }
         }
 
+        // Takes Course ID and Assignment ID as arguments
+        // Checks to see if the assignment is in the course
+        // If no, adds the assignment to the course in a for loop
+        // If yes, displays an error message
         public static void AddAssignmentToCourse(int courseID, int assignmentID)
         {
             try
@@ -1117,11 +1135,11 @@ namespace PrimarySchool
                     }
 
                     studentIDsAdapter.Dispose();
-                    studentIDsAdapter = null;
 
                     studentIDsTable.Clear();
                     studentIDsTable.Dispose();
-                    studentIDsTable = null;
+
+                    insert.Dispose();
 
                     MessageBox.Show("Assignment successfully added to course", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1134,7 +1152,6 @@ namespace PrimarySchool
 
                 dataCheckTable.Clear();
                 dataCheckTable.Dispose();
-                dataCheckTable = null;
             }
             catch (Exception ex)
             {
@@ -1142,6 +1159,10 @@ namespace PrimarySchool
             }
         }
 
+        // Takes Course ID and Assignment ID as arguments
+        // Checks to see if the assignment is in the course
+        // If yes, removes the assignment from the course in a for loop
+        // If no, displays an error message
         public static void RemoveAssignmentFromCourse(int courseID, int assignmentID)
         {
             try
@@ -1172,6 +1193,8 @@ namespace PrimarySchool
 
                     delete.ExecuteNonQuery();
 
+                    delete.Dispose();
+
                     MessageBox.Show("Assignment successfully removed from course", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -1183,7 +1206,6 @@ namespace PrimarySchool
 
                 dataCheckTable.Clear();
                 dataCheckTable.Dispose();
-                dataCheckTable = null;
             }
             catch (Exception ex)
             {

@@ -31,7 +31,7 @@ namespace PrimarySchool
         // Resets Login and shows Login.
         private void mnuFileLogOut_Click(object sender, EventArgs e)
         {
-            FormOps.CloseForm(this);
+            FormOps.CloseModeless(this);
         }
 
         // Closes Login when the Home screen is closed.

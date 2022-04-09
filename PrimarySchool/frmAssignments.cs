@@ -53,7 +53,7 @@ namespace PrimarySchool
         // Closes Assignments.
         private void mnuFileClose_Click(object sender, EventArgs e)
         {
-            FormOps.CloseForm(this);
+            FormOps.CloseModal(this);
         }
 
         // Sets program state based on parameter/argument.
