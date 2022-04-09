@@ -13,13 +13,13 @@ namespace PrimarySchool
 {
     public partial class frmGradebook : Form
     {
-        // Creates 'home' attribute so we can show Home again. Doesn't initialize.
+        // Creates 'home' attribute so we can show Home again-- doesn't initialize
         private frmHome home;
 
-        // Creates form level variable to hold selected course ID and sets it to 0.
+        // Creates form level variable to hold selected course ID and sets it to 0
         private int selectedCourseID = 0;
 
-        // Creates form level data table to use for DataGridView DataSource.
+        // Creates form level data table to use for DataGridView data source
         //      Column [0]: First Name
         //      Column [1]: Last Name
         //      Column [2]: Assignment
@@ -27,25 +27,25 @@ namespace PrimarySchool
         //      Column [4]: Comments
         private DataTable gradebookTable;
 
-        // Creates form level data table for additional data to use in code.
+        // Creates form level data table for additional data to use in code
         //      Column [0]: Student ID
         //      Column [1]: Assignment ID
         //      Column [2]: Category ID
         //      Column [3]: Category Weight
         private DataTable hiddenGradebookTable;
 
-        // Lists to hold initial values for Grade and Comments.
-        // Sometimes short-handed as "Data Lists".
+        // Lists to hold initial values for Grade and Comments
+        // Sometimes short-handed as "Data Lists"
         private List<double> gradeList;
         private List<string> commentsList;
 
         // List to hold changed rows.
         private List<int> changedRowsList;
 
-        // Creates form level bool to indicate if current edits are saved.
+        // Creates form level bool to indicate if current edits are saved
         private bool saved;
 
-        // Initializes 'home' attribute to parameter.
+        // Initializes 'home' attribute to parameter
         public frmGradebook(frmHome home)
         {
             this.home = home;
@@ -55,22 +55,49 @@ namespace PrimarySchool
         // Closes Gradebook.
         private void mnuFileClose_Click(object sender, EventArgs e)
         {
-            FormOps.CloseForm(this);
+            FormOps.CloseModeless(this);
         }
 
-        // Brings Home back upon closing Gradebook.
+        // Calls SaveYesOrNo method
+        // Clears and disposes DataTable(s)
+        // Checks if User Role is Teacher for if statement
+        // --Clears data list(s)
+        // --Clears list of changed rows
+        // Brings back Home form
         private void frmGradebook_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
                 SaveYesOrNo("Save changes before closing?");
 
-                ClearDataTables();
+                if (gradebookTable != null)
+                {
+                    gradebookTable.Clear();
+                    gradebookTable.Dispose();
+                }
+
+                if (hiddenGradebookTable != null)
+                {
+                    hiddenGradebookTable.Clear();
+                    hiddenGradebookTable.Dispose();
+                }
 
                 if (ProgOps.UserRole.Equals("Teacher"))
                 {
-                    ClearDataLists();
-                    ClearChangedRows();
+                    if (gradeList != null)
+                    {
+                        gradeList.Clear();
+                    }
+
+                    if (commentsList != null)
+                    {
+                        commentsList.Clear();
+                    }
+
+                    if (changedRowsList != null)
+                    {
+                        changedRowsList.Clear();
+                    }
                 }
 
                 FormOps.ShowModeless(home);
@@ -81,7 +108,11 @@ namespace PrimarySchool
             }
         }
 
-        // Opens modal Assignments.
+        // Checks cbxCourses selected index greater than or equal to 0
+        // --Calls SaveYesOrNo method
+        // --Creates new frmAssignments
+        // --Shows frmAssignments modal
+        // Calls LoadCourse method once frmAssignments is closed
         private void mnuEditAssignments_Click(object sender, EventArgs e)
         {
             try
@@ -107,6 +138,9 @@ namespace PrimarySchool
             }
         }
 
+        // Calls SetState method with User Role as argument
+        // Calls FillComboBox method
+        // Calls SetSavedStatus method with true argument
         private void frmGradebook_Load(object sender, EventArgs e)
         {
             try
@@ -123,7 +157,9 @@ namespace PrimarySchool
             }
         }
 
-        // Fills cbxCourses with course names.
+        // Calls ProgOps method GetCourseNames
+        // Fills ComboBox with course names via for loop
+        // Clears and disposes DataTable of course names
         private void FillComboBox()
         {
             try
@@ -137,7 +173,6 @@ namespace PrimarySchool
 
                 courseNamesTable.Clear();
                 courseNamesTable.Dispose();
-                courseNamesTable = null;
             }
             catch (Exception ex)
             {
@@ -145,7 +180,8 @@ namespace PrimarySchool
             }
         }
 
-        // Fills labels and calls FillDataGridView method.
+        // Calls SaveYesOrNo method
+        // Calls LoadCourse method
         private void cbxCourses_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -191,7 +227,13 @@ namespace PrimarySchool
             }
         }
 
-        // Fills DataGridView.
+        // Calls FillDataTable(s) method
+        // Calls SetSavedStatus method with true argument
+        // Calls ClearDataGridView method
+        // Calls CheckDataTables for if statement
+        // --Sets DataGridView DataSource to gradebookTable if above true
+        // --Calls ConfigDataGridView method
+        // Displays error message if above false
         private void FillDataGridView()
         {
             try
@@ -219,6 +261,9 @@ namespace PrimarySchool
             }
         }
 
+        // Sets DataGridView data source to null
+        // Clears DataGridView rows
+        // Clears DataGridView columns
         private void ClearDataGridView()
         {
             try
@@ -233,11 +278,14 @@ namespace PrimarySchool
             }
         }
 
+        // Calls NullifyDataTable(s) method
+        // Calls ProgOps GetGradebookTable method to fill gradebookTable
+        // Calls ProgOps GetHiddenGradebookTable method to fill hiddenGradebookTable
         private void FillDataTables()
         {
             try
             {
-                ClearDataTables();
+                NullifyDataTables();
 
                 gradebookTable = ProgOps.GetGradebookTable(selectedCourseID);
 
@@ -249,7 +297,9 @@ namespace PrimarySchool
             }
         }
 
-        private void ClearDataTables()
+        // Checks that DataTable(s) is(are) not null in if statement(s)
+        // --Clears, disposes, and makes DataTable(s) null if above true
+        private void NullifyDataTables()
         {
             try
             {
@@ -273,7 +323,8 @@ namespace PrimarySchool
             }
         }
 
-        // Configures and enables the DataGridView.
+        // Configures DataGridView based on column information
+        // Enables DataGridView
         private void ConfigDataGridView()
         {
             try
@@ -314,6 +365,11 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // --Clears modifiable data in table, using for loop, if above true
+        // --Calls AddAllToChangedRows method if above true
+        // --Calls SetSavedStatus with false argument if above true
+        // Displays error message if above false
         private void ClearTableData()
         {
             try
@@ -341,6 +397,9 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // --Calls ClearChangedRows if CheckDataTable(s) true
+        // --Initializes new list of changes rows if CheckDataTable(s) true
         private void InitChangedRows()
         {
             try
@@ -358,6 +417,10 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // Checks if list of changed rows is not null for if statement
+        // Checks if specified row is not contained in list of changed rows for if statement
+        // --Adds specified row to list of changed rows if above true
         private void AddToChangedRows(int row)
         {
             try
@@ -375,6 +438,7 @@ namespace PrimarySchool
             }
         }
 
+        // If list of changed rows is not null, clear the list and make it null
         private void ClearChangedRows()
         {
             try
@@ -391,6 +455,10 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // --Calls ClearDataList(s) if above true
+        // --Initializes new data list(s)
+        // --Uses for loop to fill data list(s) with data from DataTable
         private void FillDataLists()
         {
             try
@@ -430,6 +498,8 @@ namespace PrimarySchool
             }
         }
 
+        // Checks if data list(s) are not null
+        // --Clears and nulls data list(s) if above true
         private void ClearDataLists()
         {
             try
@@ -452,6 +522,12 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // Checks if data list(s) is(are) not null for if statement
+        // --Uses for loop to fill DataTable with data from data list(s) if above true
+        // --Calls AddAllToChangedRows method
+        // --Calls SetSavedStatus with false argument
+        // Displays error message if above false
         private void ResetTableData()
         {
             try
@@ -481,8 +557,6 @@ namespace PrimarySchool
                         }
                     }
 
-                    //InitChangedRows();
-
                     AddAllToChangedRows();
 
                     SetSavedStatus(false);
@@ -498,6 +572,7 @@ namespace PrimarySchool
             }
         }
 
+        // Calls ClearTableData method
         private void mnuEditClear_Click(object sender, EventArgs e)
         {
             try
@@ -510,6 +585,7 @@ namespace PrimarySchool
             }
         }
 
+        // Calls ResetTableData method
         private void mnuEditReset_Click(object sender, EventArgs e)
         {
             try
@@ -522,6 +598,12 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // --Prevents user from entering grade below 0 if above true
+        // --Replaces empty strings with nulls if above true
+        // --Calls CalculateFinalGrades method if above true
+        // --Calls AddToChangedRows method if above true
+        // --Calls SetSavedStatus with false argument if above true
         private void dgvGradebook_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -566,6 +648,7 @@ namespace PrimarySchool
             }
         }
 
+        // Calls Save method
         private void mnuFileSave_Click(object sender, EventArgs e)
         {
             try
@@ -579,6 +662,9 @@ namespace PrimarySchool
 
         }
 
+        // Sets saved status based on boolean parameter
+        // If not saved, adds asterisk (*) to form text
+        // If saved, sets form text to default value
         private void SetSavedStatus(bool status)
         {
             try
@@ -600,6 +686,7 @@ namespace PrimarySchool
             }
         }
 
+        
         private void dgvGradebook_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             try
@@ -626,6 +713,8 @@ namespace PrimarySchool
             }
         }
 
+        // Algorithm works but is bulky
+        // Hope to simplify in later iterations
         private void CalculateFinalGrades()
         {
             try
@@ -805,35 +894,22 @@ namespace PrimarySchool
                     }
 
                     tempStudentIdList.Clear();
-                    tempStudentIdList = null;
                     tempCategoryIdList.Clear();
-                    tempCategoryIdList = null;
                     tempWeightList.Clear();
-                    tempWeightList = null;
                     tempCountList.Clear();
-                    tempCountList = null;
                     tempPointsList.Clear();
-                    tempPointsList = null;
 
                     studentIdList.Clear();
-                    studentIdList = null;
                     categoryIdList.Clear();
-                    categoryIdList = null;
                     weightList.Clear();
-                    weightList = null;
                     countList.Clear();
-                    countList = null;
                     pointsList.Clear();
-                    pointsList = null;
 
                     dividedWeightList.Clear();
-                    dividedWeightList = null;
 
                     finalGradeList.Clear();
-                    finalGradeList = null;
 
                     studentNameList.Clear();
-                    studentNameList = null;
                 }
             }
             catch (Exception ex)
@@ -842,27 +918,21 @@ namespace PrimarySchool
             }
         }
 
-        private void GenerateRandomGrades()
-        {
-            try
-            {
-                Random rand = new Random();
-
-                for (int x = 0; x < gradebookTable.Rows.Count; x++)
-                {
-                    gradebookTable.Rows[x][3] = Convert.ToDecimal(rand.Next(65, 100));
-
-                    AddToChangedRows(x);
-                }
-
-                SetSavedStatus(false);
-            }
-            catch (Exception ex)
-            {
-                FormOps.ErrorBox(ex.Message);
-            }
-        }
-
+        // Checks cbxCourses selected index greater than or equal to 0
+        // --Sets course name label to selected course
+        // --Calls ProgOps method GetCourseID to fill selectedCourseID
+        // --If User Role is not Teacher
+        // ----Calls ProgOps method GetInstructorName for instructor name label
+        // --Calls ProgOps method GetRoomID
+        // --If Room ID equals 0
+        // ----Set room label to Room Not Set
+        // --Else
+        // ----Set room label to Room ID
+        // --Calls FillDataGridView method
+        // --If User Role is Teacher
+        // ----Calls FillDataList(s) method
+        // ----Calls InitChangedRows method
+        // --Calls CalculateFinalGrades method
         private void LoadCourse()
         {
             try
@@ -906,6 +976,9 @@ namespace PrimarySchool
             }
         }
 
+        // Returns true if DataTable(s) is(are) null and contain(s) more than 0 rows
+        // Returns false if DataTable(s) is(are) not null or contain(s) 0 rows
+
         private bool CheckDataTables()
         {
             try
@@ -929,6 +1002,11 @@ namespace PrimarySchool
             }
         }
 
+        // Calls CheckDataTable(s) for if statement
+        // Checks if list of changed rows is not null for if statement
+        // --Call ProgOps UpdateGradebookTable method if above true
+        // --Call SetSavedStatus method with true argument if above true
+        // Display error message if above false
         private void Save()
         {
             try
@@ -953,6 +1031,11 @@ namespace PrimarySchool
             }
         }
 
+        // Checks saved, CheckDataTable(s), and changedRowsList for if statement
+        // --Prompts to save with yes or no question if above true (question is parameter)
+        // ----Calls ProgOps UpdateGradebookTable method if above if users chooses yes
+        // ----Calls InitChangedRows method if users chooses yes
+        // ----Calls SetSavedStatus with true argument if users chooses yes
         private void SaveYesOrNo(string question)
         {
             try
@@ -976,11 +1059,8 @@ namespace PrimarySchool
             }
         }
 
-        private void btnRandom_Click(object sender, EventArgs e)
-        {
-            GenerateRandomGrades();
-        }
-
+        // Calls CheckDataTable(s) for if statement
+        // --Calls AddToChangedRows with each row as argument in for loop
         private void AddAllToChangedRows()
         {
             try
@@ -999,6 +1079,7 @@ namespace PrimarySchool
             }
         }
 
+        
         private void mnuFilePrint_Click(object sender, EventArgs e)
         {
             try
@@ -1025,15 +1106,11 @@ namespace PrimarySchool
 
                             viewer.crvViewer.ReportSource = report;
 
-                            viewer.ShowDialog();
-
-                            viewer.crvViewer.ReportSource = null;
+                            FormOps.ShowModal(viewer);
 
                             report.Dispose();
-                            report = null;
 
                             viewer.Dispose();
-                            viewer = null;
                         }
                     }
                     else
@@ -1050,15 +1127,11 @@ namespace PrimarySchool
 
                         viewer.crvViewer.ReportSource = report;
 
-                        viewer.ShowDialog();
-
-                        viewer.crvViewer.ReportSource = null;
+                        FormOps.ShowModal(viewer);
 
                         report.Dispose();
-                        report = null;
 
                         viewer.Dispose();
-                        viewer = null;
                     }
                 }
                 else

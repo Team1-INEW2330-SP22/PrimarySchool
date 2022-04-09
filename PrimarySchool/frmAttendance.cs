@@ -50,19 +50,45 @@ namespace PrimarySchool
             InitializeComponent();
         }
 
-        // Brings Home back upon closing Attendance.
+        // Calls SaveYesOrNo method
+        // Clears and disposes DataTable(s)
+        // Checks if User Role is Teacher for if statement
+        // --Clears data list(s)
+        // --Clears list of changed rows
+        // Brings back Home form
         private void frmAttendance_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
                 SaveYesOrNo("Save changes before closing?");
 
-                ClearDataTable();
+                if (attendanceTable != null)
+                {
+                    attendanceTable.Clear();
+                    attendanceTable.Dispose();
+                }
 
                 if (ProgOps.UserRole.Equals("Teacher"))
                 {
-                    ClearDataLists();
-                    ClearChangedRows();
+                    if (presentList != null)
+                    {
+                        presentList.Clear();
+                    }
+
+                    if (excusedList != null)
+                    {
+                        excusedList.Clear();
+                    }
+
+                    if (reasonList != null)
+                    {
+                        reasonList.Clear();
+                    }
+
+                    if (changedRowsList != null)
+                    {
+                        changedRowsList.Clear();
+                    }
                 }
 
                 FormOps.ShowModeless(home);
@@ -78,7 +104,7 @@ namespace PrimarySchool
         {
             try
             {
-                FormOps.CloseForm(this);
+                FormOps.CloseModeless(this);
             }
             catch (Exception ex)
             {
@@ -116,7 +142,6 @@ namespace PrimarySchool
 
                 courseNamesTable.Clear();
                 courseNamesTable.Dispose();
-                courseNamesTable = null;
 
                 DateTime date = new DateTime(2021, 9, 1);
                 DateTime endDate = new DateTime(2022, 6, 17);
@@ -267,7 +292,7 @@ namespace PrimarySchool
             {
                 if (!cbxCourses.Text.Equals(string.Empty) && !cbxDate.Text.Equals(string.Empty))
                 {
-                    ClearDataTable();
+                    NullifyDataTable();
 
                     attendanceTable = ProgOps.GetAttendanceTable(selectedCourseID, cbxDate.Text);
 
@@ -300,7 +325,6 @@ namespace PrimarySchool
 
                             studentsTable.Clear();
                             studentsTable.Dispose();
-                            studentsTable = null;
                         }
                     }
                     else
@@ -336,7 +360,7 @@ namespace PrimarySchool
                     }
                     else
                     {
-                        ClearDataTable();
+                        NullifyDataTable();
                         attendanceTable = new DataTable();
                     }
 
@@ -361,7 +385,7 @@ namespace PrimarySchool
                 
                 if (!ProgOps.UserRole.Equals("Teacher") && newData)
                 {
-                    ClearDataTable();
+                    NullifyDataTable();
 
                     FormOps.ErrorBox("Attendance for this date has not been taken");
                 }
@@ -402,7 +426,7 @@ namespace PrimarySchool
             }
         }
 
-        private void ClearDataTable()
+        private void NullifyDataTable()
         {
             try
             {
@@ -895,15 +919,11 @@ namespace PrimarySchool
 
                             viewer.crvViewer.ReportSource = report;
 
-                            viewer.ShowDialog();
-
-                            viewer.crvViewer.ReportSource = null;
+                            FormOps.ShowModal(viewer);
 
                             report.Dispose();
-                            report = null;
 
                             viewer.Dispose();
-                            viewer = null;
                         }
                     }
                     else
@@ -924,15 +944,11 @@ namespace PrimarySchool
 
                         viewer.crvViewer.ReportSource = report;
 
-                        viewer.ShowDialog();
-
-                        viewer.crvViewer.ReportSource = null;
+                        FormOps.ShowModal(viewer);
 
                         report.Dispose();
-                        report = null;
 
                         viewer.Dispose();
-                        viewer = null;
                     }
                 }
                 else
