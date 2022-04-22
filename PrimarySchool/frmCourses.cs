@@ -34,8 +34,11 @@ namespace PrimarySchool
         private string strSearch = "Name";
 
         // Lists to hold student IDs
-        List<int> registeredStudentIDs = new List<int>();
-        List<int> availableStudentIDs = new List<int>();
+        private List<int> registeredStudentIDs;
+        private List<int> availableStudentIDs;
+
+        // Bool to track if adding new course
+        private bool newCourse;
 
         // Initializes 'home' attribute to parameter.
         public frmCourses(frmHome home)
@@ -118,6 +121,8 @@ namespace PrimarySchool
 
                 InitDataLists();
 
+                newCourse = false;
+
                 SetState("View");
             }
             catch (Exception ex)
@@ -136,7 +141,7 @@ namespace PrimarySchool
             {
                 if (state.Equals("Edit") || state.Equals("Add New"))
                 {
-                    FormOps.ErrorBox("You must finish the current edit before closing Courses");
+                    FormOps.ErrorBox("You must finish the current edit before closing Courses.");
 
                     e.Cancel = true;
                 }
@@ -362,27 +367,27 @@ namespace PrimarySchool
         {
             try
             {
-                string message = "Invalid input detected";
+                string message = "Invalid input detected.";
 
                 bool allOK = true;
 
                 if (tbxCourseName.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter a Name";
+                    message = "You must enter a Name.";
                     tbxCourseName.Focus();
                     allOK = false;
                 }
 
                 if (tbxDescription.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter a Description";
+                    message = "You must enter a Description.";
                     tbxDescription.Focus();
                     allOK = false;
                 }
 
                 if (tbxUserID.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter a Teacher ID";
+                    message = "You must enter a Teacher ID.";
                     tbxUserID.Focus();
                     allOK = false;
                 }
@@ -396,8 +401,8 @@ namespace PrimarySchool
 
                 if (!teacherIDList.Contains(Convert.ToInt32(tbxUserID.Text.Trim())))
                 {
-                    message = "You must enter a valid Teacher ID...\n" +
-                        "review the list box on the right side of the form";
+                    message = "You must enter a valid Teacher ID.\n" +
+                        "Review the list box on the right side of the form.";
                     tbxUserID.Focus();
                     teacherIDList.Clear();
                     allOK = false;
@@ -505,9 +510,24 @@ namespace PrimarySchool
 
                 ProgOps.UpdateCourses();
 
+                if (newCourse)
+                {
+                    int courseID = ProgOps.GetCourseID(tbxCourseName.Text);
+
+                    ProgOps.AddPlaceholderStudentToNewCourse(courseID);
+
+                    //ClearDataLists();
+
+                    //FillRegisteredStudentsListBox();
+
+                    //FillAvailableStudentsListBox();
+
+                    newCourse = false;
+                }
+
                 ProgOps.CoursesTable.DefaultView.Sort = "Course_Name";
 
-                MessageBox.Show("Record saved.", "Save",
+                MessageBox.Show("Record saved", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 SetState("View");
@@ -524,7 +544,9 @@ namespace PrimarySchool
         // Sets state to View
         private void Delete()
         {
-            if (!FormOps.QuestionBox("Are you sure you want to delete this course?"))
+            if (!FormOps.QuestionBox("Are you sure you want to delete this course?\n\n" +
+                "It will be deleted from the database entirely,\n" +
+                "an action which cannot be undone."))
             {
                 return;
             }
@@ -579,6 +601,8 @@ namespace PrimarySchool
                 bookmark = manager.Position;
 
                 SetState("Add New");
+
+                newCourse = true;
 
                 manager.AddNew();
 
@@ -844,7 +868,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Select an available student to add");
+                    FormOps.ErrorBox("Select an available student to add.");
                 }
             }
             catch (Exception ex)
@@ -859,25 +883,34 @@ namespace PrimarySchool
             {
                 if (lbxRegisteredStudents.SelectedIndex >= 0)
                 {
-                    if (FormOps.QuestionBox("Are you sure you want to remove this student?\n" +
-                        "Their grade, seat, and attendance records will be deleted\n" +
-                        "and pressing Cancel will not undo this..."))
+                    if (registeredStudentIDs.Count > 1)
                     {
-                        int studentID = Convert.ToInt32(registeredStudentIDs[lbxRegisteredStudents.SelectedIndex]),
-                            courseID = Convert.ToInt32(tbxCourseID.Text);
+                        if (FormOps.QuestionBox("Are you sure you want to remove this student?\n\n" +
+                        "Their grade, seat, and attendance records will be deleted.\n\n" +
+                        "Pressing Cancel will not undo this."))
+                        {
+                            int studentID = Convert.ToInt32(registeredStudentIDs[lbxRegisteredStudents.SelectedIndex]),
+                                courseID = Convert.ToInt32(tbxCourseID.Text);
 
-                        ProgOps.RemoveStudentFromCourse(studentID, courseID);
+                            ProgOps.RemoveStudentFromCourse(studentID, courseID);
 
-                        ClearDataLists();
+                            ClearDataLists();
 
-                        FillRegisteredStudentsListBox();
+                            FillRegisteredStudentsListBox();
 
-                        FillAvailableStudentsListBox();
+                            FillAvailableStudentsListBox();
+                        }
+                    }
+                    else
+                    {
+                        FormOps.ErrorBox("Due to database limitations, you must have\n" +
+                            "at least 1 student in the course in order for\n" +
+                            "the course to have an assigned room.");
                     }
                 }
                 else
                 {
-                    FormOps.ErrorBox("Select a registered student to remove");
+                    FormOps.ErrorBox("Select a registered student to remove.");
                 }
             }
             catch (Exception ex)

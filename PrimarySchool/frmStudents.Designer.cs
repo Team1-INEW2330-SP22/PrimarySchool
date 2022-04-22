@@ -779,6 +779,7 @@ namespace PrimarySchool
             this.btnRemoveCourse.TabIndex = 3;
             this.btnRemoveCourse.Text = "&Remove";
             this.btnRemoveCourse.UseVisualStyleBackColor = false;
+            this.btnRemoveCourse.Click += new System.EventHandler(this.btnRemoveCourse_Click);
             // 
             // btnAddCourse
             // 
@@ -792,6 +793,7 @@ namespace PrimarySchool
             this.btnAddCourse.TabIndex = 1;
             this.btnAddCourse.Text = "Add C&ourse";
             this.btnAddCourse.UseVisualStyleBackColor = false;
+            this.btnAddCourse.Click += new System.EventHandler(this.btnAddCourse_Click);
             // 
             // mnuMenu
             // 

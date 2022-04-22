@@ -129,7 +129,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Select a course before going to Assignments");
+                    FormOps.ErrorBox("Select a course before going to Assignments.");
                 }
             }
             catch (Exception ex)
@@ -252,7 +252,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Data could not be found");
+                    FormOps.ErrorBox("Data could not be found.");
                 }
             }
             catch (Exception ex)
@@ -388,7 +388,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Nothing to clear");
+                    FormOps.ErrorBox("Nothing to clear.");
                 }
             }
             catch (Exception ex)
@@ -563,7 +563,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Nothing to reset");
+                    FormOps.ErrorBox("Nothing to reset.");
                 }
             }
             catch (Exception ex)
@@ -698,7 +698,7 @@ namespace PrimarySchool
                     int row = dgvGradebook.CurrentCell.RowIndex, column = dgvGradebook.CurrentCell.ColumnIndex;
 
                     FormOps.ErrorBox("Invalid data detected on row " + (row + 1).ToString() + " of the " +
-                        columnName + " column...\nPlease try again");
+                        columnName + " column.\n\nPlease try again");
 
                     gradebookTable.Rows[row][column] = DBNull.Value;
 
@@ -1022,7 +1022,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Nothing to save");
+                    FormOps.ErrorBox("Nothing to save.");
                 }
             }
             catch (Exception ex)
@@ -1042,7 +1042,7 @@ namespace PrimarySchool
             {
                 if (!saved && CheckDataTables() && changedRowsList != null)
                 {
-                    if (FormOps.QuestionBox(question + "\nIf not, the data may be reset."))
+                    if (FormOps.QuestionBox(question + "\n\nIf not, the data may be reset."))
                     {
                         ProgOps.UpdateGradebookTable(gradebookTable, hiddenGradebookTable, 
                             changedRowsList, selectedCourseID);
@@ -1088,7 +1088,7 @@ namespace PrimarySchool
                 {
                     if (!saved)
                     {
-                        FormOps.ErrorBox("Cannot print data that has not been saved");
+                        FormOps.ErrorBox("Cannot print data that has not been saved.");
 
                         SaveYesOrNo("Save then print?");
 
@@ -1136,7 +1136,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Select a course before printing");
+                    FormOps.ErrorBox("Select a course before printing.");
                 }
             }
             catch (Exception ex)

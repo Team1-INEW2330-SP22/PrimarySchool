@@ -46,14 +46,12 @@ namespace PrimarySchool
             {
                 if (state.Equals("Edit") || state.Equals("Add New"))
                 {
-                    FormOps.ErrorBox("You must finish the current edit before closing Students");
+                    FormOps.ErrorBox("You must finish the current edit before closing Students.");
 
                     e.Cancel = true;
                 }
                 else
                 {
-                    //ProgOps.UpdateStudents();
-
                     ProgOps.DisposeStudents();
 
                     FormOps.ShowModeless(home);
@@ -99,9 +97,6 @@ namespace PrimarySchool
                         tbxG2PlaceOfWork.ReadOnly = true;
                         tbxEC.ReadOnly = true;
                         tbxEcCellPhone.ReadOnly = true;
-                        //gbxCourses.Enabled = false;
-                        //lbxAvailableCourses.Enabled = false;
-                        //lbxRegisteredCourses.Enabled = false;
                         btnAddCourse.Enabled = false;
                         btnRemoveCourse.Enabled = false;
                         btnFirst.Enabled = true;
@@ -150,9 +145,6 @@ namespace PrimarySchool
                         tbxG2PlaceOfWork.ReadOnly = false;
                         tbxEC.ReadOnly = false;
                         tbxEcCellPhone.ReadOnly = false;
-                        //gbxCourses.Enabled = true;
-                        //lbxAvailableCourses.Enabled = true;
-                        //lbxRegisteredCourses.Enabled = true;
                         btnAddCourse.Enabled = true;
                         btnRemoveCourse.Enabled = true;
                         btnFirst.Enabled = false;
@@ -325,97 +317,97 @@ namespace PrimarySchool
         {
             try
             {
-                string message = "Invalid input detected";
+                string message = "Invalid input detected.";
 
                 bool allOK = true;
 
                 if (tbxLastName.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter a Last Name";
+                    message = "You must enter a Last Name.";
                     tbxLastName.Focus();
                     allOK = false;
                 }
 
                 if (tbxFirstName.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter a First Name";
+                    message = "You must enter a First Name.";
                     tbxFirstName.Focus();
                     allOK = false;
                 }
 
                 if (tbxMiddleName.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter a Middle Name";
+                    message = "You must enter a Middle Name.";
                     tbxMiddleName.Focus();
                     allOK = false;
                 }
 
                 if (tbxDateOfBirth.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter a Date of Birth";
+                    message = "You must enter a Date of Birth.";
                     tbxDateOfBirth.Focus();
                     allOK = false;
                 }
 
                 if (tbxAddress.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter an Address";
+                    message = "You must enter an Address.";
                     tbxAddress.Focus();
                     allOK = false;
                 }
 
                 if (tbxCity.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter a City";
+                    message = "You must enter a City.";
                     tbxCity.Focus();
                     allOK = false;
                 }
 
                 if (tbxZip.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter a Zip Code";
+                    message = "You must enter a Zip Code.";
                     tbxZip.Focus();
                     allOK = false;
                 }
 
                 if (tbxG1Name.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter Guardian 1 Name";
+                    message = "You must enter Guardian 1 Name.";
                     tbxG1Name.Focus();
                     allOK = false;
                 }
 
                 if (tbxG1CellPhone.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter Guardian 1 Cell Phone";
+                    message = "You must enter Guardian 1 Cell Phone.";
                     tbxG1CellPhone.Focus();
                     allOK = false;
                 }
 
                 if (tbxG1WorkPhone.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter Guardian 1 Work Phone";
+                    message = "You must enter Guardian 1 Work Phone.";
                     tbxG1WorkPhone.Focus();
                     allOK = false;
                 }
 
                 if (tbxG1PlaceOfWork.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter Guardian 1 Place of Work";
+                    message = "You must enter Guardian 1 Place of Work.";
                     tbxG1PlaceOfWork.Focus();
                     allOK = false;
                 }
 
                 if (tbxEC.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter an Emergency Contact";
+                    message = "You must enter an Emergency Contact.";
                     tbxEC.Focus();
                     allOK = false;
                 }
 
                 if (tbxEcCellPhone.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter Emergency Contact Cell Phone";
+                    message = "You must enter Emergency Contact Cell Phone.";
                     tbxEcCellPhone.Focus();
                     allOK = false;
                 }
@@ -440,6 +432,7 @@ namespace PrimarySchool
             try
             {
                 manager.Position = 0;
+
                 SystemSounds.Beep.Play();
             }
             catch (Exception ex)
@@ -454,6 +447,7 @@ namespace PrimarySchool
             try
             {
                 manager.Position = manager.Count - 1;
+
                 SystemSounds.Beep.Play();
             }
             catch (Exception ex)
@@ -472,6 +466,7 @@ namespace PrimarySchool
                 {
                     SystemSounds.Beep.Play();
                 }
+
                 manager.Position--;
             }
             catch (Exception ex)
@@ -490,6 +485,7 @@ namespace PrimarySchool
                 {
                     SystemSounds.Beep.Play();
                 }
+
                 manager.Position++;
             }
             catch (Exception ex)
@@ -514,6 +510,8 @@ namespace PrimarySchool
             {
                 manager.EndCurrentEdit();
 
+                ProgOps.UpdateStudents();
+
                 ProgOps.StudentsTable.DefaultView.Sort = "Last_Name";
 
                 MessageBox.Show("Record saved", "Success",
@@ -533,8 +531,9 @@ namespace PrimarySchool
         // Sets state to View
         private void Delete()
         {
-            if (!FormOps.QuestionBox("Are you sure you want to delete this student?\n" +
-                "They will be deleted from the database entirely..."))
+            if (!FormOps.QuestionBox("Are you sure you want to delete this student?\n\n" +
+                "They will be deleted from the database entirely,\n" +
+                "an action which cannot be undone."))
             {
                 return;
             }
@@ -751,6 +750,59 @@ namespace PrimarySchool
             FillRegisteredCoursesListBox();
 
             FillAvailableCoursesListBox();
+        }
+
+        private void btnAddCourse_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (lbxAvailableCourses.SelectedIndex >= 0)
+                {
+                    if (FormOps.QuestionBox("Are you sure you want to add this course?"))
+                    {
+                        int courseID = ProgOps.GetCourseID(lbxAvailableCourses.SelectedItem.ToString()),
+                            studentID = Convert.ToInt32(tbxStudentID.Text);
+
+                        ProgOps.AddStudentToCourse(studentID, courseID);
+
+                        FillRegisteredCoursesListBox();
+
+                        FillAvailableCoursesListBox();
+                    }
+                }
+                else
+                {
+                    FormOps.ErrorBox("Select an available course to add.");
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void btnRemoveCourse_Click(object sender, EventArgs e)
+        {
+            if (lbxRegisteredCourses.SelectedIndex >= 0)
+            {
+                if (FormOps.QuestionBox("Are you sure you want to remove this course?\n\n" +
+                "The student's grade, seat, and attendance records will be deleted for this course.\n\n" +
+                "Pressing Cancel will not undo this."))
+                {
+                    int courseID = ProgOps.GetCourseID(lbxRegisteredCourses.SelectedItem.ToString()),
+                        studentID = Convert.ToInt32(tbxStudentID.Text);
+
+                    ProgOps.RemoveStudentFromCourse(studentID, courseID);
+
+                    FillRegisteredCoursesListBox();
+
+                    FillAvailableCoursesListBox();
+                }
+            }
+            else
+            {
+                FormOps.ErrorBox("Select a registered course to remove.");
+            }
         }
     }
 }

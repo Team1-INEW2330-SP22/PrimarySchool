@@ -164,7 +164,7 @@ namespace PrimarySchool
                     logInTable.Clear();
                     logInTable.Dispose();
 
-                    FormOps.ErrorBox("Check username and password");
+                    FormOps.ErrorBox("Check username and password.");
 
                     return false;
                 }
@@ -597,12 +597,12 @@ namespace PrimarySchool
 
                 update.Dispose();
 
-                MessageBox.Show("Database successfully updated", "Success",
+                MessageBox.Show("Database successfully updated.", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                FormOps.ErrorBox("Update Gradebook Table: " + ex.Message);
+                FormOps.ErrorBox(ex.Message);
             }
         }
 
@@ -672,7 +672,7 @@ namespace PrimarySchool
 
                 insert.Dispose();
 
-                MessageBox.Show("Database successfully updated", "Success",
+                MessageBox.Show("Database successfully updated.", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -723,7 +723,7 @@ namespace PrimarySchool
 
                 update.Dispose();
 
-                MessageBox.Show("Database successfully updated", "Success",
+                MessageBox.Show("Database successfully updated.", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -815,12 +815,12 @@ namespace PrimarySchool
 
                 update.Dispose();
 
-                MessageBox.Show("Database successfully updated", "Success",
+                MessageBox.Show("Database successfully updated.", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                FormOps.ErrorBox("UpdateSeatingChartTable: " + ex.Message);
+                FormOps.ErrorBox(ex.Message);
             }
         }
 
@@ -1355,12 +1355,12 @@ namespace PrimarySchool
 
                     insert.Dispose();
 
-                    MessageBox.Show("Assignment successfully added to course", "Success",
+                    MessageBox.Show("Assignment successfully added to course.", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    FormOps.ErrorBox("Cannot add an assignment that is already in the course");
+                    FormOps.ErrorBox("Cannot add an assignment that is already in the course.");
                 }
 
                 dataCheckAdapter.Dispose();
@@ -1440,18 +1440,36 @@ namespace PrimarySchool
 
                     seatStudentCommand.Dispose();
 
-                    MessageBox.Show("Student successfully added to course", "Success", 
+                    MessageBox.Show("Student successfully added to course.", "Success", 
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    FormOps.ErrorBox("No available seats in course");
+                    FormOps.ErrorBox("No available seats in course.");
                 }
 
                 availableSeatsAdapter.Dispose();
 
                 availableSeatsTable.Clear();
                 availableSeatsTable.Dispose();
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        // Adds a placeholder student to a course (call when course is first created)
+        public static void AddPlaceholderStudentToNewCourse(int courseID)
+        {
+            try
+            {
+                SqlCommand addCommand = new SqlCommand("EXEC group1fa212330.spAddPlaceholderStudentToNewCourse @Course_ID = " + 
+                    courseID + ";", _cntPrimarySchoolDatabase);
+
+                addCommand.ExecuteNonQuery();
+
+                addCommand.Dispose();
             }
             catch (Exception ex)
             {
@@ -1475,7 +1493,7 @@ namespace PrimarySchool
 
                 removalCommand.Dispose();
 
-                MessageBox.Show("Student successfully removed from course", "Success",
+                MessageBox.Show("Student successfully removed from course.", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -1560,12 +1578,12 @@ namespace PrimarySchool
 
                     delete.Dispose();
 
-                    MessageBox.Show("Assignment successfully removed from course", "Success",
+                    MessageBox.Show("Assignment successfully removed from course.", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    FormOps.ErrorBox("Cannot remove an assignment that is not in the course");
+                    FormOps.ErrorBox("Cannot remove an assignment that is not in the course.");
                 }
 
                 dataCheckAdapter.Dispose();
