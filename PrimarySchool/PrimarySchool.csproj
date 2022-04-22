@@ -288,6 +288,11 @@
     <Content Include="help\template.htm" />
     <Content Include="help\welcome.htm" />
     <Content Include="Icons\Icon.ico" />
+    <Content Include="Images\Eye.png" />
+    <Content Include="Images\Person.png" />
+    <Content Include="Images\school%281%29.png" />
+    <Content Include="Images\school%282%29.png" />
+    <Content Include="Images\school.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
