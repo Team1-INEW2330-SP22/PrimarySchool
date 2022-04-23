@@ -362,7 +362,7 @@ namespace PrimarySchool
             Delete();
         }
 
-        // Checks validity of edited/new data (do later)
+        // Checks validity of edited/new data
         private bool ValidateData()
         {
             try
@@ -401,7 +401,7 @@ namespace PrimarySchool
 
                 if (!teacherIDList.Contains(Convert.ToInt32(tbxUserID.Text.Trim())))
                 {
-                    message = "You must enter a valid Teacher ID.\n" +
+                    message = "You must enter a valid Teacher ID.\n\n" +
                         "Review the list box on the right side of the form.";
                     tbxUserID.Focus();
                     teacherIDList.Clear();
@@ -516,18 +516,18 @@ namespace PrimarySchool
 
                     ProgOps.AddPlaceholderStudentToNewCourse(courseID);
 
-                    //ClearDataLists();
+                    ClearDataLists();
 
-                    //FillRegisteredStudentsListBox();
+                    FillRegisteredStudentsListBox();
 
-                    //FillAvailableStudentsListBox();
+                    FillAvailableStudentsListBox();
 
                     newCourse = false;
                 }
 
                 ProgOps.CoursesTable.DefaultView.Sort = "Course_Name";
 
-                MessageBox.Show("Record saved", "Success",
+                MessageBox.Show("Record saved.", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 SetState("View");

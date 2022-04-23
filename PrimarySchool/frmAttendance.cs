@@ -387,7 +387,7 @@ namespace PrimarySchool
                 {
                     NullifyDataTable();
 
-                    FormOps.ErrorBox("Attendance for this date has not been taken");
+                    FormOps.ErrorBox("Attendance for this date has not been taken.");
                 }
 
                 if (dgvAttendance.Columns.Count > 0)
@@ -539,7 +539,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Nothing to clear");
+                    FormOps.ErrorBox("Nothing to clear.");
                 }
             }
             catch (Exception ex)
@@ -578,7 +578,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Nothing to reset");
+                    FormOps.ErrorBox("Nothing to reset.");
                 }
             }
             catch (Exception ex)
@@ -614,7 +614,7 @@ namespace PrimarySchool
                     int row = dgvAttendance.CurrentCell.RowIndex, column = dgvAttendance.CurrentCell.ColumnIndex;
 
                     FormOps.ErrorBox("Invalid data detected on row " + (row + 1).ToString() + " of the " +
-                        columnName + " column...\nPlease try again");
+                        columnName + " column.\n\nPlease try again.");
 
                     if (column == 3 || column == 4)
                     {
@@ -819,7 +819,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Nothing to save");
+                    FormOps.ErrorBox("Nothing to save.");
                 }
             }
             catch (Exception ex)
@@ -837,7 +837,7 @@ namespace PrimarySchool
                     && CheckDataTable()
                     && changedRowsList != null)
                 {
-                    if (FormOps.QuestionBox(question + "\nIf not, the data may be reset."))
+                    if (FormOps.QuestionBox(question + "\n\nIf not, the data may be reset."))
                     {
                         if (newData)
                         {
@@ -897,7 +897,7 @@ namespace PrimarySchool
                 {
                     if (!saved)
                     {
-                        FormOps.ErrorBox("Cannot print data that has not been saved");
+                        FormOps.ErrorBox("Cannot print data that has not been saved.");
 
                         SaveYesOrNo("Save then print?");
 
@@ -953,7 +953,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Select a valid course/date combination before printing");
+                    FormOps.ErrorBox("Select a valid course/date combination before printing.");
                 }
             }
             catch (Exception ex)

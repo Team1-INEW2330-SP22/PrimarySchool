@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace PrimarySchool
 {
@@ -32,7 +33,7 @@ namespace PrimarySchool
         }
 
         // Prevents closing of form during edits.
-        // Closes and disposes of DB things (do later).
+        // Closes and disposes of DB things.
         // Shows Home.
         private void frmTeachers_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -45,7 +46,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-
+                    //ProgOps.CloseDisposeDatabase();
                     FormOps.ShowModeless(home);
                 }
             }
@@ -74,15 +75,11 @@ namespace PrimarySchool
                         tbxFirstName.ReadOnly = true;
                         tbxMiddleName.ReadOnly = true;
                         tbxDateOfBirth.ReadOnly = true;
-                        tbxMailAddress.ReadOnly = true;
-                        tbxStreetAddress.ReadOnly = true;
+                        tbxAddress.ReadOnly = true;
                         tbxCity.ReadOnly = true;
                         tbxState.ReadOnly = true;
                         tbxZip.ReadOnly = true;
                         tbxPhone.ReadOnly = true;
-                        gbxCourses.Enabled = false;
-                        lbxAvailableCourses.Enabled = false;
-                        lbxTeacherCourses.Enabled = false;
                         btnAddCourse.Enabled = false;
                         btnRemoveCourse.Enabled = false;
                         btnFirst.Enabled = true;
@@ -117,15 +114,11 @@ namespace PrimarySchool
                         tbxFirstName.ReadOnly = false;
                         tbxMiddleName.ReadOnly = false;
                         tbxDateOfBirth.ReadOnly = false;
-                        tbxMailAddress.ReadOnly = false;
-                        tbxStreetAddress.ReadOnly = false;
+                        tbxAddress.ReadOnly = false;
                         tbxCity.ReadOnly = false;
                         tbxState.ReadOnly = false;
                         tbxZip.ReadOnly = false;
                         tbxPhone.ReadOnly = false;
-                        gbxCourses.Enabled = true;
-                        lbxAvailableCourses.Enabled = true;
-                        lbxTeacherCourses.Enabled = true;
                         btnAddCourse.Enabled = true;
                         btnRemoveCourse.Enabled = true;
                         btnFirst.Enabled = false;
@@ -167,8 +160,12 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void frmTeachers_Load(object sender, EventArgs e)
         {
-
-
+            //ProgOps.OpenDatabase();
+            ProgOps.TeachersCommand(tbxUserID, tbxLastName, tbxFirstName, tbxMiddleName, tbxDateOfBirth, tbxAddress,
+                tbxCity, tbxState, tbxZip, tbxPhone);
+            //establish currency manager to control buttons previous and next
+            manager = (CurrencyManager)this.BindingContext[ProgOps.DTTeachersTable];
+            //set state
             SetState("View");
         }
 
@@ -305,8 +302,8 @@ namespace PrimarySchool
         {
             try
             {
-                //manager.Position = 0;
-                //SystemSounds.Beep.Play();
+                manager.Position = 0;
+                SystemSounds.Beep.Play();
             }
             catch (Exception ex)
             {
@@ -319,8 +316,8 @@ namespace PrimarySchool
         {
             try
             {
-                //manager.Position = manager.Count - 1;
-                //SystemSounds.Beep.Play();
+                manager.Position = manager.Count - 1;
+                SystemSounds.Beep.Play();
             }
             catch (Exception ex)
             {
@@ -334,11 +331,11 @@ namespace PrimarySchool
         {
             try
             {
-                //if (manager.Position == 0)
-                //{
-                //    SystemSounds.Beep.Play();
-                //}
-                //manager.Position--;
+                if (manager.Position == 0)
+                {
+                    SystemSounds.Beep.Play();
+                }
+                manager.Position--;
             }
             catch (Exception ex)
             {
@@ -352,11 +349,11 @@ namespace PrimarySchool
         {
             try
             {
-                //if (manager.Position == manager.Count - 1)
-                //{
-                //    SystemSounds.Beep.Play();
-                //}
-                //manager.Position++;
+                if (manager.Position == manager.Count - 1)
+                {
+                    SystemSounds.Beep.Play();
+                }
+                manager.Position++;
             }
             catch (Exception ex)
             {
@@ -380,8 +377,8 @@ namespace PrimarySchool
             {
                 //manager.EndCurrentEdit();
 
-                //MessageBox.Show("Record saved.", "Save",
-                //    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Record saved.", "Save",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
                 SetState("View");
             }
             catch (Exception ex)
@@ -419,18 +416,18 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void Cancel()
         {
-            //try
-            //{
-            //    manager.CancelCurrentEdit();
-            //    if (state.Equals("Add New"))
-            //    {
-            //        manager.Position = bookmark;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    FormOps.ErrorBox(ex.Message);
-            //}
+            try
+            {
+                manager.CancelCurrentEdit();
+                if (state.Equals("Add New"))
+                {
+                    manager.Position = bookmark;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
             SetState("View");
         }
 
@@ -442,7 +439,7 @@ namespace PrimarySchool
         {
             try
             {
-                //bookmark = manager.Position;
+                bookmark = manager.Position;
                 SetState("Add New");
                 //manager.AddNew();
 
@@ -459,6 +456,154 @@ namespace PrimarySchool
         {
             SetState("Edit");
 
+        }
+
+        private void btnAddCourse_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (lbxAvailableCourses.SelectedIndex >= 0)
+                {
+                    if (FormOps.QuestionBox("Are you sure you want to add this course?"))
+                    {
+                        int userID = Convert.ToInt32(tbxUserID.Text);
+
+                        ProgOps.AddTeacherToCourse(userID, lbxAvailableCourses.SelectedItem.ToString());
+
+                        FillRegisteredCoursesListBox();
+
+                        FillAvailableCoursesListBox();
+                    }
+                }
+                else
+                {
+                    FormOps.ErrorBox("Select an available course to add.");
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox("btnAddCourse_Click: " + ex.Message);
+            }
+        }
+
+        private void FillAvailableCoursesListBox()
+        {
+            try
+            {
+                lbxAvailableCourses.Items.Clear();
+
+                if (!tbxUserID.Text.Equals(string.Empty))
+                {
+                    DataTable coursesTable = ProgOps.GetAvailableCoursesForTeacher(); ;
+
+                    if (coursesTable.Rows.Count > 0 && !tbxUserID.Text.Equals("1009"))
+                    {
+                        lblAvailableCourses.Text = "Available Courses (" + coursesTable.Rows.Count.ToString() + ")";
+
+                        for (int x = 0; x < coursesTable.Rows.Count; x++)
+                        {
+                            lbxAvailableCourses.Items.Add(coursesTable.Rows[x][0]);
+                        }
+                    }
+                    else
+                    {
+                        lblAvailableCourses.Text = "Available Courses (0)";
+                    }
+
+                    coursesTable.Clear();
+                    coursesTable.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox("FillAvailableCoursesListBox: " + ex.Message);
+            }
+        }
+
+        private void FillRegisteredCoursesListBox()
+        {
+            try
+            {
+                lbxRegisteredCourses.Items.Clear();
+
+                if (!tbxUserID.Text.Equals(string.Empty))
+                {
+                    DataTable coursesTable = ProgOps.GetRegisteredCoursesForTeacher(Convert.ToInt32(tbxUserID.Text));
+
+                    if (coursesTable.Rows.Count > 0)
+                    {
+                        lblRegisteredCourses.Text = "Registered Courses (" + coursesTable.Rows.Count.ToString() + ")";
+
+                        for (int x = 0; x < coursesTable.Rows.Count; x++)
+                        {
+                            lbxRegisteredCourses.Items.Add(coursesTable.Rows[x][0]);
+                        }
+                    }
+                    else
+                    {
+                        lblRegisteredCourses.Text = "Registered Courses (0)";
+                    }
+
+                    coursesTable.Clear();
+                    coursesTable.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox("FillRegisteredCoursesListBox: " + ex.Message);
+            }
+        }
+
+        private void tbxUserID_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                FillAvailableCoursesListBox();
+
+                FillRegisteredCoursesListBox();
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void btnRemoveCourse_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (lbxRegisteredCourses.SelectedIndex >= 0)
+                {
+                    if (!tbxUserID.Text.Equals("1009"))
+                    {
+                        if (FormOps.QuestionBox("Are you sure you want to remove this course?\n\n" +
+                            "The teacher will no longer be associated with this course.\n\n" +
+                            "Pressing Cancel will not undo this."))
+                        {
+                            ProgOps.RemoveTeacherFromCourse(lbxRegisteredCourses.SelectedItem.ToString());
+
+                            FillRegisteredCoursesListBox();
+
+                            FillAvailableCoursesListBox();
+                        }
+                    }
+                    else
+                    {
+                        FormOps.ErrorBox("Cannot delete Placeholder Teacher.\n\n" +
+                            "Due to database limitations, you must have\n" +
+                            "a teacher assigned to each course in order\n" +
+                            "for the course to exist.");
+                    }
+                }
+                else
+                {
+                    FormOps.ErrorBox("Select a registered course to remove.");
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox("btnRemoveCourse_Click: " + ex.Message);
+            }
         }
     }
 }

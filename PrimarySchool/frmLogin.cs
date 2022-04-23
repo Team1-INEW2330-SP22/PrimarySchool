@@ -51,7 +51,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Check username and password");
+                    FormOps.ErrorBox("Check username and password.");
                     return false;
                 }
             }
@@ -237,7 +237,8 @@ namespace PrimarySchool
             }
         }
 
-        // Clears tbxPassword if user selects it while the default prompt is visible, sets the text color to black,
+        // Clears tbxPassword if user selects it while the default prompt is visible,
+        // sets the text color to black,
         // and sets the password character.
         private void tbxPassword_Enter(object sender, EventArgs e)
         {

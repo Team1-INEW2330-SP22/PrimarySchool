@@ -312,7 +312,7 @@ namespace PrimarySchool
             Delete();
         }
 
-        // Checks validity of edited/new data (do later).
+        // Checks validity of edited/new data
         private bool ValidateData()
         {
             try
@@ -685,7 +685,7 @@ namespace PrimarySchool
 
                 if (!tbxStudentID.Text.Equals(string.Empty))
                 {
-                    DataTable coursesTable = ProgOps.GetRegisteredCourses(Convert.ToInt32(tbxStudentID.Text));
+                    DataTable coursesTable = ProgOps.GetRegisteredCoursesForStudent(Convert.ToInt32(tbxStudentID.Text));
 
                     if (coursesTable.Rows.Count > 0)
                     {
@@ -719,7 +719,7 @@ namespace PrimarySchool
 
                 if (!tbxStudentID.Text.Equals(string.Empty))
                 {
-                    DataTable coursesTable = ProgOps.GetAvailableCourses(Convert.ToInt32(tbxStudentID.Text));
+                    DataTable coursesTable = ProgOps.GetAvailableCoursesForStudent(Convert.ToInt32(tbxStudentID.Text));
 
                     if (coursesTable.Rows.Count > 0)
                     {
@@ -785,19 +785,35 @@ namespace PrimarySchool
         {
             if (lbxRegisteredCourses.SelectedIndex >= 0)
             {
-                if (FormOps.QuestionBox("Are you sure you want to remove this course?\n\n" +
-                "The student's grade, seat, and attendance records will be deleted for this course.\n\n" +
-                "Pressing Cancel will not undo this."))
+                int courseID = ProgOps.GetCourseID(lbxRegisteredCourses.SelectedItem.ToString());
+
+                DataTable studentsTable = ProgOps.GetStudentsInCourse(courseID);
+
+                if (studentsTable.Rows.Count > 1)
                 {
-                    int courseID = ProgOps.GetCourseID(lbxRegisteredCourses.SelectedItem.ToString()),
-                        studentID = Convert.ToInt32(tbxStudentID.Text);
+                    if (FormOps.QuestionBox("Are you sure you want to remove this course?\n\n" +
+                        "The student's grade, seat, and attendance records will be deleted for this course.\n\n" +
+                        "Pressing Cancel will not undo this."))
+                    {
+                        int studentID = Convert.ToInt32(tbxStudentID.Text);
 
-                    ProgOps.RemoveStudentFromCourse(studentID, courseID);
+                        ProgOps.RemoveStudentFromCourse(studentID, courseID);
 
-                    FillRegisteredCoursesListBox();
+                        FillRegisteredCoursesListBox();
 
-                    FillAvailableCoursesListBox();
+                        FillAvailableCoursesListBox();
+                    }
                 }
+                else
+                {
+                    FormOps.ErrorBox("This the last student in the course.\n\n" +
+                        "Due to database limitations, you must have\n" +
+                        "at least 1 student in the course in order for\n" +
+                        "the course to have an assigned room.");
+                }
+
+                studentsTable.Clear();
+                studentsTable.Dispose();
             }
             else
             {

@@ -180,7 +180,7 @@ namespace PrimarySchool
             {
                 if (state.Equals("Edit") || state.Equals("Create New"))
                 {
-                    FormOps.ErrorBox("You must finish the current edit before closing Assignments");
+                    FormOps.ErrorBox("You must finish the current edit before closing Assignments.");
 
                     e.Cancel = true;
                 }
@@ -280,20 +280,20 @@ namespace PrimarySchool
         {
             try
             {
-                string message = "Invalid input detected";
+                string message = "Invalid input detected.";
 
                 bool allOK = true;
 
                 if (tbxAssignmentName.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter a Name";
+                    message = "You must enter a Name.";
                     tbxAssignmentName.Focus();
                     allOK = false;
                 }
 
                 if (tbxCategory.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter a Category ID";
+                    message = "You must enter a Category ID.";
                     tbxCategory.Focus();
                     allOK = false;
                 }
@@ -307,8 +307,8 @@ namespace PrimarySchool
 
                 if (!categoryIDList.Contains(Convert.ToInt32(tbxCategory.Text.Trim())))
                 {
-                    message = "You must enter a valid Category ID...\n" +
-                        "review the list box on the right side of the form";
+                    message = "You must enter a valid Category ID.\n\n" +
+                        "Review the list box on the right side of the form.";
                     tbxCategory.Focus();
                     categoryIDList.Clear();
                     allOK = false;
@@ -318,7 +318,7 @@ namespace PrimarySchool
 
                 if (tbxDescription.Text.Trim().Equals(string.Empty))
                 {
-                    message = "You must enter a Description";
+                    message = "You must enter a Description.";
                     tbxDescription.Focus();
                     allOK = false;
                 }
@@ -426,7 +426,7 @@ namespace PrimarySchool
 
                 ProgOps.AssignmentsTable.DefaultView.Sort = "Assignment_Name";
 
-                MessageBox.Show("Record saved", "Success",
+                MessageBox.Show("Record saved.", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 SetState("View");
@@ -594,8 +594,8 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Unable to add because the Assignment ID is not listed...\n" +
-                        "To fix this, try again after closing and reopening Assignments");
+                    FormOps.ErrorBox("Unable to add because the Assignment ID is not listed.\n\n" +
+                        "To fix this, try again after closing and reopening Assignments.");
                 }
             }
             catch (Exception ex)
@@ -614,8 +614,8 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Unable to remove because the Assignment ID is not listed...\n" +
-                        "To fix this, try again after closing and reopening Assignments");
+                    FormOps.ErrorBox("Unable to remove because the Assignment ID is not listed.\n\n" +
+                        "To fix this, try again after closing and reopening Assignments.");
                 }
             }
             catch (Exception ex)

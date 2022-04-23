@@ -277,11 +277,8 @@ namespace PrimarySchool
 
                 if (userRole.Equals("Teacher"))
                 {
-                    courseNamesQuery =
-                        "SELECT Course_Name " +
-                        "FROM group1fa212330.Courses " +
-                        "WHERE User_ID = " + userID +
-                        " ORDER BY Course_Name;";
+                    courseNamesQuery = "EXEC group1fa212330.spGetRegisteredCoursesForTeacher " +
+                        "@User_ID = " + userID + ";";
                 }
                 else
                 {
@@ -442,8 +439,8 @@ namespace PrimarySchool
 
         //Get Teacher information for Academic Officers - Teacher Tab
         public static void TeachersCommand(TextBox txUserID, TextBox txLName, TextBox txFname,
-            TextBox txMName, TextBox txDOB, TextBox txMailingAddress, TextBox txStreet, TextBox txCity,
-            TextBox txState, TextBox txZip, TextBox txPhone, TextBox txTotalCourses)
+            TextBox txMName, TextBox txDOB, TextBox txAddress, TextBox txCity,
+            TextBox txState, TextBox txZip, TextBox txPhone)
         {
             try
             {
@@ -464,14 +461,12 @@ namespace PrimarySchool
                 txLName.DataBindings.Add("Text", _dtTeachersTable, "User_LName");
                 txFname.DataBindings.Add("Text", _dtTeachersTable, "User_FName");
                 txMName.DataBindings.Add("Text", _dtTeachersTable, "User_MName");
-                txDOB.DataBindings.Add("Text", _dtTeachersTable, "User_DOB");
-                txMailingAddress.DataBindings.Add("Text", _dtTeachersTable, "User_MailingAddress");
-                txStreet.DataBindings.Add("Text", _dtTeachersTable, "User_StreetAddress");
+                txDOB.DataBindings.Add("Text", _dtTeachersTable, "User_DOB", true);
+                txAddress.DataBindings.Add("Text", _dtTeachersTable, "User_MailingAddress");
                 txCity.DataBindings.Add("Text", _dtTeachersTable, "User_City");
                 txState.DataBindings.Add("Text", _dtTeachersTable, "User_State");
                 txZip.DataBindings.Add("Text", _dtTeachersTable, "User_Zip");
                 txPhone.DataBindings.Add("Text", _dtTeachersTable, "User_Phone_Number");
-                txTotalCourses.DataBindings.Add("Text", _dtTeachersTable, "NumOfCourses");
             }
             catch (SqlException ex)
             {
@@ -850,14 +845,40 @@ namespace PrimarySchool
         }
 
         // Returns DataTable for courses that a student is registered for using Student ID
-        public static DataTable GetRegisteredCourses(int studentID)
+        public static DataTable GetRegisteredCoursesForStudent(int studentID)
         {
 
             DataTable coursesTable = new DataTable();
 
             try
             {
-                string coursesQuery = "EXEC group1fa212330.spGetRegisteredCourses @Student_ID = " + studentID + ";";
+                string coursesQuery = "EXEC group1fa212330.spGetRegisteredCoursesForStudent @Student_ID = " + studentID + ";";
+
+                SqlDataAdapter coursesAdapter = new SqlDataAdapter(coursesQuery, _cntPrimarySchoolDatabase);
+
+                coursesAdapter.Fill(coursesTable);
+
+                coursesAdapter.Dispose();
+
+                return coursesTable;
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+                return coursesTable;
+            }
+        }
+
+        // Returns DataTable for courses that a teacher is registered for using User ID
+        public static DataTable GetRegisteredCoursesForTeacher(int userID)
+        {
+
+            DataTable coursesTable = new DataTable();
+
+            try
+            {
+                string coursesQuery = "EXEC group1fa212330.spGetRegisteredCoursesForTeacher " +
+                        "@User_ID = " + userID + ";";
 
                 SqlDataAdapter coursesAdapter = new SqlDataAdapter(coursesQuery, _cntPrimarySchoolDatabase);
 
@@ -875,14 +896,39 @@ namespace PrimarySchool
         }
 
         // Returns DataTable for courses that a student is NOT registered for using Student ID
-        public static DataTable GetAvailableCourses(int studentID)
+        public static DataTable GetAvailableCoursesForStudent(int studentID)
         {
 
             DataTable coursesTable = new DataTable();
 
             try
             {
-                string coursesQuery = "EXEC group1fa212330.spGetAvailableCourses @Student_ID = " + studentID + ";";
+                string coursesQuery = "EXEC group1fa212330.spGetAvailableCoursesForStudent @Student_ID = " + studentID + ";";
+
+                SqlDataAdapter coursesAdapter = new SqlDataAdapter(coursesQuery, _cntPrimarySchoolDatabase);
+
+                coursesAdapter.Fill(coursesTable);
+
+                coursesAdapter.Dispose();
+
+                return coursesTable;
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+                return coursesTable;
+            }
+        }
+
+        // Returns DataTable for courses with no registered teacher
+        public static DataTable GetAvailableCoursesForTeacher()
+        {
+
+            DataTable coursesTable = new DataTable();
+
+            try
+            {
+                string coursesQuery = "EXEC group1fa212330.spGetAvailableCoursesForTeacher;";
 
                 SqlDataAdapter coursesAdapter = new SqlDataAdapter(coursesQuery, _cntPrimarySchoolDatabase);
 
@@ -1499,6 +1545,50 @@ namespace PrimarySchool
             catch (Exception ex)
             {
                 FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        public static void AddTeacherToCourse(int userID, string courseName)
+        {
+            try
+            {
+                int courseID = GetCourseID(courseName);
+
+                SqlCommand addCommand = new SqlCommand("EXEC group1fa212330.spAddTeacherToCourse " +
+                    "@User_ID = " + userID + ", @Course_ID = " + courseID + ";", _cntPrimarySchoolDatabase);
+
+                addCommand.ExecuteNonQuery();
+
+                addCommand.Dispose();
+
+                MessageBox.Show("Teacher successfully added to course.", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox("AddTeacherToCourse" + ex.Message);
+            }
+        }
+
+        public static void RemoveTeacherFromCourse(string courseName)
+        {
+            try
+            {
+                int courseID = GetCourseID(courseName);
+
+                SqlCommand removalCommand = new SqlCommand("EXEC group1fa212330.spRemoveTeacherFromCourse " +
+                    "@Course_ID = " + courseID + ";", _cntPrimarySchoolDatabase);
+
+                removalCommand.ExecuteNonQuery();
+
+                removalCommand.Dispose();
+
+                MessageBox.Show("Teacher successfully removed from course.", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox("RemoveTeacherFromCourse: " + ex.Message);
             }
         }
 
