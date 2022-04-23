@@ -75,6 +75,7 @@ namespace PrimarySchool
                         tbxFirstName.ReadOnly = true;
                         tbxMiddleName.ReadOnly = true;
                         tbxDateOfBirth.ReadOnly = true;
+                        tbxEmail.ReadOnly = true;
                         tbxAddress.ReadOnly = true;
                         tbxCity.ReadOnly = true;
                         tbxState.ReadOnly = true;
@@ -110,6 +111,7 @@ namespace PrimarySchool
                         tbxFirstName.ReadOnly = false;
                         tbxMiddleName.ReadOnly = false;
                         tbxDateOfBirth.ReadOnly = false;
+                        tbxEmail.ReadOnly = false;
                         tbxAddress.ReadOnly = false;
                         tbxCity.ReadOnly = false;
                         tbxState.ReadOnly = false;
@@ -153,8 +155,8 @@ namespace PrimarySchool
         private void frmTeachers_Load(object sender, EventArgs e)
         {
             //ProgOps.OpenDatabase();
-            ProgOps.TeachersCommand(tbxUserID, tbxLastName, tbxFirstName, tbxMiddleName, tbxDateOfBirth, tbxAddress,
-                tbxCity, tbxState, tbxZip, tbxPhone);
+            ProgOps.TeachersCommand(tbxUserID, tbxLastName, tbxFirstName, tbxMiddleName, tbxDateOfBirth, tbxEmail,
+                tbxAddress, tbxCity, tbxState, tbxZip, tbxPhone);
             //establish currency manager to control buttons previous and next
             manager = (CurrencyManager)this.BindingContext[ProgOps.DTTeachersTable];
             //set state
@@ -280,6 +282,7 @@ namespace PrimarySchool
             try
             {
                 manager.Position = 0;
+
                 SystemSounds.Beep.Play();
             }
             catch (Exception ex)
@@ -294,6 +297,7 @@ namespace PrimarySchool
             try
             {
                 manager.Position = manager.Count - 1;
+
                 SystemSounds.Beep.Play();
             }
             catch (Exception ex)
@@ -312,6 +316,7 @@ namespace PrimarySchool
                 {
                     SystemSounds.Beep.Play();
                 }
+
                 manager.Position--;
             }
             catch (Exception ex)
@@ -330,6 +335,7 @@ namespace PrimarySchool
                 {
                     SystemSounds.Beep.Play();
                 }
+
                 manager.Position++;
             }
             catch (Exception ex)
@@ -425,8 +431,6 @@ namespace PrimarySchool
                 manager.AddNew();
 
                 SetState("Add New");
-                //manager.AddNew();
-
             }
             catch (Exception ex)
             {
@@ -442,31 +446,28 @@ namespace PrimarySchool
 
         }
 
-        private void btnAddCourse_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            Save();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (tbxSearch.Text.Equals(""))
             {
-                if (lbxAvailableCourses.SelectedIndex >= 0)
-                {
-                    if (FormOps.QuestionBox("Are you sure you want to add this course?"))
-                    {
-                        int userID = Convert.ToInt32(tbxUserID.Text);
-
-                        ProgOps.AddTeacherToCourse(userID, lbxAvailableCourses.SelectedItem.ToString());
-
-                        FillRegisteredCoursesListBox();
-
-                        FillAvailableCoursesListBox();
-                    }
-                }
-                else
-                {
-                    FormOps.ErrorBox("Select an available course to add.");
-                }
+                return;
             }
-            catch (Exception ex)
+            int savedRow = manager.Position;
+            DataRow[] foundRows;
+            ProgOps.DTTeachersTable.DefaultView.Sort = "User_LName";
+            foundRows = ProgOps.DTTeachersTable.Select("User_LName LIKE '" + tbxSearch.Text + "*'");
+            if (foundRows.Length == 0)
             {
-                FormOps.ErrorBox("btnAddCourse_Click: " + ex.Message);
+                manager.Position = savedRow;
+            }
+            else
+            {
+                manager.Position = ProgOps.DTTeachersTable.DefaultView.Find(foundRows[0]["User_LName"]);
             }
         }
 
@@ -538,17 +539,31 @@ namespace PrimarySchool
             }
         }
 
-        private void tbxUserID_TextChanged(object sender, EventArgs e)
+        private void btnAddCourse_Click(object sender, EventArgs e)
         {
             try
             {
-                FillAvailableCoursesListBox();
+                if (lbxAvailableCourses.SelectedIndex >= 0)
+                {
+                    if (FormOps.QuestionBox("Are you sure you want to add this course?"))
+                    {
+                        int userID = Convert.ToInt32(tbxUserID.Text);
 
-                FillRegisteredCoursesListBox();
+                        ProgOps.AddTeacherToCourse(userID, lbxAvailableCourses.SelectedItem.ToString());
+
+                        FillRegisteredCoursesListBox();
+
+                        FillAvailableCoursesListBox();
+                    }
+                }
+                else
+                {
+                    FormOps.ErrorBox("Select an available course to add.");
+                }
             }
             catch (Exception ex)
             {
-                FormOps.ErrorBox(ex.Message);
+                FormOps.ErrorBox("btnAddCourse_Click: " + ex.Message);
             }
         }
 
@@ -587,6 +602,20 @@ namespace PrimarySchool
             catch (Exception ex)
             {
                 FormOps.ErrorBox("btnRemoveCourse_Click: " + ex.Message);
+            }
+        }
+
+        private void tbxUserID_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                FillAvailableCoursesListBox();
+
+                FillRegisteredCoursesListBox();
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
             }
         }
     }
