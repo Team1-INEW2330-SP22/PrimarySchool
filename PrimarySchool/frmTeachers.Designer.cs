@@ -40,7 +40,7 @@ namespace PrimarySchool
             this.lblUserID = new System.Windows.Forms.Label();
             this.tbxDateOfBirth = new System.Windows.Forms.TextBox();
             this.lblDateOfBirth = new System.Windows.Forms.Label();
-            this.tbxMailAddress = new System.Windows.Forms.TextBox();
+            this.tbxEmail = new System.Windows.Forms.TextBox();
             this.lblMailAddress = new System.Windows.Forms.Label();
             this.tbxStreetAddress = new System.Windows.Forms.TextBox();
             this.lblStreetAddress = new System.Windows.Forms.Label();
@@ -63,8 +63,6 @@ namespace PrimarySchool
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnAddNew = new System.Windows.Forms.Button();
             this.gbxSearch = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.tbxSearch = new System.Windows.Forms.TextBox();
@@ -89,8 +87,6 @@ namespace PrimarySchool
             this.mnuEditRecord = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSave = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCancel = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAddNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCourses = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAddCourse = new System.Windows.Forms.ToolStripMenuItem();
@@ -217,28 +213,28 @@ namespace PrimarySchool
             this.lblDateOfBirth.TabIndex = 8;
             this.lblDateOfBirth.Text = "Date of Birth:";
             // 
-            // tbxMailAddress
+            // tbxEmail
             // 
-            this.tbxMailAddress.BackColor = System.Drawing.Color.White;
-            this.tbxMailAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbxMailAddress.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxMailAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxMailAddress.Location = new System.Drawing.Point(120, 203);
-            this.tbxMailAddress.Name = "tbxMailAddress";
-            this.tbxMailAddress.ReadOnly = true;
-            this.tbxMailAddress.Size = new System.Drawing.Size(283, 27);
-            this.tbxMailAddress.TabIndex = 11;
-            this.tbxMailAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbxEmail.BackColor = System.Drawing.Color.White;
+            this.tbxEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxEmail.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
+            this.tbxEmail.Location = new System.Drawing.Point(120, 203);
+            this.tbxEmail.Name = "tbxEmail";
+            this.tbxEmail.ReadOnly = true;
+            this.tbxEmail.Size = new System.Drawing.Size(283, 27);
+            this.tbxEmail.TabIndex = 11;
+            this.tbxEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblMailAddress
             // 
-            this.lblMailAddress.AutoSize = true;
             this.lblMailAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMailAddress.Location = new System.Drawing.Point(10, 208);
             this.lblMailAddress.Name = "lblMailAddress";
             this.lblMailAddress.Size = new System.Drawing.Size(106, 17);
             this.lblMailAddress.TabIndex = 10;
-            this.lblMailAddress.Text = "Mailing Address:";
+            this.lblMailAddress.Text = "Email:";
+            this.lblMailAddress.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbxStreetAddress
             // 
@@ -483,6 +479,7 @@ namespace PrimarySchool
             this.btnSave.TabIndex = 32;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -497,34 +494,6 @@ namespace PrimarySchool
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.btnDelete.Location = new System.Drawing.Point(215, 373);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(93, 30);
-            this.btnDelete.TabIndex = 35;
-            this.btnDelete.Text = "&Delete";
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnAddNew
-            // 
-            this.btnAddNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddNew.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddNew.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.btnAddNew.Location = new System.Drawing.Point(120, 373);
-            this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(93, 30);
-            this.btnAddNew.TabIndex = 34;
-            this.btnAddNew.Text = "&Add New";
-            this.btnAddNew.UseVisualStyleBackColor = false;
-            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // gbxSearch
             // 
@@ -552,6 +521,7 @@ namespace PrimarySchool
             this.btnSearch.TabIndex = 38;
             this.btnSearch.Text = "Sea&rch";
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // tbxSearch
             // 
@@ -683,7 +653,7 @@ namespace PrimarySchool
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
             this.mnuFileClose.Text = "&Close";
             this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
@@ -747,8 +717,6 @@ namespace PrimarySchool
             this.mnuEditRecord,
             this.mnuSave,
             this.mnuCancel,
-            this.mnuAddNew,
-            this.mnuDelete,
             this.mnuSearch,
             this.mnuCourses});
             this.mnuOperations.Name = "mnuOperations";
@@ -780,22 +748,6 @@ namespace PrimarySchool
             this.mnuCancel.Size = new System.Drawing.Size(190, 22);
             this.mnuCancel.Text = "&Cancel";
             this.mnuCancel.Click += new System.EventHandler(this.mnuCancel_Click);
-            // 
-            // mnuAddNew
-            // 
-            this.mnuAddNew.Name = "mnuAddNew";
-            this.mnuAddNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.mnuAddNew.Size = new System.Drawing.Size(190, 22);
-            this.mnuAddNew.Text = "&Add New";
-            this.mnuAddNew.Click += new System.EventHandler(this.mnuAddNew_Click);
-            // 
-            // mnuDelete
-            // 
-            this.mnuDelete.Name = "mnuDelete";
-            this.mnuDelete.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.mnuDelete.Size = new System.Drawing.Size(190, 22);
-            this.mnuDelete.Text = "&Delete";
-            this.mnuDelete.Click += new System.EventHandler(this.mnuDelete_Click);
             // 
             // mnuSearch
             // 
@@ -843,7 +795,7 @@ namespace PrimarySchool
             // 
             this.mnuHelpInstructions.Name = "mnuHelpInstructions";
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
             // 
             // frmTeachers
@@ -855,8 +807,6 @@ namespace PrimarySchool
             this.Controls.Add(this.mnuMenu);
             this.Controls.Add(this.gbxCourses);
             this.Controls.Add(this.gbxSearch);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnEdit);
@@ -878,7 +828,7 @@ namespace PrimarySchool
             this.Controls.Add(this.lblCity);
             this.Controls.Add(this.tbxStreetAddress);
             this.Controls.Add(this.lblStreetAddress);
-            this.Controls.Add(this.tbxMailAddress);
+            this.Controls.Add(this.tbxEmail);
             this.Controls.Add(this.lblMailAddress);
             this.Controls.Add(this.tbxDateOfBirth);
             this.Controls.Add(this.lblDateOfBirth);
@@ -924,7 +874,7 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblUserID;
         private System.Windows.Forms.TextBox tbxDateOfBirth;
         private System.Windows.Forms.Label lblDateOfBirth;
-        private System.Windows.Forms.TextBox tbxMailAddress;
+        private System.Windows.Forms.TextBox tbxEmail;
         private System.Windows.Forms.Label lblMailAddress;
         private System.Windows.Forms.TextBox tbxStreetAddress;
         private System.Windows.Forms.Label lblStreetAddress;
@@ -947,8 +897,6 @@ namespace PrimarySchool
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.GroupBox gbxSearch;
         private System.Windows.Forms.TextBox tbxSearch;
         private System.Windows.Forms.Label lblSearch;
@@ -973,8 +921,6 @@ namespace PrimarySchool
         private System.Windows.Forms.ToolStripMenuItem mnuEditRecord;
         private System.Windows.Forms.ToolStripMenuItem mnuSave;
         private System.Windows.Forms.ToolStripMenuItem mnuCancel;
-        private System.Windows.Forms.ToolStripMenuItem mnuAddNew;
-        private System.Windows.Forms.ToolStripMenuItem mnuDelete;
         private System.Windows.Forms.ToolStripMenuItem mnuSearch;
         private System.Windows.Forms.ToolStripMenuItem mnuCourses;
         private System.Windows.Forms.ToolStripMenuItem mnuAddCourse;

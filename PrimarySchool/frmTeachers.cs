@@ -46,7 +46,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    //ProgOps.CloseDisposeDatabase();
+                    ProgOps.UpdateTeacherRecordsOnClose();
                     FormOps.ShowModeless(home);
                 }
             }
@@ -75,7 +75,7 @@ namespace PrimarySchool
                         tbxFirstName.ReadOnly = true;
                         tbxMiddleName.ReadOnly = true;
                         tbxDateOfBirth.ReadOnly = true;
-                        tbxMailAddress.ReadOnly = true;
+                        tbxEmail.ReadOnly = true;
                         tbxStreetAddress.ReadOnly = true;
                         tbxCity.ReadOnly = true;
                         tbxState.ReadOnly = true;
@@ -91,9 +91,7 @@ namespace PrimarySchool
                         btnNext.Enabled = true;
                         btnPrevious.Enabled = true;
                         btnEdit.Enabled = true;
-                        btnAddNew.Enabled = true;
                         btnSave.Enabled = false;
-                        btnDelete.Enabled = true;
                         btnCancel.Enabled = false;
                         gbxSearch.Enabled = true;
                         mnuNavigation.Enabled = true;
@@ -102,9 +100,7 @@ namespace PrimarySchool
                         mnuNext.Enabled = true;
                         mnuPrevious.Enabled = true;
                         mnuEditRecord.Enabled = true;
-                        mnuAddNew.Enabled = true;
                         mnuSave.Enabled = false;
-                        mnuDelete.Enabled = true;
                         mnuCancel.Enabled = false;
                         mnuSearch.Enabled = true;
                         mnuCourses.Enabled = false;
@@ -118,7 +114,7 @@ namespace PrimarySchool
                         tbxFirstName.ReadOnly = false;
                         tbxMiddleName.ReadOnly = false;
                         tbxDateOfBirth.ReadOnly = false;
-                        tbxMailAddress.ReadOnly = false;
+                        tbxEmail.ReadOnly = false;
                         tbxStreetAddress.ReadOnly = false;
                         tbxCity.ReadOnly = false;
                         tbxState.ReadOnly = false;
@@ -134,9 +130,7 @@ namespace PrimarySchool
                         btnNext.Enabled = false;
                         btnPrevious.Enabled = false;
                         btnEdit.Enabled = false;
-                        btnAddNew.Enabled = false;
                         btnSave.Enabled = true;
-                        btnDelete.Enabled = false;
                         btnCancel.Enabled = true;
                         gbxSearch.Enabled = false;
                         mnuNavigation.Enabled = false;
@@ -145,9 +139,7 @@ namespace PrimarySchool
                         mnuNext.Enabled = false;
                         mnuPrevious.Enabled = false;
                         mnuEditRecord.Enabled = false;
-                        mnuAddNew.Enabled = false;
                         mnuSave.Enabled = true;
-                        mnuDelete.Enabled = false;
                         mnuCancel.Enabled = true;
                         mnuSearch.Enabled = false;
                         mnuCourses.Enabled = true;
@@ -169,7 +161,7 @@ namespace PrimarySchool
         private void frmTeachers_Load(object sender, EventArgs e)
         {
             //ProgOps.OpenDatabase();
-            ProgOps.TeachersCommand(tbxUserID, tbxLastName, tbxFirstName, tbxMiddleName, tbxDateOfBirth, tbxMailAddress,
+            ProgOps.TeachersCommand(tbxUserID, tbxLastName, tbxFirstName, tbxMiddleName, tbxDateOfBirth, tbxEmail,
                 tbxStreetAddress, tbxCity, tbxState, tbxZip, tbxPhone, tbxTotalCourses);
             //establish currency manager to control buttons previous and next
             manager = (CurrencyManager)this.BindingContext[ProgOps.DTTeachersTable];
@@ -183,22 +175,7 @@ namespace PrimarySchool
         // Sets state to View.
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (!FormOps.QuestionBox("Are you sure you want to delete this teacher?"))
-            {
-                return;
-            }
-            else
-            {
-                try
-                {
-                    //manager.RemoveAt(manager.Position);
-                }
-                catch (Exception ex)
-                {
-                    FormOps.ErrorBox(ex.Message);
-                }
-            }
-            SetState("View");
+            Delete();
         }
 
         // Calls GoToFirst().
@@ -376,17 +353,22 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void Save()
         {
-            if (!ValidateData())
-            {
-                return;
-            }
+            //if (!ValidateData())
+            //{
+            //    return;
+            //}
+
+            string savedName = tbxUserID.Text;
+            int savedRow;
 
             try
             {
-                //manager.EndCurrentEdit();
+                manager.EndCurrentEdit();
+                ProgOps.DTTeachersTable.DefaultView.Sort = "User_LName";
+                savedRow = ProgOps.DTTeachersTable.DefaultView.Find(savedName);
 
-                MessageBox.Show("Record saved.", "Save",
-                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                manager.Position = savedRow;
+                MessageBox.Show("Record Saved", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 SetState("View");
             }
             catch (Exception ex)
@@ -401,7 +383,7 @@ namespace PrimarySchool
         // Sets state to View.
         private void Delete()
         {
-            if (!FormOps.QuestionBox("Are you sure you want to delete this assignment?"))
+            if (!FormOps.QuestionBox("Are you sure you want to delete this user?"))
             {
                 return;
             }
@@ -409,7 +391,7 @@ namespace PrimarySchool
             {
                 try
                 {
-                    //manager.RemoveAt(manager.Position);
+                    manager.RemoveAt(manager.Position);
                 }
                 catch (Exception ex)
                 {
@@ -448,6 +430,8 @@ namespace PrimarySchool
             try
             {
                 bookmark = manager.Position;
+                manager.AddNew();
+
                 SetState("Add New");
                 //manager.AddNew();
 
@@ -464,6 +448,31 @@ namespace PrimarySchool
         {
             SetState("Edit");
 
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (tbxSearch.Text.Equals(""))
+            {
+                return;
+            }
+            int savedRow = manager.Position;
+            DataRow[] foundRows;
+            ProgOps.DTTeachersTable.DefaultView.Sort = "User_LName";
+            foundRows = ProgOps.DTTeachersTable.Select("User_LName LIKE '" + tbxSearch.Text + "*'");
+            if (foundRows.Length == 0)
+            {
+                manager.Position = savedRow;
+            }
+            else
+            {
+                manager.Position = ProgOps.DTTeachersTable.DefaultView.Find(foundRows[0]["User_LName"]);
+            }
         }
     }
 }

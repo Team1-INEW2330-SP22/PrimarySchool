@@ -450,17 +450,17 @@ namespace PrimarySchool
 
         //Get Teacher information for Academic Officers - Teacher Tab
         public static void TeachersCommand(TextBox txUserID, TextBox txLName, TextBox txFname,
-            TextBox txMName, TextBox txDOB, TextBox txMailingAddress, TextBox txStreet, TextBox txCity,
+            TextBox txMName, TextBox txDOB, TextBox txEmail, TextBox txStreet, TextBox txCity,
             TextBox txState, TextBox txZip, TextBox txPhone, TextBox txTotalCourses)
         {
             try
             {
                 //statement for the command string
-                string sqlStatement = "SELECT Users.User_ID, User_LName, User_FName, User_MName, User_DOB, User_MailingAddress, User_MailingAddress AS User_StreetAddress, " +
+                string sqlStatement = "SELECT Users.User_ID, User_LName, User_FName, User_MName, User_DOB, User_Email, User_MailingAddress, " +
                     "User_City, User_State, User_Zip, User_Phone_Number, Count(Courses.Course_ID) AS NumOfCourses " +
                     "FROM group1fa212330.Users " +
                     "JOIN group1fa212330.Courses ON Users.User_ID = Courses.User_ID " +
-                    "GROUP BY Users.User_ID, User_LName, User_FName, User_MName, User_DOB, User_MailingAddress, User_City, User_State, User_Zip, User_Phone_Number;";
+                    "GROUP BY Users.User_ID, User_LName, User_FName, User_MName, User_DOB, User_Email, User_MailingAddress, User_City, User_State, User_Zip, User_Phone_Number;";
                 //establish command object
                 _sqlTeachersCommand = new SqlCommand(sqlStatement, _cntPrimarySchoolDatabase);
                 //establish data adapter
@@ -472,9 +472,9 @@ namespace PrimarySchool
                 txLName.DataBindings.Add("Text", _dtTeachersTable, "User_LName");
                 txFname.DataBindings.Add("Text", _dtTeachersTable, "User_FName");
                 txMName.DataBindings.Add("Text", _dtTeachersTable, "User_MName");
-                txDOB.DataBindings.Add("Text", _dtTeachersTable, "User_DOB");
-                txMailingAddress.DataBindings.Add("Text", _dtTeachersTable, "User_MailingAddress");
-                txStreet.DataBindings.Add("Text", _dtTeachersTable, "User_StreetAddress");
+                txDOB.DataBindings.Add("Text", _dtTeachersTable, "User_DOB", true);
+                txEmail.DataBindings.Add("Text", _dtTeachersTable, "User_Email");
+                txStreet.DataBindings.Add("Text", _dtTeachersTable, "User_MailingAddress");
                 txCity.DataBindings.Add("Text", _dtTeachersTable, "User_City");
                 txState.DataBindings.Add("Text", _dtTeachersTable, "User_State");
                 txZip.DataBindings.Add("Text", _dtTeachersTable, "User_Zip");
@@ -1222,6 +1222,11 @@ namespace PrimarySchool
         //Establishing Data Tables - rth040322
         private static DataTable _dtUsersTable = new DataTable();                    //DataTable Object for Users Table
 
+        public static DataTable DTUsersTable
+        {
+            get { return _dtUsersTable; }
+        }
+
         public static void UserLoginObjectDisposal()
         {
             //Dispose of UserLogin command adapter and objects
@@ -1468,5 +1473,122 @@ namespace PrimarySchool
             //    _sqlUpdatePassCommand.ExecuteNonQuery();
             //}
         }
+
+        
+        
+        //Get Users information for Users - 
+        public static void GetUserRecords(TextBox txUserID, TextBox txLName, TextBox txFname,
+            TextBox txMName, TextBox txDOB, TextBox txStreet, TextBox txCity,
+            TextBox txState, TextBox txZip, TextBox txPhone, TextBox txRole, TextBox txUserName, TextBox txPassword, TextBox txEmail)
+        {
+            try
+            {
+                //statement for the command string
+                string sqlStatement = "SELECT * FROM group1fa212330.Users ORDER BY User_LName, User_FName;";
+                //establish command object
+                _sqlUsersCommand = new SqlCommand(sqlStatement, _cntPrimarySchoolDatabase);
+                //establish data adapter
+                _daUsers.SelectCommand = _sqlUsersCommand;
+                //fill DataTable
+                _daUsers.Fill(_dtUsersTable);
+                //bind controls to DataTable
+                txUserID.DataBindings.Add("Text", _dtUsersTable, "User_ID");
+                txLName.DataBindings.Add("Text", _dtUsersTable, "User_LName");
+                txFname.DataBindings.Add("Text", _dtUsersTable, "User_FName");
+                txMName.DataBindings.Add("Text", _dtUsersTable, "User_MName");
+                txDOB.DataBindings.Add("Text", _dtUsersTable, "User_DOB", true);
+                txStreet.DataBindings.Add("Text", _dtUsersTable, "User_MailingAddress");
+                txCity.DataBindings.Add("Text", _dtUsersTable, "User_City");
+                txState.DataBindings.Add("Text", _dtUsersTable, "User_State");
+                txZip.DataBindings.Add("Text", _dtUsersTable, "User_Zip");
+                txPhone.DataBindings.Add("Text", _dtUsersTable, "User_Phone_Number");
+                txRole.DataBindings.Add("Text", _dtUsersTable, "Role_ID");
+                txUserName.DataBindings.Add("Text", _dtUsersTable, "User_LoginName");
+                txPassword.DataBindings.Add("Text", _dtUsersTable, "User_LoginPwd");
+                txEmail.DataBindings.Add("Text", _dtUsersTable, "User_Email");
+
+            }
+            catch (SqlException ex)
+            {
+                if (ex is SqlException)
+                {//handles more specific SqlException here.
+                    for (int i = 0; i < ex.Errors.Count; i++)
+                    {
+                        _errorMessages.Append("Index #" + i + "\n" +
+                            "Message: " + ex.Errors[i].Message + "\n" +
+                            "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                            "Source: " + ex.Errors[i].Source + "\n" +
+                            "Procedure: " + ex.Errors[i].Procedure + "\n");
+                    }
+                    MessageBox.Show(_errorMessages.ToString(), "Error on DatabaseCommand", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {//handles generic ones here
+                    MessageBox.Show(ex.Message, "Error on DatabaseCommand", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // Updates the User Information
+        public static void UpdateUserRecordsOnClose()
+        {
+            try
+            {
+                //save the updated phone table
+                SqlCommandBuilder UsersAdapterCommands = new SqlCommandBuilder(_daUsers);
+                _daUsers.Update(_dtUsersTable);
+
+            }
+            catch (SqlException ex)
+            {
+                if (ex is SqlException)
+                {//handles more specific SqlException here.
+                    for (int i = 0; i < ex.Errors.Count; i++)
+                    {
+                        _errorMessages.Append("Index #" + i + "\n" +
+                            "Message: " + ex.Errors[i].Message + "\n" +
+                            "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                            "Source: " + ex.Errors[i].Source + "\n" +
+                            "Procedure: " + ex.Errors[i].Procedure + "\n");
+                    }
+                    MessageBox.Show(_errorMessages.ToString(), "Error Update Users", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {//handles generic ones here
+                    MessageBox.Show(ex.Message + "Error (PO4)", "Error Update Users", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        public static void UpdateTeacherRecordsOnClose()
+        {
+            try
+            {
+                //save the updated phone table
+                SqlCommandBuilder TeachersAdapterCommands = new SqlCommandBuilder(_daTeachers);
+                _daTeachers.Update(_dtTeachersTable);
+
+            }
+            catch (SqlException ex)
+            {
+                if (ex is SqlException)
+                {//handles more specific SqlException here.
+                    for (int i = 0; i < ex.Errors.Count; i++)
+                    {
+                        _errorMessages.Append("Index #" + i + "\n" +
+                            "Message: " + ex.Errors[i].Message + "\n" +
+                            "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                            "Source: " + ex.Errors[i].Source + "\n" +
+                            "Procedure: " + ex.Errors[i].Procedure + "\n");
+                    }
+                    MessageBox.Show(_errorMessages.ToString(), "Error Update Users", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {//handles generic ones here
+                    MessageBox.Show(ex.Message + "Error (PO4)", "Error Update Users", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
     }
 }

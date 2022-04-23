@@ -302,7 +302,7 @@ namespace PrimarySchool
         private bool ValidateData()
         {
 
-            return false;
+            return true;
         }
 
         // Goes to first record and beeps (commented).

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;             //using for beeps, sounds
 
 namespace PrimarySchool
 {
@@ -40,12 +41,13 @@ namespace PrimarySchool
             {
                 if (state.Equals("Edit") || state.Equals("Add New"))
                 {
-                    FormOps.ErrorBox("You must finish the current edit before closing Users.");
+                    MessageBox.Show("You must finish the current edit before stopping the application.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     e.Cancel = true;
                 }
                 else
                 {
-
+                    //Saves Changes before closing form
+                    ProgOps.UpdateUserRecordsOnClose();
                     FormOps.ShowModeless(home);
                 }
             }
@@ -74,7 +76,7 @@ namespace PrimarySchool
                         tbxFirstName.ReadOnly = true;
                         tbxMiddleName.ReadOnly = true;
                         tbxDateOfBirth.ReadOnly = true;
-                        tbxMailAddress.ReadOnly = true;
+                        tbxEmail.ReadOnly = true;
                         tbxStreetAddress.ReadOnly = true;
                         tbxCity.ReadOnly = true;
                         tbxState.ReadOnly = true;
@@ -91,6 +93,9 @@ namespace PrimarySchool
                         btnCancel.Enabled = false;
                         gbxSearch.Enabled = true;
                         gbxCredentials.Enabled = false;
+                        tbxRole.ReadOnly = true;
+                        tbxUsername.ReadOnly = true;
+                        tbxUserPassword.ReadOnly = true;
                         mnuNavigation.Enabled = true;
                         mnuFirst.Enabled = true;
                         mnuLast.Enabled = true;
@@ -112,7 +117,7 @@ namespace PrimarySchool
                         tbxFirstName.ReadOnly = false;
                         tbxMiddleName.ReadOnly = false;
                         tbxDateOfBirth.ReadOnly = false;
-                        tbxMailAddress.ReadOnly = false;
+                        tbxEmail.ReadOnly = false;
                         tbxStreetAddress.ReadOnly = false;
                         tbxCity.ReadOnly = false;
                         tbxState.ReadOnly = false;
@@ -129,6 +134,9 @@ namespace PrimarySchool
                         btnCancel.Enabled = true;
                         gbxSearch.Enabled = false;
                         gbxCredentials.Enabled = true;
+                        tbxRole.ReadOnly = false;
+                        tbxUsername.ReadOnly = false;
+                        tbxUserPassword.ReadOnly = false;
                         mnuNavigation.Enabled = false;
                         mnuFirst.Enabled = false;
                         mnuLast.Enabled = false;
@@ -157,8 +165,12 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void frmUsers_Load(object sender, EventArgs e)
         {
-
-
+            //ProgOps.OpenDatabase();
+            ProgOps.GetUserRecords(tbxUserID, tbxLastName, tbxFirstName, tbxMiddleName, tbxDateOfBirth,
+                                    tbxStreetAddress, tbxCity, tbxState, tbxZip, tbxPhone, tbxRole, tbxUsername, tbxUserPassword, tbxEmail);
+            //establish currency manager to control buttons previous and next
+            manager = (CurrencyManager)this.BindingContext[ProgOps.DTUsersTable];
+            //set state
             SetState("View");
         }
 
@@ -275,7 +287,7 @@ namespace PrimarySchool
         private bool ValidateData()
         {
 
-            return false;
+            return true;
         }
 
         // Goes to first record and beeps (commented).
@@ -283,8 +295,8 @@ namespace PrimarySchool
         {
             try
             {
-                //manager.Position = 0;
-                //SystemSounds.Beep.Play();
+                manager.Position = 0;
+                SystemSounds.Beep.Play();
             }
             catch (Exception ex)
             {
@@ -297,8 +309,8 @@ namespace PrimarySchool
         {
             try
             {
-                //manager.Position = manager.Count - 1;
-                //SystemSounds.Beep.Play();
+                manager.Position = manager.Count - 1;
+                SystemSounds.Beep.Play();
             }
             catch (Exception ex)
             {
@@ -312,11 +324,11 @@ namespace PrimarySchool
         {
             try
             {
-                //if (manager.Position == 0)
-                //{
-                //    SystemSounds.Beep.Play();
-                //}
-                //manager.Position--;
+                if (manager.Position == 0)
+                {
+                    SystemSounds.Beep.Play();
+                }
+                manager.Position--;
             }
             catch (Exception ex)
             {
@@ -330,11 +342,11 @@ namespace PrimarySchool
         {
             try
             {
-                //if (manager.Position == manager.Count - 1)
-                //{
-                //    SystemSounds.Beep.Play();
-                //}
-                //manager.Position++;
+                if (manager.Position == manager.Count - 1)
+                {
+                    SystemSounds.Beep.Play();
+                }
+                manager.Position++;
             }
             catch (Exception ex)
             {
@@ -349,17 +361,23 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void Save()
         {
-            if (!ValidateData())
-            {
-                return;
-            }
+            //if (!ValidateData())
+            //{
+            //    return;
+            //}
+            
+
+            string savedName = tbxUserID.Text;
+            int savedRow;
 
             try
             {
-                //manager.EndCurrentEdit();
+                manager.EndCurrentEdit();
+                ProgOps.DTUsersTable.DefaultView.Sort = "User_LName";
+                savedRow = ProgOps.DTUsersTable.DefaultView.Find(savedName);
 
-                //MessageBox.Show("Record saved.", "Save",
-                //    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                manager.Position = savedRow;
+                MessageBox.Show("Record Saved", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 SetState("View");
             }
             catch (Exception ex)
@@ -382,7 +400,7 @@ namespace PrimarySchool
             {
                 try
                 {
-                    //manager.RemoveAt(manager.Position);
+                    manager.RemoveAt(manager.Position);
                 }
                 catch (Exception ex)
                 {
@@ -397,18 +415,18 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void Cancel()
         {
-            //try
-            //{
-            //    manager.CancelCurrentEdit();
-            //    if (state.Equals("Add New"))
-            //    {
-            //        manager.Position = bookmark;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    FormOps.ErrorBox(ex.Message);
-            //}
+            try
+            {
+                manager.CancelCurrentEdit();
+                if (state.Equals("Add New"))
+                {
+                    manager.Position = bookmark;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
             SetState("View");
         }
 
@@ -420,7 +438,9 @@ namespace PrimarySchool
         {
             try
             {
-                //bookmark = manager.Position;
+                bookmark = manager.Position;
+                manager.AddNew();
+
                 SetState("Add New");
                 //manager.AddNew();
 
@@ -438,5 +458,45 @@ namespace PrimarySchool
             SetState("Edit");
 
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (tbxSearch.Text.Equals(""))
+            {
+                return;
+            }
+            int savedRow = manager.Position;
+            DataRow[] foundRows;
+            ProgOps.DTUsersTable.DefaultView.Sort = "User_LName";
+            foundRows = ProgOps.DTUsersTable.Select("User_LName LIKE '" + tbxSearch.Text + "*'");
+            if (foundRows.Length == 0)
+            {
+                manager.Position = savedRow;
+            }
+            else
+            {
+                manager.Position = ProgOps.DTUsersTable.DefaultView.Find(foundRows[0]["User_LName"]);
+            }
+        }
+
+        private void pbxEyeballUserPassword_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbxUserPassword.PasswordChar.Equals('*'))
+                {
+                    tbxUserPassword.PasswordChar = '\0';
+                }
+                else
+                {
+                    tbxUserPassword.PasswordChar = '*';
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+    
     }
 }
