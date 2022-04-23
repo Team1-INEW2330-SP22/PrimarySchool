@@ -355,10 +355,15 @@ namespace PrimarySchool
 
                     seatList = new List<int>();
 
-                    for (int x = 0; x < seatChartTable.Rows.Count; x++)
+                    DataTable seatsListTable = ProgOps.GetSeatsList(selectedCourseID);
+
+                    for (int x = 0; x < seatsListTable.Rows.Count; x++)
                     {
-                        seatList.Add(Convert.ToInt32(seatChartTable.Rows[x][3]));
+                        seatList.Add(Convert.ToInt32(seatsListTable.Rows[x][0]));
                     }
+
+                    seatsListTable.Clear();
+                    seatsListTable.Dispose();
                 }
             }
             catch (Exception ex)
@@ -402,7 +407,7 @@ namespace PrimarySchool
 
                     Random rand = new Random();
 
-                    int seatCount = tempList.Count;
+                    int seatCount = seatList.Count;
 
                     while (seatCount > 1)
                     {

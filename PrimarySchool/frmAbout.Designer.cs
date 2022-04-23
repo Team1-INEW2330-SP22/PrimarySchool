@@ -124,8 +124,7 @@ namespace PrimarySchool
             this.lblProgramInfo.Name = "lblProgramInfo";
             this.lblProgramInfo.Size = new System.Drawing.Size(237, 266);
             this.lblProgramInfo.TabIndex = 119;
-            this.lblProgramInfo.Text = "This is the Alpha Build of the Primary School application by Group One of INEW-23" +
-    "30-7Z1 (04/08/2022).";
+            this.lblProgramInfo.Text = "This is the Alpha Build for the Primary School application (04/08/2022).";
             // 
             // gbxDevelopers
             // 
@@ -191,7 +190,7 @@ namespace PrimarySchool
             this.pbxAnderson.Location = new System.Drawing.Point(6, 28);
             this.pbxAnderson.Name = "pbxAnderson";
             this.pbxAnderson.Size = new System.Drawing.Size(70, 70);
-            this.pbxAnderson.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxAnderson.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbxAnderson.TabIndex = 128;
             this.pbxAnderson.TabStop = false;
             // 

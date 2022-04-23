@@ -13,35 +13,35 @@ namespace PrimarySchool
 {
     public partial class frmAssignments : Form
     {
-        // Creates 'gradebook' attribute so we can perform certain operations on Gradebook from Assignments.
-        // Doesn't initialize.
+        // Creates 'gradebook' attribute so we can perform certain operations on Gradebook from Assignments...
+        // ...doesn't initialize
         private frmGradebook gradebook;
 
-        // Creates form level variable to hold selected course name.
+        // Creates form level variable to hold selected course name
         private string courseName;
 
-        // Creates form level variable to hold selected course ID.
+        // Creates form level variable to hold selected course ID
         private int selectedCourseID;
 
-        // Creates 'state' attribute to hold current state.
+        // Creates 'state' attribute to hold current state
         private string state;
 
-        // Creates currency manager.
+        // Creates currency manager
         private CurrencyManager manager;
 
-        // Holds currency manager position.
+        // Holds currency manager position
         private int bookmark;
 
-        // Holds default value for tbxSearch.
+        // Holds default value for tbxSearch
         private string strSearch = "Name";
 
-        // Creates form level data table for categories.
+        // Creates form level data table for categories
         //      Column [0]: Category_ID
         //      Column [1]: Category_Name
         //      Column [2]: Category_Weight
         private DataTable categoriesTable;
 
-        // Initializes 'gradebook' attribute to parameter.
+        // Initializes 'gradebook' attribute to parameter
         public frmAssignments(frmGradebook gradebook, string courseName, int selectedCourseID)
         {
             this.gradebook = gradebook;
@@ -50,13 +50,13 @@ namespace PrimarySchool
             InitializeComponent();
         }
 
-        // Closes Assignments.
+        // Closes Assignments
         private void mnuFileClose_Click(object sender, EventArgs e)
         {
             FormOps.CloseModal(this);
         }
 
-        // Sets program state based on parameter/argument.
+        // Sets program state based on parameter/argument
         private void SetState(string state)
         {
             try
@@ -95,7 +95,7 @@ namespace PrimarySchool
                         mnuSearch.Enabled = true;
                         tbxAssignmentName.Focus();
                         break;
-                    // Acts as both 'Create New' and 'Edit' state.
+                    // Acts as both 'Create New' and 'Edit' state
                     default:
                         tbxAssignmentName.ReadOnly = false;
                         tbxCategory.ReadOnly = false;
@@ -134,21 +134,21 @@ namespace PrimarySchool
             }
         }
 
-        // Calls Edit().
+        // Calls Edit()
         private void btnEdit_Click(object sender, EventArgs e)
         {
             Edit();
         }
 
-        // Calls Cancel().
+        // Calls Cancel()
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Cancel();
         }
 
-        // Calls DB commmand.
-        // Fills currency manager.
-        // Sets state to 'View'.
+        // Calls DB commmand
+        // Fills currency manager
+        // Sets state to 'View'
         private void frmAssignments_Load(object sender, EventArgs e)
         {
             try
@@ -172,15 +172,15 @@ namespace PrimarySchool
             }
         }
 
-        // Prevents closing of form during edits.
-        // Closes and disposes of DB things.
+        // Prevents closing of form during edits
+        // Closes and disposes of DB things
         private void frmAssignments_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
                 if (state.Equals("Edit") || state.Equals("Create New"))
                 {
-                    FormOps.ErrorBox("You must finish the current edit before closing Assignments");
+                    FormOps.ErrorBox("You must finish the current edit before closing Assignments.");
 
                     e.Cancel = true;
                 }
@@ -197,101 +197,105 @@ namespace PrimarySchool
             }
         }
 
-        // Calls GoToFirst().
+        // Calls GoToFirst()
         private void btnFirst_Click(object sender, EventArgs e)
         {
             GoToFirst();
         }
 
-        // Calls GoToLast().
+        // Calls GoToLast()
         private void btnLast_Click(object sender, EventArgs e)
         {
             GoToLast();
         }
 
-        // Calls GoToPrevious().
+        // Calls GoToPrevious()
         private void btnPrevious_Click(object sender, EventArgs e)
         {
             GoToPrevious();
         }
 
-        // Calls GoToNext().
+        // Calls GoToNext()
         private void btnNext_Click(object sender, EventArgs e)
         {
             GoToNext();
         }
 
-        // Calls Save();
+        // Calls Save()
         private void btnSave_Click(object sender, EventArgs e)
         {
             Save();
         }
 
-        // Calls GoToFirst().
+        // Calls GoToFirst()
         private void mnuFirst_Click(object sender, EventArgs e)
         {
             GoToFirst();
         }
 
-        // Calls GoToFirst().
+        // Calls GoToFirst()
         private void mnuLast_Click(object sender, EventArgs e)
         {
             GoToLast();
         }
 
-        // Calls GoToPrevious().
+        // Calls GoToPrevious()
         private void mnuPrevious_Click(object sender, EventArgs e)
         {
             GoToPrevious();
         }
 
-        // Calls GoToNext().
+        // Calls GoToNext()
         private void mnuNext_Click(object sender, EventArgs e)
         {
             GoToNext();
         }
 
-        // Calls Save().
+        // Calls Save()
         private void mnuSave_Click(object sender, EventArgs e)
         {
             Save();
         }
 
-        // Calls Cancel().
+        // Calls Cancel()
         private void mnuCancel_Click(object sender, EventArgs e)
         {
             Cancel();
         }
 
-        // Calls CreateNew().
+        // Calls CreateNew()
         private void mnuAddNew_Click(object sender, EventArgs e)
         {
             CreateNew();
         }
 
-        // Calls Edit().
+        // Calls Edit()
         private void mnuEditRecord_Click(object sender, EventArgs e)
         {
             Edit();
         }
 
-        // Checks validity of edited/new data (do later).
+        // Checks validity of edited/new data
         private bool ValidateData()
         {
             try
             {
+                string message = "Invalid input detected.";
+
+                bool allOK = true;
+
                 if (tbxAssignmentName.Text.Trim().Equals(string.Empty))
                 {
-                    FormOps.ErrorBox("You must enter an Assignment Name");
+                    message = "You must enter a Name.";
                     tbxAssignmentName.Focus();
-                    return false;
+                    allOK = false;
                 }
 
                 if (tbxCategory.Text.Trim().Equals(string.Empty))
                 {
-                    FormOps.ErrorBox("You must enter a Category ID");
+                    message = "You must enter a Category ID.";
                     tbxCategory.Focus();
-                    return false;
+                    allOK = false;
                 }
 
                 List<int> categoryIDList = new List<int>();
@@ -303,28 +307,28 @@ namespace PrimarySchool
 
                 if (!categoryIDList.Contains(Convert.ToInt32(tbxCategory.Text.Trim())))
                 {
-                    FormOps.ErrorBox("You must enter a valid Category ID...\n" +
-                        "review the list box on the right side of the form");
-
+                    message = "You must enter a valid Category ID.\n\n" +
+                        "Review the list box on the right side of the form.";
                     tbxCategory.Focus();
-
                     categoryIDList.Clear();
-                    categoryIDList = null;
-
-                    return false;
+                    allOK = false;
                 }
 
                 categoryIDList.Clear();
-                categoryIDList = null;
 
                 if (tbxDescription.Text.Trim().Equals(string.Empty))
                 {
-                    FormOps.ErrorBox("You must enter an Assignment Description");
+                    message = "You must enter a Description.";
                     tbxDescription.Focus();
-                    return false;
+                    allOK = false;
                 }
 
-                return true;
+                if (!allOK)
+                {
+                    FormOps.ErrorBox(message);
+                }
+
+                return allOK;
             }
             catch (Exception ex)
             {
@@ -333,7 +337,7 @@ namespace PrimarySchool
             }
         }
 
-        // Goes to first record and beeps.
+        // Goes to first record and beeps
         private void GoToFirst()
         {
             try
@@ -348,7 +352,7 @@ namespace PrimarySchool
             }
         }
 
-        // Goes to last record and beeps.
+        // Goes to last record and beeps
         private void GoToLast()
         {
             try
@@ -363,8 +367,8 @@ namespace PrimarySchool
             }
         }
 
-        // Goes to previous record.
-        // Beeps when first record is reached.
+        // Goes to previous record
+        // Beeps when first record is reached
         private void GoToPrevious()
         {
             try
@@ -382,8 +386,8 @@ namespace PrimarySchool
             }
         }
 
-        // Goes to next record.
-        // Beeps when last record is reached.
+        // Goes to next record
+        // Beeps when last record is reached
         private void GoToNext()
         {
             try
@@ -401,12 +405,12 @@ namespace PrimarySchool
             }
         }
 
-        // Calls ValidateData before saving.
-        // Ends current edit.
-        // Updates database.
-        // Sorts by ID.
-        // Informs user of successful save.
-        // Sets state to 'View'.
+        // Calls ValidateData before saving
+        // Ends current edit
+        // Updates database
+        // Sorts by ID
+        // Informs user of successful save
+        // Sets state to 'View'
         private void Save()
         {
             if (!ValidateData())
@@ -420,9 +424,9 @@ namespace PrimarySchool
 
                 ProgOps.UpdateAssignments();
 
-                ProgOps.AssignmentsTable.DefaultView.Sort = "Assignment_ID";
+                ProgOps.AssignmentsTable.DefaultView.Sort = "Assignment_Name";
 
-                MessageBox.Show("Record saved", "Success",
+                MessageBox.Show("Record saved.", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 SetState("View");
@@ -433,9 +437,9 @@ namespace PrimarySchool
             }
         }
 
-        // Cancels current edit.
-        // Prevents error if user cancels before saving new record.
-        // Sets state to 'View'.
+        // Cancels current edit
+        // Prevents error if user cancels before saving new record
+        // Sets state to 'View'
         private void Cancel()
         {
             try
@@ -455,10 +459,9 @@ namespace PrimarySchool
             SetState("View");
         }
 
-        // Saves curreny manager position into bookmark variable.
-        // Set state to 'Create New'.
-        // Adds new record to data table.
-        // Sets correct ID (do later).
+        // Saves curreny manager position into bookmark variable
+        // Set state to 'Create New'
+        // Adds new record to data table
         private void CreateNew()
         {
             try
@@ -468,8 +471,6 @@ namespace PrimarySchool
                 SetState("Create New");
 
                 manager.AddNew();
-
-
             }
             catch (Exception ex)
             {
@@ -477,13 +478,10 @@ namespace PrimarySchool
             }
         }
 
-        // Sets state to 'Edit'.
-        // Sets correct ID (do later).
+        // Sets state to 'Edit'
         private void Edit()
         {
             SetState("Edit");
-
-
         }
 
         private void tbxSearch_Leave(object sender, EventArgs e)
@@ -538,7 +536,6 @@ namespace PrimarySchool
                 {
                     categoriesTable.Clear();
                     categoriesTable.Dispose();
-                    categoriesTable = null;
                 }
             }
             catch (Exception ex)
@@ -547,7 +544,7 @@ namespace PrimarySchool
             }
         }
 
-        // Calls CreateNew().
+        // Calls CreateNew()
         private void btnCreate_Click(object sender, EventArgs e)
         {
             CreateNew();
@@ -576,7 +573,7 @@ namespace PrimarySchool
             }
         }
 
-        // Calls AddToCourse().
+        // Calls AddToCourse()
         private void mnuAdd_Click(object sender, EventArgs e)
         {
             AddToCourse();
@@ -597,8 +594,8 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Unable to add because the Assignment ID is not listed...\n" +
-                        "To fix this, try again after closing and reopening Assignments");
+                    FormOps.ErrorBox("Unable to add because the Assignment ID is not listed.\n\n" +
+                        "To fix this, try again after closing and reopening Assignments.");
                 }
             }
             catch (Exception ex)
@@ -617,8 +614,8 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Unable to remove because the Assignment ID is not listed...\n" +
-                        "To fix this, try again after closing and reopening Assignments");
+                    FormOps.ErrorBox("Unable to remove because the Assignment ID is not listed.\n\n" +
+                        "To fix this, try again after closing and reopening Assignments.");
                 }
             }
             catch (Exception ex)
@@ -646,7 +643,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (tbxSearch.Text.Equals(""))
+                if (tbxSearch.Text.Equals(string.Empty))
                 {
                     return;
                 }
