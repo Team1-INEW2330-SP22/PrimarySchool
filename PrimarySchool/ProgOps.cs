@@ -32,7 +32,7 @@ namespace PrimarySchool
             }
         }
 
-        // Command objects - MMC
+        // Command objects - MMC 
         private static SqlCommand _sqlTeachersCommand;
 
         // Data adapters - MMC
@@ -1706,6 +1706,7 @@ namespace PrimarySchool
             //Dispose of UserLogin command adapter and objects
             _sqlUsersCommand.Dispose();
             _daUsers.Dispose();
+            _dtUsersTable.Clear();
             _dtUsersTable.Dispose();
         }
 
@@ -1958,7 +1959,7 @@ namespace PrimarySchool
             try
             {
                 //statement for the command string
-                string sqlStatement = "SELECT * FROM group1fa212330.Users ORDER BY User_LName, User_FName;";
+                string sqlStatement = "SELECT * FROM group1fa212330.Users ORDER BY User_LName;";
                 //establish command object
                 _sqlUsersCommand = new SqlCommand(sqlStatement, _cntPrimarySchoolDatabase);
                 //establish data adapter
@@ -2061,6 +2062,33 @@ namespace PrimarySchool
                 {//handles generic ones here
                     MessageBox.Show(ex.Message + "Error (PO4)", "Error Update Users", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        // Clears and disposes objects used for Teachers form
+        public static void DisposeTeachers()
+        {
+            try
+            {
+                if (_dtTeachersTable != null)
+                {
+                    _dtTeachersTable.Clear();
+                    _dtTeachersTable.Dispose();
+                }
+
+                if (_sqlTeachersCommand != null)
+                {
+                    _sqlTeachersCommand.Dispose();
+                }
+
+                if (_daTeachers != null)
+                {
+                    _daTeachers.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
             }
         }
 

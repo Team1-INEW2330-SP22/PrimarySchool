@@ -25,6 +25,9 @@ namespace PrimarySchool
         // Holds currency manager position.
         private int bookmark;
 
+        // Holds default value for tbxSearch
+        private string strSearch = "Last Name";
+
         // Initializes 'home' attribute to parameter.
         public frmUsers(frmHome home)
         {
@@ -48,6 +51,7 @@ namespace PrimarySchool
                 {
                     //Saves Changes before closing form
                     ProgOps.UpdateUserRecordsOnClose();
+                    ProgOps.UserLoginObjectDisposal();
                     FormOps.ShowModeless(home);
                 }
             }
@@ -93,9 +97,9 @@ namespace PrimarySchool
                         btnCancel.Enabled = false;
                         gbxSearch.Enabled = true;
                         gbxCredentials.Enabled = false;
-                        tbxRole.ReadOnly = true;
-                        tbxUsername.ReadOnly = true;
-                        tbxUserPassword.ReadOnly = true;
+                        //tbxRole.ReadOnly = true;
+                        //tbxUsername.ReadOnly = true;
+                        //tbxUserPassword.ReadOnly = true;
                         mnuNavigation.Enabled = true;
                         mnuFirst.Enabled = true;
                         mnuLast.Enabled = true;
@@ -110,6 +114,7 @@ namespace PrimarySchool
                         mnuCredentials.Enabled = false;
                         mnuSubmit.Enabled = false;
                         tbxLastName.Focus();
+                        CheckForPlaceholder();
                         break;
                     // Acts as both 'Add New' and 'Edit' state.
                     default:
@@ -134,9 +139,9 @@ namespace PrimarySchool
                         btnCancel.Enabled = true;
                         gbxSearch.Enabled = false;
                         gbxCredentials.Enabled = true;
-                        tbxRole.ReadOnly = false;
-                        tbxUsername.ReadOnly = false;
-                        tbxUserPassword.ReadOnly = false;
+                        //tbxRole.ReadOnly = false;
+                        //tbxUsername.ReadOnly = false;
+                        //tbxUserPassword.ReadOnly = false;
                         mnuNavigation.Enabled = false;
                         mnuFirst.Enabled = false;
                         mnuLast.Enabled = false;
@@ -151,6 +156,7 @@ namespace PrimarySchool
                         mnuCredentials.Enabled = true;
                         mnuSubmit.Enabled = true;
                         tbxLastName.Focus();
+                        CheckForPlaceholder();
                         break;
                 }
             }
@@ -296,7 +302,7 @@ namespace PrimarySchool
             try
             {
                 manager.Position = 0;
-                SystemSounds.Beep.Play();
+                SystemSounds.Beep.Play();                
             }
             catch (Exception ex)
             {
@@ -310,7 +316,7 @@ namespace PrimarySchool
             try
             {
                 manager.Position = manager.Count - 1;
-                SystemSounds.Beep.Play();
+                SystemSounds.Beep.Play();              
             }
             catch (Exception ex)
             {
@@ -328,7 +334,7 @@ namespace PrimarySchool
                 {
                     SystemSounds.Beep.Play();
                 }
-                manager.Position--;
+                manager.Position--;                
             }
             catch (Exception ex)
             {
@@ -346,7 +352,7 @@ namespace PrimarySchool
                 {
                     SystemSounds.Beep.Play();
                 }
-                manager.Position++;
+                manager.Position++;               
             }
             catch (Exception ex)
             {
@@ -498,5 +504,62 @@ namespace PrimarySchool
             }
         }
 
+        private void CheckForPlaceholder()
+        {
+            try
+            {
+                if (tbxUserID.Text.Equals("1009"))
+                {
+                    btnDelete.Enabled = false;
+                    tbxRole.Enabled = false;
+                }
+                else
+                {
+                    btnDelete.Enabled = true;
+                    tbxRole.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void tbxSearch_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbxSearch.Text.Equals(strSearch))
+                {
+                    tbxSearch.Text = string.Empty;
+                    tbxSearch.ForeColor = FormOps.GetColorFromPalette("black");
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void tbxSearch_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbxSearch.Text.Trim().Equals(string.Empty))
+                {
+                    tbxSearch.ForeColor = FormOps.GetColorFromPalette("mid blue");
+                    tbxSearch.Text = strSearch;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void tbxUserID_TextChanged(object sender, EventArgs e)
+        {
+            CheckForPlaceholder();
+        }
     }
 }

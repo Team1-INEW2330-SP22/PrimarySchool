@@ -50,6 +50,7 @@ namespace PrimarySchool
                 else
                 {
                     ProgOps.UpdateTeacherRecordsOnClose();
+                    ProgOps.DisposeTeachers();
                     FormOps.ShowModeless(home);
                 }
             }
