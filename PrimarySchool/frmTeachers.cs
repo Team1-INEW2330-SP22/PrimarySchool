@@ -25,6 +25,9 @@ namespace PrimarySchool
         // Holds currency manager position.
         private int bookmark;
 
+        // Holds default value for tbxSearch
+        private string strSearch = "Last Name";
+
         // Initializes 'home' attribute to parameter.
         public frmTeachers(frmHome home)
         {
@@ -46,7 +49,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    //ProgOps.CloseDisposeDatabase();
+                    ProgOps.UpdateTeacherRecordsOnClose();
                     FormOps.ShowModeless(home);
                 }
             }
@@ -75,6 +78,7 @@ namespace PrimarySchool
                         tbxFirstName.ReadOnly = true;
                         tbxMiddleName.ReadOnly = true;
                         tbxDateOfBirth.ReadOnly = true;
+                        tbxEmail.ReadOnly = true;
                         tbxAddress.ReadOnly = true;
                         tbxCity.ReadOnly = true;
                         tbxState.ReadOnly = true;
@@ -87,9 +91,7 @@ namespace PrimarySchool
                         btnNext.Enabled = true;
                         btnPrevious.Enabled = true;
                         btnEdit.Enabled = true;
-                        btnAddNew.Enabled = true;
                         btnSave.Enabled = false;
-                        btnDelete.Enabled = true;
                         btnCancel.Enabled = false;
                         gbxSearch.Enabled = true;
                         mnuNavigation.Enabled = true;
@@ -98,9 +100,7 @@ namespace PrimarySchool
                         mnuNext.Enabled = true;
                         mnuPrevious.Enabled = true;
                         mnuEditRecord.Enabled = true;
-                        mnuAddNew.Enabled = true;
                         mnuSave.Enabled = false;
-                        mnuDelete.Enabled = true;
                         mnuCancel.Enabled = false;
                         mnuSearch.Enabled = true;
                         mnuCourses.Enabled = false;
@@ -114,6 +114,7 @@ namespace PrimarySchool
                         tbxFirstName.ReadOnly = false;
                         tbxMiddleName.ReadOnly = false;
                         tbxDateOfBirth.ReadOnly = false;
+                        tbxEmail.ReadOnly = false;
                         tbxAddress.ReadOnly = false;
                         tbxCity.ReadOnly = false;
                         tbxState.ReadOnly = false;
@@ -126,9 +127,7 @@ namespace PrimarySchool
                         btnNext.Enabled = false;
                         btnPrevious.Enabled = false;
                         btnEdit.Enabled = false;
-                        btnAddNew.Enabled = false;
                         btnSave.Enabled = true;
-                        btnDelete.Enabled = false;
                         btnCancel.Enabled = true;
                         gbxSearch.Enabled = false;
                         mnuNavigation.Enabled = false;
@@ -137,9 +136,7 @@ namespace PrimarySchool
                         mnuNext.Enabled = false;
                         mnuPrevious.Enabled = false;
                         mnuEditRecord.Enabled = false;
-                        mnuAddNew.Enabled = false;
                         mnuSave.Enabled = true;
-                        mnuDelete.Enabled = false;
                         mnuCancel.Enabled = true;
                         mnuSearch.Enabled = false;
                         mnuCourses.Enabled = true;
@@ -161,8 +158,8 @@ namespace PrimarySchool
         private void frmTeachers_Load(object sender, EventArgs e)
         {
             //ProgOps.OpenDatabase();
-            ProgOps.TeachersCommand(tbxUserID, tbxLastName, tbxFirstName, tbxMiddleName, tbxDateOfBirth, tbxAddress,
-                tbxCity, tbxState, tbxZip, tbxPhone);
+            ProgOps.TeachersCommand(tbxUserID, tbxLastName, tbxFirstName, tbxMiddleName, tbxDateOfBirth, tbxEmail,
+                tbxAddress, tbxCity, tbxState, tbxZip, tbxPhone);
             //establish currency manager to control buttons previous and next
             manager = (CurrencyManager)this.BindingContext[ProgOps.DTTeachersTable];
             //set state
@@ -175,22 +172,7 @@ namespace PrimarySchool
         // Sets state to View.
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (!FormOps.QuestionBox("Are you sure you want to delete this teacher?"))
-            {
-                return;
-            }
-            else
-            {
-                try
-                {
-                    //manager.RemoveAt(manager.Position);
-                }
-                catch (Exception ex)
-                {
-                    FormOps.ErrorBox(ex.Message);
-                }
-            }
-            SetState("View");
+            Delete();
         }
 
         // Calls GoToFirst().
@@ -303,6 +285,7 @@ namespace PrimarySchool
             try
             {
                 manager.Position = 0;
+
                 SystemSounds.Beep.Play();
             }
             catch (Exception ex)
@@ -317,6 +300,7 @@ namespace PrimarySchool
             try
             {
                 manager.Position = manager.Count - 1;
+
                 SystemSounds.Beep.Play();
             }
             catch (Exception ex)
@@ -335,6 +319,7 @@ namespace PrimarySchool
                 {
                     SystemSounds.Beep.Play();
                 }
+
                 manager.Position--;
             }
             catch (Exception ex)
@@ -353,6 +338,7 @@ namespace PrimarySchool
                 {
                     SystemSounds.Beep.Play();
                 }
+
                 manager.Position++;
             }
             catch (Exception ex)
@@ -368,17 +354,22 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void Save()
         {
-            if (!ValidateData())
-            {
-                return;
-            }
+            //if (!ValidateData())
+            //{
+            //    return;
+            //}
+
+            string savedName = tbxUserID.Text;
+            int savedRow;
 
             try
             {
-                //manager.EndCurrentEdit();
+                manager.EndCurrentEdit();
+                ProgOps.DTTeachersTable.DefaultView.Sort = "User_LName";
+                savedRow = ProgOps.DTTeachersTable.DefaultView.Find(savedName);
 
-                MessageBox.Show("Record saved.", "Save",
-                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                manager.Position = savedRow;
+                MessageBox.Show("Record Saved", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 SetState("View");
             }
             catch (Exception ex)
@@ -393,7 +384,7 @@ namespace PrimarySchool
         // Sets state to View.
         private void Delete()
         {
-            if (!FormOps.QuestionBox("Are you sure you want to delete this assignment?"))
+            if (!FormOps.QuestionBox("Are you sure you want to delete this user?"))
             {
                 return;
             }
@@ -401,7 +392,7 @@ namespace PrimarySchool
             {
                 try
                 {
-                    //manager.RemoveAt(manager.Position);
+                    manager.RemoveAt(manager.Position);
                 }
                 catch (Exception ex)
                 {
@@ -440,9 +431,9 @@ namespace PrimarySchool
             try
             {
                 bookmark = manager.Position;
-                SetState("Add New");
-                //manager.AddNew();
+                manager.AddNew();
 
+                SetState("Add New");
             }
             catch (Exception ex)
             {
@@ -458,31 +449,28 @@ namespace PrimarySchool
 
         }
 
-        private void btnAddCourse_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            Save();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (tbxSearch.Text.Equals(""))
             {
-                if (lbxAvailableCourses.SelectedIndex >= 0)
-                {
-                    if (FormOps.QuestionBox("Are you sure you want to add this course?"))
-                    {
-                        int userID = Convert.ToInt32(tbxUserID.Text);
-
-                        ProgOps.AddTeacherToCourse(userID, lbxAvailableCourses.SelectedItem.ToString());
-
-                        FillRegisteredCoursesListBox();
-
-                        FillAvailableCoursesListBox();
-                    }
-                }
-                else
-                {
-                    FormOps.ErrorBox("Select an available course to add.");
-                }
+                return;
             }
-            catch (Exception ex)
+            int savedRow = manager.Position;
+            DataRow[] foundRows;
+            ProgOps.DTTeachersTable.DefaultView.Sort = "User_LName";
+            foundRows = ProgOps.DTTeachersTable.Select("User_LName LIKE '" + tbxSearch.Text + "*'");
+            if (foundRows.Length == 0)
             {
-                FormOps.ErrorBox("btnAddCourse_Click: " + ex.Message);
+                manager.Position = savedRow;
+            }
+            else
+            {
+                manager.Position = ProgOps.DTTeachersTable.DefaultView.Find(foundRows[0]["User_LName"]);
             }
         }
 
@@ -554,17 +542,31 @@ namespace PrimarySchool
             }
         }
 
-        private void tbxUserID_TextChanged(object sender, EventArgs e)
+        private void btnAddCourse_Click(object sender, EventArgs e)
         {
             try
             {
-                FillAvailableCoursesListBox();
+                if (lbxAvailableCourses.SelectedIndex >= 0)
+                {
+                    if (FormOps.QuestionBox("Are you sure you want to add this course?"))
+                    {
+                        int userID = Convert.ToInt32(tbxUserID.Text);
 
-                FillRegisteredCoursesListBox();
+                        ProgOps.AddTeacherToCourse(userID, lbxAvailableCourses.SelectedItem.ToString());
+
+                        FillRegisteredCoursesListBox();
+
+                        FillAvailableCoursesListBox();
+                    }
+                }
+                else
+                {
+                    FormOps.ErrorBox("Select an available course to add.");
+                }
             }
             catch (Exception ex)
             {
-                FormOps.ErrorBox(ex.Message);
+                FormOps.ErrorBox("btnAddCourse_Click: " + ex.Message);
             }
         }
 
@@ -603,6 +605,52 @@ namespace PrimarySchool
             catch (Exception ex)
             {
                 FormOps.ErrorBox("btnRemoveCourse_Click: " + ex.Message);
+            }
+        }
+
+        private void tbxUserID_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                FillAvailableCoursesListBox();
+
+                FillRegisteredCoursesListBox();
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void tbxSearch_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbxSearch.Text.Equals(strSearch))
+                {
+                    tbxSearch.Text = string.Empty;
+                    tbxSearch.ForeColor = FormOps.GetColorFromPalette("black");
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void tbxSearch_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbxSearch.Text.Trim().Equals(string.Empty))
+                {
+                    tbxSearch.ForeColor = FormOps.GetColorFromPalette("mid blue");
+                    tbxSearch.Text = strSearch;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
             }
         }
     }
