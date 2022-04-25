@@ -425,8 +425,8 @@ namespace PrimarySchool
         {
             try
             {
-                if (CheckDataTables() 
-                    && changedRowsList != null 
+                if (CheckDataTables()
+                    && changedRowsList != null
                     && !changedRowsList.Contains(row))
                 {
                     changedRowsList.Add(row);
@@ -764,7 +764,7 @@ namespace PrimarySchool
                             {
                                 for (int y = 0; y < tempCategoryIdList.Count; y++)
                                 {
-                                    if (tempCategoryIdList[y] == Convert.ToInt32(hiddenGradebookTable.Rows[x][2]) 
+                                    if (tempCategoryIdList[y] == Convert.ToInt32(hiddenGradebookTable.Rows[x][2])
                                         && gradebookTable.Rows[x][3] != DBNull.Value)
                                     {
                                         tempCountList[y]++;
@@ -774,7 +774,7 @@ namespace PrimarySchool
                             }
                         }
 
-                        if (studentID != Convert.ToInt32(hiddenGradebookTable.Rows[x][0]) 
+                        if (studentID != Convert.ToInt32(hiddenGradebookTable.Rows[x][0])
                             || (x + 1) == hiddenGradebookTable.Rows.Count)
                         {
                             for (int y = 0; y < tempCategoryIdList.Count; y++)
@@ -817,7 +817,7 @@ namespace PrimarySchool
                                 {
                                     for (int y = 0; y < tempCategoryIdList.Count; y++)
                                     {
-                                        if (tempCategoryIdList[y] == Convert.ToInt32(hiddenGradebookTable.Rows[x][2]) 
+                                        if (tempCategoryIdList[y] == Convert.ToInt32(hiddenGradebookTable.Rows[x][2])
                                             && gradebookTable.Rows[x][3] != DBNull.Value)
                                         {
                                             tempCountList[y]++;
@@ -825,7 +825,7 @@ namespace PrimarySchool
                                         }
                                     }
                                 }
-                            } 
+                            }
                         }
                     }
 
@@ -867,7 +867,7 @@ namespace PrimarySchool
 
                     studentID = Convert.ToInt32(hiddenGradebookTable.Rows[0][0]);
 
-                    string studentName = gradebookTable.Rows[0][0].ToString().Substring(0, 1) 
+                    string studentName = gradebookTable.Rows[0][0].ToString().Substring(0, 1)
                         + ". " + gradebookTable.Rows[0][1].ToString();
 
                     List<string> studentNameList = new List<string>();
@@ -880,7 +880,7 @@ namespace PrimarySchool
                         {
                             studentID = Convert.ToInt32(hiddenGradebookTable.Rows[x][0]);
 
-                            studentName = gradebookTable.Rows[x][0].ToString().Substring(0, 1) 
+                            studentName = gradebookTable.Rows[x][0].ToString().Substring(0, 1)
                                 + ". " + gradebookTable.Rows[x][1].ToString();
 
                             studentNameList.Add(studentName);
@@ -889,7 +889,7 @@ namespace PrimarySchool
 
                     for (int x = 0; x < finalGradeList.Count; x++)
                     {
-                        lbxFinalGrades.Items.Add(studentNameList[x] 
+                        lbxFinalGrades.Items.Add(studentNameList[x]
                             + ": " + finalGradeList[x].ToString("F"));
                     }
 
@@ -983,9 +983,9 @@ namespace PrimarySchool
         {
             try
             {
-                if (gradebookTable != null 
-                    && gradebookTable.Rows.Count > 0 
-                    && hiddenGradebookTable != null 
+                if (gradebookTable != null
+                    && gradebookTable.Rows.Count > 0
+                    && hiddenGradebookTable != null
                     && hiddenGradebookTable.Rows.Count > 0)
                 {
                     return true;
@@ -1044,7 +1044,7 @@ namespace PrimarySchool
                 {
                     if (FormOps.QuestionBox(question + "\n\nIf not, the data may be reset."))
                     {
-                        ProgOps.UpdateGradebookTable(gradebookTable, hiddenGradebookTable, 
+                        ProgOps.UpdateGradebookTable(gradebookTable, hiddenGradebookTable,
                             changedRowsList, selectedCourseID);
 
                         InitChangedRows();

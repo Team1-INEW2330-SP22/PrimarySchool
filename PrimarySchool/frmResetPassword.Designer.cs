@@ -73,6 +73,7 @@ namespace PrimarySchool
             this.btnSend.TabIndex = 6;
             this.btnSend.Text = "&Send Code";
             this.btnSend.UseVisualStyleBackColor = false;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // lblCode
             // 
@@ -109,6 +110,7 @@ namespace PrimarySchool
             this.btnSubmit.TabIndex = 9;
             this.btnSubmit.Text = "S&ubmit";
             this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // frmResetPassword
             // 

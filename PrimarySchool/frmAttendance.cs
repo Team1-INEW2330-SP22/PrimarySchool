@@ -382,7 +382,7 @@ namespace PrimarySchool
                     dgvAttendance.Columns[5].HeaderText = "Absence Reason";
                     dgvAttendance.Columns[6].HeaderText = "Date";
                 }
-                
+
                 if (!ProgOps.UserRole.Equals("Teacher") && newData)
                 {
                     NullifyDataTable();
@@ -564,9 +564,9 @@ namespace PrimarySchool
         {
             try
             {
-                if (presentList != null 
-                    && excusedList != null 
-                    && reasonList != null 
+                if (presentList != null
+                    && excusedList != null
+                    && reasonList != null
                     && CheckDataTable())
                 {
                     for (int x = 0; x < attendanceTable.Rows.Count; x++)
@@ -728,8 +728,8 @@ namespace PrimarySchool
         {
             try
             {
-                if (CheckDataTable() 
-                    && changedRowsList != null 
+                if (CheckDataTable()
+                    && changedRowsList != null
                     && !changedRowsList.Contains(row))
                 {
                     changedRowsList.Add(row);

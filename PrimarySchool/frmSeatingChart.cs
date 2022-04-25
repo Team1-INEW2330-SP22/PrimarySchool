@@ -911,7 +911,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (seatChartTable != null 
+                if (seatChartTable != null
                     && seatChartTable.Rows.Count > 0)
                 {
                     return true;
