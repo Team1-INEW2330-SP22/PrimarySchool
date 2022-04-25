@@ -70,7 +70,7 @@ namespace PrimarySchool
             this.tbxConfirm.Name = "tbxConfirm";
             this.tbxConfirm.Size = new System.Drawing.Size(323, 29);
             this.tbxConfirm.TabIndex = 13;
-            this.tbxConfirm.Text = "Confirm your new password";
+            this.tbxConfirm.Text = " Confirm your new password";
             this.tbxConfirm.Enter += new System.EventHandler(this.tbxConfirm_Enter);
             this.tbxConfirm.Leave += new System.EventHandler(this.tbxConfirm_Leave);
             // 
