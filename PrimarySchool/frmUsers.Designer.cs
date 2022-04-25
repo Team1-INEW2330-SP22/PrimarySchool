@@ -36,6 +36,10 @@ namespace PrimarySchool
             this.lblSearch = new System.Windows.Forms.Label();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.gbxCredentials = new System.Windows.Forms.GroupBox();
+            this.lblRole3Def = new System.Windows.Forms.Label();
+            this.lblRole2Def = new System.Windows.Forms.Label();
+            this.lblRole1Def = new System.Windows.Forms.Label();
+            this.tbxRole = new System.Windows.Forms.TextBox();
             this.lblRole = new System.Windows.Forms.Label();
             this.pbxEyeballUserPassword = new System.Windows.Forms.PictureBox();
             this.tbxUserPassword = new System.Windows.Forms.TextBox();
@@ -92,10 +96,6 @@ namespace PrimarySchool
             this.mnuHelpInstructions = new System.Windows.Forms.ToolStripMenuItem();
             this.lblEmail = new System.Windows.Forms.Label();
             this.tbxEmail = new System.Windows.Forms.TextBox();
-            this.tbxRole = new System.Windows.Forms.TextBox();
-            this.lblRole1Def = new System.Windows.Forms.Label();
-            this.lblRole2Def = new System.Windows.Forms.Label();
-            this.lblRole3Def = new System.Windows.Forms.Label();
             this.gbxSearch.SuspendLayout();
             this.gbxCredentials.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxEyeballUserPassword)).BeginInit();
@@ -141,6 +141,8 @@ namespace PrimarySchool
             this.tbxSearch.Size = new System.Drawing.Size(173, 25);
             this.tbxSearch.TabIndex = 1;
             this.tbxSearch.Text = "Last Name";
+            this.tbxSearch.Enter += new System.EventHandler(this.tbxSearch_Enter);
+            this.tbxSearch.Leave += new System.EventHandler(this.tbxSearch_Leave);
             // 
             // lblSearch
             // 
@@ -187,6 +189,48 @@ namespace PrimarySchool
             this.gbxCredentials.TabIndex = 116;
             this.gbxCredentials.TabStop = false;
             this.gbxCredentials.Text = "User Credentials";
+            // 
+            // lblRole3Def
+            // 
+            this.lblRole3Def.AutoSize = true;
+            this.lblRole3Def.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRole3Def.Location = new System.Drawing.Point(170, 71);
+            this.lblRole3Def.Name = "lblRole3Def";
+            this.lblRole3Def.Size = new System.Drawing.Size(107, 17);
+            this.lblRole3Def.TabIndex = 133;
+            this.lblRole3Def.Text = "3 - Administrator";
+            // 
+            // lblRole2Def
+            // 
+            this.lblRole2Def.AutoSize = true;
+            this.lblRole2Def.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRole2Def.Location = new System.Drawing.Point(170, 54);
+            this.lblRole2Def.Name = "lblRole2Def";
+            this.lblRole2Def.Size = new System.Drawing.Size(127, 17);
+            this.lblRole2Def.TabIndex = 132;
+            this.lblRole2Def.Text = "2 - Academic Officer";
+            // 
+            // lblRole1Def
+            // 
+            this.lblRole1Def.AutoSize = true;
+            this.lblRole1Def.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRole1Def.Location = new System.Drawing.Point(170, 37);
+            this.lblRole1Def.Name = "lblRole1Def";
+            this.lblRole1Def.Size = new System.Drawing.Size(73, 17);
+            this.lblRole1Def.TabIndex = 131;
+            this.lblRole1Def.Text = "1 - Teacher";
+            // 
+            // tbxRole
+            // 
+            this.tbxRole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
+            this.tbxRole.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxRole.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
+            this.tbxRole.Location = new System.Drawing.Point(131, 33);
+            this.tbxRole.Name = "tbxRole";
+            this.tbxRole.ReadOnly = true;
+            this.tbxRole.Size = new System.Drawing.Size(33, 25);
+            this.tbxRole.TabIndex = 130;
             // 
             // lblRole
             // 
@@ -518,6 +562,7 @@ namespace PrimarySchool
             this.tbxUserID.Size = new System.Drawing.Size(283, 27);
             this.tbxUserID.TabIndex = 86;
             this.tbxUserID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbxUserID.TextChanged += new System.EventHandler(this.tbxUserID_TextChanged);
             // 
             // lblUserID
             // 
@@ -798,48 +843,6 @@ namespace PrimarySchool
             this.tbxEmail.Size = new System.Drawing.Size(283, 27);
             this.tbxEmail.TabIndex = 90;
             this.tbxEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // tbxRole
-            // 
-            this.tbxRole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.tbxRole.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbxRole.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxRole.Location = new System.Drawing.Point(131, 33);
-            this.tbxRole.Name = "tbxRole";
-            this.tbxRole.ReadOnly = true;
-            this.tbxRole.Size = new System.Drawing.Size(33, 25);
-            this.tbxRole.TabIndex = 130;
-            // 
-            // lblRole1Def
-            // 
-            this.lblRole1Def.AutoSize = true;
-            this.lblRole1Def.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRole1Def.Location = new System.Drawing.Point(170, 37);
-            this.lblRole1Def.Name = "lblRole1Def";
-            this.lblRole1Def.Size = new System.Drawing.Size(73, 17);
-            this.lblRole1Def.TabIndex = 131;
-            this.lblRole1Def.Text = "1 - Teacher";
-            // 
-            // lblRole2Def
-            // 
-            this.lblRole2Def.AutoSize = true;
-            this.lblRole2Def.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRole2Def.Location = new System.Drawing.Point(170, 54);
-            this.lblRole2Def.Name = "lblRole2Def";
-            this.lblRole2Def.Size = new System.Drawing.Size(127, 17);
-            this.lblRole2Def.TabIndex = 132;
-            this.lblRole2Def.Text = "2 - Academic Officer";
-            // 
-            // lblRole3Def
-            // 
-            this.lblRole3Def.AutoSize = true;
-            this.lblRole3Def.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRole3Def.Location = new System.Drawing.Point(170, 71);
-            this.lblRole3Def.Name = "lblRole3Def";
-            this.lblRole3Def.Size = new System.Drawing.Size(107, 17);
-            this.lblRole3Def.TabIndex = 133;
-            this.lblRole3Def.Text = "3 - Administrator";
             // 
             // frmUsers
             // 

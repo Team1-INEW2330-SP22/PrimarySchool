@@ -485,6 +485,8 @@ namespace PrimarySchool
             this.tbxSearch.Size = new System.Drawing.Size(173, 25);
             this.tbxSearch.TabIndex = 1;
             this.tbxSearch.Text = "Last Name";
+            this.tbxSearch.Enter += new System.EventHandler(this.tbxSearch_Enter);
+            this.tbxSearch.Leave += new System.EventHandler(this.tbxSearch_Leave);
             // 
             // lblSearch
             // 

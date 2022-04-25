@@ -32,7 +32,7 @@ namespace PrimarySchool
             }
         }
 
-        // Command objects - MMC
+        // Command objects - MMC 
         private static SqlCommand _sqlTeachersCommand;
 
         // Data adapters - MMC
@@ -441,18 +441,14 @@ namespace PrimarySchool
         }
 
         //Get Teacher information for Academic Officers - Teacher Tab
-        public static void TeachersCommand(TextBox txUserID, TextBox txLName, TextBox txFname,
+        public static void TeachersCommand(TextBox txUserID, TextBox txLName, TextBox txFName,
             TextBox txMName, TextBox txDOB, TextBox txEmail, TextBox txAddress, TextBox txCity,
             TextBox txState, TextBox txZip, TextBox txPhone)
         {
             try
             {
                 //statement for the command string
-                string sqlStatement = "SELECT Users.User_ID, User_LName, User_FName, User_MName, User_DOB, User_Email, User_MailingAddress, " +
-                    "User_City, User_State, User_Zip, User_Phone_Number, Count(Courses.Course_ID) AS NumOfCourses " +
-                    "FROM group1fa212330.Users " +
-                    "JOIN group1fa212330.Courses ON Users.User_ID = Courses.User_ID " +
-                    "GROUP BY Users.User_ID, User_LName, User_FName, User_MName, User_DOB, User_Email, User_MailingAddress, User_City, User_State, User_Zip, User_Phone_Number;";
+                string sqlStatement = "EXEC group1fa212330.spTeachersForm;";
                 //establish command object
                 _sqlTeachersCommand = new SqlCommand(sqlStatement, _cntPrimarySchoolDatabase);
                 //establish data adapter
@@ -462,7 +458,7 @@ namespace PrimarySchool
                 //bind controls to DataTable
                 txUserID.DataBindings.Add("Text", _dtTeachersTable, "User_ID");
                 txLName.DataBindings.Add("Text", _dtTeachersTable, "User_LName");
-                txFname.DataBindings.Add("Text", _dtTeachersTable, "User_FName");
+                txFName.DataBindings.Add("Text", _dtTeachersTable, "User_FName");
                 txMName.DataBindings.Add("Text", _dtTeachersTable, "User_MName");
                 txDOB.DataBindings.Add("Text", _dtTeachersTable, "User_DOB", true);
                 txEmail.DataBindings.Add("Text", _dtTeachersTable, "User_Email");
@@ -1710,6 +1706,7 @@ namespace PrimarySchool
             //Dispose of UserLogin command adapter and objects
             _sqlUsersCommand.Dispose();
             _daUsers.Dispose();
+            _dtUsersTable.Clear();
             _dtUsersTable.Dispose();
         }
 
@@ -1962,7 +1959,7 @@ namespace PrimarySchool
             try
             {
                 //statement for the command string
-                string sqlStatement = "SELECT * FROM group1fa212330.Users ORDER BY User_LName, User_FName;";
+                string sqlStatement = "SELECT * FROM group1fa212330.Users ORDER BY User_LName;";
                 //establish command object
                 _sqlUsersCommand = new SqlCommand(sqlStatement, _cntPrimarySchoolDatabase);
                 //establish data adapter
@@ -2065,6 +2062,33 @@ namespace PrimarySchool
                 {//handles generic ones here
                     MessageBox.Show(ex.Message + "Error (PO4)", "Error Update Users", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        // Clears and disposes objects used for Teachers form
+        public static void DisposeTeachers()
+        {
+            try
+            {
+                if (_dtTeachersTable != null)
+                {
+                    _dtTeachersTable.Clear();
+                    _dtTeachersTable.Dispose();
+                }
+
+                if (_sqlTeachersCommand != null)
+                {
+                    _sqlTeachersCommand.Dispose();
+                }
+
+                if (_daTeachers != null)
+                {
+                    _daTeachers.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
             }
         }
 

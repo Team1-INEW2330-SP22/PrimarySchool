@@ -25,6 +25,9 @@ namespace PrimarySchool
         // Holds currency manager position.
         private int bookmark;
 
+        // Holds default value for tbxSearch
+        private string strSearch = "Last Name";
+
         // Initializes 'home' attribute to parameter.
         public frmTeachers(frmHome home)
         {
@@ -47,6 +50,7 @@ namespace PrimarySchool
                 else
                 {
                     ProgOps.UpdateTeacherRecordsOnClose();
+                    ProgOps.DisposeTeachers();
                     FormOps.ShowModeless(home);
                 }
             }
@@ -612,6 +616,38 @@ namespace PrimarySchool
                 FillAvailableCoursesListBox();
 
                 FillRegisteredCoursesListBox();
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void tbxSearch_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbxSearch.Text.Equals(strSearch))
+                {
+                    tbxSearch.Text = string.Empty;
+                    tbxSearch.ForeColor = FormOps.GetColorFromPalette("black");
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void tbxSearch_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbxSearch.Text.Trim().Equals(string.Empty))
+                {
+                    tbxSearch.ForeColor = FormOps.GetColorFromPalette("mid blue");
+                    tbxSearch.Text = strSearch;
+                }
             }
             catch (Exception ex)
             {
