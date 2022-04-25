@@ -384,6 +384,8 @@ namespace PrimarySchool
 
                     AddAllToChangedRows();
 
+                    CalculateFinalGrades();
+
                     SetSavedStatus(false);
                 }
                 else
@@ -545,7 +547,10 @@ namespace PrimarySchool
                             gradebookTable.Rows[x][3] = gradeList[x].ToString();
                         }
 
-                        gradebookTable.Rows[x][3] = Convert.ToDouble(gradebookTable.Rows[x][3]).ToString("F");
+                        if (gradebookTable.Rows[x][3] != DBNull.Value)
+                        {
+                            gradebookTable.Rows[x][3] = Convert.ToDouble(gradebookTable.Rows[x][3]).ToString("F");
+                        }                        
 
                         if (commentsList[x].Equals(string.Empty))
                         {
@@ -558,6 +563,8 @@ namespace PrimarySchool
                     }
 
                     AddAllToChangedRows();
+
+                    CalculateFinalGrades();
 
                     SetSavedStatus(false);
                 }
@@ -725,6 +732,13 @@ namespace PrimarySchool
                 {
                     int studentID = Convert.ToInt32(hiddenGradebookTable.Rows[0][0]);
 
+                    string studentName = gradebookTable.Rows[0][0].ToString().Substring(0, 1)
+                        + ". " + gradebookTable.Rows[0][1].ToString();
+
+                    List<string> studentNameList = new List<string>();
+
+                    studentNameList.Add(studentName);
+
                     List<int> tempStudentIdList = new List<int>();
                     List<int> tempCategoryIdList = new List<int>();
                     List<double> tempWeightList = new List<double>();
@@ -738,6 +752,12 @@ namespace PrimarySchool
                     List<double> pointsList = new List<double>();
 
                     List<double> dividedWeightList = new List<double>();
+
+                    double final = 0;
+
+                    List<double> finalGradeList = new List<double>();
+
+                    bool allCategories = true;
 
                     for (int x = 0; x < hiddenGradebookTable.Rows.Count; x++)
                     {
@@ -796,6 +816,11 @@ namespace PrimarySchool
                             {
                                 studentID = Convert.ToInt32(hiddenGradebookTable.Rows[x][0]);
 
+                                studentName = gradebookTable.Rows[x][0].ToString().Substring(0, 1) 
+                                    + ". " + gradebookTable.Rows[x][1].ToString();
+
+                                studentNameList.Add(studentName);
+
                                 if (!tempCategoryIdList.Contains(Convert.ToInt32(hiddenGradebookTable.Rows[x][2])))
                                 {
                                     tempStudentIdList.Add(Convert.ToInt32(hiddenGradebookTable.Rows[x][0]));
@@ -829,69 +854,56 @@ namespace PrimarySchool
                         }
                     }
 
-                    for (int x = 0; x < studentIdList.Count; x++)
+                    if (!categoryIdList.Contains(1) || !categoryIdList.Contains(2)
+                        || !categoryIdList.Contains(3) || !categoryIdList.Contains(4))
                     {
-                        dividedWeightList.Add(Convert.ToDouble(weightList[x] / countList[x]));
+                        lbxFinalGrades.Items.Add("Insufficient categories.");
+
+                        allCategories = false;
                     }
 
-                    studentID = studentIdList[0];
-
-                    double final = 0;
-
-                    List<double> finalGradeList = new List<double>();
-
-                    for (int x = 0; x < studentIdList.Count; x++)
+                    if (allCategories)
                     {
-                        if (studentID == studentIdList[x])
+                        for (int x = 0; x < studentIdList.Count; x++)
                         {
-                            final += pointsList[x] * (dividedWeightList[x] * .01);
+                            dividedWeightList.Add(Convert.ToDouble(weightList[x] / countList[x]));
                         }
 
-                        if (studentID != studentIdList[x] || (x + 1) == studentIdList.Count)
+                        studentID = studentIdList[0];
+
+                        for (int x = 0; x < studentIdList.Count; x++)
                         {
-                            finalGradeList.Add(final);
-
-                            if ((x + 1) != studentIdList.Count)
+                            if (studentID == studentIdList[x])
                             {
-                                studentID = studentIdList[x];
+                                final += pointsList[x] * (dividedWeightList[x] * .01);
+                            }
 
-                                final = 0;
+                            if (studentID != studentIdList[x] || (x + 1) == studentIdList.Count)
+                            {
+                                finalGradeList.Add(final);
 
-                                if (studentID == studentIdList[x])
+                                if ((x + 1) != studentIdList.Count)
                                 {
-                                    final += pointsList[x] * (dividedWeightList[x] * .01);
+                                    studentID = studentIdList[x];
+
+                                    final = 0;
+
+                                    if (studentID == studentIdList[x])
+                                    {
+                                        final += pointsList[x] * (dividedWeightList[x] * .01);
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    studentID = Convert.ToInt32(hiddenGradebookTable.Rows[0][0]);
-
-                    string studentName = gradebookTable.Rows[0][0].ToString().Substring(0, 1)
-                        + ". " + gradebookTable.Rows[0][1].ToString();
-
-                    List<string> studentNameList = new List<string>();
-
-                    studentNameList.Add(studentName);
-
-                    for (int x = 0; x < gradebookTable.Rows.Count; x++)
-                    {
-                        if (studentID != Convert.ToInt32(hiddenGradebookTable.Rows[x][0]))
+                        for (int x = 0; x < finalGradeList.Count; x++)
                         {
-                            studentID = Convert.ToInt32(hiddenGradebookTable.Rows[x][0]);
-
-                            studentName = gradebookTable.Rows[x][0].ToString().Substring(0, 1)
-                                + ". " + gradebookTable.Rows[x][1].ToString();
-
-                            studentNameList.Add(studentName);
+                            lbxFinalGrades.Items.Add(studentNameList[x]
+                                + ": " + finalGradeList[x].ToString("F"));
                         }
                     }
 
-                    for (int x = 0; x < finalGradeList.Count; x++)
-                    {
-                        lbxFinalGrades.Items.Add(studentNameList[x]
-                            + ": " + finalGradeList[x].ToString("F"));
-                    }
+                    studentNameList.Clear();
 
                     tempStudentIdList.Clear();
                     tempCategoryIdList.Clear();
@@ -908,8 +920,6 @@ namespace PrimarySchool
                     dividedWeightList.Clear();
 
                     finalGradeList.Clear();
-
-                    studentNameList.Clear();
                 }
             }
             catch (Exception ex)
