@@ -204,7 +204,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Data could not be found");
+                    FormOps.ErrorBox("Data could not be found.");
                 }
             }
             catch (Exception ex)
@@ -435,7 +435,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Nothing to randomize");
+                    FormOps.ErrorBox("Nothing to randomize.");
                 }
             }
             catch (Exception ex)
@@ -479,7 +479,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Nothing to clear");
+                    FormOps.ErrorBox("Nothing to clear.");
                 }
             }
             catch (Exception ex)
@@ -524,7 +524,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Nothing to reset");
+                    FormOps.ErrorBox("Nothing to reset.");
                 }
             }
             catch (Exception ex)
@@ -557,7 +557,7 @@ namespace PrimarySchool
                     int row = dgvSeatingChart.CurrentCell.RowIndex, column = dgvSeatingChart.CurrentCell.ColumnIndex;
 
                     FormOps.ErrorBox("Invalid data detected on row " + (row + 1).ToString() + " of the " +
-                        columnName + " column...\nPlease try again");
+                        columnName + " column.\n\nPlease try again.");
 
                     seatChartTable.Rows[row][column] = DBNull.Value;
 
@@ -636,13 +636,13 @@ namespace PrimarySchool
                 {
                     bool noNulls = true, correctRange = true, allUnique = true;
 
-                    string errorMessage = "Invalid input detected";
+                    string errorMessage = "Invalid input detected.";
 
                     for (int x = 0; x < seatChartTable.Rows.Count; x++)
                     {
                         if (seatChartTable.Rows[x][3] == DBNull.Value)
                         {
-                            errorMessage = "Every student must be assigned a Seat ID";
+                            errorMessage = "Every student must be assigned a Seat ID.";
                             noNulls = false;
                         }
                     }
@@ -659,7 +659,7 @@ namespace PrimarySchool
 
                             if (value < lowest || value > highest)
                             {
-                                errorMessage = "Check that all Seat IDs are in the Seat List";
+                                errorMessage = "Check that all Seat IDs are in the Seat List.";
                                 correctRange = false;
                                 break;
                             }
@@ -676,7 +676,7 @@ namespace PrimarySchool
                             {
                                 if (value == Convert.ToInt32(seatChartTable.Rows[y][3]) && y != x)
                                 {
-                                    errorMessage = "Check that no Seat IDs are repeated";
+                                    errorMessage = "Check that no Seat IDs are repeated.";
                                     allUnique = false;
                                     break;
                                 }
@@ -701,13 +701,13 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Data table is null");
+                    FormOps.ErrorBox("Data table is null.");
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                FormOps.ErrorBox("ValidateData: " + ex.Message);
+                FormOps.ErrorBox(ex.Message);
                 return false;
             }
         }
@@ -860,7 +860,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Nothing to save");
+                    FormOps.ErrorBox("Nothing to save.");
                 }
             }
             catch (Exception ex)
@@ -882,7 +882,7 @@ namespace PrimarySchool
             {
                 if (!saved && CheckDataTable() && changedRowsList != null)
                 {
-                    if (FormOps.QuestionBox(question + "\nIf not, the data may be reset."))
+                    if (FormOps.QuestionBox(question + "\n\nIf not, the data may be reset."))
                     {
                         if (ValidateData())
                         {
@@ -894,7 +894,7 @@ namespace PrimarySchool
                         }
                         else
                         {
-                            FormOps.ErrorBox("Failed to save changes");
+                            FormOps.ErrorBox("Failed to save changes.");
                         }
                     }
                 }
@@ -957,7 +957,7 @@ namespace PrimarySchool
                 {
                     if (!saved)
                     {
-                        FormOps.ErrorBox("Cannot print data that has not been saved");
+                        FormOps.ErrorBox("Cannot print data that has not been saved.");
 
                         SaveYesOrNo("Save then print?");
 
@@ -1005,7 +1005,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Select a course before printing");
+                    FormOps.ErrorBox("Select a course before printing.");
                 }
             }
             catch (Exception ex)

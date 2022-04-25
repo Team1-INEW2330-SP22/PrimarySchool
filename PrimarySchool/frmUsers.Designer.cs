@@ -194,7 +194,7 @@ namespace PrimarySchool
             // 
             this.lblRole3Def.AutoSize = true;
             this.lblRole3Def.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRole3Def.Location = new System.Drawing.Point(170, 71);
+            this.lblRole3Def.Location = new System.Drawing.Point(151, 97);
             this.lblRole3Def.Name = "lblRole3Def";
             this.lblRole3Def.Size = new System.Drawing.Size(107, 17);
             this.lblRole3Def.TabIndex = 133;
@@ -204,7 +204,7 @@ namespace PrimarySchool
             // 
             this.lblRole2Def.AutoSize = true;
             this.lblRole2Def.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRole2Def.Location = new System.Drawing.Point(170, 54);
+            this.lblRole2Def.Location = new System.Drawing.Point(151, 80);
             this.lblRole2Def.Name = "lblRole2Def";
             this.lblRole2Def.Size = new System.Drawing.Size(127, 17);
             this.lblRole2Def.TabIndex = 132;
@@ -214,7 +214,7 @@ namespace PrimarySchool
             // 
             this.lblRole1Def.AutoSize = true;
             this.lblRole1Def.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRole1Def.Location = new System.Drawing.Point(170, 37);
+            this.lblRole1Def.Location = new System.Drawing.Point(151, 63);
             this.lblRole1Def.Name = "lblRole1Def";
             this.lblRole1Def.Size = new System.Drawing.Size(73, 17);
             this.lblRole1Def.TabIndex = 131;
@@ -226,7 +226,7 @@ namespace PrimarySchool
             this.tbxRole.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxRole.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxRole.Location = new System.Drawing.Point(131, 33);
+            this.tbxRole.Location = new System.Drawing.Point(112, 59);
             this.tbxRole.Name = "tbxRole";
             this.tbxRole.ReadOnly = true;
             this.tbxRole.Size = new System.Drawing.Size(33, 25);
@@ -236,7 +236,7 @@ namespace PrimarySchool
             // 
             this.lblRole.AutoSize = true;
             this.lblRole.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRole.Location = new System.Drawing.Point(88, 37);
+            this.lblRole.Location = new System.Drawing.Point(69, 63);
             this.lblRole.Name = "lblRole";
             this.lblRole.Size = new System.Drawing.Size(37, 17);
             this.lblRole.TabIndex = 125;
@@ -247,7 +247,7 @@ namespace PrimarySchool
             this.pbxEyeballUserPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(180)))), ((int)(((byte)(210)))));
             this.pbxEyeballUserPassword.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbxEyeballUserPassword.Image = ((System.Drawing.Image)(resources.GetObject("pbxEyeballUserPassword.Image")));
-            this.pbxEyeballUserPassword.Location = new System.Drawing.Point(330, 126);
+            this.pbxEyeballUserPassword.Location = new System.Drawing.Point(311, 152);
             this.pbxEyeballUserPassword.Name = "pbxEyeballUserPassword";
             this.pbxEyeballUserPassword.Size = new System.Drawing.Size(29, 27);
             this.pbxEyeballUserPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -261,7 +261,7 @@ namespace PrimarySchool
             this.tbxUserPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxUserPassword.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxUserPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxUserPassword.Location = new System.Drawing.Point(131, 127);
+            this.tbxUserPassword.Location = new System.Drawing.Point(112, 153);
             this.tbxUserPassword.Name = "tbxUserPassword";
             this.tbxUserPassword.PasswordChar = '*';
             this.tbxUserPassword.ReadOnly = true;
@@ -272,7 +272,7 @@ namespace PrimarySchool
             // 
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(58, 131);
+            this.lblPassword.Location = new System.Drawing.Point(39, 157);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(67, 17);
             this.lblPassword.TabIndex = 122;
@@ -284,7 +284,7 @@ namespace PrimarySchool
             this.tbxUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxUsername.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxUsername.Location = new System.Drawing.Point(131, 96);
+            this.tbxUsername.Location = new System.Drawing.Point(112, 122);
             this.tbxUsername.Name = "tbxUsername";
             this.tbxUsername.ReadOnly = true;
             this.tbxUsername.Size = new System.Drawing.Size(228, 25);
@@ -294,7 +294,7 @@ namespace PrimarySchool
             // 
             this.lblUsername.AutoSize = true;
             this.lblUsername.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsername.Location = new System.Drawing.Point(55, 100);
+            this.lblUsername.Location = new System.Drawing.Point(36, 126);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(70, 17);
             this.lblUsername.TabIndex = 120;

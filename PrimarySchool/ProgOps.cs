@@ -203,7 +203,7 @@ namespace PrimarySchool
                 _cntPrimarySchoolDatabase.Open();
 
                 // Show message stating that connection to database was succesful
-                MessageBox.Show("Connection to database successfully opened", "Database Connection",
+                MessageBox.Show("Connection to database successfully opened.", "Database Connection",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (SqlException ex)
@@ -238,7 +238,7 @@ namespace PrimarySchool
                 _cntPrimarySchoolDatabase.Close();
 
                 // Show message stating that connection to database was succesful
-                MessageBox.Show("Connection to database was successfully closed", "Database Connection",
+                MessageBox.Show("Connection to database was successfully closed.", "Database Connection",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Dispose of the SQL objects
