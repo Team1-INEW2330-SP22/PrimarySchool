@@ -188,7 +188,6 @@ namespace PrimarySchool
                         btnEdit.Enabled = true;
                         btnAddNew.Enabled = true;
                         btnSave.Enabled = false;
-                        btnDelete.Enabled = true;
                         btnCancel.Enabled = false;
                         gbxSearch.Enabled = true;
                         tbxSearch.ReadOnly = false;
@@ -203,13 +202,13 @@ namespace PrimarySchool
                         mnuEditRecord.Enabled = true;
                         mnuAddNew.Enabled = true;
                         mnuSave.Enabled = false;
-                        mnuDelete.Enabled = true;
                         mnuCancel.Enabled = false;
                         mnuSearch.Enabled = true;
                         mnuStudents.Enabled = false;
                         mnuAddStudent.Enabled = false;
                         mnuRemoveStudent.Enabled = false;
                         tbxCourseName.Focus();
+                        CheckDatabaseTies();
                         break;
                     // Acts as both 'Add New' and 'Edit' state
                     default:
@@ -525,6 +524,8 @@ namespace PrimarySchool
                     newCourse = false;
                 }
 
+                CheckDatabaseTies();
+
                 ProgOps.CoursesTable.DefaultView.Sort = "Course_Name";
 
                 MessageBox.Show("Record saved.", "Success",
@@ -582,6 +583,8 @@ namespace PrimarySchool
                 {
                     manager.Position = bookmark;
                 }
+
+                CheckDatabaseTies();
             }
             catch (Exception ex)
             {
@@ -838,6 +841,8 @@ namespace PrimarySchool
 
         private void tbxCourseID_TextChanged(object sender, EventArgs e)
         {
+            CheckDatabaseTies();
+
             ClearDataLists();
 
             FillRegisteredStudentsListBox();
@@ -911,6 +916,45 @@ namespace PrimarySchool
                 else
                 {
                     FormOps.ErrorBox("Select a registered student to remove.");
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void CheckDatabaseTies()
+        {
+            try
+            {
+                if (!tbxCourseID.Text.Equals(string.Empty))
+                {
+                    int courseID = Convert.ToInt32(tbxCourseID.Text);
+
+                    DataTable students = ProgOps.GetStudentsInCourse(courseID);
+
+                    if (!(students.Rows.Count == 1 && students.Rows[0][0].ToString().Equals("1003")))
+                    {
+                        btnDelete.Enabled = false;
+                        mnuDelete.Enabled = false;
+                        tbxStatus.Text = "Not Active";
+                    }
+                    else
+                    {
+                        btnDelete.Enabled = true;
+                        mnuDelete.Enabled = true;
+                        tbxStatus.Text = "Active";
+                    }
+
+                    students.Clear();
+                    students.Dispose();
+                }
+                else
+                {
+                    btnDelete.Enabled = false;
+                    mnuDelete.Enabled = false;
+                    tbxStatus.Text = string.Empty;
                 }
             }
             catch (Exception ex)

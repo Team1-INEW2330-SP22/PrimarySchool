@@ -93,13 +93,9 @@ namespace PrimarySchool
                         btnEdit.Enabled = true;
                         btnAddNew.Enabled = true;
                         btnSave.Enabled = false;
-                        btnDelete.Enabled = true;
                         btnCancel.Enabled = false;
                         gbxSearch.Enabled = true;
                         gbxCredentials.Enabled = false;
-                        //tbxRole.ReadOnly = true;
-                        //tbxUsername.ReadOnly = true;
-                        //tbxUserPassword.ReadOnly = true;
                         mnuNavigation.Enabled = true;
                         mnuFirst.Enabled = true;
                         mnuLast.Enabled = true;
@@ -108,13 +104,12 @@ namespace PrimarySchool
                         mnuEditRecord.Enabled = true;
                         mnuAddNew.Enabled = true;
                         mnuSave.Enabled = false;
-                        mnuDelete.Enabled = true;
                         mnuCancel.Enabled = false;
                         mnuSearch.Enabled = true;
                         mnuCredentials.Enabled = false;
                         mnuSubmit.Enabled = false;
                         tbxLastName.Focus();
-                        CheckForPlaceholder();
+                        CheckDatabaseTies();
                         break;
                     // Acts as both 'Add New' and 'Edit' state.
                     default:
@@ -139,9 +134,6 @@ namespace PrimarySchool
                         btnCancel.Enabled = true;
                         gbxSearch.Enabled = false;
                         gbxCredentials.Enabled = true;
-                        //tbxRole.ReadOnly = false;
-                        //tbxUsername.ReadOnly = false;
-                        //tbxUserPassword.ReadOnly = false;
                         mnuNavigation.Enabled = false;
                         mnuFirst.Enabled = false;
                         mnuLast.Enabled = false;
@@ -156,7 +148,6 @@ namespace PrimarySchool
                         mnuCredentials.Enabled = true;
                         mnuSubmit.Enabled = true;
                         tbxLastName.Focus();
-                        CheckForPlaceholder();
                         break;
                 }
             }
@@ -292,8 +283,127 @@ namespace PrimarySchool
         // Checks validity of edited/new data (do later).
         private bool ValidateData()
         {
+            try
+            {
+                string message = "Invalid input detected.";
 
-            return true;
+                bool allOK = true;
+
+                if (tbxLastName.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Last Name.";
+                    tbxLastName.Focus();
+                    allOK = false;
+                }
+
+                if (tbxFirstName.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a First Name.";
+                    tbxFirstName.Focus();
+                    allOK = false;
+                }
+
+                if (tbxMiddleName.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Middle Name.";
+                    tbxMiddleName.Focus();
+                    allOK = false;
+                }
+
+                if (tbxDateOfBirth.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Date of Birth.";
+                    tbxDateOfBirth.Focus();
+                    allOK = false;
+                }
+
+                if (tbxEmail.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter an Email.";
+                    tbxEmail.Focus();
+                    allOK = false;
+                }
+
+                if (tbxStreetAddress.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Street Adress.";
+                    tbxStreetAddress.Focus();
+                    allOK = false;
+                }
+
+                if (tbxCity.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a City.";
+                    tbxCity.Focus();
+                    allOK = false;
+                }
+
+                if (tbxState.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter State.";
+                    tbxState.Focus();
+                    allOK = false;
+                }
+
+                if (tbxZip.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter Zip.";
+                    tbxZip.Focus();
+                    allOK = false;
+                }
+
+                if (tbxPhone.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter Phone Number.";
+                    tbxPhone.Focus();
+                    allOK = false;
+                }
+
+                if (tbxRole.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter Role.";
+                    tbxRole.Focus();
+                    allOK = false;
+                }
+
+                if (tbxRole.Text.Trim().Equals("1") || tbxRole.Text.Trim().Equals("2")
+                    || tbxRole.Text.Trim().Equals("3"))
+                {
+
+                }
+                else
+                {
+                    message = "You must enter a number between 1 and 3 for Role.";
+                    tbxRole.Focus();
+                    allOK = false;
+                }
+
+                if (tbxUsername.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Username.";
+                    tbxUsername.Focus();
+                    allOK = false;
+                }
+
+                if (tbxUserPassword.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Password.";
+                    tbxUserPassword.Focus();
+                    allOK = false;
+                }
+
+                if (!allOK)
+                {
+                    FormOps.ErrorBox(message);
+                }
+
+                return allOK;
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+                return false;
+            }
         }
 
         // Goes to first record and beeps (commented).
@@ -367,23 +477,32 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void Save()
         {
-            //if (!ValidateData())
-            //{
-            //    return;
-            //}
+            if (!ValidateData())
+            {
+                return;
+            }
 
 
-            string savedName = tbxUserID.Text;
-            int savedRow;
+            //string savedName = tbxUserID.Text;
+            //int savedRow;
 
             try
             {
                 manager.EndCurrentEdit();
-                ProgOps.DTUsersTable.DefaultView.Sort = "User_LName";
-                savedRow = ProgOps.DTUsersTable.DefaultView.Find(savedName);
 
-                manager.Position = savedRow;
-                MessageBox.Show("Record Saved", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CheckDatabaseTies();
+
+                //ProgOps.DTUsersTable.DefaultView.Sort = "User_LName";
+
+                //savedRow = ProgOps.DTUsersTable.DefaultView.Find(savedName);
+
+                //manager.Position = savedRow;
+
+                tbxUserPassword.PasswordChar = '*';
+
+                MessageBox.Show("Record saved.", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 SetState("View");
             }
             catch (Exception ex)
@@ -428,6 +547,10 @@ namespace PrimarySchool
                 {
                     manager.Position = bookmark;
                 }
+
+                tbxUserPassword.PasswordChar = '*';
+
+                CheckDatabaseTies();
             }
             catch (Exception ex)
             {
@@ -504,27 +627,6 @@ namespace PrimarySchool
             }
         }
 
-        private void CheckForPlaceholder()
-        {
-            try
-            {
-                if (tbxUserID.Text.Equals("1009"))
-                {
-                    btnDelete.Enabled = false;
-                    tbxRole.Enabled = false;
-                }
-                else
-                {
-                    btnDelete.Enabled = true;
-                    tbxRole.Enabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                FormOps.ErrorBox(ex.Message);
-            }
-        }
-
         private void tbxSearch_Enter(object sender, EventArgs e)
         {
             try
@@ -559,7 +661,49 @@ namespace PrimarySchool
 
         private void tbxUserID_TextChanged(object sender, EventArgs e)
         {
-            CheckForPlaceholder();
+            CheckDatabaseTies();
+        }
+
+        private void CheckDatabaseTies()
+        {
+            try
+            {
+                if (!tbxUserID.Text.Equals(string.Empty))
+                {
+                    int userID = Convert.ToInt32(tbxUserID.Text);
+
+                    DataTable courses = ProgOps.GetRegisteredCoursesForTeacher(userID);
+
+                    if (courses.Rows.Count > 0 || tbxUserID.Text.Equals("1009"))
+                    {
+                        btnDelete.Enabled = false;
+                        mnuDelete.Enabled = false;
+                        tbxRole.Enabled = false;
+                        tbxStatus.Text = "Not Active";
+                    }
+                    else
+                    {
+                        btnDelete.Enabled = true;
+                        mnuDelete.Enabled = true;
+                        tbxRole.Enabled = true;
+                        tbxStatus.Text = "Active";
+                    }
+
+                    courses.Clear();
+                    courses.Dispose();
+                }
+                else
+                {
+                    btnDelete.Enabled = false;
+                    mnuDelete.Enabled = false;
+                    tbxRole.Enabled = false;
+                    tbxStatus.Text = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
         }
     }
 }

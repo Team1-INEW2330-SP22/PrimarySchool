@@ -52,6 +52,7 @@ namespace PrimarySchool
             this.lblFinalGrades = new System.Windows.Forms.Label();
             this.lbxFinalGrades = new System.Windows.Forms.ListBox();
             this.pbxListBoxBackground = new System.Windows.Forms.PictureBox();
+            this.mnuMidterm = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMenu.SuspendLayout();
             this.gbxGradebook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGradebook)).BeginInit();
@@ -76,6 +77,7 @@ namespace PrimarySchool
             this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFileSave,
             this.mnuFilePrint,
+            this.mnuMidterm,
             this.mnuFileClose});
             this.mnuFile.Name = "mnuFile";
             this.mnuFile.Size = new System.Drawing.Size(37, 20);
@@ -85,7 +87,7 @@ namespace PrimarySchool
             // 
             this.mnuFileSave.Name = "mnuFileSave";
             this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuFileSave.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileSave.Size = new System.Drawing.Size(201, 22);
             this.mnuFileSave.Text = "&Save";
             this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
             // 
@@ -93,15 +95,15 @@ namespace PrimarySchool
             // 
             this.mnuFilePrint.Name = "mnuFilePrint";
             this.mnuFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.mnuFilePrint.Size = new System.Drawing.Size(144, 22);
-            this.mnuFilePrint.Text = "&Print";
+            this.mnuFilePrint.Size = new System.Drawing.Size(201, 22);
+            this.mnuFilePrint.Text = "&Print Gradebook";
             this.mnuFilePrint.Click += new System.EventHandler(this.mnuFilePrint_Click);
             // 
             // mnuFileClose
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(201, 22);
             this.mnuFileClose.Text = "&Close";
             this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
@@ -288,6 +290,14 @@ namespace PrimarySchool
             this.pbxListBoxBackground.TabIndex = 17;
             this.pbxListBoxBackground.TabStop = false;
             // 
+            // mnuMidterm
+            // 
+            this.mnuMidterm.Name = "mnuMidterm";
+            this.mnuMidterm.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.mnuMidterm.Size = new System.Drawing.Size(201, 22);
+            this.mnuMidterm.Text = "Print &Midterm";
+            this.mnuMidterm.Click += new System.EventHandler(this.mnuMidterm_Click);
+            // 
             // frmGradebook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -348,5 +358,6 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblFinalGrades;
         private System.Windows.Forms.ListBox lbxFinalGrades;
         private System.Windows.Forms.PictureBox pbxListBoxBackground;
+        private System.Windows.Forms.ToolStripMenuItem mnuMidterm;
     }
 }

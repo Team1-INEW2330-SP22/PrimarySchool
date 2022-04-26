@@ -96,6 +96,8 @@ namespace PrimarySchool
             this.mnuHelpInstructions = new System.Windows.Forms.ToolStripMenuItem();
             this.lblEmail = new System.Windows.Forms.Label();
             this.tbxEmail = new System.Windows.Forms.TextBox();
+            this.tbxStatus = new System.Windows.Forms.TextBox();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.gbxSearch.SuspendLayout();
             this.gbxCredentials.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxEyeballUserPassword)).BeginInit();
@@ -112,7 +114,7 @@ namespace PrimarySchool
             this.gbxSearch.Location = new System.Drawing.Point(121, 371);
             this.gbxSearch.Name = "gbxSearch";
             this.gbxSearch.Size = new System.Drawing.Size(283, 101);
-            this.gbxSearch.TabIndex = 114;
+            this.gbxSearch.TabIndex = 34;
             this.gbxSearch.TabStop = false;
             this.gbxSearch.Text = "Search by Last Name";
             // 
@@ -125,7 +127,7 @@ namespace PrimarySchool
             this.btnSearch.Location = new System.Drawing.Point(199, 51);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(71, 26);
-            this.btnSearch.TabIndex = 38;
+            this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = "Sea&rch";
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -139,7 +141,7 @@ namespace PrimarySchool
             this.tbxSearch.Location = new System.Drawing.Point(20, 52);
             this.tbxSearch.Name = "tbxSearch";
             this.tbxSearch.Size = new System.Drawing.Size(173, 25);
-            this.tbxSearch.TabIndex = 1;
+            this.tbxSearch.TabIndex = 0;
             this.tbxSearch.Text = "Last Name";
             this.tbxSearch.Enter += new System.EventHandler(this.tbxSearch_Enter);
             this.tbxSearch.Leave += new System.EventHandler(this.tbxSearch_Leave);
@@ -151,7 +153,7 @@ namespace PrimarySchool
             this.lblSearch.Location = new System.Drawing.Point(20, 32);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(110, 17);
-            this.lblSearch.TabIndex = 0;
+            this.lblSearch.TabIndex = 2;
             this.lblSearch.Text = "User\'s Last Name";
             // 
             // btnAddNew
@@ -163,7 +165,7 @@ namespace PrimarySchool
             this.btnAddNew.Location = new System.Drawing.Point(121, 335);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(93, 30);
-            this.btnAddNew.TabIndex = 112;
+            this.btnAddNew.TabIndex = 19;
             this.btnAddNew.Text = "&Add New";
             this.btnAddNew.UseVisualStyleBackColor = false;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
@@ -181,12 +183,11 @@ namespace PrimarySchool
             this.gbxCredentials.Controls.Add(this.lblPassword);
             this.gbxCredentials.Controls.Add(this.tbxUsername);
             this.gbxCredentials.Controls.Add(this.lblUsername);
-            this.gbxCredentials.Enabled = false;
             this.gbxCredentials.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxCredentials.Location = new System.Drawing.Point(417, 239);
             this.gbxCredentials.Name = "gbxCredentials";
             this.gbxCredentials.Size = new System.Drawing.Size(381, 233);
-            this.gbxCredentials.TabIndex = 116;
+            this.gbxCredentials.TabIndex = 33;
             this.gbxCredentials.TabStop = false;
             this.gbxCredentials.Text = "User Credentials";
             // 
@@ -197,7 +198,7 @@ namespace PrimarySchool
             this.lblRole3Def.Location = new System.Drawing.Point(151, 97);
             this.lblRole3Def.Name = "lblRole3Def";
             this.lblRole3Def.Size = new System.Drawing.Size(107, 17);
-            this.lblRole3Def.TabIndex = 133;
+            this.lblRole3Def.TabIndex = 6;
             this.lblRole3Def.Text = "3 - Administrator";
             // 
             // lblRole2Def
@@ -207,7 +208,7 @@ namespace PrimarySchool
             this.lblRole2Def.Location = new System.Drawing.Point(151, 80);
             this.lblRole2Def.Name = "lblRole2Def";
             this.lblRole2Def.Size = new System.Drawing.Size(127, 17);
-            this.lblRole2Def.TabIndex = 132;
+            this.lblRole2Def.TabIndex = 5;
             this.lblRole2Def.Text = "2 - Academic Officer";
             // 
             // lblRole1Def
@@ -217,7 +218,7 @@ namespace PrimarySchool
             this.lblRole1Def.Location = new System.Drawing.Point(151, 63);
             this.lblRole1Def.Name = "lblRole1Def";
             this.lblRole1Def.Size = new System.Drawing.Size(73, 17);
-            this.lblRole1Def.TabIndex = 131;
+            this.lblRole1Def.TabIndex = 4;
             this.lblRole1Def.Text = "1 - Teacher";
             // 
             // tbxRole
@@ -228,9 +229,8 @@ namespace PrimarySchool
             this.tbxRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.tbxRole.Location = new System.Drawing.Point(112, 59);
             this.tbxRole.Name = "tbxRole";
-            this.tbxRole.ReadOnly = true;
             this.tbxRole.Size = new System.Drawing.Size(33, 25);
-            this.tbxRole.TabIndex = 130;
+            this.tbxRole.TabIndex = 0;
             // 
             // lblRole
             // 
@@ -239,7 +239,7 @@ namespace PrimarySchool
             this.lblRole.Location = new System.Drawing.Point(69, 63);
             this.lblRole.Name = "lblRole";
             this.lblRole.Size = new System.Drawing.Size(37, 17);
-            this.lblRole.TabIndex = 125;
+            this.lblRole.TabIndex = 3;
             this.lblRole.Text = "Role:";
             // 
             // pbxEyeballUserPassword
@@ -264,9 +264,8 @@ namespace PrimarySchool
             this.tbxUserPassword.Location = new System.Drawing.Point(112, 153);
             this.tbxUserPassword.Name = "tbxUserPassword";
             this.tbxUserPassword.PasswordChar = '*';
-            this.tbxUserPassword.ReadOnly = true;
             this.tbxUserPassword.Size = new System.Drawing.Size(193, 25);
-            this.tbxUserPassword.TabIndex = 123;
+            this.tbxUserPassword.TabIndex = 2;
             // 
             // lblPassword
             // 
@@ -275,7 +274,7 @@ namespace PrimarySchool
             this.lblPassword.Location = new System.Drawing.Point(39, 157);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(67, 17);
-            this.lblPassword.TabIndex = 122;
+            this.lblPassword.TabIndex = 8;
             this.lblPassword.Text = "Password:";
             // 
             // tbxUsername
@@ -286,9 +285,8 @@ namespace PrimarySchool
             this.tbxUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.tbxUsername.Location = new System.Drawing.Point(112, 122);
             this.tbxUsername.Name = "tbxUsername";
-            this.tbxUsername.ReadOnly = true;
             this.tbxUsername.Size = new System.Drawing.Size(228, 25);
-            this.tbxUsername.TabIndex = 121;
+            this.tbxUsername.TabIndex = 1;
             // 
             // lblUsername
             // 
@@ -297,7 +295,7 @@ namespace PrimarySchool
             this.lblUsername.Location = new System.Drawing.Point(36, 126);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(70, 17);
-            this.lblUsername.TabIndex = 120;
+            this.lblUsername.TabIndex = 7;
             this.lblUsername.Text = "Username:";
             // 
             // btnDelete
@@ -309,7 +307,7 @@ namespace PrimarySchool
             this.btnDelete.Location = new System.Drawing.Point(216, 335);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(93, 30);
-            this.btnDelete.TabIndex = 113;
+            this.btnDelete.TabIndex = 20;
             this.btnDelete.Text = "&Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -323,7 +321,7 @@ namespace PrimarySchool
             this.btnCancel.Location = new System.Drawing.Point(311, 303);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(93, 30);
-            this.btnCancel.TabIndex = 111;
+            this.btnCancel.TabIndex = 18;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -337,7 +335,7 @@ namespace PrimarySchool
             this.btnSave.Location = new System.Drawing.Point(216, 303);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(93, 30);
-            this.btnSave.TabIndex = 110;
+            this.btnSave.TabIndex = 17;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -351,7 +349,7 @@ namespace PrimarySchool
             this.btnEdit.Location = new System.Drawing.Point(121, 303);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 30);
-            this.btnEdit.TabIndex = 109;
+            this.btnEdit.TabIndex = 16;
             this.btnEdit.Text = "&Edit";
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -365,7 +363,7 @@ namespace PrimarySchool
             this.btnLast.Location = new System.Drawing.Point(264, 239);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(140, 30);
-            this.btnLast.TabIndex = 108;
+            this.btnLast.TabIndex = 13;
             this.btnLast.Text = "&Last >|";
             this.btnLast.UseVisualStyleBackColor = false;
             this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
@@ -379,7 +377,7 @@ namespace PrimarySchool
             this.btnFirst.Location = new System.Drawing.Point(121, 239);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(140, 30);
-            this.btnFirst.TabIndex = 107;
+            this.btnFirst.TabIndex = 12;
             this.btnFirst.Text = "|< &First";
             this.btnFirst.UseVisualStyleBackColor = false;
             this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
@@ -393,7 +391,7 @@ namespace PrimarySchool
             this.btnNext.Location = new System.Drawing.Point(264, 271);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(140, 30);
-            this.btnNext.TabIndex = 106;
+            this.btnNext.TabIndex = 15;
             this.btnNext.Text = "&Next >";
             this.btnNext.UseVisualStyleBackColor = false;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -407,7 +405,7 @@ namespace PrimarySchool
             this.btnPrevious.Location = new System.Drawing.Point(121, 271);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(140, 30);
-            this.btnPrevious.TabIndex = 105;
+            this.btnPrevious.TabIndex = 14;
             this.btnPrevious.Text = "< &Previous";
             this.btnPrevious.UseVisualStyleBackColor = false;
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
@@ -418,21 +416,21 @@ namespace PrimarySchool
             this.tbxPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxPhone.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxPhone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxPhone.Location = new System.Drawing.Point(515, 172);
+            this.tbxPhone.Location = new System.Drawing.Point(515, 206);
             this.tbxPhone.Name = "tbxPhone";
             this.tbxPhone.ReadOnly = true;
             this.tbxPhone.Size = new System.Drawing.Size(283, 27);
-            this.tbxPhone.TabIndex = 100;
+            this.tbxPhone.TabIndex = 11;
             this.tbxPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
             this.lblPhone.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhone.Location = new System.Drawing.Point(464, 177);
+            this.lblPhone.Location = new System.Drawing.Point(464, 211);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(47, 17);
-            this.lblPhone.TabIndex = 99;
+            this.lblPhone.TabIndex = 32;
             this.lblPhone.Text = "Phone:";
             // 
             // tbxZip
@@ -441,21 +439,21 @@ namespace PrimarySchool
             this.tbxZip.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxZip.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxZip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxZip.Location = new System.Drawing.Point(515, 138);
+            this.tbxZip.Location = new System.Drawing.Point(515, 172);
             this.tbxZip.Name = "tbxZip";
             this.tbxZip.ReadOnly = true;
             this.tbxZip.Size = new System.Drawing.Size(283, 27);
-            this.tbxZip.TabIndex = 98;
+            this.tbxZip.TabIndex = 10;
             this.tbxZip.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblZip
             // 
             this.lblZip.AutoSize = true;
             this.lblZip.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZip.Location = new System.Drawing.Point(482, 143);
+            this.lblZip.Location = new System.Drawing.Point(482, 177);
             this.lblZip.Name = "lblZip";
             this.lblZip.Size = new System.Drawing.Size(29, 17);
-            this.lblZip.TabIndex = 97;
+            this.lblZip.TabIndex = 31;
             this.lblZip.Text = "Zip:";
             // 
             // tbxState
@@ -464,21 +462,21 @@ namespace PrimarySchool
             this.tbxState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxState.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxState.Location = new System.Drawing.Point(515, 104);
+            this.tbxState.Location = new System.Drawing.Point(515, 138);
             this.tbxState.Name = "tbxState";
             this.tbxState.ReadOnly = true;
             this.tbxState.Size = new System.Drawing.Size(283, 27);
-            this.tbxState.TabIndex = 96;
+            this.tbxState.TabIndex = 9;
             this.tbxState.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblState
             // 
             this.lblState.AutoSize = true;
             this.lblState.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblState.Location = new System.Drawing.Point(471, 109);
+            this.lblState.Location = new System.Drawing.Point(471, 143);
             this.lblState.Name = "lblState";
             this.lblState.Size = new System.Drawing.Size(40, 17);
-            this.lblState.TabIndex = 95;
+            this.lblState.TabIndex = 30;
             this.lblState.Text = "State:";
             // 
             // tbxCity
@@ -487,21 +485,21 @@ namespace PrimarySchool
             this.tbxCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxCity.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxCity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxCity.Location = new System.Drawing.Point(515, 70);
+            this.tbxCity.Location = new System.Drawing.Point(515, 104);
             this.tbxCity.Name = "tbxCity";
             this.tbxCity.ReadOnly = true;
             this.tbxCity.Size = new System.Drawing.Size(283, 27);
-            this.tbxCity.TabIndex = 94;
+            this.tbxCity.TabIndex = 8;
             this.tbxCity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblCity
             // 
             this.lblCity.AutoSize = true;
             this.lblCity.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCity.Location = new System.Drawing.Point(479, 75);
+            this.lblCity.Location = new System.Drawing.Point(479, 109);
             this.lblCity.Name = "lblCity";
             this.lblCity.Size = new System.Drawing.Size(32, 17);
-            this.lblCity.TabIndex = 93;
+            this.lblCity.TabIndex = 29;
             this.lblCity.Text = "City:";
             // 
             // tbxStreetAddress
@@ -510,22 +508,22 @@ namespace PrimarySchool
             this.tbxStreetAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxStreetAddress.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxStreetAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxStreetAddress.Location = new System.Drawing.Point(515, 36);
+            this.tbxStreetAddress.Location = new System.Drawing.Point(515, 70);
             this.tbxStreetAddress.Name = "tbxStreetAddress";
             this.tbxStreetAddress.ReadOnly = true;
             this.tbxStreetAddress.Size = new System.Drawing.Size(283, 27);
-            this.tbxStreetAddress.TabIndex = 92;
+            this.tbxStreetAddress.TabIndex = 7;
             this.tbxStreetAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblStreetAddress
             // 
             this.lblStreetAddress.AutoSize = true;
             this.lblStreetAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStreetAddress.Location = new System.Drawing.Point(414, 41);
+            this.lblStreetAddress.Location = new System.Drawing.Point(452, 75);
             this.lblStreetAddress.Name = "lblStreetAddress";
-            this.lblStreetAddress.Size = new System.Drawing.Size(97, 17);
-            this.lblStreetAddress.TabIndex = 91;
-            this.lblStreetAddress.Text = "Street Address:";
+            this.lblStreetAddress.Size = new System.Drawing.Size(59, 17);
+            this.lblStreetAddress.TabIndex = 28;
+            this.lblStreetAddress.Text = "Address:";
             // 
             // tbxDateOfBirth
             // 
@@ -533,21 +531,21 @@ namespace PrimarySchool
             this.tbxDateOfBirth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxDateOfBirth.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxDateOfBirth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxDateOfBirth.Location = new System.Drawing.Point(121, 172);
+            this.tbxDateOfBirth.Location = new System.Drawing.Point(121, 206);
             this.tbxDateOfBirth.Name = "tbxDateOfBirth";
             this.tbxDateOfBirth.ReadOnly = true;
             this.tbxDateOfBirth.Size = new System.Drawing.Size(283, 27);
-            this.tbxDateOfBirth.TabIndex = 88;
+            this.tbxDateOfBirth.TabIndex = 5;
             this.tbxDateOfBirth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblDateOfBirth
             // 
             this.lblDateOfBirth.AutoSize = true;
             this.lblDateOfBirth.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDateOfBirth.Location = new System.Drawing.Point(33, 177);
+            this.lblDateOfBirth.Location = new System.Drawing.Point(33, 211);
             this.lblDateOfBirth.Name = "lblDateOfBirth";
             this.lblDateOfBirth.Size = new System.Drawing.Size(84, 17);
-            this.lblDateOfBirth.TabIndex = 87;
+            this.lblDateOfBirth.TabIndex = 26;
             this.lblDateOfBirth.Text = "Date of Birth:";
             // 
             // tbxUserID
@@ -560,7 +558,7 @@ namespace PrimarySchool
             this.tbxUserID.Name = "tbxUserID";
             this.tbxUserID.ReadOnly = true;
             this.tbxUserID.Size = new System.Drawing.Size(283, 27);
-            this.tbxUserID.TabIndex = 86;
+            this.tbxUserID.TabIndex = 0;
             this.tbxUserID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbxUserID.TextChanged += new System.EventHandler(this.tbxUserID_TextChanged);
             // 
@@ -571,7 +569,7 @@ namespace PrimarySchool
             this.lblUserID.Location = new System.Drawing.Point(63, 41);
             this.lblUserID.Name = "lblUserID";
             this.lblUserID.Size = new System.Drawing.Size(54, 17);
-            this.lblUserID.TabIndex = 85;
+            this.lblUserID.TabIndex = 21;
             this.lblUserID.Text = "User ID:";
             // 
             // tbxMiddleName
@@ -580,21 +578,21 @@ namespace PrimarySchool
             this.tbxMiddleName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxMiddleName.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxMiddleName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxMiddleName.Location = new System.Drawing.Point(121, 138);
+            this.tbxMiddleName.Location = new System.Drawing.Point(121, 172);
             this.tbxMiddleName.Name = "tbxMiddleName";
             this.tbxMiddleName.ReadOnly = true;
             this.tbxMiddleName.Size = new System.Drawing.Size(283, 27);
-            this.tbxMiddleName.TabIndex = 84;
+            this.tbxMiddleName.TabIndex = 4;
             this.tbxMiddleName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblMiddleName
             // 
             this.lblMiddleName.AutoSize = true;
             this.lblMiddleName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMiddleName.Location = new System.Drawing.Point(25, 143);
+            this.lblMiddleName.Location = new System.Drawing.Point(25, 177);
             this.lblMiddleName.Name = "lblMiddleName";
             this.lblMiddleName.Size = new System.Drawing.Size(91, 17);
-            this.lblMiddleName.TabIndex = 83;
+            this.lblMiddleName.TabIndex = 25;
             this.lblMiddleName.Text = "Middle Name:";
             // 
             // tbxFirstName
@@ -603,21 +601,21 @@ namespace PrimarySchool
             this.tbxFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxFirstName.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxFirstName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxFirstName.Location = new System.Drawing.Point(121, 104);
+            this.tbxFirstName.Location = new System.Drawing.Point(121, 138);
             this.tbxFirstName.Name = "tbxFirstName";
             this.tbxFirstName.ReadOnly = true;
             this.tbxFirstName.Size = new System.Drawing.Size(283, 27);
-            this.tbxFirstName.TabIndex = 82;
+            this.tbxFirstName.TabIndex = 3;
             this.tbxFirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblFirstName
             // 
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFirstName.Location = new System.Drawing.Point(42, 109);
+            this.lblFirstName.Location = new System.Drawing.Point(42, 143);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(74, 17);
-            this.lblFirstName.TabIndex = 81;
+            this.lblFirstName.TabIndex = 24;
             this.lblFirstName.Text = "First Name:";
             // 
             // tbxLastName
@@ -626,21 +624,21 @@ namespace PrimarySchool
             this.tbxLastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxLastName.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxLastName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxLastName.Location = new System.Drawing.Point(121, 70);
+            this.tbxLastName.Location = new System.Drawing.Point(121, 104);
             this.tbxLastName.Name = "tbxLastName";
             this.tbxLastName.ReadOnly = true;
             this.tbxLastName.Size = new System.Drawing.Size(283, 27);
-            this.tbxLastName.TabIndex = 80;
+            this.tbxLastName.TabIndex = 2;
             this.tbxLastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
             this.lblLastName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLastName.Location = new System.Drawing.Point(43, 75);
+            this.lblLastName.Location = new System.Drawing.Point(43, 109);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(73, 17);
-            this.lblLastName.TabIndex = 79;
+            this.lblLastName.TabIndex = 23;
             this.lblLastName.Text = "Last Name:";
             // 
             // mnuMenu
@@ -652,7 +650,7 @@ namespace PrimarySchool
             this.mnuMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMenu.Name = "mnuMenu";
             this.mnuMenu.Size = new System.Drawing.Size(809, 24);
-            this.mnuMenu.TabIndex = 122;
+            this.mnuMenu.TabIndex = 35;
             this.mnuMenu.Text = "menuStrip1";
             // 
             // mnuFile
@@ -824,10 +822,10 @@ namespace PrimarySchool
             // lblEmail
             // 
             this.lblEmail.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmail.Location = new System.Drawing.Point(11, 211);
+            this.lblEmail.Location = new System.Drawing.Point(405, 41);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(106, 17);
-            this.lblEmail.TabIndex = 89;
+            this.lblEmail.TabIndex = 27;
             this.lblEmail.Text = "Email:";
             this.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -837,12 +835,35 @@ namespace PrimarySchool
             this.tbxEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxEmail.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxEmail.Location = new System.Drawing.Point(121, 206);
+            this.tbxEmail.Location = new System.Drawing.Point(515, 36);
             this.tbxEmail.Name = "tbxEmail";
             this.tbxEmail.ReadOnly = true;
             this.tbxEmail.Size = new System.Drawing.Size(283, 27);
-            this.tbxEmail.TabIndex = 90;
+            this.tbxEmail.TabIndex = 6;
             this.tbxEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tbxStatus
+            // 
+            this.tbxStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(197)))), ((int)(((byte)(190)))));
+            this.tbxStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxStatus.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
+            this.tbxStatus.Location = new System.Drawing.Point(121, 70);
+            this.tbxStatus.Name = "tbxStatus";
+            this.tbxStatus.ReadOnly = true;
+            this.tbxStatus.Size = new System.Drawing.Size(283, 27);
+            this.tbxStatus.TabIndex = 1;
+            this.tbxStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Location = new System.Drawing.Point(70, 75);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(46, 17);
+            this.lblStatus.TabIndex = 22;
+            this.lblStatus.Text = "Status:";
             // 
             // frmUsers
             // 
@@ -850,6 +871,8 @@ namespace PrimarySchool
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(180)))), ((int)(((byte)(210)))));
             this.ClientSize = new System.Drawing.Size(809, 481);
+            this.Controls.Add(this.tbxStatus);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.mnuMenu);
             this.Controls.Add(this.gbxSearch);
             this.Controls.Add(this.btnAddNew);
@@ -975,5 +998,7 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblRole3Def;
         private System.Windows.Forms.Label lblRole2Def;
         private System.Windows.Forms.Label lblRole1Def;
+        private System.Windows.Forms.TextBox tbxStatus;
+        private System.Windows.Forms.Label lblStatus;
     }
 }

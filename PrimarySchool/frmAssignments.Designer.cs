@@ -563,7 +563,7 @@ namespace PrimarySchool
             this.tbxCategory.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.tbxCategory.Location = new System.Drawing.Point(116, 131);
-            this.tbxCategory.MaxLength = 1;
+            this.tbxCategory.MaxLength = 4;
             this.tbxCategory.Name = "tbxCategory";
             this.tbxCategory.ReadOnly = true;
             this.tbxCategory.Size = new System.Drawing.Size(283, 27);

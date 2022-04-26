@@ -94,6 +94,7 @@ namespace PrimarySchool
                         btnEdit.Enabled = true;
                         btnSave.Enabled = false;
                         btnCancel.Enabled = false;
+                        btnAddNew.Enabled = true;
                         gbxSearch.Enabled = true;
                         mnuNavigation.Enabled = true;
                         mnuFirst.Enabled = true;
@@ -107,7 +108,11 @@ namespace PrimarySchool
                         mnuCourses.Enabled = false;
                         mnuAddCourse.Enabled = false;
                         mnuRemoveCourse.Enabled = false;
+                        //tbxRoleID.ReadOnly = true;
+                        tbxUsername.ReadOnly = true;
+                        tbxPassword.ReadOnly = true;
                         tbxLastName.Focus();
+                        CheckDatabaseTies();
                         break;
                     // Acts as both 'Add New' and 'Edit' state.
                     default:
@@ -130,6 +135,7 @@ namespace PrimarySchool
                         btnEdit.Enabled = false;
                         btnSave.Enabled = true;
                         btnCancel.Enabled = true;
+                        btnAddNew.Enabled = false;
                         gbxSearch.Enabled = false;
                         mnuNavigation.Enabled = false;
                         mnuFirst.Enabled = false;
@@ -143,6 +149,11 @@ namespace PrimarySchool
                         mnuCourses.Enabled = true;
                         mnuAddCourse.Enabled = true;
                         mnuRemoveCourse.Enabled = true;
+                        //tbxRoleID.ReadOnly = false;
+                        tbxUsername.ReadOnly = false;
+                        tbxPassword.ReadOnly = false;
+                        btnDelete.Enabled = false;
+                        mnuDelete.Enabled = false;
                         tbxLastName.Focus();
                         break;
                 }
@@ -160,7 +171,7 @@ namespace PrimarySchool
         {
             //ProgOps.OpenDatabase();
             ProgOps.TeachersCommand(tbxUserID, tbxLastName, tbxFirstName, tbxMiddleName, tbxDateOfBirth, tbxEmail,
-                tbxAddress, tbxCity, tbxState, tbxZip, tbxPhone);
+                tbxAddress, tbxCity, tbxState, tbxZip, tbxPhone, tbxRoleID, tbxUsername, tbxPassword);
             //establish currency manager to control buttons previous and next
             manager = (CurrencyManager)this.BindingContext[ProgOps.DTTeachersTable];
             //set state
@@ -276,8 +287,87 @@ namespace PrimarySchool
         // Checks validity of edited/new data (do later).
         private bool ValidateData()
         {
+            try
+            {
+                string message = "Invalid input detected.";
 
-            return false;
+                bool allOK = true;
+
+                if (tbxLastName.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Last Name.";
+                    tbxLastName.Focus();
+                    allOK = false;
+                }
+
+                if (tbxFirstName.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a First Name.";
+                    tbxFirstName.Focus();
+                    allOK = false;
+                }
+
+                if (tbxMiddleName.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Middle Name.";
+                    tbxMiddleName.Focus();
+                    allOK = false;
+                }
+
+                if (tbxEmail.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter an Email.";
+                    tbxDateOfBirth.Focus();
+                    allOK = false;
+                }
+
+                if (tbxAddress.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter an Address.";
+                    tbxAddress.Focus();
+                    allOK = false;
+                }
+
+                if (tbxCity.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a City.";
+                    tbxCity.Focus();
+                    allOK = false;
+                }
+
+                if (tbxState.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a State.";
+                    tbxZip.Focus();
+                    allOK = false;
+                }
+
+                if (tbxZip.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter Zip.";
+                    tbxZip.Focus();
+                    allOK = false;
+                }
+
+                if (tbxPhone.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Phone Number.";
+                    tbxPhone.Focus();
+                    allOK = false;
+                }
+
+                if (!allOK)
+                {
+                    FormOps.ErrorBox(message);
+                }
+
+                return allOK;
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+                return false;
+            }
         }
 
         // Goes to first record and beeps (commented).
@@ -355,22 +445,31 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void Save()
         {
-            //if (!ValidateData())
-            //{
-            //    return;
-            //}
+            if (!ValidateData())
+            {
+                return;
+            }
 
-            string savedName = tbxUserID.Text;
-            int savedRow;
+            //string savedName = tbxUserID.Text;
+            //int savedRow;
 
             try
             {
                 manager.EndCurrentEdit();
-                ProgOps.DTTeachersTable.DefaultView.Sort = "User_LName";
-                savedRow = ProgOps.DTTeachersTable.DefaultView.Find(savedName);
 
-                manager.Position = savedRow;
-                MessageBox.Show("Record Saved", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CheckDatabaseTies();
+
+                //ProgOps.DTTeachersTable.DefaultView.Sort = "User_LName";
+
+                //savedRow = ProgOps.DTTeachersTable.DefaultView.Find(savedName);
+
+               // manager.Position = savedRow;
+
+                tbxPassword.PasswordChar = '*';
+
+                MessageBox.Show("Record saved.", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 SetState("View");
             }
             catch (Exception ex)
@@ -415,6 +514,10 @@ namespace PrimarySchool
                 {
                     manager.Position = bookmark;
                 }
+
+                tbxPassword.PasswordChar = '*';
+
+                CheckDatabaseTies();
             }
             catch (Exception ex)
             {
@@ -435,6 +538,8 @@ namespace PrimarySchool
                 manager.AddNew();
 
                 SetState("Add New");
+
+                tbxRoleID.Text = "1";
             }
             catch (Exception ex)
             {
@@ -502,6 +607,10 @@ namespace PrimarySchool
                     coursesTable.Clear();
                     coursesTable.Dispose();
                 }
+                else
+                {
+                    lblAvailableCourses.Text = "Available Courses (0)";
+                }
             }
             catch (Exception ex)
             {
@@ -535,6 +644,10 @@ namespace PrimarySchool
 
                     coursesTable.Clear();
                     coursesTable.Dispose();
+                }
+                else
+                {
+                    lblRegisteredCourses.Text = "Registered Courses (0)";
                 }
             }
             catch (Exception ex)
@@ -613,6 +726,8 @@ namespace PrimarySchool
         {
             try
             {
+                CheckDatabaseTies();
+
                 FillAvailableCoursesListBox();
 
                 FillRegisteredCoursesListBox();
@@ -647,6 +762,67 @@ namespace PrimarySchool
                 {
                     tbxSearch.ForeColor = FormOps.GetColorFromPalette("mid blue");
                     tbxSearch.Text = strSearch;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void pbxEyeballUserPassword_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbxPassword.PasswordChar.Equals('*'))
+                {
+                    tbxPassword.PasswordChar = '\0';
+                }
+                else
+                {
+                    tbxPassword.PasswordChar = '*';
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void CheckDatabaseTies()
+        {
+            try
+            {
+                if (!tbxUserID.Text.Equals(string.Empty))
+                {
+                    int userID = Convert.ToInt32(tbxUserID.Text);
+
+                    DataTable courses = ProgOps.GetRegisteredCoursesForTeacher(userID);
+
+                    if (courses.Rows.Count > 0 || tbxUserID.Text.Equals("1009"))
+                    {
+                        btnDelete.Enabled = false;
+                        mnuDelete.Enabled = false;
+                        tbxRoleID.Enabled = false;
+                        tbxStatus.Text = "Not Active";
+                    }
+                    else
+                    {
+                        btnDelete.Enabled = true;
+                        mnuDelete.Enabled = true;
+                        tbxRoleID.Enabled = true;
+                        tbxStatus.Text = "Active";
+                    }
+
+                    courses.Clear();
+                    courses.Dispose();
+                }
+                else
+                {
+                    btnDelete.Enabled = false;
+                    mnuDelete.Enabled = false;
+                    tbxRoleID.Enabled = false;
+                    tbxStatus.Text = string.Empty;
                 }
             }
             catch (Exception ex)
