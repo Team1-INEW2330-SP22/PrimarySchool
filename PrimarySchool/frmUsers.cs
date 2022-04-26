@@ -283,8 +283,127 @@ namespace PrimarySchool
         // Checks validity of edited/new data (do later).
         private bool ValidateData()
         {
+            try
+            {
+                string message = "Invalid input detected.";
 
-            return true;
+                bool allOK = true;
+
+                if (tbxLastName.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Last Name.";
+                    tbxLastName.Focus();
+                    allOK = false;
+                }
+
+                if (tbxFirstName.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a First Name.";
+                    tbxFirstName.Focus();
+                    allOK = false;
+                }
+
+                if (tbxMiddleName.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Middle Name.";
+                    tbxMiddleName.Focus();
+                    allOK = false;
+                }
+
+                if (tbxDateOfBirth.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Date of Birth.";
+                    tbxDateOfBirth.Focus();
+                    allOK = false;
+                }
+
+                if (tbxEmail.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter an Email.";
+                    tbxEmail.Focus();
+                    allOK = false;
+                }
+
+                if (tbxStreetAddress.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Street Adress.";
+                    tbxStreetAddress.Focus();
+                    allOK = false;
+                }
+
+                if (tbxCity.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a City.";
+                    tbxCity.Focus();
+                    allOK = false;
+                }
+
+                if (tbxState.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter State.";
+                    tbxState.Focus();
+                    allOK = false;
+                }
+
+                if (tbxZip.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter Zip.";
+                    tbxZip.Focus();
+                    allOK = false;
+                }
+
+                if (tbxPhone.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter Phone Number.";
+                    tbxPhone.Focus();
+                    allOK = false;
+                }
+
+                if (tbxRole.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter Role.";
+                    tbxRole.Focus();
+                    allOK = false;
+                }
+
+                if (tbxRole.Text.Trim().Equals("1") || tbxRole.Text.Trim().Equals("2")
+                    || tbxRole.Text.Trim().Equals("3"))
+                {
+
+                }
+                else
+                {
+                    message = "You must enter a number between 1 and 3 for Role.";
+                    tbxRole.Focus();
+                    allOK = false;
+                }
+
+                if (tbxUsername.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Username.";
+                    tbxUsername.Focus();
+                    allOK = false;
+                }
+
+                if (tbxUserPassword.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Password.";
+                    tbxUserPassword.Focus();
+                    allOK = false;
+                }
+
+                if (!allOK)
+                {
+                    FormOps.ErrorBox(message);
+                }
+
+                return allOK;
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+                return false;
+            }
         }
 
         // Goes to first record and beeps (commented).
@@ -358,10 +477,10 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void Save()
         {
-            //if (!ValidateData())
-            //{
-            //    return;
-            //}
+            if (!ValidateData())
+            {
+                return;
+            }
 
 
             //string savedName = tbxUserID.Text;

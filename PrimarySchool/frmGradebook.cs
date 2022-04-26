@@ -45,6 +45,10 @@ namespace PrimarySchool
         // Creates form level bool to indicate if current edits are saved
         private bool saved;
 
+
+        private double average;
+        private int globalStudentID;
+
         // Initializes 'home' attribute to parameter
         public frmGradebook(frmHome home)
         {
@@ -792,7 +796,7 @@ namespace PrimarySchool
                                     }
                                 }
                             }
-                        }
+                        }                       
 
                         if (studentID != Convert.ToInt32(hiddenGradebookTable.Rows[x][0])
                             || (x + 1) == hiddenGradebookTable.Rows.Count)
@@ -816,7 +820,7 @@ namespace PrimarySchool
                             {
                                 studentID = Convert.ToInt32(hiddenGradebookTable.Rows[x][0]);
 
-                                studentName = gradebookTable.Rows[x][0].ToString().Substring(0, 1) 
+                                studentName = gradebookTable.Rows[x][0].ToString().Substring(0, 1)
                                     + ". " + gradebookTable.Rows[x][1].ToString();
 
                                 studentNameList.Add(studentName);
@@ -855,7 +859,8 @@ namespace PrimarySchool
                     }
 
                     if (!categoryIdList.Contains(1) || !categoryIdList.Contains(2)
-                        || !categoryIdList.Contains(3) || !categoryIdList.Contains(4))
+                        || !categoryIdList.Contains(3) || !categoryIdList.Contains(4)
+                        || !categoryIdList.Contains(1002))
                     {
                         lbxFinalGrades.Items.Add("Insufficient categories.");
 
@@ -866,7 +871,14 @@ namespace PrimarySchool
                     {
                         for (int x = 0; x < studentIdList.Count; x++)
                         {
-                            dividedWeightList.Add(Convert.ToDouble(weightList[x] / countList[x]));
+                            if (countList[x] > 0)
+                            {
+                                dividedWeightList.Add(Convert.ToDouble(weightList[x] / countList[x]));
+                            }
+                            else
+                            {
+                                dividedWeightList.Add(Convert.ToDouble(weightList[x] / 1));
+                            }
                         }
 
                         studentID = studentIdList[0];
@@ -880,6 +892,11 @@ namespace PrimarySchool
 
                             if (studentID != studentIdList[x] || (x + 1) == studentIdList.Count)
                             {
+                                if (studentID == globalStudentID)
+                                {
+                                    average = final;
+                                }
+
                                 finalGradeList.Add(final);
 
                                 if ((x + 1) != studentIdList.Count)
@@ -1143,6 +1160,98 @@ namespace PrimarySchool
 
                         viewer.Dispose();
                     }
+                }
+                else
+                {
+                    FormOps.ErrorBox("Select a course before printing.");
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        private void mnuMidterm_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CheckDataTables())
+                {
+                    globalStudentID = 0;
+
+                    if (dgvGradebook.CurrentRow.Index >= 0)
+                    {
+                        globalStudentID = Convert.ToInt32(hiddenGradebookTable.Rows[dgvGradebook.CurrentRow.Index][0]);
+                    }
+
+                    CalculateFinalGrades();
+
+                    if (globalStudentID != 0)
+                    {
+                        if (!saved)
+                        {
+                            FormOps.ErrorBox("Cannot print data that has not been saved.");
+
+                            SaveYesOrNo("Save then print?");
+
+                            if (saved)
+                            {
+                                CrystalReports.crptMidterm report = new CrystalReports.crptMidterm();
+
+                                report.SetDatabaseLogon("group1fa212330", "1645456");
+
+                                report.SetParameterValue("selectedCourseID", selectedCourseID);
+
+                                report.SetParameterValue("studentID", globalStudentID);
+
+                                report.SetParameterValue("average", average.ToString("F"));
+
+                                frmViewer viewer = new frmViewer();
+
+                                viewer.crvViewer.ReportSource = null;
+
+                                viewer.crvViewer.ReportSource = report;
+
+                                FormOps.ShowModal(viewer);
+
+                                report.Dispose();
+
+                                viewer.Dispose();
+                            }
+                        }
+                        else
+                        {
+                            CrystalReports.crptMidterm report = new CrystalReports.crptMidterm();
+
+                            report.SetDatabaseLogon("group1fa212330", "1645456");
+
+                            report.SetParameterValue("selectedCourseID", selectedCourseID);
+
+                            report.SetParameterValue("studentID", globalStudentID);
+
+                            report.SetParameterValue("average", average.ToString("F"));
+
+                            frmViewer viewer = new frmViewer();
+
+                            viewer.crvViewer.ReportSource = null;
+
+                            viewer.crvViewer.ReportSource = report;
+
+                            FormOps.ShowModal(viewer);
+
+                            report.Dispose();
+
+                            viewer.Dispose();
+                        }
+                    }
+                    else
+                    {
+                        FormOps.ErrorBox("Select a student before printing.");
+                    }
+
+                    globalStudentID = 0;
+                    average = 0;
                 }
                 else
                 {
