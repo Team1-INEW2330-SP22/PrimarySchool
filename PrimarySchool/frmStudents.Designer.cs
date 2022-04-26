@@ -109,6 +109,8 @@ namespace PrimarySchool
             this.mnuHelpInstructions = new System.Windows.Forms.ToolStripMenuItem();
             this.tbxEcCellPhone = new System.Windows.Forms.TextBox();
             this.lblECCellPhone = new System.Windows.Forms.Label();
+            this.tbxStatus = new System.Windows.Forms.TextBox();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.gbxSearch.SuspendLayout();
             this.gbxCourses.SuspendLayout();
             this.mnuMenu.SuspendLayout();
@@ -120,7 +122,7 @@ namespace PrimarySchool
             this.tbxZip.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxZip.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxZip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxZip.Location = new System.Drawing.Point(110, 309);
+            this.tbxZip.Location = new System.Drawing.Point(110, 343);
             this.tbxZip.MaxLength = 5;
             this.tbxZip.Name = "tbxZip";
             this.tbxZip.Size = new System.Drawing.Size(283, 27);
@@ -131,7 +133,7 @@ namespace PrimarySchool
             // 
             this.lblZip.AutoSize = true;
             this.lblZip.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZip.Location = new System.Drawing.Point(77, 314);
+            this.lblZip.Location = new System.Drawing.Point(77, 348);
             this.lblZip.Name = "lblZip";
             this.lblZip.Size = new System.Drawing.Size(29, 17);
             this.lblZip.TabIndex = 37;
@@ -143,7 +145,7 @@ namespace PrimarySchool
             this.tbxState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxState.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxState.Location = new System.Drawing.Point(110, 275);
+            this.tbxState.Location = new System.Drawing.Point(110, 309);
             this.tbxState.MaxLength = 20;
             this.tbxState.Name = "tbxState";
             this.tbxState.Size = new System.Drawing.Size(283, 27);
@@ -154,7 +156,7 @@ namespace PrimarySchool
             // 
             this.lblState.AutoSize = true;
             this.lblState.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblState.Location = new System.Drawing.Point(66, 280);
+            this.lblState.Location = new System.Drawing.Point(66, 314);
             this.lblState.Name = "lblState";
             this.lblState.Size = new System.Drawing.Size(40, 17);
             this.lblState.TabIndex = 36;
@@ -166,7 +168,7 @@ namespace PrimarySchool
             this.tbxCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxCity.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxCity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxCity.Location = new System.Drawing.Point(110, 241);
+            this.tbxCity.Location = new System.Drawing.Point(110, 275);
             this.tbxCity.MaxLength = 50;
             this.tbxCity.Name = "tbxCity";
             this.tbxCity.Size = new System.Drawing.Size(283, 27);
@@ -177,7 +179,7 @@ namespace PrimarySchool
             // 
             this.lblCity.AutoSize = true;
             this.lblCity.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCity.Location = new System.Drawing.Point(74, 246);
+            this.lblCity.Location = new System.Drawing.Point(74, 280);
             this.lblCity.Name = "lblCity";
             this.lblCity.Size = new System.Drawing.Size(32, 17);
             this.lblCity.TabIndex = 35;
@@ -189,7 +191,7 @@ namespace PrimarySchool
             this.tbxAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxAddress.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxAddress.Location = new System.Drawing.Point(110, 207);
+            this.tbxAddress.Location = new System.Drawing.Point(110, 241);
             this.tbxAddress.MaxLength = 100;
             this.tbxAddress.Name = "tbxAddress";
             this.tbxAddress.Size = new System.Drawing.Size(283, 27);
@@ -200,7 +202,7 @@ namespace PrimarySchool
             // 
             this.lblAddress.AutoSize = true;
             this.lblAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAddress.Location = new System.Drawing.Point(47, 212);
+            this.lblAddress.Location = new System.Drawing.Point(47, 246);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(59, 17);
             this.lblAddress.TabIndex = 34;
@@ -212,7 +214,7 @@ namespace PrimarySchool
             this.tbxDateOfBirth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxDateOfBirth.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxDateOfBirth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxDateOfBirth.Location = new System.Drawing.Point(110, 173);
+            this.tbxDateOfBirth.Location = new System.Drawing.Point(110, 207);
             this.tbxDateOfBirth.MaxLength = 10;
             this.tbxDateOfBirth.Name = "tbxDateOfBirth";
             this.tbxDateOfBirth.Size = new System.Drawing.Size(283, 27);
@@ -223,7 +225,7 @@ namespace PrimarySchool
             // 
             this.lblDateOfBirth.AutoSize = true;
             this.lblDateOfBirth.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDateOfBirth.Location = new System.Drawing.Point(22, 178);
+            this.lblDateOfBirth.Location = new System.Drawing.Point(22, 212);
             this.lblDateOfBirth.Name = "lblDateOfBirth";
             this.lblDateOfBirth.Size = new System.Drawing.Size(84, 17);
             this.lblDateOfBirth.TabIndex = 33;
@@ -259,7 +261,7 @@ namespace PrimarySchool
             this.tbxMiddleName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxMiddleName.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxMiddleName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxMiddleName.Location = new System.Drawing.Point(110, 139);
+            this.tbxMiddleName.Location = new System.Drawing.Point(110, 173);
             this.tbxMiddleName.MaxLength = 30;
             this.tbxMiddleName.Name = "tbxMiddleName";
             this.tbxMiddleName.Size = new System.Drawing.Size(283, 27);
@@ -270,7 +272,7 @@ namespace PrimarySchool
             // 
             this.lblMiddleName.AutoSize = true;
             this.lblMiddleName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMiddleName.Location = new System.Drawing.Point(14, 144);
+            this.lblMiddleName.Location = new System.Drawing.Point(14, 178);
             this.lblMiddleName.Name = "lblMiddleName";
             this.lblMiddleName.Size = new System.Drawing.Size(91, 17);
             this.lblMiddleName.TabIndex = 32;
@@ -282,7 +284,7 @@ namespace PrimarySchool
             this.tbxFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxFirstName.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxFirstName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxFirstName.Location = new System.Drawing.Point(110, 105);
+            this.tbxFirstName.Location = new System.Drawing.Point(110, 139);
             this.tbxFirstName.MaxLength = 30;
             this.tbxFirstName.Name = "tbxFirstName";
             this.tbxFirstName.Size = new System.Drawing.Size(283, 27);
@@ -293,7 +295,7 @@ namespace PrimarySchool
             // 
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFirstName.Location = new System.Drawing.Point(31, 110);
+            this.lblFirstName.Location = new System.Drawing.Point(31, 144);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(74, 17);
             this.lblFirstName.TabIndex = 31;
@@ -305,7 +307,7 @@ namespace PrimarySchool
             this.tbxLastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxLastName.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxLastName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.tbxLastName.Location = new System.Drawing.Point(110, 71);
+            this.tbxLastName.Location = new System.Drawing.Point(110, 105);
             this.tbxLastName.MaxLength = 30;
             this.tbxLastName.Name = "tbxLastName";
             this.tbxLastName.Size = new System.Drawing.Size(283, 27);
@@ -316,7 +318,7 @@ namespace PrimarySchool
             // 
             this.lblLastName.AutoSize = true;
             this.lblLastName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLastName.Location = new System.Drawing.Point(32, 76);
+            this.lblLastName.Location = new System.Drawing.Point(32, 110);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(73, 17);
             this.lblLastName.TabIndex = 30;
@@ -1005,12 +1007,38 @@ namespace PrimarySchool
             this.lblECCellPhone.TabIndex = 47;
             this.lblECCellPhone.Text = "EC Cell Phone:";
             // 
+            // tbxStatus
+            // 
+            this.tbxStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(197)))), ((int)(((byte)(190)))));
+            this.tbxStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxStatus.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
+            this.tbxStatus.Location = new System.Drawing.Point(110, 71);
+            this.tbxStatus.MaxLength = 30;
+            this.tbxStatus.Name = "tbxStatus";
+            this.tbxStatus.ReadOnly = true;
+            this.tbxStatus.Size = new System.Drawing.Size(283, 27);
+            this.tbxStatus.TabIndex = 50;
+            this.tbxStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Location = new System.Drawing.Point(59, 76);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(46, 17);
+            this.lblStatus.TabIndex = 51;
+            this.lblStatus.Text = "Status:";
+            // 
             // frmStudents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(180)))), ((int)(((byte)(210)))));
             this.ClientSize = new System.Drawing.Size(875, 623);
+            this.Controls.Add(this.tbxStatus);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.tbxEcCellPhone);
             this.Controls.Add(this.lblECCellPhone);
             this.Controls.Add(this.mnuMenu);
@@ -1163,5 +1191,7 @@ namespace PrimarySchool
         private System.Windows.Forms.ToolStripMenuItem mnuHelpInstructions;
         private System.Windows.Forms.TextBox tbxEcCellPhone;
         private System.Windows.Forms.Label lblECCellPhone;
+        private System.Windows.Forms.TextBox tbxStatus;
+        private System.Windows.Forms.Label lblStatus;
     }
 }

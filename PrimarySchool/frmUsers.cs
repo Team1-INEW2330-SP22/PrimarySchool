@@ -93,13 +93,9 @@ namespace PrimarySchool
                         btnEdit.Enabled = true;
                         btnAddNew.Enabled = true;
                         btnSave.Enabled = false;
-                        btnDelete.Enabled = true;
                         btnCancel.Enabled = false;
                         gbxSearch.Enabled = true;
                         gbxCredentials.Enabled = false;
-                        //tbxRole.ReadOnly = true;
-                        //tbxUsername.ReadOnly = true;
-                        //tbxUserPassword.ReadOnly = true;
                         mnuNavigation.Enabled = true;
                         mnuFirst.Enabled = true;
                         mnuLast.Enabled = true;
@@ -108,13 +104,12 @@ namespace PrimarySchool
                         mnuEditRecord.Enabled = true;
                         mnuAddNew.Enabled = true;
                         mnuSave.Enabled = false;
-                        mnuDelete.Enabled = true;
                         mnuCancel.Enabled = false;
                         mnuSearch.Enabled = true;
                         mnuCredentials.Enabled = false;
                         mnuSubmit.Enabled = false;
                         tbxLastName.Focus();
-                        CheckForPlaceholder();
+                        CheckDatabaseTies();
                         break;
                     // Acts as both 'Add New' and 'Edit' state.
                     default:
@@ -139,9 +134,6 @@ namespace PrimarySchool
                         btnCancel.Enabled = true;
                         gbxSearch.Enabled = false;
                         gbxCredentials.Enabled = true;
-                        //tbxRole.ReadOnly = false;
-                        //tbxUsername.ReadOnly = false;
-                        //tbxUserPassword.ReadOnly = false;
                         mnuNavigation.Enabled = false;
                         mnuFirst.Enabled = false;
                         mnuLast.Enabled = false;
@@ -156,7 +148,6 @@ namespace PrimarySchool
                         mnuCredentials.Enabled = true;
                         mnuSubmit.Enabled = true;
                         tbxLastName.Focus();
-                        CheckForPlaceholder();
                         break;
                 }
             }
@@ -373,17 +364,26 @@ namespace PrimarySchool
             //}
 
 
-            string savedName = tbxUserID.Text;
-            int savedRow;
+            //string savedName = tbxUserID.Text;
+            //int savedRow;
 
             try
             {
                 manager.EndCurrentEdit();
-                ProgOps.DTUsersTable.DefaultView.Sort = "User_LName";
-                savedRow = ProgOps.DTUsersTable.DefaultView.Find(savedName);
 
-                manager.Position = savedRow;
-                MessageBox.Show("Record Saved", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CheckDatabaseTies();
+
+                //ProgOps.DTUsersTable.DefaultView.Sort = "User_LName";
+
+                //savedRow = ProgOps.DTUsersTable.DefaultView.Find(savedName);
+
+                //manager.Position = savedRow;
+
+                tbxUserPassword.PasswordChar = '*';
+
+                MessageBox.Show("Record saved.", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 SetState("View");
             }
             catch (Exception ex)
@@ -428,6 +428,10 @@ namespace PrimarySchool
                 {
                     manager.Position = bookmark;
                 }
+
+                tbxUserPassword.PasswordChar = '*';
+
+                CheckDatabaseTies();
             }
             catch (Exception ex)
             {
@@ -504,27 +508,6 @@ namespace PrimarySchool
             }
         }
 
-        private void CheckForPlaceholder()
-        {
-            try
-            {
-                if (tbxUserID.Text.Equals("1009"))
-                {
-                    btnDelete.Enabled = false;
-                    tbxRole.Enabled = false;
-                }
-                else
-                {
-                    btnDelete.Enabled = true;
-                    tbxRole.Enabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                FormOps.ErrorBox(ex.Message);
-            }
-        }
-
         private void tbxSearch_Enter(object sender, EventArgs e)
         {
             try
@@ -559,7 +542,49 @@ namespace PrimarySchool
 
         private void tbxUserID_TextChanged(object sender, EventArgs e)
         {
-            CheckForPlaceholder();
+            CheckDatabaseTies();
+        }
+
+        private void CheckDatabaseTies()
+        {
+            try
+            {
+                if (!tbxUserID.Text.Equals(string.Empty))
+                {
+                    int userID = Convert.ToInt32(tbxUserID.Text);
+
+                    DataTable courses = ProgOps.GetRegisteredCoursesForTeacher(userID);
+
+                    if (courses.Rows.Count > 0 || tbxUserID.Text.Equals("1009"))
+                    {
+                        btnDelete.Enabled = false;
+                        mnuDelete.Enabled = false;
+                        tbxRole.Enabled = false;
+                        tbxStatus.Text = "Not Active";
+                    }
+                    else
+                    {
+                        btnDelete.Enabled = true;
+                        mnuDelete.Enabled = true;
+                        tbxRole.Enabled = true;
+                        tbxStatus.Text = "Active";
+                    }
+
+                    courses.Clear();
+                    courses.Dispose();
+                }
+                else
+                {
+                    btnDelete.Enabled = false;
+                    mnuDelete.Enabled = false;
+                    tbxRole.Enabled = false;
+                    tbxStatus.Text = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
         }
     }
 }

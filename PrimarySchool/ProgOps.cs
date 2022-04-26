@@ -443,7 +443,8 @@ namespace PrimarySchool
         //Get Teacher information for Academic Officers - Teacher Tab
         public static void TeachersCommand(TextBox txUserID, TextBox txLName, TextBox txFName,
             TextBox txMName, TextBox txDOB, TextBox txEmail, TextBox txAddress, TextBox txCity,
-            TextBox txState, TextBox txZip, TextBox txPhone)
+            TextBox txState, TextBox txZip, TextBox txPhone, TextBox txRole, TextBox txUsername,
+            TextBox txPassword)
         {
             try
             {
@@ -467,6 +468,9 @@ namespace PrimarySchool
                 txState.DataBindings.Add("Text", _dtTeachersTable, "User_State");
                 txZip.DataBindings.Add("Text", _dtTeachersTable, "User_Zip");
                 txPhone.DataBindings.Add("Text", _dtTeachersTable, "User_Phone_Number");
+                txRole.DataBindings.Add("Text", _dtTeachersTable, "Role_ID");
+                txUsername.DataBindings.Add("Text", _dtTeachersTable, "User_LoginName");
+                txPassword.DataBindings.Add("Text", _dtTeachersTable, "User_LoginPwd");
             }
             catch (SqlException ex)
             {

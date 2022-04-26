@@ -106,7 +106,6 @@ namespace PrimarySchool
                         btnEdit.Enabled = true;
                         btnAddNew.Enabled = true;
                         btnSave.Enabled = false;
-                        btnDelete.Enabled = true;
                         btnCancel.Enabled = false;
                         gbxSearch.Enabled = true;
                         mnuNavigation.Enabled = true;
@@ -117,13 +116,13 @@ namespace PrimarySchool
                         mnuEditRecord.Enabled = true;
                         mnuAddNew.Enabled = true;
                         mnuSave.Enabled = false;
-                        mnuDelete.Enabled = true;
                         mnuCancel.Enabled = false;
                         mnuSearch.Enabled = true;
                         mnuCourses.Enabled = false;
                         mnuAddCourse.Enabled = false;
                         mnuRemoveCourse.Enabled = false;
                         tbxLastName.Focus();
+                        CheckDatabaseTies();
                         break;
                     // Acts as both 'Add New' and 'Edit' state
                     default:
@@ -496,7 +495,7 @@ namespace PrimarySchool
 
         // Calls ValidateData before saving
         // Ends current edit
-        // Sorts by ID
+        // Sorts by Last Name
         // Informs user of successful save
         // Sets state to 'View'
         private void Save()
@@ -511,6 +510,8 @@ namespace PrimarySchool
                 manager.EndCurrentEdit();
 
                 ProgOps.UpdateStudents();
+
+                CheckDatabaseTies();
 
                 ProgOps.StudentsTable.DefaultView.Sort = "Last_Name";
 
@@ -569,6 +570,8 @@ namespace PrimarySchool
                 {
                     manager.Position = bookmark;
                 }
+
+                CheckDatabaseTies();
             }
             catch (Exception ex)
             {
@@ -704,6 +707,10 @@ namespace PrimarySchool
                     coursesTable.Clear();
                     coursesTable.Dispose();
                 }
+                else
+                {
+                    lblRegisteredCourses.Text = "Registered Courses (0)";
+                }
             }
             catch (Exception ex)
             {
@@ -738,6 +745,10 @@ namespace PrimarySchool
                     coursesTable.Clear();
                     coursesTable.Dispose();
                 }
+                else
+                {
+                    lblAvailableCourses.Text = "Available Courses (0)";
+                }
             }
             catch (Exception ex)
             {
@@ -747,6 +758,8 @@ namespace PrimarySchool
 
         private void tbxStudentID_TextChanged(object sender, EventArgs e)
         {
+            CheckDatabaseTies();
+
             FillRegisteredCoursesListBox();
 
             FillAvailableCoursesListBox();
@@ -818,6 +831,45 @@ namespace PrimarySchool
             else
             {
                 FormOps.ErrorBox("Select a registered course to remove.");
+            }
+        }
+
+        private void CheckDatabaseTies()
+        {
+            try
+            {
+                if (!tbxStudentID.Text.Equals(string.Empty))
+                {
+                    int studentID = Convert.ToInt32(tbxStudentID.Text);
+
+                    DataTable courses = ProgOps.GetRegisteredCoursesForStudent(studentID);
+
+                    if (courses.Rows.Count > 0)
+                    {
+                        btnDelete.Enabled = false;
+                        mnuDelete.Enabled = false;
+                        tbxStatus.Text = "Not Active";
+                    }
+                    else
+                    {
+                        btnDelete.Enabled = true;
+                        mnuDelete.Enabled = true;
+                        tbxStatus.Text = "Active";
+                    }
+
+                    courses.Clear();
+                    courses.Dispose();
+                }
+                else
+                {
+                    btnDelete.Enabled = false;
+                    mnuDelete.Enabled = false;
+                    tbxStatus.Text = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
             }
         }
     }
