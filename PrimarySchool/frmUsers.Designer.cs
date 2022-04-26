@@ -231,6 +231,7 @@ namespace PrimarySchool
             this.tbxRole.ReadOnly = true;
             this.tbxRole.Size = new System.Drawing.Size(33, 25);
             this.tbxRole.TabIndex = 130;
+            this.tbxRole.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxRole_KeyPress);
             // 
             // lblRole
             // 

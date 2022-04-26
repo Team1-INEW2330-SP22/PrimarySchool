@@ -276,8 +276,87 @@ namespace PrimarySchool
         // Checks validity of edited/new data (do later).
         private bool ValidateData()
         {
+            try
+            {
+                string message = "Invalid input detected.";
 
-            return false;
+                bool allOK = true;
+
+                if (tbxLastName.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Last Name.";
+                    tbxLastName.Focus();
+                    allOK = false;
+                }
+
+                if (tbxFirstName.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a First Name.";
+                    tbxFirstName.Focus();
+                    allOK = false;
+                }
+
+                if (tbxMiddleName.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Middle Name.";
+                    tbxMiddleName.Focus();
+                    allOK = false;
+                }
+
+                if (tbxEmail.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter an Email.";
+                    tbxDateOfBirth.Focus();
+                    allOK = false;
+                }
+
+                if (tbxAddress.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter an Address.";
+                    tbxAddress.Focus();
+                    allOK = false;
+                }
+
+                if (tbxCity.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a City.";
+                    tbxCity.Focus();
+                    allOK = false;
+                }
+
+                if (tbxState.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a State.";
+                    tbxZip.Focus();
+                    allOK = false;
+                }
+
+                if (tbxZip.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter Zip.";
+                    tbxZip.Focus();
+                    allOK = false;
+                }
+
+                if (tbxPhone.Text.Trim().Equals(string.Empty))
+                {
+                    message = "You must enter a Phone Number.";
+                    tbxPhone.Focus();
+                    allOK = false;
+                }
+
+                if (!allOK)
+                {
+                    FormOps.ErrorBox(message);
+                }
+
+                return allOK;
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+                return false;
+            }
         }
 
         // Goes to first record and beeps (commented).
