@@ -9,18 +9,41 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 
+/*
+ * Application: Primary School
+ * Group: Team 1
+ * Names: Tyler Anderson, Max Cancino, Ryan Hicks
+ * Date: 4/27/2022
+ * Course: INEW-2330-7Z1
+ * Semester: SP/22
+ */
+
 // Enables easy repitition for basic form-related operations.
 
 namespace PrimarySchool
 {
     class FormOps
     {
-        // Closes form.
-        public static void CloseForm(Form form)
+        // Closes modeless form.
+        public static void CloseModeless(Form form)
         {
             try
             {
                 form.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorBox(ex.Message);
+            }
+        }
+
+        // Closes modal form.
+        public static void CloseModal(Form form)
+        {
+            try
+            {
+                form.Close();
+                form.Dispose();
             }
             catch (Exception ex)
             {

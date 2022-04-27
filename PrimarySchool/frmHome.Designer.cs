@@ -50,6 +50,7 @@ namespace PrimarySchool
             this.lblMenu = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.pbxSchool = new System.Windows.Forms.PictureBox();
+            this.helpme = new System.Windows.Forms.HelpProvider();
             this.mnuMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxSchool)).BeginInit();
             this.SuspendLayout();
@@ -193,6 +194,7 @@ namespace PrimarySchool
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
             this.mnuHelpInstructions.Size = new System.Drawing.Size(181, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
+            this.mnuHelpInstructions.Click += new System.EventHandler(this.mnuHelpInstructions_Click);
             // 
             // mnuHelpAbout
             // 
@@ -248,10 +250,12 @@ namespace PrimarySchool
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.helpme.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.TableOfContents);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mnuMenu;
             this.MaximizeBox = false;
             this.Name = "frmHome";
+            this.helpme.SetShowHelp(this, true);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Home";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmHome_FormClosing);
@@ -286,5 +290,6 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.PictureBox pbxSchool;
         private System.Windows.Forms.ToolStripMenuItem mnuOfficerCourses;
+        private System.Windows.Forms.HelpProvider helpme;
     }
 }

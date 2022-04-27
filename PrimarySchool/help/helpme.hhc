@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="Window Styles" value="0x800025">
+	<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Getting Started">
+		<param name="Local" value="hdr_GettingStarted.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Brief Overview">
+			<param name="Local" value="pg_GS_Overview.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="System Requirements">
+			<param name="Local" value="pg_GS_SysReq.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Installation">
+			<param name="Local" value="pg_GS_Installation.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="License">
+			<param name="Local" value="pg_GS_License.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Application Access">
+		<param name="Local" value="hdr_ApplicationAccess.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Resetting Password">
+			<param name="Local" value="pg_AA_PasswordReset.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="System Access">
+			<param name="Local" value="pg_AA_SystemAccess.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="User Maintenance">
+		<param name="Local" value="hdr_UserMaint.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Creating a New User">
+			<param name="Local" value="pg_UM_CreatingNewUser.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Searching for a User">
+			<param name="Local" value="pg_UM_SearchUsers.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Editing an Existing User">
+			<param name="Local" value="pg_UM_EditingUser.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Teacher Maintenance">
+		<param name="Local" value="hdr_TeacherMaint.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Managing Teacher Course Assignments">
+			<param name="Local" value="pg_TM_ManagingAssignments.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Searching for a Teacher">
+			<param name="Local" value="pg_TM_SearchTeachers.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Editing an Teacher">
+			<param name="Local" value="pg_TM_EditingUser.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Student Maintenance">
+		<param name="Local" value="hdr_StuMaint.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Creating/Enrolling a New Student">
+			<param name="Local" value="pg_SM_CreatingNewStudent.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Searching for a Student">
+			<param name="Local" value="pg_SM_SearchStudent.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Editing an Existing Student">
+			<param name="Local" value="pg_SM_EditingStudent.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Registering a Student">
+			<param name="Local" value="pg_SM_AssignCourses.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Classroom and Coursework Management">
+		<param name="Local" value="hdr_ClassCourseMgt.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Courses">
+			<param name="Local" value="hdr_Courses.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Creating/Editing a Course">
+				<param name="Local" value="pg_CRS_CreateEdit.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Searching Courses">
+				<param name="Local" value="pg_CRS_SearchCourses.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Gradebook">
+			<param name="Local" value="hdr_Gradebook.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Update a Course's Gradebook">
+				<param name="Local" value="pg_GB_UpdateGradebook.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Managing Assignments">
+				<param name="Local" value="pg_GB_Assignments.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Printing Grades">
+				<param name="Local" value="pg_GB_Print.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Attendance">
+			<param name="Local" value="hdr_Attendance.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Updating Attendance">
+				<param name="Local" value="pg_ATT_UpdatingAttendance.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Printing Attendance">
+				<param name="Local" value="pg_ATT_Print.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Seating Charts">
+			<param name="Local" value="hdr_SeatingChart.htm">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>

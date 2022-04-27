@@ -50,11 +50,10 @@ namespace PrimarySchool
             this.lblCourseName = new System.Windows.Forms.Label();
             this.cbxCourses = new System.Windows.Forms.ComboBox();
             this.lblSelectCourse = new System.Windows.Forms.Label();
-            this.lblUnavailableSeats = new System.Windows.Forms.Label();
-            this.lblAvailableSeats = new System.Windows.Forms.Label();
-            this.lbxUnavailableSeats = new System.Windows.Forms.ListBox();
-            this.lbxAvailableSeats = new System.Windows.Forms.ListBox();
+            this.lblSeatList = new System.Windows.Forms.Label();
+            this.lbxSeatList = new System.Windows.Forms.ListBox();
             this.pbxListBoxBackground = new System.Windows.Forms.PictureBox();
+            this.helpme = new System.Windows.Forms.HelpProvider();
             this.mnuMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeatingChart)).BeginInit();
             this.gbxSeatingChart.SuspendLayout();
@@ -69,7 +68,7 @@ namespace PrimarySchool
             this.mnuHelp});
             this.mnuMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMenu.Name = "mnuMenu";
-            this.mnuMenu.Size = new System.Drawing.Size(769, 24);
+            this.mnuMenu.Size = new System.Drawing.Size(823, 24);
             this.mnuMenu.TabIndex = 2;
             this.mnuMenu.Text = "menuStrip1";
             // 
@@ -89,6 +88,7 @@ namespace PrimarySchool
             this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.mnuFileSave.Size = new System.Drawing.Size(144, 22);
             this.mnuFileSave.Text = "&Save";
+            this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
             // 
             // mnuFilePrint
             // 
@@ -96,6 +96,7 @@ namespace PrimarySchool
             this.mnuFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
             this.mnuFilePrint.Size = new System.Drawing.Size(144, 22);
             this.mnuFilePrint.Text = "&Print";
+            this.mnuFilePrint.Click += new System.EventHandler(this.mnuFilePrint_Click);
             // 
             // mnuFileClose
             // 
@@ -121,6 +122,7 @@ namespace PrimarySchool
             this.mnuEditClear.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
             this.mnuEditClear.Size = new System.Drawing.Size(206, 22);
             this.mnuEditClear.Text = "&Clear";
+            this.mnuEditClear.Click += new System.EventHandler(this.mnuEditClear_Click);
             // 
             // mnuEditReset
             // 
@@ -128,6 +130,7 @@ namespace PrimarySchool
             this.mnuEditReset.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
             this.mnuEditReset.Size = new System.Drawing.Size(206, 22);
             this.mnuEditReset.Text = "&Reset";
+            this.mnuEditReset.Click += new System.EventHandler(this.mnuEditReset_Click);
             // 
             // mnuEditRandomize
             // 
@@ -136,6 +139,7 @@ namespace PrimarySchool
             | System.Windows.Forms.Keys.R)));
             this.mnuEditRandomize.Size = new System.Drawing.Size(206, 22);
             this.mnuEditRandomize.Text = "R&andomize";
+            this.mnuEditRandomize.Click += new System.EventHandler(this.mnuEditRandomize_Click);
             // 
             // mnuHelp
             // 
@@ -151,17 +155,18 @@ namespace PrimarySchool
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
             this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
+            this.mnuHelpInstructions.Click += new System.EventHandler(this.mnuHelpInstructions_Click);
             // 
             // lblInstructions
             // 
             this.lblInstructions.AutoSize = true;
             this.lblInstructions.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInstructions.Location = new System.Drawing.Point(429, 88);
+            this.lblInstructions.Location = new System.Drawing.Point(596, 71);
             this.lblInstructions.Name = "lblInstructions";
-            this.lblInstructions.Size = new System.Drawing.Size(325, 51);
-            this.lblInstructions.TabIndex = 6;
-            this.lblInstructions.Text = "Use the bottom left table to assign seating.\r\nThe menu up top contains more opera" +
-    "tions. \r\nFor detailed help, click Instructions under the Help tab.";
+            this.lblInstructions.Size = new System.Drawing.Size(219, 68);
+            this.lblInstructions.TabIndex = 5;
+            this.lblInstructions.Text = "Use the bottom left table to assign \r\nseating. The menu up top contains \r\nmore op" +
+    "erations. For detailed help, \r\nclick Instructions under the Help tab.";
             // 
             // dgvSeatingChart
             // 
@@ -174,11 +179,14 @@ namespace PrimarySchool
             this.dgvSeatingChart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSeatingChart.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.dgvSeatingChart.Enabled = false;
-            this.dgvSeatingChart.Location = new System.Drawing.Point(14, 145);
+            this.dgvSeatingChart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(197)))), ((int)(((byte)(190)))));
+            this.dgvSeatingChart.Location = new System.Drawing.Point(8, 145);
             this.dgvSeatingChart.Name = "dgvSeatingChart";
-            this.dgvSeatingChart.Size = new System.Drawing.Size(409, 389);
-            this.dgvSeatingChart.TabIndex = 5;
+            this.dgvSeatingChart.Size = new System.Drawing.Size(582, 389);
+            this.dgvSeatingChart.TabIndex = 0;
             this.dgvSeatingChart.TabStop = false;
+            this.dgvSeatingChart.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeatingChart_CellValueChanged);
+            this.dgvSeatingChart.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvSeatingChart_DataError);
             // 
             // gbxSeatingChart
             // 
@@ -189,10 +197,10 @@ namespace PrimarySchool
             this.gbxSeatingChart.Controls.Add(this.lblCourseName);
             this.gbxSeatingChart.Controls.Add(this.cbxCourses);
             this.gbxSeatingChart.Controls.Add(this.lblSelectCourse);
-            this.gbxSeatingChart.Location = new System.Drawing.Point(14, 33);
+            this.gbxSeatingChart.Location = new System.Drawing.Point(8, 33);
             this.gbxSeatingChart.Name = "gbxSeatingChart";
-            this.gbxSeatingChart.Size = new System.Drawing.Size(409, 106);
-            this.gbxSeatingChart.TabIndex = 7;
+            this.gbxSeatingChart.Size = new System.Drawing.Size(582, 106);
+            this.gbxSeatingChart.TabIndex = 4;
             this.gbxSeatingChart.TabStop = false;
             this.gbxSeatingChart.Text = "Seating Chart";
             // 
@@ -200,118 +208,94 @@ namespace PrimarySchool
             // 
             this.lblTotalSeats.AutoSize = true;
             this.lblTotalSeats.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalSeats.Location = new System.Drawing.Point(231, 80);
+            this.lblTotalSeats.Location = new System.Drawing.Point(298, 80);
             this.lblTotalSeats.Name = "lblTotalSeats";
             this.lblTotalSeats.Size = new System.Drawing.Size(79, 17);
-            this.lblTotalSeats.TabIndex = 11;
+            this.lblTotalSeats.TabIndex = 5;
             this.lblTotalSeats.Text = "[Total Seats]";
             // 
             // lblRoom
             // 
             this.lblRoom.AutoSize = true;
             this.lblRoom.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRoom.Location = new System.Drawing.Point(231, 59);
+            this.lblRoom.Location = new System.Drawing.Point(298, 59);
             this.lblRoom.Name = "lblRoom";
             this.lblRoom.Size = new System.Drawing.Size(51, 17);
-            this.lblRoom.TabIndex = 10;
+            this.lblRoom.TabIndex = 4;
             this.lblRoom.Text = "[Room]";
             // 
             // lblInstructor
             // 
             this.lblInstructor.AutoSize = true;
             this.lblInstructor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInstructor.Location = new System.Drawing.Point(231, 38);
+            this.lblInstructor.Location = new System.Drawing.Point(298, 38);
             this.lblInstructor.Name = "lblInstructor";
             this.lblInstructor.Size = new System.Drawing.Size(71, 17);
-            this.lblInstructor.TabIndex = 9;
+            this.lblInstructor.TabIndex = 3;
             this.lblInstructor.Text = "[Instructor]";
             // 
             // lblCourseName
             // 
             this.lblCourseName.AutoSize = true;
             this.lblCourseName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCourseName.Location = new System.Drawing.Point(231, 17);
+            this.lblCourseName.Location = new System.Drawing.Point(298, 17);
             this.lblCourseName.Name = "lblCourseName";
             this.lblCourseName.Size = new System.Drawing.Size(96, 17);
-            this.lblCourseName.TabIndex = 7;
+            this.lblCourseName.TabIndex = 2;
             this.lblCourseName.Text = "[Course Name]";
             // 
             // cbxCourses
             // 
             this.cbxCourses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
             this.cbxCourses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxCourses.Enabled = false;
             this.cbxCourses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
             this.cbxCourses.FormattingEnabled = true;
             this.cbxCourses.Location = new System.Drawing.Point(15, 49);
             this.cbxCourses.Name = "cbxCourses";
-            this.cbxCourses.Size = new System.Drawing.Size(196, 29);
-            this.cbxCourses.TabIndex = 1;
+            this.cbxCourses.Size = new System.Drawing.Size(263, 29);
+            this.cbxCourses.TabIndex = 0;
+            this.cbxCourses.SelectedIndexChanged += new System.EventHandler(this.cbxCourses_SelectedIndexChanged);
             // 
             // lblSelectCourse
             // 
             this.lblSelectCourse.AutoSize = true;
             this.lblSelectCourse.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectCourse.Location = new System.Drawing.Point(16, 32);
+            this.lblSelectCourse.Location = new System.Drawing.Point(15, 32);
             this.lblSelectCourse.Name = "lblSelectCourse";
             this.lblSelectCourse.Size = new System.Drawing.Size(87, 17);
-            this.lblSelectCourse.TabIndex = 0;
+            this.lblSelectCourse.TabIndex = 1;
             this.lblSelectCourse.Text = "Select Course";
             // 
-            // lblUnavailableSeats
+            // lblSeatList
             // 
-            this.lblUnavailableSeats.AutoSize = true;
-            this.lblUnavailableSeats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.lblUnavailableSeats.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnavailableSeats.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.lblUnavailableSeats.Location = new System.Drawing.Point(595, 149);
-            this.lblUnavailableSeats.Name = "lblUnavailableSeats";
-            this.lblUnavailableSeats.Size = new System.Drawing.Size(126, 20);
-            this.lblUnavailableSeats.TabIndex = 17;
-            this.lblUnavailableSeats.Text = "Unavailable Seats";
+            this.lblSeatList.AutoSize = true;
+            this.lblSeatList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
+            this.lblSeatList.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSeatList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
+            this.lblSeatList.Location = new System.Drawing.Point(673, 149);
+            this.lblSeatList.Name = "lblSeatList";
+            this.lblSeatList.Size = new System.Drawing.Size(64, 20);
+            this.lblSeatList.TabIndex = 16;
+            this.lblSeatList.Text = "Seat List";
             // 
-            // lblAvailableSeats
+            // lbxSeatList
             // 
-            this.lblAvailableSeats.AutoSize = true;
-            this.lblAvailableSeats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.lblAvailableSeats.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvailableSeats.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.lblAvailableSeats.Location = new System.Drawing.Point(431, 149);
-            this.lblAvailableSeats.Name = "lblAvailableSeats";
-            this.lblAvailableSeats.Size = new System.Drawing.Size(110, 20);
-            this.lblAvailableSeats.TabIndex = 16;
-            this.lblAvailableSeats.Text = "Available Seats";
-            // 
-            // lbxUnavailableSeats
-            // 
-            this.lbxUnavailableSeats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.lbxUnavailableSeats.Enabled = false;
-            this.lbxUnavailableSeats.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.lbxUnavailableSeats.FormattingEnabled = true;
-            this.lbxUnavailableSeats.ItemHeight = 21;
-            this.lbxUnavailableSeats.Location = new System.Drawing.Point(595, 173);
-            this.lbxUnavailableSeats.Name = "lbxUnavailableSeats";
-            this.lbxUnavailableSeats.Size = new System.Drawing.Size(160, 361);
-            this.lbxUnavailableSeats.TabIndex = 15;
-            // 
-            // lbxAvailableSeats
-            // 
-            this.lbxAvailableSeats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-            this.lbxAvailableSeats.Enabled = false;
-            this.lbxAvailableSeats.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
-            this.lbxAvailableSeats.FormattingEnabled = true;
-            this.lbxAvailableSeats.ItemHeight = 21;
-            this.lbxAvailableSeats.Location = new System.Drawing.Point(431, 173);
-            this.lbxAvailableSeats.Name = "lbxAvailableSeats";
-            this.lbxAvailableSeats.Size = new System.Drawing.Size(160, 361);
-            this.lbxAvailableSeats.TabIndex = 14;
+            this.lbxSeatList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
+            this.lbxSeatList.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbxSeatList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
+            this.lbxSeatList.FormattingEnabled = true;
+            this.lbxSeatList.ItemHeight = 17;
+            this.lbxSeatList.Location = new System.Drawing.Point(596, 173);
+            this.lbxSeatList.Name = "lbxSeatList";
+            this.lbxSeatList.Size = new System.Drawing.Size(219, 361);
+            this.lbxSeatList.TabIndex = 1;
             // 
             // pbxListBoxBackground
             // 
             this.pbxListBoxBackground.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(119)))), ((int)(((byte)(165)))));
-            this.pbxListBoxBackground.Location = new System.Drawing.Point(431, 145);
+            this.pbxListBoxBackground.Location = new System.Drawing.Point(596, 145);
             this.pbxListBoxBackground.Name = "pbxListBoxBackground";
-            this.pbxListBoxBackground.Size = new System.Drawing.Size(324, 389);
+            this.pbxListBoxBackground.Size = new System.Drawing.Size(219, 389);
             this.pbxListBoxBackground.TabIndex = 8;
             this.pbxListBoxBackground.TabStop = false;
             // 
@@ -320,11 +304,9 @@ namespace PrimarySchool
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(180)))), ((int)(((byte)(210)))));
-            this.ClientSize = new System.Drawing.Size(769, 541);
-            this.Controls.Add(this.lblUnavailableSeats);
-            this.Controls.Add(this.lblAvailableSeats);
-            this.Controls.Add(this.lbxUnavailableSeats);
-            this.Controls.Add(this.lbxAvailableSeats);
+            this.ClientSize = new System.Drawing.Size(823, 541);
+            this.Controls.Add(this.lblSeatList);
+            this.Controls.Add(this.lbxSeatList);
             this.Controls.Add(this.pbxListBoxBackground);
             this.Controls.Add(this.gbxSeatingChart);
             this.Controls.Add(this.lblInstructions);
@@ -340,6 +322,7 @@ namespace PrimarySchool
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Seating Chart";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSeatingChart_FormClosing);
+            this.Load += new System.EventHandler(this.frmSeatingChart_Load);
             this.mnuMenu.ResumeLayout(false);
             this.mnuMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeatingChart)).EndInit();
@@ -372,11 +355,10 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblCourseName;
         private System.Windows.Forms.ComboBox cbxCourses;
         private System.Windows.Forms.Label lblSelectCourse;
-        private System.Windows.Forms.Label lblUnavailableSeats;
-        private System.Windows.Forms.Label lblAvailableSeats;
-        private System.Windows.Forms.ListBox lbxUnavailableSeats;
-        private System.Windows.Forms.ListBox lbxAvailableSeats;
+        private System.Windows.Forms.Label lblSeatList;
+        private System.Windows.Forms.ListBox lbxSeatList;
         private System.Windows.Forms.PictureBox pbxListBoxBackground;
         private System.Windows.Forms.ToolStripMenuItem mnuEditRandomize;
+        private System.Windows.Forms.HelpProvider helpme;
     }
 }

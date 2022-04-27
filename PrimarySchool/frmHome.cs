@@ -8,6 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/*
+ * Application: Primary School
+ * Group: Team 1
+ * Names: Tyler Anderson, Max Cancino, Ryan Hicks
+ * Date: 4/27/2022
+ * Course: INEW-2330-7Z1
+ * Semester: SP/22
+ */
+
 namespace PrimarySchool
 {
     public partial class frmHome : Form
@@ -31,12 +40,13 @@ namespace PrimarySchool
         // Resets Login and shows Login.
         private void mnuFileLogOut_Click(object sender, EventArgs e)
         {
-            FormOps.CloseForm(this);
+            FormOps.CloseModeless(this);
         }
 
         // Closes Login when the Home screen is closed.
         private void frmHome_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ProgOps.LogOut();
             login.Reset();
             FormOps.ShowModeless(login);
         }
@@ -163,14 +173,22 @@ namespace PrimarySchool
         // Sets state.
         private void frmHome_Load(object sender, EventArgs e)
         {
+            //Pointer to help file
+            helpme.HelpNamespace = Application.StartupPath + "\\helpme.chm";
+
             try
             {
-                SetState("Administrator");
+                SetState(ProgOps.UserRole);
             }
             catch (Exception ex)
             {
                 FormOps.ErrorBox(ex.Message);
             }
+        }
+
+        private void mnuHelpInstructions_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, helpme.HelpNamespace);
         }
     }
 }

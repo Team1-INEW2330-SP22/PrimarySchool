@@ -8,6 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/*
+ * Application: Primary School
+ * Group: Team 1
+ * Names: Tyler Anderson, Max Cancino, Ryan Hicks
+ * Date: 4/27/2022
+ * Course: INEW-2330-7Z1
+ * Semester: SP/22
+ */
+
 namespace PrimarySchool
 {
     public partial class frmLogin : Form
@@ -25,7 +34,7 @@ namespace PrimarySchool
         {
             try
             {
-                if (LogIn())
+                if (ProgOps.LogIn(tbxUsername, tbxPassword))
                 {
                     frmHome home = new frmHome(this);
                     FormOps.ShowModelessAndHide(home, this);
@@ -37,6 +46,7 @@ namespace PrimarySchool
             }
         }
 
+        // NOT CURRENTLY BEING USED ******************************
         // Checks user credentials.
         // Displays MessageBox if user credentials aren't correct.
         private bool LogIn()
@@ -50,7 +60,7 @@ namespace PrimarySchool
                 }
                 else
                 {
-                    FormOps.ErrorBox("Check username and password");
+                    FormOps.ErrorBox("Check username and password.");
                     return false;
                 }
             }
@@ -68,7 +78,7 @@ namespace PrimarySchool
             {
                 if (tbxUsername.Text.Trim().Equals(string.Empty))
                 {
-                    tbxUsername.ForeColor = FormOps.GetColorFromPalette("dark blue");
+                    tbxUsername.ForeColor = FormOps.GetColorFromPalette("mid blue");
                     tbxUsername.Text = strTypeUser;
                 }
             }
@@ -199,7 +209,45 @@ namespace PrimarySchool
             }
         }
 
-        // Clears tbxPassword if user selects it while the default prompt is visible, sets the text color to black,
+        // If user press Enter key inside tbxUsername, tbxPassword gets focus.
+        private void tbxUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    tbxPassword.Focus();
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        // If user press Enter key inside tbxPassword, btnLogin performs click.
+        private void tbxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    btnLogIn.Focus();
+                    btnLogIn.PerformClick();
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormOps.ErrorBox(ex.Message);
+            }
+        }
+
+        // Clears tbxPassword if user selects it while the default prompt is visible,
+        // sets the text color to black,
         // and sets the password character.
         private void tbxPassword_Enter(object sender, EventArgs e)
         {

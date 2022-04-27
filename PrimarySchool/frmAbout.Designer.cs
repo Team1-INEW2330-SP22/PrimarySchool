@@ -33,8 +33,6 @@ namespace PrimarySchool
             this.mnuMenu = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileClose = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHelpInstructions = new System.Windows.Forms.ToolStripMenuItem();
             this.lblProgramName = new System.Windows.Forms.Label();
             this.lblVersionNumber = new System.Windows.Forms.Label();
             this.lblProgramInfo = new System.Windows.Forms.Label();
@@ -56,8 +54,7 @@ namespace PrimarySchool
             // mnuMenu
             // 
             this.mnuMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFile,
-            this.mnuHelp});
+            this.mnuFile});
             this.mnuMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMenu.Name = "mnuMenu";
             this.mnuMenu.Size = new System.Drawing.Size(514, 24);
@@ -76,24 +73,9 @@ namespace PrimarySchool
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
             this.mnuFileClose.Text = "&Close";
             this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
-            // 
-            // mnuHelp
-            // 
-            this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuHelpInstructions});
-            this.mnuHelp.Name = "mnuHelp";
-            this.mnuHelp.Size = new System.Drawing.Size(44, 20);
-            this.mnuHelp.Text = "&Help";
-            // 
-            // mnuHelpInstructions
-            // 
-            this.mnuHelpInstructions.Name = "mnuHelpInstructions";
-            this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
-            this.mnuHelpInstructions.Text = "&Instructions";
             // 
             // lblProgramName
             // 
@@ -109,11 +91,11 @@ namespace PrimarySchool
             // 
             this.lblVersionNumber.AutoSize = true;
             this.lblVersionNumber.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersionNumber.Location = new System.Drawing.Point(195, 77);
+            this.lblVersionNumber.Location = new System.Drawing.Point(213, 75);
             this.lblVersionNumber.Name = "lblVersionNumber";
-            this.lblVersionNumber.Size = new System.Drawing.Size(125, 20);
+            this.lblVersionNumber.Size = new System.Drawing.Size(88, 20);
             this.lblVersionNumber.TabIndex = 118;
-            this.lblVersionNumber.Text = "[Version Number]";
+            this.lblVersionNumber.Text = "Version 1.00";
             // 
             // lblProgramInfo
             // 
@@ -124,7 +106,8 @@ namespace PrimarySchool
             this.lblProgramInfo.Name = "lblProgramInfo";
             this.lblProgramInfo.Size = new System.Drawing.Size(237, 266);
             this.lblProgramInfo.TabIndex = 119;
-            this.lblProgramInfo.Text = "[Program Information]";
+            this.lblProgramInfo.Text = "This is Version 1.00 of the Primary School application. It was developed by Team " +
+    "1 of 22/SP INEW-2330-7Z1. This version was released on 4/27/2022.";
             // 
             // gbxDevelopers
             // 
@@ -190,7 +173,7 @@ namespace PrimarySchool
             this.pbxAnderson.Location = new System.Drawing.Point(6, 28);
             this.pbxAnderson.Name = "pbxAnderson";
             this.pbxAnderson.Size = new System.Drawing.Size(70, 70);
-            this.pbxAnderson.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxAnderson.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbxAnderson.TabIndex = 128;
             this.pbxAnderson.TabStop = false;
             // 
@@ -257,8 +240,6 @@ namespace PrimarySchool
         private System.Windows.Forms.MenuStrip mnuMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuFile;
         private System.Windows.Forms.ToolStripMenuItem mnuFileClose;
-        private System.Windows.Forms.ToolStripMenuItem mnuHelp;
-        private System.Windows.Forms.ToolStripMenuItem mnuHelpInstructions;
         private System.Windows.Forms.Label lblProgramName;
         private System.Windows.Forms.Label lblVersionNumber;
         private System.Windows.Forms.Label lblProgramInfo;

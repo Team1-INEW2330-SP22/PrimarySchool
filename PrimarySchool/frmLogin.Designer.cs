@@ -51,6 +51,7 @@ namespace PrimarySchool
             this.tbxUsername.TabIndex = 0;
             this.tbxUsername.Text = " Type your username";
             this.tbxUsername.Enter += new System.EventHandler(this.tbxUsername_Enter);
+            this.tbxUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxUsername_KeyDown);
             this.tbxUsername.Leave += new System.EventHandler(this.tbxUsername_Leave);
             // 
             // tbxPassword
@@ -63,6 +64,7 @@ namespace PrimarySchool
             this.tbxPassword.TabIndex = 1;
             this.tbxPassword.Text = " Type your password";
             this.tbxPassword.Enter += new System.EventHandler(this.tbxPassword_Enter);
+            this.tbxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxPassword_KeyDown);
             this.tbxPassword.Leave += new System.EventHandler(this.tbxPassword_Leave);
             // 
             // btnLogIn
@@ -87,7 +89,7 @@ namespace PrimarySchool
             this.lblUsername.Location = new System.Drawing.Point(30, 24);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(67, 17);
-            this.lblUsername.TabIndex = 3;
+            this.lblUsername.TabIndex = 4;
             this.lblUsername.Text = "Username";
             // 
             // lblPassword
@@ -98,7 +100,7 @@ namespace PrimarySchool
             this.lblPassword.Location = new System.Drawing.Point(30, 86);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(64, 17);
-            this.lblPassword.TabIndex = 4;
+            this.lblPassword.TabIndex = 5;
             this.lblPassword.Text = "Password";
             // 
             // lblForgot
@@ -110,7 +112,7 @@ namespace PrimarySchool
             this.lblForgot.Location = new System.Drawing.Point(174, 138);
             this.lblForgot.Name = "lblForgot";
             this.lblForgot.Size = new System.Drawing.Size(144, 17);
-            this.lblForgot.TabIndex = 5;
+            this.lblForgot.TabIndex = 6;
             this.lblForgot.Text = "Forgot your password?";
             this.lblForgot.Click += new System.EventHandler(this.lblForgot_Click);
             // 
@@ -136,7 +138,7 @@ namespace PrimarySchool
             this.btnClose.Location = new System.Drawing.Point(30, 214);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(323, 41);
-            this.btnClose.TabIndex = 7;
+            this.btnClose.TabIndex = 3;
             this.btnClose.Text = "&Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);

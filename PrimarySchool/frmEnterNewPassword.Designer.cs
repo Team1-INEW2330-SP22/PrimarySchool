@@ -49,6 +49,7 @@ namespace PrimarySchool
             this.btnSubmit.TabIndex = 15;
             this.btnSubmit.Text = "&Submit";
             this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // lblConfirm
             // 
@@ -69,7 +70,9 @@ namespace PrimarySchool
             this.tbxConfirm.Name = "tbxConfirm";
             this.tbxConfirm.Size = new System.Drawing.Size(323, 29);
             this.tbxConfirm.TabIndex = 13;
-            this.tbxConfirm.Text = "Confirm your new password";
+            this.tbxConfirm.Text = " Confirm your new password";
+            this.tbxConfirm.Enter += new System.EventHandler(this.tbxConfirm_Enter);
+            this.tbxConfirm.Leave += new System.EventHandler(this.tbxConfirm_Leave);
             // 
             // lblNewPass
             // 
@@ -91,6 +94,8 @@ namespace PrimarySchool
             this.tbxNewPass.Size = new System.Drawing.Size(323, 29);
             this.tbxNewPass.TabIndex = 10;
             this.tbxNewPass.Text = " Type your new password";
+            this.tbxNewPass.Enter += new System.EventHandler(this.tbxNewPass_Enter);
+            this.tbxNewPass.Leave += new System.EventHandler(this.tbxNewPass_Leave);
             // 
             // frmEnterNewPassword
             // 
