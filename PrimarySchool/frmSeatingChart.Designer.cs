@@ -53,6 +53,7 @@ namespace PrimarySchool
             this.lblSeatList = new System.Windows.Forms.Label();
             this.lbxSeatList = new System.Windows.Forms.ListBox();
             this.pbxListBoxBackground = new System.Windows.Forms.PictureBox();
+            this.helpme = new System.Windows.Forms.HelpProvider();
             this.mnuMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeatingChart)).BeginInit();
             this.gbxSeatingChart.SuspendLayout();
@@ -85,7 +86,7 @@ namespace PrimarySchool
             // 
             this.mnuFileSave.Name = "mnuFileSave";
             this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuFileSave.Size = new System.Drawing.Size(180, 22);
+            this.mnuFileSave.Size = new System.Drawing.Size(144, 22);
             this.mnuFileSave.Text = "&Save";
             this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
             // 
@@ -93,7 +94,7 @@ namespace PrimarySchool
             // 
             this.mnuFilePrint.Name = "mnuFilePrint";
             this.mnuFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.mnuFilePrint.Size = new System.Drawing.Size(180, 22);
+            this.mnuFilePrint.Size = new System.Drawing.Size(144, 22);
             this.mnuFilePrint.Text = "&Print";
             this.mnuFilePrint.Click += new System.EventHandler(this.mnuFilePrint_Click);
             // 
@@ -101,7 +102,7 @@ namespace PrimarySchool
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
             this.mnuFileClose.Text = "&Close";
             this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
@@ -152,8 +153,9 @@ namespace PrimarySchool
             // 
             this.mnuHelpInstructions.Name = "mnuHelpInstructions";
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
+            this.mnuHelpInstructions.Click += new System.EventHandler(this.mnuHelpInstructions_Click);
             // 
             // lblInstructions
             // 
@@ -357,5 +359,6 @@ namespace PrimarySchool
         private System.Windows.Forms.ListBox lbxSeatList;
         private System.Windows.Forms.PictureBox pbxListBoxBackground;
         private System.Windows.Forms.ToolStripMenuItem mnuEditRandomize;
+        private System.Windows.Forms.HelpProvider helpme;
     }
 }

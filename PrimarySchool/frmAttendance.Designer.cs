@@ -51,6 +51,7 @@ namespace PrimarySchool
             this.lblCourseName = new System.Windows.Forms.Label();
             this.cbxCourses = new System.Windows.Forms.ComboBox();
             this.lblSelectCourse = new System.Windows.Forms.Label();
+            this.helpme = new System.Windows.Forms.HelpProvider();
             this.mnuMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAttendance)).BeginInit();
             this.gbxAttendance.SuspendLayout();
@@ -82,7 +83,7 @@ namespace PrimarySchool
             // 
             this.mnuFileSave.Name = "mnuFileSave";
             this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuFileSave.Size = new System.Drawing.Size(180, 22);
+            this.mnuFileSave.Size = new System.Drawing.Size(144, 22);
             this.mnuFileSave.Text = "&Save";
             this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
             // 
@@ -90,7 +91,7 @@ namespace PrimarySchool
             // 
             this.mnuFilePrint.Name = "mnuFilePrint";
             this.mnuFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.mnuFilePrint.Size = new System.Drawing.Size(180, 22);
+            this.mnuFilePrint.Size = new System.Drawing.Size(144, 22);
             this.mnuFilePrint.Text = "&Print";
             this.mnuFilePrint.Click += new System.EventHandler(this.mnuFilePrint_Click);
             // 
@@ -98,7 +99,7 @@ namespace PrimarySchool
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
             this.mnuFileClose.Text = "&Close";
             this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
             // 
@@ -139,8 +140,9 @@ namespace PrimarySchool
             // 
             this.mnuHelpInstructions.Name = "mnuHelpInstructions";
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
+            this.mnuHelpInstructions.Click += new System.EventHandler(this.mnuHelpInstructions_Click);
             // 
             // lblInstructions
             // 
@@ -287,10 +289,12 @@ namespace PrimarySchool
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.helpme.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.TableOfContents);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "frmAttendance";
+            this.helpme.SetShowHelp(this, true);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Attendance";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAttendance_FormClosing);
@@ -328,5 +332,6 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblSelectDate;
         private System.Windows.Forms.Label lblInstructor;
         private System.Windows.Forms.Label lblCourseName;
+        private System.Windows.Forms.HelpProvider helpme;
     }
 }

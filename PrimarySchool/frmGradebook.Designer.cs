@@ -34,6 +34,7 @@ namespace PrimarySchool
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFilePrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMidterm = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileClose = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEditClear = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +53,7 @@ namespace PrimarySchool
             this.lblFinalGrades = new System.Windows.Forms.Label();
             this.lbxFinalGrades = new System.Windows.Forms.ListBox();
             this.pbxListBoxBackground = new System.Windows.Forms.PictureBox();
-            this.mnuMidterm = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpme = new System.Windows.Forms.HelpProvider();
             this.mnuMenu.SuspendLayout();
             this.gbxGradebook.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGradebook)).BeginInit();
@@ -98,6 +99,14 @@ namespace PrimarySchool
             this.mnuFilePrint.Size = new System.Drawing.Size(201, 22);
             this.mnuFilePrint.Text = "&Print Gradebook";
             this.mnuFilePrint.Click += new System.EventHandler(this.mnuFilePrint_Click);
+            // 
+            // mnuMidterm
+            // 
+            this.mnuMidterm.Name = "mnuMidterm";
+            this.mnuMidterm.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.mnuMidterm.Size = new System.Drawing.Size(201, 22);
+            this.mnuMidterm.Text = "Print &Midterm";
+            this.mnuMidterm.Click += new System.EventHandler(this.mnuMidterm_Click);
             // 
             // mnuFileClose
             // 
@@ -154,8 +163,9 @@ namespace PrimarySchool
             // 
             this.mnuHelpInstructions.Name = "mnuHelpInstructions";
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
+            this.mnuHelpInstructions.Click += new System.EventHandler(this.mnuHelpInstructions_Click);
             // 
             // gbxGradebook
             // 
@@ -290,14 +300,6 @@ namespace PrimarySchool
             this.pbxListBoxBackground.TabIndex = 17;
             this.pbxListBoxBackground.TabStop = false;
             // 
-            // mnuMidterm
-            // 
-            this.mnuMidterm.Name = "mnuMidterm";
-            this.mnuMidterm.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.mnuMidterm.Size = new System.Drawing.Size(201, 22);
-            this.mnuMidterm.Text = "Print &Midterm";
-            this.mnuMidterm.Click += new System.EventHandler(this.mnuMidterm_Click);
-            // 
             // frmGradebook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -314,11 +316,13 @@ namespace PrimarySchool
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.helpme.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.TableOfContents);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mnuMenu;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "frmGradebook";
+            this.helpme.SetShowHelp(this, true);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Gradebook";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmGradebook_FormClosing);
@@ -359,5 +363,6 @@ namespace PrimarySchool
         private System.Windows.Forms.ListBox lbxFinalGrades;
         private System.Windows.Forms.PictureBox pbxListBoxBackground;
         private System.Windows.Forms.ToolStripMenuItem mnuMidterm;
+        private System.Windows.Forms.HelpProvider helpme;
     }
 }

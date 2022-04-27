@@ -1,0 +1,47 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=helpme.chm
+Contents file=C:\Users\ryanh\OneDrive\Documents\Document Files\Education\TSTC\INEW-2330 - Comp Software Proj\INEW_2330 Team 1 Project\PrimarySchool\help\helpme.hhc
+Display compile progress=No
+Index file=helpme.hhk
+Language=0x409 English (United States)
+
+
+[FILES]
+hdr_ApplicationAccess.htm
+hdr_Attendance.htm
+hdr_ClassCourseMgt.htm
+hdr_Courses.htm
+hdr_GettingStarted.htm
+hdr_Gradebook.htm
+hdr_SeatingChart.htm
+hdr_StuMaint.htm
+hdr_TeacherMaint.htm
+hdr_UserMaint.htm
+pg_AA_PasswordReset.htm
+pg_AA_SystemAccess.htm
+pg_ATT_Print.htm
+pg_ATT_UpdatingAttendance.htm
+pg_CRS_CreateEdit.htm
+pg_CRS_SearchCourses.htm
+pg_GB_Assignments.htm
+pg_GB_Print.htm
+pg_GB_UpdateGradebook.htm
+pg_GS_Installation.htm
+pg_GS_License.htm
+pg_GS_Overview.htm
+pg_GS_SysReq.htm
+pg_SM_AssignCourses.htm
+pg_SM_CreatingNewStudent.htm
+pg_SM_EditingStudent.htm
+pg_SM_SearchStudent.htm
+pg_TM_EditingUser.htm
+pg_TM_ManagingAssignments.htm
+pg_TM_SearchTeachers.htm
+pg_UM_CreatingNewUser.htm
+pg_UM_EditingUser.htm
+pg_UM_SearchUsers.htm
+pg_UM_UserForm.htm
+
+[INFOTYPES]
+

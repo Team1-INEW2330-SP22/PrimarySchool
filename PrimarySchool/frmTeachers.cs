@@ -169,6 +169,9 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void frmTeachers_Load(object sender, EventArgs e)
         {
+            //Pointer to help file
+            helpme.HelpNamespace = Application.StartupPath + "\\helpme.chm";
+
             //ProgOps.OpenDatabase();
             ProgOps.TeachersCommand(tbxUserID, tbxLastName, tbxFirstName, tbxMiddleName, tbxDateOfBirth, tbxEmail,
                 tbxAddress, tbxCity, tbxState, tbxZip, tbxPhone, tbxRoleID, tbxUsername, tbxPassword);
@@ -829,6 +832,11 @@ namespace PrimarySchool
             {
                 FormOps.ErrorBox(ex.Message);
             }
+        }
+
+        private void mnuHelpInstructions_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, helpme.HelpNamespace);
         }
     }
 }

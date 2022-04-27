@@ -93,6 +93,9 @@ namespace PrimarySchool
         // Calls SetSavedStatus method with true argument
         private void frmSeatingChart_Load(object sender, EventArgs e)
         {
+            //Pointer to help file
+            helpme.HelpNamespace = Application.StartupPath + "\\helpme.chm"; 
+            
             try
             {
                 SetState(ProgOps.UserRole);
@@ -1012,6 +1015,11 @@ namespace PrimarySchool
             {
                 FormOps.ErrorBox(ex.Message);
             }
+        }
+
+        private void mnuHelpInstructions_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, helpme.HelpNamespace);
         }
     }
 }

@@ -111,6 +111,7 @@ namespace PrimarySchool
             this.lblECCellPhone = new System.Windows.Forms.Label();
             this.tbxStatus = new System.Windows.Forms.TextBox();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.helpme = new System.Windows.Forms.HelpProvider();
             this.gbxSearch.SuspendLayout();
             this.gbxCourses.SuspendLayout();
             this.mnuMenu.SuspendLayout();
@@ -981,8 +982,9 @@ namespace PrimarySchool
             // 
             this.mnuHelpInstructions.Name = "mnuHelpInstructions";
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
+            this.mnuHelpInstructions.Click += new System.EventHandler(this.mnuHelpInstructions_Click);
             // 
             // tbxEcCellPhone
             // 
@@ -1092,10 +1094,12 @@ namespace PrimarySchool
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.helpme.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.TableOfContents);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "frmStudents";
+            this.helpme.SetShowHelp(this, true);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Students";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmStudents_FormClosing);
@@ -1193,5 +1197,6 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblECCellPhone;
         private System.Windows.Forms.TextBox tbxStatus;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.HelpProvider helpme;
     }
 }

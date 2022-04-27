@@ -74,6 +74,7 @@ namespace PrimarySchool
             this.lbxCategories = new System.Windows.Forms.ListBox();
             this.lblSelectedCourse = new System.Windows.Forms.Label();
             this.tbxCategory = new System.Windows.Forms.TextBox();
+            this.helpme = new System.Windows.Forms.HelpProvider();
             this.gbxSearch.SuspendLayout();
             this.mnuMenu.SuspendLayout();
             this.SuspendLayout();
@@ -506,8 +507,9 @@ namespace PrimarySchool
             // 
             this.mnuHelpInstructions.Name = "mnuHelpInstructions";
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
+            this.mnuHelpInstructions.Click += new System.EventHandler(this.mnuHelpInstructions_Click);
             // 
             // btnCreate
             // 
@@ -602,10 +604,12 @@ namespace PrimarySchool
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(9)))), ((int)(((byte)(11)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.helpme.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.TableOfContents);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "frmAssignments";
+            this.helpme.SetShowHelp(this, true);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Primary School - Assignments";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAssignments_FormClosing);
@@ -664,5 +668,6 @@ namespace PrimarySchool
         private System.Windows.Forms.Label lblSelectedCourse;
         private System.Windows.Forms.TextBox tbxCategory;
         private System.Windows.Forms.ToolStripMenuItem mnuCreate;
+        private System.Windows.Forms.HelpProvider helpme;
     }
 }

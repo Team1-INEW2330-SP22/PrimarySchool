@@ -109,6 +109,9 @@ namespace PrimarySchool
         // Sets state to 'View'
         private void frmCourses_Load(object sender, EventArgs e)
         {
+            //Pointer to help file
+            helpme.HelpNamespace = Application.StartupPath + "\\helpme.chm";
+
             try
             {
                 ProgOps.DatabaseCommandCourses(tbxCourseID, tbxCourseName, tbxDescription, tbxUserID);
@@ -961,6 +964,11 @@ namespace PrimarySchool
             {
                 FormOps.ErrorBox(ex.Message);
             }
+        }
+
+        private void mnuHelpInstructions_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, helpme.HelpNamespace);
         }
     }
 }

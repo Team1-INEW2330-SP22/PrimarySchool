@@ -33,8 +33,6 @@ namespace PrimarySchool
             this.mnuMenu = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileClose = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHelpInstructions = new System.Windows.Forms.ToolStripMenuItem();
             this.lblProgramName = new System.Windows.Forms.Label();
             this.lblVersionNumber = new System.Windows.Forms.Label();
             this.lblProgramInfo = new System.Windows.Forms.Label();
@@ -56,8 +54,7 @@ namespace PrimarySchool
             // mnuMenu
             // 
             this.mnuMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFile,
-            this.mnuHelp});
+            this.mnuFile});
             this.mnuMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMenu.Name = "mnuMenu";
             this.mnuMenu.Size = new System.Drawing.Size(514, 24);
@@ -76,24 +73,9 @@ namespace PrimarySchool
             // 
             this.mnuFileClose.Name = "mnuFileClose";
             this.mnuFileClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.mnuFileClose.Size = new System.Drawing.Size(144, 22);
+            this.mnuFileClose.Size = new System.Drawing.Size(180, 22);
             this.mnuFileClose.Text = "&Close";
             this.mnuFileClose.Click += new System.EventHandler(this.mnuFileClose_Click);
-            // 
-            // mnuHelp
-            // 
-            this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuHelpInstructions});
-            this.mnuHelp.Name = "mnuHelp";
-            this.mnuHelp.Size = new System.Drawing.Size(44, 20);
-            this.mnuHelp.Text = "&Help";
-            // 
-            // mnuHelpInstructions
-            // 
-            this.mnuHelpInstructions.Name = "mnuHelpInstructions";
-            this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
-            this.mnuHelpInstructions.Text = "&Instructions";
             // 
             // lblProgramName
             // 
@@ -258,8 +240,6 @@ namespace PrimarySchool
         private System.Windows.Forms.MenuStrip mnuMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuFile;
         private System.Windows.Forms.ToolStripMenuItem mnuFileClose;
-        private System.Windows.Forms.ToolStripMenuItem mnuHelp;
-        private System.Windows.Forms.ToolStripMenuItem mnuHelpInstructions;
         private System.Windows.Forms.Label lblProgramName;
         private System.Windows.Forms.Label lblVersionNumber;
         private System.Windows.Forms.Label lblProgramInfo;

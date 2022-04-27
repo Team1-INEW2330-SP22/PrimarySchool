@@ -162,6 +162,9 @@ namespace PrimarySchool
         // Sets state to 'View'.
         private void frmUsers_Load(object sender, EventArgs e)
         {
+            //Pointer to help file
+            helpme.HelpNamespace = Application.StartupPath + "\\helpme.chm";
+
             //ProgOps.OpenDatabase();
             ProgOps.GetUserRecords(tbxUserID, tbxLastName, tbxFirstName, tbxMiddleName, tbxDateOfBirth,
                                     tbxStreetAddress, tbxCity, tbxState, tbxZip, tbxPhone, tbxRole, tbxUsername, tbxUserPassword, tbxEmail);
@@ -704,6 +707,11 @@ namespace PrimarySchool
             {
                 FormOps.ErrorBox(ex.Message);
             }
+        }
+
+        private void mnuHelpInstructions_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, helpme.HelpNamespace);
         }
     }
 }

@@ -151,6 +151,9 @@ namespace PrimarySchool
         // Sets state to 'View'
         private void frmAssignments_Load(object sender, EventArgs e)
         {
+            //Pointer to help file
+            helpme.HelpNamespace = Application.StartupPath + "\\helpme.chm"; 
+            
             try
             {
                 tbxCourseName.Text = courseName;
@@ -674,6 +677,11 @@ namespace PrimarySchool
         private void mnuSearch_Click(object sender, EventArgs e)
         {
             PerformSearch();
+        }
+
+        private void mnuHelpInstructions_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, helpme.HelpNamespace);
         }
     }
 }
