@@ -10,6 +10,15 @@ using System.Net;
 using System.Net.Mail;
 using System.Configuration;
 
+/*
+ * Application: Primary School
+ * Group: Team 1
+ * Names: Tyler Anderson, Max Cancino, Ryan Hicks
+ * Date: 4/27/2022
+ * Course: INEW-2330-7Z1
+ * Semester: SP/22
+ */
+
 // Performs various database (DB) related operations for Primary School.
 
 namespace PrimarySchool

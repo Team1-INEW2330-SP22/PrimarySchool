@@ -9,6 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 
+/*
+ * Application: Primary School
+ * Group: Team 1
+ * Names: Tyler Anderson, Max Cancino, Ryan Hicks
+ * Date: 4/27/2022
+ * Course: INEW-2330-7Z1
+ * Semester: SP/22
+ */
+
 // Enables easy repitition for basic form-related operations.
 
 namespace PrimarySchool
