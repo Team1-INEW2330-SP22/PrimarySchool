@@ -70,7 +70,7 @@ namespace PrimarySchool
             this.mnuMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMenu.Name = "mnuMenu";
             this.mnuMenu.Size = new System.Drawing.Size(923, 24);
-            this.mnuMenu.TabIndex = 0;
+            this.mnuMenu.TabIndex = 2;
             this.mnuMenu.Text = "menuStrip1";
             // 
             // mnuFile
@@ -163,7 +163,7 @@ namespace PrimarySchool
             // 
             this.mnuHelpInstructions.Name = "mnuHelpInstructions";
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
             this.mnuHelpInstructions.Click += new System.EventHandler(this.mnuHelpInstructions_Click);
             // 
@@ -178,7 +178,7 @@ namespace PrimarySchool
             this.gbxGradebook.Location = new System.Drawing.Point(8, 36);
             this.gbxGradebook.Name = "gbxGradebook";
             this.gbxGradebook.Size = new System.Drawing.Size(544, 95);
-            this.gbxGradebook.TabIndex = 1;
+            this.gbxGradebook.TabIndex = 3;
             this.gbxGradebook.TabStop = false;
             this.gbxGradebook.Text = "Gradebook";
             // 
@@ -221,7 +221,7 @@ namespace PrimarySchool
             this.cbxCourses.Location = new System.Drawing.Point(18, 46);
             this.cbxCourses.Name = "cbxCourses";
             this.cbxCourses.Size = new System.Drawing.Size(249, 29);
-            this.cbxCourses.TabIndex = 1;
+            this.cbxCourses.TabIndex = 0;
             this.cbxCourses.SelectedIndexChanged += new System.EventHandler(this.cbxCourses_SelectedIndexChanged);
             // 
             // lblSelectCourse
@@ -231,7 +231,7 @@ namespace PrimarySchool
             this.lblSelectCourse.Location = new System.Drawing.Point(18, 29);
             this.lblSelectCourse.Name = "lblSelectCourse";
             this.lblSelectCourse.Size = new System.Drawing.Size(87, 17);
-            this.lblSelectCourse.TabIndex = 0;
+            this.lblSelectCourse.TabIndex = 1;
             this.lblSelectCourse.Text = "Select Course";
             // 
             // dgvGradebook
@@ -250,7 +250,7 @@ namespace PrimarySchool
             this.dgvGradebook.Name = "dgvGradebook";
             this.dgvGradebook.RowHeadersWidth = 62;
             this.dgvGradebook.Size = new System.Drawing.Size(684, 432);
-            this.dgvGradebook.TabIndex = 2;
+            this.dgvGradebook.TabIndex = 0;
             this.dgvGradebook.TabStop = false;
             this.dgvGradebook.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGradebook_CellValueChanged);
             this.dgvGradebook.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvGradebook_DataError);
@@ -262,7 +262,7 @@ namespace PrimarySchool
             this.lblInstructions.Location = new System.Drawing.Point(558, 63);
             this.lblInstructions.Name = "lblInstructions";
             this.lblInstructions.Size = new System.Drawing.Size(344, 68);
-            this.lblInstructions.TabIndex = 3;
+            this.lblInstructions.TabIndex = 4;
             this.lblInstructions.Text = "Use the table below to edit assignment grades. The final \r\ngrade is calculated au" +
     "tomatically. The menu up top cont-\r\nains more operations. For detailed help, cli" +
     "ck Instructions \r\nunder the Help tab.";
@@ -276,7 +276,7 @@ namespace PrimarySchool
             this.lblFinalGrades.Location = new System.Drawing.Point(759, 141);
             this.lblFinalGrades.Name = "lblFinalGrades";
             this.lblFinalGrades.Size = new System.Drawing.Size(90, 20);
-            this.lblFinalGrades.TabIndex = 19;
+            this.lblFinalGrades.TabIndex = 5;
             this.lblFinalGrades.Text = "Final Grades";
             // 
             // lbxFinalGrades
@@ -289,7 +289,7 @@ namespace PrimarySchool
             this.lbxFinalGrades.Location = new System.Drawing.Point(695, 165);
             this.lbxFinalGrades.Name = "lbxFinalGrades";
             this.lbxFinalGrades.Size = new System.Drawing.Size(219, 404);
-            this.lbxFinalGrades.TabIndex = 18;
+            this.lbxFinalGrades.TabIndex = 1;
             // 
             // pbxListBoxBackground
             // 

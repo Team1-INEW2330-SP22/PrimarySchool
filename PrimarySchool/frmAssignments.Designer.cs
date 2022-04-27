@@ -91,7 +91,7 @@ namespace PrimarySchool
             this.tbxDescription.Name = "tbxDescription";
             this.tbxDescription.ReadOnly = true;
             this.tbxDescription.Size = new System.Drawing.Size(283, 110);
-            this.tbxDescription.TabIndex = 4;
+            this.tbxDescription.TabIndex = 14;
             // 
             // lblDescription
             // 
@@ -100,7 +100,7 @@ namespace PrimarySchool
             this.lblDescription.Location = new System.Drawing.Point(33, 164);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(77, 17);
-            this.lblDescription.TabIndex = 22;
+            this.lblDescription.TabIndex = 21;
             this.lblDescription.Text = "Description:";
             // 
             // tbxAssignmentID
@@ -113,7 +113,7 @@ namespace PrimarySchool
             this.tbxAssignmentID.Name = "tbxAssignmentID";
             this.tbxAssignmentID.ReadOnly = true;
             this.tbxAssignmentID.Size = new System.Drawing.Size(283, 27);
-            this.tbxAssignmentID.TabIndex = 1;
+            this.tbxAssignmentID.TabIndex = 11;
             this.tbxAssignmentID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblAssignmentID
@@ -123,7 +123,7 @@ namespace PrimarySchool
             this.lblAssignmentID.Location = new System.Drawing.Point(16, 70);
             this.lblAssignmentID.Name = "lblAssignmentID";
             this.lblAssignmentID.Size = new System.Drawing.Size(94, 17);
-            this.lblAssignmentID.TabIndex = 19;
+            this.lblAssignmentID.TabIndex = 18;
             this.lblAssignmentID.Text = "Assignment ID:";
             // 
             // lblCategory
@@ -133,7 +133,7 @@ namespace PrimarySchool
             this.lblCategory.Location = new System.Drawing.Point(30, 136);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(80, 17);
-            this.lblCategory.TabIndex = 21;
+            this.lblCategory.TabIndex = 20;
             this.lblCategory.Text = "Category ID:";
             // 
             // tbxAssignmentName
@@ -147,7 +147,7 @@ namespace PrimarySchool
             this.tbxAssignmentName.Name = "tbxAssignmentName";
             this.tbxAssignmentName.ReadOnly = true;
             this.tbxAssignmentName.Size = new System.Drawing.Size(283, 27);
-            this.tbxAssignmentName.TabIndex = 2;
+            this.tbxAssignmentName.TabIndex = 12;
             this.tbxAssignmentName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblAssignmentName
@@ -157,7 +157,7 @@ namespace PrimarySchool
             this.lblAssignmentName.Location = new System.Drawing.Point(64, 103);
             this.lblAssignmentName.Name = "lblAssignmentName";
             this.lblAssignmentName.Size = new System.Drawing.Size(46, 17);
-            this.lblAssignmentName.TabIndex = 20;
+            this.lblAssignmentName.TabIndex = 19;
             this.lblAssignmentName.Text = "Name:";
             // 
             // btnRemove
@@ -169,7 +169,7 @@ namespace PrimarySchool
             this.btnRemove.Location = new System.Drawing.Point(184, 424);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(147, 30);
-            this.btnRemove.TabIndex = 13;
+            this.btnRemove.TabIndex = 8;
             this.btnRemove.Text = "Remo&ve from Course";
             this.btnRemove.UseVisualStyleBackColor = false;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
@@ -183,7 +183,7 @@ namespace PrimarySchool
             this.btnAdd.Location = new System.Drawing.Point(184, 391);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(147, 30);
-            this.btnAdd.TabIndex = 12;
+            this.btnAdd.TabIndex = 7;
             this.btnAdd.Text = "&Add to Course";
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -197,7 +197,7 @@ namespace PrimarySchool
             this.btnCancel.Location = new System.Drawing.Point(306, 351);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(93, 30);
-            this.btnCancel.TabIndex = 11;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -225,7 +225,7 @@ namespace PrimarySchool
             this.btnEdit.Location = new System.Drawing.Point(116, 351);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 30);
-            this.btnEdit.TabIndex = 9;
+            this.btnEdit.TabIndex = 5;
             this.btnEdit.Text = "&Edit";
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -239,7 +239,7 @@ namespace PrimarySchool
             this.btnLast.Location = new System.Drawing.Point(259, 287);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(140, 30);
-            this.btnLast.TabIndex = 6;
+            this.btnLast.TabIndex = 1;
             this.btnLast.Text = "&Last >|";
             this.btnLast.UseVisualStyleBackColor = false;
             this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
@@ -253,7 +253,7 @@ namespace PrimarySchool
             this.btnFirst.Location = new System.Drawing.Point(116, 287);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(140, 30);
-            this.btnFirst.TabIndex = 5;
+            this.btnFirst.TabIndex = 0;
             this.btnFirst.Text = "|< &First";
             this.btnFirst.UseVisualStyleBackColor = false;
             this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
@@ -267,7 +267,7 @@ namespace PrimarySchool
             this.btnNext.Location = new System.Drawing.Point(259, 319);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(140, 30);
-            this.btnNext.TabIndex = 8;
+            this.btnNext.TabIndex = 3;
             this.btnNext.Text = "&Next >";
             this.btnNext.UseVisualStyleBackColor = false;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -281,7 +281,7 @@ namespace PrimarySchool
             this.btnPrevious.Location = new System.Drawing.Point(116, 319);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(140, 30);
-            this.btnPrevious.TabIndex = 7;
+            this.btnPrevious.TabIndex = 2;
             this.btnPrevious.Text = "< &Previous";
             this.btnPrevious.UseVisualStyleBackColor = false;
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
@@ -296,7 +296,7 @@ namespace PrimarySchool
             this.gbxSearch.Location = new System.Drawing.Point(416, 287);
             this.gbxSearch.Name = "gbxSearch";
             this.gbxSearch.Size = new System.Drawing.Size(283, 94);
-            this.gbxSearch.TabIndex = 16;
+            this.gbxSearch.TabIndex = 22;
             this.gbxSearch.TabStop = false;
             this.gbxSearch.Text = "Search by Name";
             // 
@@ -348,7 +348,7 @@ namespace PrimarySchool
             this.mnuMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMenu.Name = "mnuMenu";
             this.mnuMenu.Size = new System.Drawing.Size(712, 24);
-            this.mnuMenu.TabIndex = 15;
+            this.mnuMenu.TabIndex = 16;
             this.mnuMenu.Text = "menuStrip1";
             // 
             // mnuFile
@@ -507,7 +507,7 @@ namespace PrimarySchool
             // 
             this.mnuHelpInstructions.Name = "mnuHelpInstructions";
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
             this.mnuHelpInstructions.Click += new System.EventHandler(this.mnuHelpInstructions_Click);
             // 
@@ -520,7 +520,7 @@ namespace PrimarySchool
             this.btnCreate.Location = new System.Drawing.Point(184, 457);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(147, 30);
-            this.btnCreate.TabIndex = 14;
+            this.btnCreate.TabIndex = 9;
             this.btnCreate.Text = "Crea&te New";
             this.btnCreate.UseVisualStyleBackColor = false;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
@@ -535,7 +535,7 @@ namespace PrimarySchool
             this.tbxCourseName.Name = "tbxCourseName";
             this.tbxCourseName.ReadOnly = true;
             this.tbxCourseName.Size = new System.Drawing.Size(283, 27);
-            this.tbxCourseName.TabIndex = 0;
+            this.tbxCourseName.TabIndex = 10;
             this.tbxCourseName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbxCategories
@@ -546,7 +546,7 @@ namespace PrimarySchool
             this.lbxCategories.Location = new System.Drawing.Point(416, 32);
             this.lbxCategories.Name = "lbxCategories";
             this.lbxCategories.Size = new System.Drawing.Size(283, 242);
-            this.lbxCategories.TabIndex = 17;
+            this.lbxCategories.TabIndex = 15;
             // 
             // lblSelectedCourse
             // 
@@ -555,7 +555,7 @@ namespace PrimarySchool
             this.lblSelectedCourse.Location = new System.Drawing.Point(5, 37);
             this.lblSelectedCourse.Name = "lblSelectedCourse";
             this.lblSelectedCourse.Size = new System.Drawing.Size(105, 17);
-            this.lblSelectedCourse.TabIndex = 18;
+            this.lblSelectedCourse.TabIndex = 17;
             this.lblSelectedCourse.Text = "Selected Course:";
             // 
             // tbxCategory
@@ -569,7 +569,7 @@ namespace PrimarySchool
             this.tbxCategory.Name = "tbxCategory";
             this.tbxCategory.ReadOnly = true;
             this.tbxCategory.Size = new System.Drawing.Size(283, 27);
-            this.tbxCategory.TabIndex = 3;
+            this.tbxCategory.TabIndex = 13;
             this.tbxCategory.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frmAssignments

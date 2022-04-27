@@ -153,7 +153,7 @@ namespace PrimarySchool
             // 
             this.mnuHelpInstructions.Name = "mnuHelpInstructions";
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
             this.mnuHelpInstructions.Click += new System.EventHandler(this.mnuHelpInstructions_Click);
             // 
@@ -164,7 +164,7 @@ namespace PrimarySchool
             this.lblInstructions.Location = new System.Drawing.Point(596, 71);
             this.lblInstructions.Name = "lblInstructions";
             this.lblInstructions.Size = new System.Drawing.Size(219, 68);
-            this.lblInstructions.TabIndex = 6;
+            this.lblInstructions.TabIndex = 5;
             this.lblInstructions.Text = "Use the bottom left table to assign \r\nseating. The menu up top contains \r\nmore op" +
     "erations. For detailed help, \r\nclick Instructions under the Help tab.";
             // 
@@ -183,7 +183,7 @@ namespace PrimarySchool
             this.dgvSeatingChart.Location = new System.Drawing.Point(8, 145);
             this.dgvSeatingChart.Name = "dgvSeatingChart";
             this.dgvSeatingChart.Size = new System.Drawing.Size(582, 389);
-            this.dgvSeatingChart.TabIndex = 5;
+            this.dgvSeatingChart.TabIndex = 0;
             this.dgvSeatingChart.TabStop = false;
             this.dgvSeatingChart.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeatingChart_CellValueChanged);
             this.dgvSeatingChart.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvSeatingChart_DataError);
@@ -200,7 +200,7 @@ namespace PrimarySchool
             this.gbxSeatingChart.Location = new System.Drawing.Point(8, 33);
             this.gbxSeatingChart.Name = "gbxSeatingChart";
             this.gbxSeatingChart.Size = new System.Drawing.Size(582, 106);
-            this.gbxSeatingChart.TabIndex = 7;
+            this.gbxSeatingChart.TabIndex = 4;
             this.gbxSeatingChart.TabStop = false;
             this.gbxSeatingChart.Text = "Seating Chart";
             // 
@@ -211,7 +211,7 @@ namespace PrimarySchool
             this.lblTotalSeats.Location = new System.Drawing.Point(298, 80);
             this.lblTotalSeats.Name = "lblTotalSeats";
             this.lblTotalSeats.Size = new System.Drawing.Size(79, 17);
-            this.lblTotalSeats.TabIndex = 11;
+            this.lblTotalSeats.TabIndex = 5;
             this.lblTotalSeats.Text = "[Total Seats]";
             // 
             // lblRoom
@@ -221,7 +221,7 @@ namespace PrimarySchool
             this.lblRoom.Location = new System.Drawing.Point(298, 59);
             this.lblRoom.Name = "lblRoom";
             this.lblRoom.Size = new System.Drawing.Size(51, 17);
-            this.lblRoom.TabIndex = 10;
+            this.lblRoom.TabIndex = 4;
             this.lblRoom.Text = "[Room]";
             // 
             // lblInstructor
@@ -231,7 +231,7 @@ namespace PrimarySchool
             this.lblInstructor.Location = new System.Drawing.Point(298, 38);
             this.lblInstructor.Name = "lblInstructor";
             this.lblInstructor.Size = new System.Drawing.Size(71, 17);
-            this.lblInstructor.TabIndex = 9;
+            this.lblInstructor.TabIndex = 3;
             this.lblInstructor.Text = "[Instructor]";
             // 
             // lblCourseName
@@ -241,7 +241,7 @@ namespace PrimarySchool
             this.lblCourseName.Location = new System.Drawing.Point(298, 17);
             this.lblCourseName.Name = "lblCourseName";
             this.lblCourseName.Size = new System.Drawing.Size(96, 17);
-            this.lblCourseName.TabIndex = 7;
+            this.lblCourseName.TabIndex = 2;
             this.lblCourseName.Text = "[Course Name]";
             // 
             // cbxCourses
@@ -253,7 +253,7 @@ namespace PrimarySchool
             this.cbxCourses.Location = new System.Drawing.Point(15, 49);
             this.cbxCourses.Name = "cbxCourses";
             this.cbxCourses.Size = new System.Drawing.Size(263, 29);
-            this.cbxCourses.TabIndex = 1;
+            this.cbxCourses.TabIndex = 0;
             this.cbxCourses.SelectedIndexChanged += new System.EventHandler(this.cbxCourses_SelectedIndexChanged);
             // 
             // lblSelectCourse
@@ -263,7 +263,7 @@ namespace PrimarySchool
             this.lblSelectCourse.Location = new System.Drawing.Point(15, 32);
             this.lblSelectCourse.Name = "lblSelectCourse";
             this.lblSelectCourse.Size = new System.Drawing.Size(87, 17);
-            this.lblSelectCourse.TabIndex = 0;
+            this.lblSelectCourse.TabIndex = 1;
             this.lblSelectCourse.Text = "Select Course";
             // 
             // lblSeatList
@@ -288,7 +288,7 @@ namespace PrimarySchool
             this.lbxSeatList.Location = new System.Drawing.Point(596, 173);
             this.lbxSeatList.Name = "lbxSeatList";
             this.lbxSeatList.Size = new System.Drawing.Size(219, 361);
-            this.lbxSeatList.TabIndex = 14;
+            this.lbxSeatList.TabIndex = 1;
             // 
             // pbxListBoxBackground
             // 

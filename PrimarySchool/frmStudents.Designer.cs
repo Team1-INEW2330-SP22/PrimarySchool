@@ -127,7 +127,7 @@ namespace PrimarySchool
             this.tbxZip.MaxLength = 5;
             this.tbxZip.Name = "tbxZip";
             this.tbxZip.Size = new System.Drawing.Size(283, 27);
-            this.tbxZip.TabIndex = 8;
+            this.tbxZip.TabIndex = 18;
             this.tbxZip.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblZip
@@ -137,7 +137,7 @@ namespace PrimarySchool
             this.lblZip.Location = new System.Drawing.Point(77, 348);
             this.lblZip.Name = "lblZip";
             this.lblZip.Size = new System.Drawing.Size(29, 17);
-            this.lblZip.TabIndex = 37;
+            this.lblZip.TabIndex = 39;
             this.lblZip.Text = "Zip:";
             // 
             // tbxState
@@ -150,7 +150,7 @@ namespace PrimarySchool
             this.tbxState.MaxLength = 20;
             this.tbxState.Name = "tbxState";
             this.tbxState.Size = new System.Drawing.Size(283, 27);
-            this.tbxState.TabIndex = 7;
+            this.tbxState.TabIndex = 17;
             this.tbxState.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblState
@@ -160,7 +160,7 @@ namespace PrimarySchool
             this.lblState.Location = new System.Drawing.Point(66, 314);
             this.lblState.Name = "lblState";
             this.lblState.Size = new System.Drawing.Size(40, 17);
-            this.lblState.TabIndex = 36;
+            this.lblState.TabIndex = 38;
             this.lblState.Text = "State:";
             // 
             // tbxCity
@@ -173,7 +173,7 @@ namespace PrimarySchool
             this.tbxCity.MaxLength = 50;
             this.tbxCity.Name = "tbxCity";
             this.tbxCity.Size = new System.Drawing.Size(283, 27);
-            this.tbxCity.TabIndex = 6;
+            this.tbxCity.TabIndex = 16;
             this.tbxCity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblCity
@@ -183,7 +183,7 @@ namespace PrimarySchool
             this.lblCity.Location = new System.Drawing.Point(74, 280);
             this.lblCity.Name = "lblCity";
             this.lblCity.Size = new System.Drawing.Size(32, 17);
-            this.lblCity.TabIndex = 35;
+            this.lblCity.TabIndex = 37;
             this.lblCity.Text = "City:";
             // 
             // tbxAddress
@@ -196,7 +196,7 @@ namespace PrimarySchool
             this.tbxAddress.MaxLength = 100;
             this.tbxAddress.Name = "tbxAddress";
             this.tbxAddress.Size = new System.Drawing.Size(283, 27);
-            this.tbxAddress.TabIndex = 5;
+            this.tbxAddress.TabIndex = 15;
             this.tbxAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblAddress
@@ -206,7 +206,7 @@ namespace PrimarySchool
             this.lblAddress.Location = new System.Drawing.Point(47, 246);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(59, 17);
-            this.lblAddress.TabIndex = 34;
+            this.lblAddress.TabIndex = 36;
             this.lblAddress.Text = "Address:";
             // 
             // tbxDateOfBirth
@@ -219,7 +219,7 @@ namespace PrimarySchool
             this.tbxDateOfBirth.MaxLength = 10;
             this.tbxDateOfBirth.Name = "tbxDateOfBirth";
             this.tbxDateOfBirth.Size = new System.Drawing.Size(283, 27);
-            this.tbxDateOfBirth.TabIndex = 4;
+            this.tbxDateOfBirth.TabIndex = 14;
             this.tbxDateOfBirth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblDateOfBirth
@@ -229,7 +229,7 @@ namespace PrimarySchool
             this.lblDateOfBirth.Location = new System.Drawing.Point(22, 212);
             this.lblDateOfBirth.Name = "lblDateOfBirth";
             this.lblDateOfBirth.Size = new System.Drawing.Size(84, 17);
-            this.lblDateOfBirth.TabIndex = 33;
+            this.lblDateOfBirth.TabIndex = 35;
             this.lblDateOfBirth.Text = "Date of Birth:";
             // 
             // tbxStudentID
@@ -242,7 +242,7 @@ namespace PrimarySchool
             this.tbxStudentID.Name = "tbxStudentID";
             this.tbxStudentID.ReadOnly = true;
             this.tbxStudentID.Size = new System.Drawing.Size(283, 27);
-            this.tbxStudentID.TabIndex = 0;
+            this.tbxStudentID.TabIndex = 9;
             this.tbxStudentID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbxStudentID.TextChanged += new System.EventHandler(this.tbxStudentID_TextChanged);
             // 
@@ -253,7 +253,7 @@ namespace PrimarySchool
             this.lblStudentID.Location = new System.Drawing.Point(34, 42);
             this.lblStudentID.Name = "lblStudentID";
             this.lblStudentID.Size = new System.Drawing.Size(71, 17);
-            this.lblStudentID.TabIndex = 29;
+            this.lblStudentID.TabIndex = 30;
             this.lblStudentID.Text = "Student ID:";
             // 
             // tbxMiddleName
@@ -266,7 +266,7 @@ namespace PrimarySchool
             this.tbxMiddleName.MaxLength = 30;
             this.tbxMiddleName.Name = "tbxMiddleName";
             this.tbxMiddleName.Size = new System.Drawing.Size(283, 27);
-            this.tbxMiddleName.TabIndex = 3;
+            this.tbxMiddleName.TabIndex = 13;
             this.tbxMiddleName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblMiddleName
@@ -276,7 +276,7 @@ namespace PrimarySchool
             this.lblMiddleName.Location = new System.Drawing.Point(14, 178);
             this.lblMiddleName.Name = "lblMiddleName";
             this.lblMiddleName.Size = new System.Drawing.Size(91, 17);
-            this.lblMiddleName.TabIndex = 32;
+            this.lblMiddleName.TabIndex = 34;
             this.lblMiddleName.Text = "Middle Name:";
             // 
             // tbxFirstName
@@ -289,7 +289,7 @@ namespace PrimarySchool
             this.tbxFirstName.MaxLength = 30;
             this.tbxFirstName.Name = "tbxFirstName";
             this.tbxFirstName.Size = new System.Drawing.Size(283, 27);
-            this.tbxFirstName.TabIndex = 2;
+            this.tbxFirstName.TabIndex = 12;
             this.tbxFirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblFirstName
@@ -299,7 +299,7 @@ namespace PrimarySchool
             this.lblFirstName.Location = new System.Drawing.Point(31, 144);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(74, 17);
-            this.lblFirstName.TabIndex = 31;
+            this.lblFirstName.TabIndex = 33;
             this.lblFirstName.Text = "First Name:";
             // 
             // tbxLastName
@@ -312,7 +312,7 @@ namespace PrimarySchool
             this.tbxLastName.MaxLength = 30;
             this.tbxLastName.Name = "tbxLastName";
             this.tbxLastName.Size = new System.Drawing.Size(283, 27);
-            this.tbxLastName.TabIndex = 1;
+            this.tbxLastName.TabIndex = 11;
             this.tbxLastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblLastName
@@ -322,7 +322,7 @@ namespace PrimarySchool
             this.lblLastName.Location = new System.Drawing.Point(32, 110);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(73, 17);
-            this.lblLastName.TabIndex = 30;
+            this.lblLastName.TabIndex = 32;
             this.lblLastName.Text = "Last Name:";
             // 
             // tbxEC
@@ -335,7 +335,7 @@ namespace PrimarySchool
             this.tbxEC.MaxLength = 100;
             this.tbxEC.Name = "tbxEC";
             this.tbxEC.Size = new System.Drawing.Size(313, 27);
-            this.tbxEC.TabIndex = 17;
+            this.tbxEC.TabIndex = 27;
             this.tbxEC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblEC
@@ -345,7 +345,7 @@ namespace PrimarySchool
             this.lblEC.Location = new System.Drawing.Point(397, 314);
             this.lblEC.Name = "lblEC";
             this.lblEC.Size = new System.Drawing.Size(150, 17);
-            this.lblEC.TabIndex = 46;
+            this.lblEC.TabIndex = 48;
             this.lblEC.Text = "Emergency Contact (EC):";
             // 
             // tbxG2PlaceOfWork
@@ -358,7 +358,7 @@ namespace PrimarySchool
             this.tbxG2PlaceOfWork.MaxLength = 100;
             this.tbxG2PlaceOfWork.Name = "tbxG2PlaceOfWork";
             this.tbxG2PlaceOfWork.Size = new System.Drawing.Size(313, 27);
-            this.tbxG2PlaceOfWork.TabIndex = 16;
+            this.tbxG2PlaceOfWork.TabIndex = 26;
             this.tbxG2PlaceOfWork.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblG2PlaceOfWork
@@ -368,7 +368,7 @@ namespace PrimarySchool
             this.lblG2PlaceOfWork.Location = new System.Drawing.Point(436, 280);
             this.lblG2PlaceOfWork.Name = "lblG2PlaceOfWork";
             this.lblG2PlaceOfWork.Size = new System.Drawing.Size(111, 17);
-            this.lblG2PlaceOfWork.TabIndex = 45;
+            this.lblG2PlaceOfWork.TabIndex = 47;
             this.lblG2PlaceOfWork.Text = "G2 Place of Work:";
             // 
             // tbxG2WorkPhone
@@ -381,7 +381,7 @@ namespace PrimarySchool
             this.tbxG2WorkPhone.MaxLength = 15;
             this.tbxG2WorkPhone.Name = "tbxG2WorkPhone";
             this.tbxG2WorkPhone.Size = new System.Drawing.Size(313, 27);
-            this.tbxG2WorkPhone.TabIndex = 15;
+            this.tbxG2WorkPhone.TabIndex = 25;
             this.tbxG2WorkPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblG2WorkPhone
@@ -391,7 +391,7 @@ namespace PrimarySchool
             this.lblG2WorkPhone.Location = new System.Drawing.Point(446, 246);
             this.lblG2WorkPhone.Name = "lblG2WorkPhone";
             this.lblG2WorkPhone.Size = new System.Drawing.Size(101, 17);
-            this.lblG2WorkPhone.TabIndex = 44;
+            this.lblG2WorkPhone.TabIndex = 46;
             this.lblG2WorkPhone.Text = "G2 Work Phone:";
             // 
             // tbxG2CellPhone
@@ -404,7 +404,7 @@ namespace PrimarySchool
             this.tbxG2CellPhone.MaxLength = 15;
             this.tbxG2CellPhone.Name = "tbxG2CellPhone";
             this.tbxG2CellPhone.Size = new System.Drawing.Size(313, 27);
-            this.tbxG2CellPhone.TabIndex = 14;
+            this.tbxG2CellPhone.TabIndex = 24;
             this.tbxG2CellPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblG2CellPhone
@@ -414,7 +414,7 @@ namespace PrimarySchool
             this.lblG2CellPhone.Location = new System.Drawing.Point(455, 212);
             this.lblG2CellPhone.Name = "lblG2CellPhone";
             this.lblG2CellPhone.Size = new System.Drawing.Size(92, 17);
-            this.lblG2CellPhone.TabIndex = 43;
+            this.lblG2CellPhone.TabIndex = 45;
             this.lblG2CellPhone.Text = "G2 Cell Phone:";
             // 
             // tbxG2Name
@@ -427,7 +427,7 @@ namespace PrimarySchool
             this.tbxG2Name.MaxLength = 100;
             this.tbxG2Name.Name = "tbxG2Name";
             this.tbxG2Name.Size = new System.Drawing.Size(313, 27);
-            this.tbxG2Name.TabIndex = 13;
+            this.tbxG2Name.TabIndex = 23;
             this.tbxG2Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblG2Name
@@ -437,7 +437,7 @@ namespace PrimarySchool
             this.lblG2Name.Location = new System.Drawing.Point(405, 178);
             this.lblG2Name.Name = "lblG2Name";
             this.lblG2Name.Size = new System.Drawing.Size(142, 17);
-            this.lblG2Name.TabIndex = 42;
+            this.lblG2Name.TabIndex = 44;
             this.lblG2Name.Text = "Guardian 2 (G2) Name:";
             // 
             // tbxG1PlaceOfWork
@@ -450,7 +450,7 @@ namespace PrimarySchool
             this.tbxG1PlaceOfWork.MaxLength = 100;
             this.tbxG1PlaceOfWork.Name = "tbxG1PlaceOfWork";
             this.tbxG1PlaceOfWork.Size = new System.Drawing.Size(313, 27);
-            this.tbxG1PlaceOfWork.TabIndex = 12;
+            this.tbxG1PlaceOfWork.TabIndex = 22;
             this.tbxG1PlaceOfWork.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblG1PlaceOfWork
@@ -460,7 +460,7 @@ namespace PrimarySchool
             this.lblG1PlaceOfWork.Location = new System.Drawing.Point(436, 144);
             this.lblG1PlaceOfWork.Name = "lblG1PlaceOfWork";
             this.lblG1PlaceOfWork.Size = new System.Drawing.Size(111, 17);
-            this.lblG1PlaceOfWork.TabIndex = 41;
+            this.lblG1PlaceOfWork.TabIndex = 43;
             this.lblG1PlaceOfWork.Text = "G1 Place of Work:";
             // 
             // tbxG1WorkPhone
@@ -473,7 +473,7 @@ namespace PrimarySchool
             this.tbxG1WorkPhone.MaxLength = 15;
             this.tbxG1WorkPhone.Name = "tbxG1WorkPhone";
             this.tbxG1WorkPhone.Size = new System.Drawing.Size(313, 27);
-            this.tbxG1WorkPhone.TabIndex = 11;
+            this.tbxG1WorkPhone.TabIndex = 21;
             this.tbxG1WorkPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblG1WorkPhone
@@ -483,7 +483,7 @@ namespace PrimarySchool
             this.lblG1WorkPhone.Location = new System.Drawing.Point(446, 110);
             this.lblG1WorkPhone.Name = "lblG1WorkPhone";
             this.lblG1WorkPhone.Size = new System.Drawing.Size(101, 17);
-            this.lblG1WorkPhone.TabIndex = 40;
+            this.lblG1WorkPhone.TabIndex = 42;
             this.lblG1WorkPhone.Text = "G1 Work Phone:";
             // 
             // tbxG1CellPhone
@@ -496,7 +496,7 @@ namespace PrimarySchool
             this.tbxG1CellPhone.MaxLength = 15;
             this.tbxG1CellPhone.Name = "tbxG1CellPhone";
             this.tbxG1CellPhone.Size = new System.Drawing.Size(313, 27);
-            this.tbxG1CellPhone.TabIndex = 10;
+            this.tbxG1CellPhone.TabIndex = 20;
             this.tbxG1CellPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblG1CellPhone
@@ -506,7 +506,7 @@ namespace PrimarySchool
             this.lblG1CellPhone.Location = new System.Drawing.Point(455, 76);
             this.lblG1CellPhone.Name = "lblG1CellPhone";
             this.lblG1CellPhone.Size = new System.Drawing.Size(92, 17);
-            this.lblG1CellPhone.TabIndex = 39;
+            this.lblG1CellPhone.TabIndex = 41;
             this.lblG1CellPhone.Text = "G1 Cell Phone:";
             // 
             // tbxG1Name
@@ -519,7 +519,7 @@ namespace PrimarySchool
             this.tbxG1Name.MaxLength = 100;
             this.tbxG1Name.Name = "tbxG1Name";
             this.tbxG1Name.Size = new System.Drawing.Size(313, 27);
-            this.tbxG1Name.TabIndex = 9;
+            this.tbxG1Name.TabIndex = 19;
             this.tbxG1Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblG1Name
@@ -529,7 +529,7 @@ namespace PrimarySchool
             this.lblG1Name.Location = new System.Drawing.Point(404, 42);
             this.lblG1Name.Name = "lblG1Name";
             this.lblG1Name.Size = new System.Drawing.Size(142, 17);
-            this.lblG1Name.TabIndex = 38;
+            this.lblG1Name.TabIndex = 40;
             this.lblG1Name.Text = "Guardian 1 (G1) Name:";
             // 
             // gbxSearch
@@ -542,7 +542,7 @@ namespace PrimarySchool
             this.gbxSearch.Location = new System.Drawing.Point(110, 523);
             this.gbxSearch.Name = "gbxSearch";
             this.gbxSearch.Size = new System.Drawing.Size(283, 88);
-            this.gbxSearch.TabIndex = 48;
+            this.gbxSearch.TabIndex = 50;
             this.gbxSearch.TabStop = false;
             this.gbxSearch.Text = "Search by Last Name";
             // 
@@ -555,7 +555,7 @@ namespace PrimarySchool
             this.btnSearch.Location = new System.Drawing.Point(194, 45);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(71, 26);
-            this.btnSearch.TabIndex = 38;
+            this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = "Sea&rch";
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -582,7 +582,7 @@ namespace PrimarySchool
             this.lblSearch.Location = new System.Drawing.Point(15, 26);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(127, 17);
-            this.lblSearch.TabIndex = 1;
+            this.lblSearch.TabIndex = 2;
             this.lblSearch.Text = "Student\'s Last Name";
             // 
             // btnDelete
@@ -594,7 +594,7 @@ namespace PrimarySchool
             this.btnDelete.Location = new System.Drawing.Point(205, 480);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(93, 30);
-            this.btnDelete.TabIndex = 27;
+            this.btnDelete.TabIndex = 8;
             this.btnDelete.Text = "&Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -608,7 +608,7 @@ namespace PrimarySchool
             this.btnAddNew.Location = new System.Drawing.Point(110, 480);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(93, 30);
-            this.btnAddNew.TabIndex = 26;
+            this.btnAddNew.TabIndex = 7;
             this.btnAddNew.Text = "&Add New";
             this.btnAddNew.UseVisualStyleBackColor = false;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
@@ -622,7 +622,7 @@ namespace PrimarySchool
             this.btnCancel.Location = new System.Drawing.Point(300, 448);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(93, 30);
-            this.btnCancel.TabIndex = 25;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -636,7 +636,7 @@ namespace PrimarySchool
             this.btnSave.Location = new System.Drawing.Point(205, 448);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(93, 30);
-            this.btnSave.TabIndex = 24;
+            this.btnSave.TabIndex = 5;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -650,7 +650,7 @@ namespace PrimarySchool
             this.btnEdit.Location = new System.Drawing.Point(110, 448);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 30);
-            this.btnEdit.TabIndex = 23;
+            this.btnEdit.TabIndex = 4;
             this.btnEdit.Text = "&Edit";
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -664,7 +664,7 @@ namespace PrimarySchool
             this.btnLast.Location = new System.Drawing.Point(253, 384);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(140, 30);
-            this.btnLast.TabIndex = 20;
+            this.btnLast.TabIndex = 1;
             this.btnLast.Text = "&Last >|";
             this.btnLast.UseVisualStyleBackColor = false;
             this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
@@ -678,7 +678,7 @@ namespace PrimarySchool
             this.btnFirst.Location = new System.Drawing.Point(110, 384);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(140, 30);
-            this.btnFirst.TabIndex = 19;
+            this.btnFirst.TabIndex = 0;
             this.btnFirst.Text = "|< &First";
             this.btnFirst.UseVisualStyleBackColor = false;
             this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
@@ -692,7 +692,7 @@ namespace PrimarySchool
             this.btnNext.Location = new System.Drawing.Point(253, 416);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(140, 30);
-            this.btnNext.TabIndex = 22;
+            this.btnNext.TabIndex = 3;
             this.btnNext.Text = "&Next >";
             this.btnNext.UseVisualStyleBackColor = false;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -706,7 +706,7 @@ namespace PrimarySchool
             this.btnPrevious.Location = new System.Drawing.Point(110, 416);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(140, 30);
-            this.btnPrevious.TabIndex = 21;
+            this.btnPrevious.TabIndex = 2;
             this.btnPrevious.Text = "< &Previous";
             this.btnPrevious.UseVisualStyleBackColor = false;
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
@@ -724,7 +724,7 @@ namespace PrimarySchool
             this.gbxCourses.Location = new System.Drawing.Point(408, 384);
             this.gbxCourses.Name = "gbxCourses";
             this.gbxCourses.Size = new System.Drawing.Size(455, 227);
-            this.gbxCourses.TabIndex = 49;
+            this.gbxCourses.TabIndex = 51;
             this.gbxCourses.TabStop = false;
             this.gbxCourses.Text = "Courses";
             // 
@@ -757,7 +757,7 @@ namespace PrimarySchool
             this.lbxRegisteredCourses.Name = "lbxRegisteredCourses";
             this.lbxRegisteredCourses.ScrollAlwaysVisible = true;
             this.lbxRegisteredCourses.Size = new System.Drawing.Size(220, 140);
-            this.lbxRegisteredCourses.TabIndex = 2;
+            this.lbxRegisteredCourses.TabIndex = 1;
             // 
             // lbxAvailableCourses
             // 
@@ -793,7 +793,7 @@ namespace PrimarySchool
             this.btnAddCourse.Location = new System.Drawing.Point(69, 185);
             this.btnAddCourse.Name = "btnAddCourse";
             this.btnAddCourse.Size = new System.Drawing.Size(95, 26);
-            this.btnAddCourse.TabIndex = 1;
+            this.btnAddCourse.TabIndex = 2;
             this.btnAddCourse.Text = "Add C&ourse";
             this.btnAddCourse.UseVisualStyleBackColor = false;
             this.btnAddCourse.Click += new System.EventHandler(this.btnAddCourse_Click);
@@ -807,7 +807,7 @@ namespace PrimarySchool
             this.mnuMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuMenu.Name = "mnuMenu";
             this.mnuMenu.Size = new System.Drawing.Size(875, 24);
-            this.mnuMenu.TabIndex = 28;
+            this.mnuMenu.TabIndex = 29;
             this.mnuMenu.Text = "menuStrip1";
             // 
             // mnuFile
@@ -982,7 +982,7 @@ namespace PrimarySchool
             // 
             this.mnuHelpInstructions.Name = "mnuHelpInstructions";
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
             this.mnuHelpInstructions.Click += new System.EventHandler(this.mnuHelpInstructions_Click);
             // 
@@ -996,7 +996,7 @@ namespace PrimarySchool
             this.tbxEcCellPhone.MaxLength = 15;
             this.tbxEcCellPhone.Name = "tbxEcCellPhone";
             this.tbxEcCellPhone.Size = new System.Drawing.Size(313, 27);
-            this.tbxEcCellPhone.TabIndex = 18;
+            this.tbxEcCellPhone.TabIndex = 28;
             this.tbxEcCellPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblECCellPhone
@@ -1006,7 +1006,7 @@ namespace PrimarySchool
             this.lblECCellPhone.Location = new System.Drawing.Point(456, 348);
             this.lblECCellPhone.Name = "lblECCellPhone";
             this.lblECCellPhone.Size = new System.Drawing.Size(91, 17);
-            this.lblECCellPhone.TabIndex = 47;
+            this.lblECCellPhone.TabIndex = 49;
             this.lblECCellPhone.Text = "EC Cell Phone:";
             // 
             // tbxStatus
@@ -1020,7 +1020,7 @@ namespace PrimarySchool
             this.tbxStatus.Name = "tbxStatus";
             this.tbxStatus.ReadOnly = true;
             this.tbxStatus.Size = new System.Drawing.Size(283, 27);
-            this.tbxStatus.TabIndex = 50;
+            this.tbxStatus.TabIndex = 10;
             this.tbxStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblStatus
@@ -1030,7 +1030,7 @@ namespace PrimarySchool
             this.lblStatus.Location = new System.Drawing.Point(59, 76);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(46, 17);
-            this.lblStatus.TabIndex = 51;
+            this.lblStatus.TabIndex = 31;
             this.lblStatus.Text = "Status:";
             // 
             // frmStudents

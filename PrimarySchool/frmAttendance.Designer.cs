@@ -140,7 +140,7 @@ namespace PrimarySchool
             // 
             this.mnuHelpInstructions.Name = "mnuHelpInstructions";
             this.mnuHelpInstructions.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.mnuHelpInstructions.Size = new System.Drawing.Size(180, 22);
+            this.mnuHelpInstructions.Size = new System.Drawing.Size(173, 22);
             this.mnuHelpInstructions.Text = "&Instructions";
             this.mnuHelpInstructions.Click += new System.EventHandler(this.mnuHelpInstructions_Click);
             // 
@@ -151,7 +151,7 @@ namespace PrimarySchool
             this.lblInstructions.Location = new System.Drawing.Point(811, 57);
             this.lblInstructions.Name = "lblInstructions";
             this.lblInstructions.Size = new System.Drawing.Size(187, 85);
-            this.lblInstructions.TabIndex = 6;
+            this.lblInstructions.TabIndex = 3;
             this.lblInstructions.Text = "Use the table below to record \r\nstudent attendance. The menu \r\nup top contains mo" +
     "re operati-\r\nons. For detailed help, click In-\r\nstructions under the Help tab.";
             // 
@@ -169,7 +169,7 @@ namespace PrimarySchool
             this.dgvAttendance.Location = new System.Drawing.Point(12, 148);
             this.dgvAttendance.Name = "dgvAttendance";
             this.dgvAttendance.Size = new System.Drawing.Size(986, 412);
-            this.dgvAttendance.TabIndex = 5;
+            this.dgvAttendance.TabIndex = 0;
             this.dgvAttendance.TabStop = false;
             this.dgvAttendance.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAttendance_CellValueChanged);
             this.dgvAttendance.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvAttendance_DataError);
@@ -188,7 +188,7 @@ namespace PrimarySchool
             this.gbxAttendance.Location = new System.Drawing.Point(12, 36);
             this.gbxAttendance.Name = "gbxAttendance";
             this.gbxAttendance.Size = new System.Drawing.Size(793, 106);
-            this.gbxAttendance.TabIndex = 4;
+            this.gbxAttendance.TabIndex = 2;
             this.gbxAttendance.TabStop = false;
             this.gbxAttendance.Text = "Attendance";
             // 
@@ -199,7 +199,7 @@ namespace PrimarySchool
             this.lblDate.Location = new System.Drawing.Point(496, 81);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(43, 17);
-            this.lblDate.TabIndex = 11;
+            this.lblDate.TabIndex = 7;
             this.lblDate.Text = "[Date]";
             // 
             // cbxDate
@@ -211,7 +211,7 @@ namespace PrimarySchool
             this.cbxDate.Location = new System.Drawing.Point(285, 49);
             this.cbxDate.Name = "cbxDate";
             this.cbxDate.Size = new System.Drawing.Size(196, 29);
-            this.cbxDate.TabIndex = 8;
+            this.cbxDate.TabIndex = 1;
             this.cbxDate.SelectedIndexChanged += new System.EventHandler(this.cbxDate_SelectedIndexChanged);
             // 
             // lblRoom
@@ -221,7 +221,7 @@ namespace PrimarySchool
             this.lblRoom.Location = new System.Drawing.Point(496, 60);
             this.lblRoom.Name = "lblRoom";
             this.lblRoom.Size = new System.Drawing.Size(51, 17);
-            this.lblRoom.TabIndex = 10;
+            this.lblRoom.TabIndex = 6;
             this.lblRoom.Text = "[Room]";
             // 
             // lblSelectDate
@@ -231,7 +231,7 @@ namespace PrimarySchool
             this.lblSelectDate.Location = new System.Drawing.Point(285, 32);
             this.lblSelectDate.Name = "lblSelectDate";
             this.lblSelectDate.Size = new System.Drawing.Size(73, 17);
-            this.lblSelectDate.TabIndex = 6;
+            this.lblSelectDate.TabIndex = 3;
             this.lblSelectDate.Text = "Select Date";
             // 
             // lblInstructor
@@ -241,7 +241,7 @@ namespace PrimarySchool
             this.lblInstructor.Location = new System.Drawing.Point(496, 39);
             this.lblInstructor.Name = "lblInstructor";
             this.lblInstructor.Size = new System.Drawing.Size(71, 17);
-            this.lblInstructor.TabIndex = 9;
+            this.lblInstructor.TabIndex = 5;
             this.lblInstructor.Text = "[Instructor]";
             // 
             // lblCourseName
@@ -251,7 +251,7 @@ namespace PrimarySchool
             this.lblCourseName.Location = new System.Drawing.Point(496, 18);
             this.lblCourseName.Name = "lblCourseName";
             this.lblCourseName.Size = new System.Drawing.Size(96, 17);
-            this.lblCourseName.TabIndex = 7;
+            this.lblCourseName.TabIndex = 4;
             this.lblCourseName.Text = "[Course Name]";
             // 
             // cbxCourses
@@ -263,7 +263,7 @@ namespace PrimarySchool
             this.cbxCourses.Location = new System.Drawing.Point(15, 49);
             this.cbxCourses.Name = "cbxCourses";
             this.cbxCourses.Size = new System.Drawing.Size(255, 29);
-            this.cbxCourses.TabIndex = 1;
+            this.cbxCourses.TabIndex = 0;
             this.cbxCourses.SelectedIndexChanged += new System.EventHandler(this.cbxCourses_SelectedIndexChanged);
             // 
             // lblSelectCourse
@@ -273,7 +273,7 @@ namespace PrimarySchool
             this.lblSelectCourse.Location = new System.Drawing.Point(15, 32);
             this.lblSelectCourse.Name = "lblSelectCourse";
             this.lblSelectCourse.Size = new System.Drawing.Size(87, 17);
-            this.lblSelectCourse.TabIndex = 0;
+            this.lblSelectCourse.TabIndex = 2;
             this.lblSelectCourse.Text = "Select Course";
             // 
             // frmAttendance
